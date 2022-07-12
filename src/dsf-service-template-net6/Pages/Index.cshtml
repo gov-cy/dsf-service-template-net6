@@ -1,10 +1,30 @@
 ﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Program> Localizer
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Mock Citizen Personal Data Service";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <h1>Mock Service Purpose Summary</h1>
+    <p>This service is demo that contains the following:</p>
+    <ul>
+        <li>How to implement federated login mechanism with Cy Login</li>
+        <li>View a proposed project structure for service development</li>
+        <li>Set up access to our design system with example pages (see layout Page)</li>
+        <li>Provide out of the box Multilanguage Support</li>
+        <li>Get indications How we use our Edit,View,Review,Success submission Pages</li>
+        <li>Provide some Guidance on our must implement statistic Api Call and Calling Api samples</li>
+        <li>See our proposed server side validation mechanism (Fluent Validation)</li>
+        <li>Handling Session time Out and store data in sessions during the service journey</li>
+        <li>See our sample Unit Tests</li>
+    </ul>
+    <div>
+    <form asp-page-handler="ApplicationStart">        
+        <button type="submit" class="govcy-btn-primary" id="btnApplicationStart">
+            @Localizer["Button_Get_Started"]
+        </button>
+    </form>
+    @*<a href="ChildrenList" class="govcy-btn-primary" style="color:#FFF">@HtmlLocalizer["Button_Get_Started"]</a>*@
+   </div>

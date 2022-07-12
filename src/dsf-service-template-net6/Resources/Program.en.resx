@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessibilityStatement_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;This is an accessibility statement from the Ministry of Labour and Social Insurance’s service to apply for a child birth grant.&lt;/p&gt;
+      &lt;h2&gt;Conformance status&lt;/h2&gt;
+      &lt;p&gt;The &lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;Web Content Accessibility Guidelines&lt;/a&gt; (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. The  service is partially conformant with WCAG 2.1 level AA. Partially conformant means that some parts of the content do not fully conform to the accessibility standard.&lt;/p&gt;
+      &lt;h2&gt;Compatibility with browsers and assistive technology&lt;/h2&gt;
+      &lt;p&gt;The service is not compatible with:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;Internet Explorer 9 and older&lt;/li&gt;
+        &lt;li&gt;Safari browser on Windows computers&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Limitations and alternatives&lt;/h2&gt;
+      &lt;p&gt;Despite our best efforts to ensure accessibility of the service, there may be some limitations. Below is a description of known limitations, and potential solutions. Please contact us if you observe an issue not listed below.&lt;/p&gt;
+      &lt;p&gt;Header images are a known limitation for the service. Images do not have text alternatives because we have not set the ‘alt’ attribute. We'll be adding an empty alt attribute, as the images are used for decorative purposes.&lt;/p&gt;
+      &lt;p&gt;Javascript is required for the service to function properly.&lt;/p&gt;
+      &lt;h2&gt;Assessment approach&lt;/h2&gt;
+      &lt;p&gt;The Digital Services Factory assessed the accessibility of the service using:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;&lt;a href="https://wave.webaim.org/" target="_blank"&gt;WebAIM’s WAVE Evaluation tool&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://developers.google.com/web/tools/lighthouse" target="_blank"&gt;Google Chrome’s Lighthouse tool&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Feedback and complaints&lt;/h2&gt;
+      &lt;p&gt;We welcome your feedback on the accessibility of the service. Please let us know if you encounter accessibility barriers when using it:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;Email: &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;We try to respond to feedback within 30 working days&lt;/p&gt;
+      &lt;p&gt;
+        &lt;span class="govcy-d-block"&gt;If we do not reply, or do not fix the issue, you can send a complaint to:&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;Deputy Minister of Research, Innovation, and Digital Policy&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;Vyronos 29 Avenue&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;1096 Nicosia&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;Cyprus &lt;/span&gt;
+      &lt;/p&gt;
+      &lt;p&gt;Or you can email: &lt;a href="mailto:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;If you are not satisfied with their response, you can &lt;a href="https://eforms.mof.gov.cy/eforms/eforms.nsf/complaintformombudsman_en/complaintformombudsman_en?OpenForm" target="_blank"&gt; send a complaint to the Commissioner for Administration and the Protection of Human Rights&lt;/a&gt; (Ombudsman).&lt;/p&gt;
+      &lt;h2&gt;Date&lt;/h2&gt;
+      &lt;p&gt;This statement was created on 28 March 2022 using the W3C Accessibility Statement Generator Tool.&lt;/p&gt;</value>
+    <comment>Accessibility Statement Page</comment>
+  </data>
+  <data name="AccessibilityStatement_Title" xml:space="preserve">
+    <value>Accessibility statement</value>
+    <comment>Accessibility Statement Page</comment>
+  </data>
+  <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
+    <value>Citizen Personal Data Change</value>
+    <comment>Layout Page - Header control</comment>
+  </data>
+  <data name="BackButton_Link" xml:space="preserve">
+    <value>Back</value>
+    <comment>Layout Page- Back Button</comment>
+  </data>
+  <data name="Container_content" xml:space="preserve">
+    <value>Skip to main content</value>
+    <comment>Layout Page - Container Content</comment>
+  </data>
+  <data name="CookiePolicy_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;The service for Citizen Personal Data Change (χχχχχχχ.service.gov.cy) only uses cookies that are strictly necessary for the correct functioning of the website.&lt;/p&gt;
+      &lt;h2&gt;Cookies in use&lt;/h2&gt;
+      &lt;h3&gt;DSFServiceDataCookie&lt;/h3&gt;
+      &lt;p&gt;This cookie contains encrypted information that’s entered into the form. 
+It is automatically deleted after the user logs out, or after 14 days. &lt;/p&gt;
+      &lt;h3&gt;INGRESSCOOKIE&lt;/h3&gt;
+      &lt;p&gt;This cookie ensures that information sent to our server goes to the correct place. 
+It is automatically deleted after the user closes their browser.&lt;/p&gt;
+      &lt;h2&gt;Using CY Login&lt;/h2&gt;
+      &lt;p&gt;When you sign in using CY Login (also known as ‘Ariadni’) to access the child birth grant service, it will save &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/privacy" target="_blank"&gt;additional cookies on your device.&lt;/a&gt; &lt;/p&gt;        
+      &lt;h2&gt;How to control cookies&lt;/h2&gt;
+      &lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Find out how to control and delete cookies on your device.&lt;/a&gt;
+      &lt;p&gt;You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.&lt;/p&gt;</value>
+    <comment>Cookie Policy Page</comment>
+  </data>
+  <data name="CookiePolicy_Title" xml:space="preserve">
+    <value>Cookies on the Mock on Citizen Personal  Data Change</value>
+    <comment>Cookie Policy Page</comment>
+  </data>
+  <data name="Footer_Accessibility_Statement" xml:space="preserve">
+    <value>Accessibility Statement</value>
+    <comment>Layout Page - Footer Control</comment>
+  </data>
+  <data name="Footer_Cookey_Policy" xml:space="preserve">
+    <value>Cookie policy</value>
+    <comment>Layout Page - Footer Control</comment>
+  </data>
+  <data name="Footer_CopyRight" xml:space="preserve">
+    <value>Republic of Cyprus, 2022</value>
+    <comment>Layout Page - Footer Control</comment>
+  </data>
+  <data name="Footer_Privacy_Statement" xml:space="preserve">
+    <value>Privacy statement</value>
+    <comment>Layout Page - Footer Control</comment>
+  </data>
+  <data name="LogOut_SignOut" xml:space="preserve">
+    <value>Log out</value>
+    <comment>Layout Page- Log out Control</comment>
+  </data>
+  <data name="Meta_Description" xml:space="preserve">
+    <value>Get a one-off payment of up to €581 after having a baby: what you need to be eligible and how to claim the payment online.</value>
+    <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="PrivacyStatement_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;This privacy policy explains how Social Insurance Services (SIS) uses information about you, in order to process your application for a child birth grant.&lt;/p&gt;
+      &lt;h2&gt;Types of information collected and used&lt;/h2&gt;
+      &lt;p&gt;SIS collects the following information from you directly:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;your preferred email address&lt;/li&gt;
+        &lt;li&gt;your phone number&lt;/li&gt;
+        &lt;li&gt;your international bank account number (IBAN)&lt;/li&gt;
+        &lt;li&gt;your SWIFT code (if you have a bank account outside of Cyprus)&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;SIS collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;your name&lt;/li&gt;
+        &lt;li&gt;email address&lt;/li&gt;
+        &lt;li&gt;your social insurance number&lt;/li&gt;
+		&lt;li&gt;your identification (or alien registration) number&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;SIS collects the following information from the Civil Registry and Migration Department:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;your date of birth, sex, nationality and community you belong to&lt;/li&gt;
+        &lt;li&gt;the following information about your child or children:&lt;ul&gt;&lt;li&gt;name, date of birth, sex and identification (or alien registration) number&lt;/li&gt; &lt;li&gt;the nationality and community your child or children belong to&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+         &lt;li&gt;the following information about your husband or civil partner (where appropriate, and if your child is under 12 months old):&lt;ul&gt;&lt;li&gt;name, date of birth, identification (or alien registration) number, and sex&lt;/li&gt; &lt;li&gt;nationality and community they belong to&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;SIS uses the following information about you from its own records:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;your social insurance contributions&lt;/li&gt;
+        &lt;li&gt;your husband’s or civil partner’s social insurance contributions (where appropriate)&lt;/li&gt;
+        &lt;li&gt;your IBAN (if it is already stored)&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Why they use your information&lt;/h2&gt;
+      &lt;p&gt;This information will be collated for the purposes of programmatically checking your eligibility for the payment, and then used by examiners at SIS.&lt;/p&gt;
+      &lt;p&gt;Without access to the information listed above, SIS is not able to process your application.&lt;/p&gt;
+      &lt;h2&gt;How your personal information is stored&lt;/h2&gt;
+      &lt;p&gt;The information contained within your application is stored securely on servers based in Cyprus.&lt;/p&gt;
+      &lt;h2&gt;Your rights&lt;/h2&gt;
+      &lt;p&gt;Contact &lt;a href="mailto:cchristou@sid.mlsi.gov.cy" target="_blank"&gt;cchristou@sid.mlsi.gov.cy&lt;/a&gt; if you want to:&lt;/p&gt;
+      &lt;ul&gt; 
+        &lt;li&gt;get a copy of the information held about you&lt;/li&gt;
+        &lt;li&gt;restrict the processing of your data&lt;/li&gt;
+        &lt;li&gt;correct or update your personal information&lt;/li&gt;
+        &lt;li&gt;object to the processing of your personal information&lt;/li&gt;
+        &lt;li&gt;have your information transferred to another organisation or to you&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Complaints&lt;/h2&gt;
+      &lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt; contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;</value>
+    <comment>Privacy Statement Page</comment>
+  </data>
+  <data name="PrivacyStatement_Title" xml:space="preserve">
+    <value>Privacy policy – your personal information</value>
+    <comment>Privacy Statement Page</comment>
+  </data>
+</root>
