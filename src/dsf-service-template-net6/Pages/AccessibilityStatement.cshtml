@@ -1,0 +1,8 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@model AccessibilityStatementModel
+<h1>@Localizer["AccessibilityStatement_Title"]</h1>
+@HtmlLocalizer["AccessibilityStatement_Instructions"]

@@ -1,51 +1,120 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Program> Localizer
+@{
+    var lang = "";
+    if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
+    {
+    lang = "el";
+    }
+    else 
+    {
+    lang = "en";
+    }
+}
+<!DOCTYPE html>
+
+<html lang="@lang">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - dsf_service_template_net6</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/dsf_service_template_net6.styles.css" asp-append-version="true" />
+   <meta charset="utf-8" />
+    <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Social -->
+        <meta name="robots" content="noindex, nofollow">    
+        <meta property="og:url" content="https://address-change-mock.staging.service.gov.cy/">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="/img/icons-512.png"/>
+        <meta property="og:site_name" content="GOV.CY">
+        <meta property="og:title" content="Βοήθημα τοκετού – gov.cy">
+        <meta property="og:description" content="Παίρνεις βοήθημα μέχρι €581 όταν γεννήσεις. Μάθε τι θα χρειαστείς για να είσαι δικαιούχος και πώς να υποβάλεις αίτηση διαδικτυακά. ">
+        <meta property="twitter:title" content="Βοήθημα τοκετού – gov.cy">
+        <meta property="twitter:description" content="Παίρνεις βοήθημα μέχρι €581 όταν γεννήσεις. Μάθε τι θα χρειαστείς για να είσαι δικαιούχος και πώς να υποβάλεις αίτηση διαδικτυακά. ">
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://address-change-mock.staging.service.gov.cy/">
+        <meta property="twitter:image" content="/img/icons-512.png">
+        <!-- Theme --> 
+        <link rel="manifest" href="manifest.json">
+        <meta name="theme-color" content="#31576F">
+        <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48x48.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/img/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
+        
+        <title>@Localizer["Apply_For_ChildBirth_Grant_Title"]</title>
+        <meta name="description" content=@Localizer["Meta_Description"]>
+        
+        <link href="~/css/main.min.css" rel="stylesheet" />
+        <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">dsf_service_template_net6</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - dsf_service_template_net6 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        @*Skip to content section*@
+       
+      <a href="#mainContainer" class="govcy-skip-link">@Localizer["Container_content"]</a>
+       
+       @*Header and change language Mechanism*@
+       <div class="govcy-container-fluid govcy-p-0 govcy-m-0 govcy-position-relative">
+          <div class="govcy-container">
+             <div class="row">
+                 <header class="govcy-header govcy-bg-primary govcy-text-white govcy-bg-primary-right govcy-d-print-none">
+                     <a href="/" class="govcy-logo"> <img alt="govcy-logo"/></a>
+                     <form class="govcy-text-white govcy-bg-primary" > 
+                     <vc:culture-picker/>
+                     </form>
+                    <span class="govcy-service-name">@Localizer["Apply_For_ChildBirth_Grant_Title"]</span>
+                 </header>
+             </div>
+         </div>
+     </div>
+    @*Before main we have the login link and the back button*@
+    <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
+     @if (User.Identity.IsAuthenticated)
+     {
+       <div class="govcy-mb-4 govcy-float-start"> 
+       <span class="bi bi-chevron-left"></span>
+        <a class="govcy-back-link" href="javascript:history.back();">@Localizer["BackButton_Link"]</a>
         </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="govcy-text-end" id="beforeMainContainerUsername">
+            <div class="govcy-text-end govcy-mb-4">
+			@User.Claims.First(c => c.Type == "name").Value | <a href="/Account/LogOut" class="govcy-back-link">@Localizer["LogOut_SignOut"]</a>
+		    </div>
+        </div>
+        } else
+        {
+        <div class="govcy-mb-4"> 
+        <span class="bi bi-chevron-left"></span>
+        <a class="govcy-back-link" href="javascript:history.back();">@Localizer["BackButton_Link"]</a>
+        </div> 
+         }
+   </section>
+   @*Main Body*@
+   <main class="govcy-container" id="mainContainer">
+        <div class="govcy-col-8">
+            @RenderBody()
+        </div>
+    </main>
+    
+    @*//Footer section*@
+    <div class="govcy-container-fluid govcy-br-top-8 govcy-br-top-primary govcy-p-3 govcy-bg-light govcy-d-print-none">
+        <div class="govcy-container">
+            <div class="row">   
+                <footer class="govcy-footer">
+                    <span class="govcy-d-inline-block govcy-valign-top govcy-pb-2"><img alt="govcy-logo" /></span>
+                        <ul class="govcy-d-inline-block  govcy-m-0 govcy-pt-1 govcy-pl-1 govcy-pl-sm-3 govcy-efs-medium">
+                            <li><a href="/PrivacyStatement">@Localizer["Footer_Privacy_Statement"]</a></li>
+                            <li><a href="/CookiePolicy">@Localizer["Footer_Cookey_Policy"]</a></li>
+                            <li><a href="/AccessibilityStatement">@Localizer["Footer_Accessibility_Statement"]</a></li>
+                            <li class="govcy-d-block govcy-text-dark">© @Localizer["Footer_CopyRight"]</li>
+                        </ul>
+                </footer>
+            </div>
+        </div>
+    </div>
+    @*Script Registration*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> 
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
