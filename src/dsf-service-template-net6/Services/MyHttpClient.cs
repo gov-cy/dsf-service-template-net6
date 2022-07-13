@@ -39,7 +39,7 @@ namespace dsf_service_template_net6.Services
                 HttpClient httpClient = new HttpClient(httpClientHandler);
 
                 httpClient.BaseAddress = new Uri(baseUrl);
-
+              
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
                 //httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["Ocp-Apim-Subscription-Key"]);

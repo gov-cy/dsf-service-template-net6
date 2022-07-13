@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Localization;
 using System.IdentityModel.Tokens.Jwt;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Middlewares;
+using dsf_service_template_net6.Services;
 
 IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -13,11 +14,9 @@ IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true)
                             .AddUserSecrets<Program>(true)
                             .Build();
-
 var builder = WebApplication.CreateBuilder(args);
 IWebHostEnvironment environment = builder.Environment;
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
-
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 //Localization Configuration
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -27,25 +26,25 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.FallBackToParentUICultures = true;
     options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
 });
-
 builder.Services.AddControllers();
-
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
-   // options.Conventions.AuthorizePage("/Privacy");
+    // options.Conventions.AuthorizePage("/Privacy");
+    options.Conventions.AuthorizePage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
-
 }).AddViewLocalization(); 
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
+//Register HttpClient
+//so that it can be used for Dependency Injection
+builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
 //Added for session state
 builder.Services.AddDistributedMemoryCache();
-
 builder.Services.AddSession(options => {
-    //options.IdleTimeout = TimeSpan.FromMinutes(15);
+    options.IdleTimeout = TimeSpan.FromMinutes(1);
     options.Cookie.Name = "AppDataSessionCookie";
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -57,7 +56,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme; //"oidc";
 })
 .AddCookie(options =>
-{
+{ 
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.Lax;
