@@ -168,6 +168,15 @@
     <value>Back</value>
     <comment>Layout Page- Back Button</comment>
   </data>
+  <data name="BadRoute_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;If you typed the web address, check it is correct.&lt;/p&gt;
+      &lt;p&gt;If you copied and pasted the web address, check that you copied the entire address.&lt;/p&gt;</value>
+    <comment>No Page Found</comment>
+  </data>
+  <data name="BadRoute_Title" xml:space="preserve">
+    <value>Page not found</value>
+    <comment>No Page Found</comment>
+  </data>
   <data name="Container_content" xml:space="preserve">
     <value>Skip to main content</value>
     <comment>Layout Page - Container Content</comment>
@@ -215,6 +224,16 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="Meta_Description" xml:space="preserve">
     <value>Get a one-off payment of up to €581 after having a baby: what you need to be eligible and how to claim the payment online.</value>
     <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="NoValid_Profile_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;If you've signed in using a CY Login 'organisation' account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; return to CY Login and sign in using a 'citizen' account.&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt; If you've signed in using a CY Login 'citizen' account, you need to make sure it's 'authenticated'. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Find out how to authenticate your CY Login account.&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;You can also &lt;a href="http://www.mlsi.gov.cy/mlsi/sid/sidv2.nsf/All/B85AA4D88E3630B4C2257B18003B2C9D?OpenDocument" target="_blank"&gt; apply for the payment using the paper form.&lt;/a&gt;&lt;/p&gt;</value>
+    <comment>No valid Profile Page</comment>
+  </data>
+  <data name="NoValid_Profile_Title" xml:space="preserve">
+    <value>Check your CY Login account</value>
+    <comment>No valid Profile Page</comment>
   </data>
   <data name="PrivacyStatement_Instructions" xml:space="preserve">
     <value>&lt;p&gt;This privacy policy explains how Social Insurance Services (SIS) uses information about you, in order to process your application for a child birth grant.&lt;/p&gt;

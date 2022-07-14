@@ -1,0 +1,8 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@model  NoValidProfileModel
+<h1>@Localizer["NoValid_Profile_Title"]</h1>
+@HtmlLocalizer["NoValid_Profile_Instructions"]

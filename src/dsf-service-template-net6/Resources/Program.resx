@@ -169,6 +169,15 @@
     <value>Πίσω</value>
     <comment>Layout Page- Back Button</comment>
   </data>
+  <data name="BadRoute_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
+      &lt;p&gt;Αν αντιγράψατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι επικολλήσατε ολόκληρη τη διεύθυνση.&lt;/p&gt;</value>
+    <comment>No Page Found</comment>
+  </data>
+  <data name="BadRoute_Title" xml:space="preserve">
+    <value>Δεν βρέθηκε η σελίδα</value>
+    <comment>No Page Found</comment>
+  </data>
   <data name="Button_Get_Started" xml:space="preserve">
     <value>Ξεκινήστε</value>
     <comment>Button Text</comment>
@@ -214,12 +223,22 @@
     <comment>Layout Page - Footer Control</comment>
   </data>
   <data name="LogOut_SignOut" xml:space="preserve">
-    <value />
+    <value>Αποσύνδεση</value>
     <comment>Layout Page- Log out Control</comment>
   </data>
   <data name="Meta_Description" xml:space="preserve">
     <value>Παίρνεις βοήθημα μέχρι €581 όταν γεννήσεις. Μάθε τι θα χρειαστείς για να είσαι δικαιούχος και πώς να υποβάλεις αίτηση διαδικτυακά.</value>
     <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="NoValid_Profile_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για οργανισμούς, χρειάζεται να &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; επιστρέψετε στο CY Login και να συνδεθείτε με λογαριασμό για πολίτες.&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για πολίτες, χρειάζεται να βεβαιωθείτε ότι ο λογαριασμός σας έχει ταυτοποιηθεί. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Μάθετε πώς μπορείτε να ταυτοποιήσετε τον λογαριασμό σας στο CY Login.&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Μπορείτε, επίσης, να &lt;a href="http://www.mlsi.gov.cy/mlsi/sid/sidv2.nsf/All/B85AA4D88E3630B4C2257B18003B2C9D?OpenDocument" target="_blank"&gt; υποβάλετε αίτηση γραπτώς.&lt;/a&gt;&lt;/p&gt;</value>
+    <comment>No valid Profile Page</comment>
+  </data>
+  <data name="NoValid_Profile_Title" xml:space="preserve">
+    <value>Ελέγξτε τον λογαριασμό σας στο CY Login</value>
+    <comment>No valid Profile Page</comment>
   </data>
   <data name="PrivacyStatement_Instructions" xml:space="preserve">
     <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς οι Υπηρεσίες Κοινωνικών Ασφαλίσεων (ΥΚΑ) χρησιμοποιούν πληροφορίες σχετικά με εσάς, προκειμένου να διεκπεραιώσουν την αίτησή σας για το βοήθημα τοκετού.&lt;/p&gt;
