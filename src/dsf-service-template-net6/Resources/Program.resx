@@ -169,6 +169,15 @@
     <value>Πίσω</value>
     <comment>Layout Page- Back Button</comment>
   </data>
+  <data name="BadRoute_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
+      &lt;p&gt;Αν αντιγράψατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι επικολλήσατε ολόκληρη τη διεύθυνση.&lt;/p&gt;</value>
+    <comment>No Page Found</comment>
+  </data>
+  <data name="BadRoute_Title" xml:space="preserve">
+    <value>Δεν βρέθηκε η σελίδα</value>
+    <comment>No Page Found</comment>
+  </data>
   <data name="Button_Get_Started" xml:space="preserve">
     <value>Ξεκινήστε</value>
     <comment>Button Text</comment>

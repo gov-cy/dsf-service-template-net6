@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
+using dsf_service_template_net6.Extensions;
 
 namespace dsf_service_template_net6.Controllers
 {
@@ -51,6 +53,7 @@ namespace dsf_service_template_net6.Controllers
         [Authorize]
         public IActionResult LogIn()
         {
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             if (isOrganization())
             {
                 return Redirect("/NoValidProfile");
@@ -60,6 +63,18 @@ namespace dsf_service_template_net6.Controllers
             {
                 return Redirect("/NoValidProfile");
             }
+            if (HttpContext.GetTokenAsync("id_token") != null)
+            {
+                var value = HttpContext.GetTokenAsync("id_token").Result ?? "";
+                HttpContext.Session.SetObjectAsJson("id_token",value,authTime);
+            }
+            if (HttpContext.GetTokenAsync("access_token") != null)
+            {
+                var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
+                HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
+            }
+            // string idToken = HttpContext.GetTokenAsync("id_token").Result ?? "";
+            // string accessToken = HttpContext.GetTokenAsync("access_token").Result ?? "";
             //After CyLogin login, redirect to default home page
             return Redirect("/");
         }

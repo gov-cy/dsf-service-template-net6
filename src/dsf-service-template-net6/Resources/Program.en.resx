@@ -168,6 +168,15 @@
     <value>Back</value>
     <comment>Layout Page- Back Button</comment>
   </data>
+  <data name="BadRoute_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;If you typed the web address, check it is correct.&lt;/p&gt;
+      &lt;p&gt;If you copied and pasted the web address, check that you copied the entire address.&lt;/p&gt;</value>
+    <comment>No Page Found</comment>
+  </data>
+  <data name="BadRoute_Title" xml:space="preserve">
+    <value>Page not found</value>
+    <comment>No Page Found</comment>
+  </data>
   <data name="Container_content" xml:space="preserve">
     <value>Skip to main content</value>
     <comment>Layout Page - Container Content</comment>
