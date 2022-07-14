@@ -177,6 +177,18 @@
     <value>Page not found</value>
     <comment>No Page Found</comment>
   </data>
+  <data name="CheckAndSubmit" xml:space="preserve">
+    <value>Check and submit</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="CheckAndSubmitPara01" xml:space="preserve">
+    <value>We’ve found records showing that you (or a husband or civil partner) have enough social insurance contributions to be eligible for the payment.</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="CheckAndSubmitPara02" xml:space="preserve">
+    <value>Before submitting your application, check that the information below is correct.</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Container_content" xml:space="preserve">
     <value>Skip to main content</value>
     <comment>Layout Page - Container Content</comment>

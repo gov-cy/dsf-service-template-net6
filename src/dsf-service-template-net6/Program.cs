@@ -30,7 +30,7 @@ builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
-    // options.Conventions.AuthorizePage("/Privacy");
+    options.Conventions.AuthorizePage("/ReviewPage");
     options.Conventions.AuthorizePage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");

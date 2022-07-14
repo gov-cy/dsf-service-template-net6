@@ -1,0 +1,10 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@model ReviewPageModel
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+ <h1>@Localizer["CheckAndSubmit"]</h1>
+ <p>@Localizer["CheckAndSubmitPara01"]</p>
+ <p>@Localizer["CheckAndSubmitPara02"]</p>
+

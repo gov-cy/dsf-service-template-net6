@@ -182,6 +182,18 @@
     <value>Ξεκινήστε</value>
     <comment>Button Text</comment>
   </data>
+  <data name="CheckAndSubmit" xml:space="preserve">
+    <value>Έλεγχος και υποβολή</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="CheckAndSubmitPara01" xml:space="preserve">
+    <value>Έχουμε βρει στα αρχεία μας πως εσείς (ή ο σύζυγος/σύντροφός σας) έχετε τις απαιτούμενες εισφορές στο Ταμείο Κοινωνικών Ασφαλίσεων για να δικαιούστε το βοήθημα.</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="CheckAndSubmitPara02" xml:space="preserve">
+    <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Container_content" xml:space="preserve">
     <value>Πλοήγηση από το πληκτρολόγιο</value>
     <comment>Layout Page- Container Content</comment>
