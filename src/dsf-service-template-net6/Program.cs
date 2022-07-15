@@ -30,6 +30,9 @@ builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
+    options.Conventions.AuthorizePage("/EmailEdit");
+    options.Conventions.AuthorizePage("/MobileEdit");
+    options.Conventions.AuthorizePage("/AddressEdit");
     options.Conventions.AuthorizePage("/ReviewPage");
     options.Conventions.AuthorizePage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");

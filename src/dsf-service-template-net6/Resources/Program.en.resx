@@ -160,6 +160,14 @@
     <value>Accessibility statement</value>
     <comment>Accessibility Statement Page</comment>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="AddressDetails" xml:space="preserve">
+    <value>Address Change</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
     <value>Citizen Personal Data Change</value>
     <comment>Layout Page - Header control</comment>
@@ -176,6 +184,10 @@
   <data name="BadRoute_Title" xml:space="preserve">
     <value>Page not found</value>
     <comment>No Page Found</comment>
+  </data>
+  <data name="Change_Link" xml:space="preserve">
+    <value>Change</value>
+    <comment>Table Change Link Text</comment>
   </data>
   <data name="CheckAndSubmit" xml:space="preserve">
     <value>Check and submit</value>
@@ -213,6 +225,14 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Cookies on the Mock on Citizen Personal  Data Change</value>
     <comment>Cookie Policy Page</comment>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email address</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="EmailDetails" xml:space="preserve">
+    <value>Email address change</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Footer_Accessibility_Statement" xml:space="preserve">
     <value>Accessibility Statement</value>
     <comment>Layout Page - Footer Control</comment>
@@ -236,6 +256,14 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="Meta_Description" xml:space="preserve">
     <value>Get a one-off payment of up to €581 after having a baby: what you need to be eligible and how to claim the payment online.</value>
     <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile phone number</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="MobileDetails" xml:space="preserve">
+    <value>Mobile phone number change</value>
+    <comment>Review Page</comment>
   </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;If you've signed in using a CY Login 'organisation' account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; return to CY Login and sign in using a 'citizen' account.&lt;/a&gt;&lt;/p&gt;

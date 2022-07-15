@@ -161,6 +161,14 @@
     <value>Δήλωση προσβασιμότητας</value>
     <comment>Accessibility Statement Page</comment>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Διεύθυνση</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="AddressDetails" xml:space="preserve">
+    <value>Αλλαγή Διεύθυνσης</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
     <value>Αλλαγή Προσωπικών Στοιχείων του Πολίτη</value>
     <comment>Layout Page- Header control</comment>
@@ -181,6 +189,10 @@
   <data name="Button_Get_Started" xml:space="preserve">
     <value>Ξεκινήστε</value>
     <comment>Button Text</comment>
+  </data>
+  <data name="Change_Link" xml:space="preserve">
+    <value>Αλλαγή</value>
+    <comment>Table Change Link Text</comment>
   </data>
   <data name="CheckAndSubmit" xml:space="preserve">
     <value>Έλεγχος και υποβολή</value>
@@ -218,6 +230,14 @@
     <value>Cookies στην υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη </value>
     <comment>Cookie Policy Page</comment>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="EmailDetails" xml:space="preserve">
+    <value>Αλλαγή email</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Footer_Accessibility_Statement" xml:space="preserve">
     <value>Προσβασιμότητα</value>
     <comment>Layout Page - Footer Control</comment>
@@ -241,6 +261,14 @@
   <data name="Meta_Description" xml:space="preserve">
     <value>Παίρνεις βοήθημα μέχρι €581 όταν γεννήσεις. Μάθε τι θα χρειαστείς για να είσαι δικαιούχος και πώς να υποβάλεις αίτηση διαδικτυακά.</value>
     <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Αριθμός κινητού τηλεφώνου</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="MobileDetails" xml:space="preserve">
+    <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
+    <comment>Review Page</comment>
   </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για οργανισμούς, χρειάζεται να &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; επιστρέψετε στο CY Login και να συνδεθείτε με λογαριασμό για πολίτες.&lt;/a&gt;&lt;/p&gt;
