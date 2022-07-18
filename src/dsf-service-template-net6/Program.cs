@@ -105,7 +105,7 @@ builder.Services.AddAuthentication(options =>
 
     //Port used for this client MUST BE 44319
     //options.SignedOutRedirectUri = "https://localhost:44319/";
-
+    
     options.ResponseType = "code";
     options.ResponseMode = "query";
 

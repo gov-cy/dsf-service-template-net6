@@ -1,12 +1,14 @@
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
 namespace dsf_service_template_net6.Pages
 {
+    [Authorize]
     [BindProperties]
     public class ReviewPageModel : PageModel
     {
@@ -34,8 +36,17 @@ namespace dsf_service_template_net6.Pages
             {
                 return RedirectToPage("/Index");
             }
+          //  FormatAddress();
             return Page();
         }
+        //private void FormatAddress()
+        //{
+        //    foreach (Addressinfo item in _citizenPersonalDetails.data.addressInfo)
+        //    {
+        //        item.addressText = String.Format(item.addressText);
+        //        item.addressText=item.item.name + " " + item.item.street.streetNumber 
+        //    }
+        //}
         private bool GetCitizenData()
         {
             bool isPersonalDataRetrieve = true;
@@ -65,7 +76,7 @@ namespace dsf_service_template_net6.Pages
                     else if (!_citizenPersonalDetails.succeeded)
                     {
                         isPersonalDataRetrieve = false;
-                    }
+                    } 
                 }
                
             }

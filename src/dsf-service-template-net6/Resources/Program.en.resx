@@ -249,6 +249,23 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Privacy statement</value>
     <comment>Layout Page - Footer Control</comment>
   </data>
+  <data name="Index_Heading" xml:space="preserve">
+    <value>Mock Service Purpose Summary</value>
+    <comment>Index Page</comment>
+  </data>
+  <data name="Index_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;This service is demo that contains the following:&lt;/p&gt;
+    &lt;p&gt;1-How to implement federated login mechanism with Cy Login&lt;/p&gt;
+    &lt;p&gt;2-View a proposed project structure for service development&lt;/p&gt;
+    &lt;p&gt;3-Set up access to our design system with example pages (see layout Page)&lt;/p&gt;
+    &lt;p&gt;4-Provide out of the box Multilanguage Support&lt;/p&gt;
+    &lt;p&gt;5-Get indications How we use our Edit,View,Review,Success submission Pages&lt;/p&gt;
+    &lt;p&gt;6-Provide some Guidance on our must implement statistic Api Call and Calling Api samples&lt;/p&gt;
+    &lt;p&gt;7-See our proposed server side validation mechanism (Fluent Validation)&lt;/p&gt;
+    &lt;p&gt;8-Handling Session time Out and store data in sessions during the service journey&lt;/p&gt;
+    &lt;p&gt;9-See our sample Unit Tests&lt;/p&gt;</value>
+    <comment>Index Page</comment>
+  </data>
   <data name="LogOut_SignOut" xml:space="preserve">
     <value>Log out</value>
     <comment>Layout Page- Log out Control</comment>

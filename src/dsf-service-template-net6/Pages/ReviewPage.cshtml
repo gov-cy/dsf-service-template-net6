@@ -18,7 +18,7 @@
              <th scope="row" class="col-3">@Localizer["Address"]</th>
              <td class="col-7">
                  <p>
-                 <span class="govcy-d-block">@Address.addressText</span>
+                 <span class="govcy-d-block">@Html.Raw(Html.Encode(Address.addressText).Replace("\n", "<br />"))</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
