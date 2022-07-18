@@ -18,9 +18,17 @@ namespace dsf_service_template_net6.Pages
             _configuration = configuration;
         }
         public CitizenDataResponse _citizenPersonalDetails = new CitizenDataResponse();
-
+        public string currentLanguage;
         public IActionResult OnGet()
         {
+            if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
+            {
+                currentLanguage = "el";
+            }
+            else
+            {
+                currentLanguage = "en";
+            }
             bool ret = GetCitizenData();
             if (!ret)
             {
@@ -31,8 +39,9 @@ namespace dsf_service_template_net6.Pages
         private bool GetCitizenData()
         {
             bool isPersonalDataRetrieve = true;
-            //First check if user personal data have already being retrieve
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+          
+                //First check if user personal data have already being retrieve
+                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             if (citizenPersonalDetails != null)
             {
@@ -44,8 +53,8 @@ namespace dsf_service_template_net6.Pages
                 //get uniqueid
                 //  var id = User.Claims.First(p => p.Type == "unique_identifier").Value;
                 //call the mock Api
-                var apiUrl = "contact-info-mock/en";
-                var response = _client.MyHttpClientGetRequest("https://apimocha.com/dsf-test-api/", apiUrl, "");
+                var apiUrl = "contact-info-mock/" + currentLanguage;
+                var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "");
                 if (response != null)
                 {
                     _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);

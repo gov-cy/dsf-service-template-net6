@@ -6,7 +6,7 @@
 @inject IStringLocalizer<Program> Localizer
 @inject IHtmlLocalizer<Program> HtmlLocalizer
 @{
-    Addressinfo Address = @Model._citizenPersonalDetails.data.addressInfo.First(p => p.language == "en");
+    Addressinfo Address = @Model._citizenPersonalDetails.data.addressInfo.First(p => p.language == Model.currentLanguage);
 
 }
  <h1>@Localizer["CheckAndSubmit"]</h1>
@@ -15,11 +15,10 @@
  <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
          <tr>
-             <th scope="row" class="col-3">@Localizer["AddressDetails"]</th>
+             <th scope="row" class="col-3">@Localizer["Address"]</th>
              <td class="col-7">
                  <p>
-                  <span class="govcy-fw-bold">@Localizer["Address"]</span>
-                  <span class="govcy-d-block">@Address.addressText</span>
+                 <span class="govcy-d-block">@Address.addressText</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
@@ -27,11 +26,10 @@
               </td>
          </tr>
           <tr>
-             <th scope="row" class="col-3">@Localizer["MobileDetails"]</th>
+             <th scope="row" class="col-3">@Localizer["Mobile"]</th>
              <td class="col-7">
                  <p>
-                  <span class="govcy-fw-bold">@Localizer["Mobile"]</span>
-                  <span class="govcy-d-block">@Model._citizenPersonalDetails.data.mobile</span>
+                 <span class="govcy-d-block">@Model._citizenPersonalDetails.data.mobile</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
@@ -39,10 +37,9 @@
               </td>
          </tr>
            <tr>
-             <th scope="row" class="col-3">@Localizer["EmailDetails"]</th>
+             <th scope="row" class="col-3">@Localizer["Email"]</th>
              <td class="col-7">
                  <p>
-                  <span class="govcy-fw-bold">@Localizer["Email"]</span>
                   <span class="govcy-d-block">@Model._citizenPersonalDetails.data.email</span>
                 </p>
              </td>

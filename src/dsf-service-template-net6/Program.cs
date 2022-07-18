@@ -14,6 +14,7 @@ IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true)
                             .AddUserSecrets<Program>(true)
                             .Build();
+
 var builder = WebApplication.CreateBuilder(args);
 IWebHostEnvironment environment = builder.Environment;
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
@@ -40,6 +41,7 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
 }).AddViewLocalization(); 
+
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
 //so that it can be used for Dependency Injection
@@ -47,7 +49,6 @@ builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
 //Added for session state
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {
-    options.IdleTimeout = TimeSpan.FromMinutes(1);
     options.Cookie.Name = "AppDataSessionCookie";
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -64,6 +65,10 @@ builder.Services.AddAuthentication(options =>
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.Lax;
     options.Cookie.Name = "DsfCyLoginAuthCookie";
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.Cookie.MaxAge = options.ExpireTimeSpan;
+
 })
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
