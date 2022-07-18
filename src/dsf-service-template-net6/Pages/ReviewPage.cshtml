@@ -6,7 +6,7 @@
 @inject IStringLocalizer<Program> Localizer
 @inject IHtmlLocalizer<Program> HtmlLocalizer
 @{
-    Addressinfo Address = @Model._application.data.addressInfo.Select(p => p.language == "en").FirstOrDefault();
+    Addressinfo Address = @Model._citizenPersonalDetails.data.addressInfo.First(p => p.language == "en");
 
 }
  <h1>@Localizer["CheckAndSubmit"]</h1>
@@ -31,7 +31,7 @@
              <td class="col-7">
                  <p>
                   <span class="govcy-fw-bold">@Localizer["Mobile"]</span>
-                  <span class="govcy-d-block">@Model._application.data.mobile</span>
+                  <span class="govcy-d-block">@Model._citizenPersonalDetails.data.mobile</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
@@ -43,7 +43,7 @@
              <td class="col-7">
                  <p>
                   <span class="govcy-fw-bold">@Localizer["Email"]</span>
-                  <span class="govcy-d-block">@Model._application.data.email</span>
+                  <span class="govcy-d-block">@Model._citizenPersonalDetails.data.email</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
