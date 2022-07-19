@@ -41,6 +41,7 @@ namespace dsf_service_template_net6.Services
                 httpClient.BaseAddress = new Uri(baseUrl);
               
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
+                httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
                 //httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["Ocp-Apim-Subscription-Key"]);
                 if (!string.IsNullOrEmpty(accessToken))
