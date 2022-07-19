@@ -180,14 +180,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.UseStatusCodePages(async context =>
-{
-    var response = context.HttpContext.Response;
 
-    if (response.StatusCode == (int)HttpStatusCode.Unauthorized ||
-            response.StatusCode == (int)HttpStatusCode.Forbidden)
-        response.Redirect("/Account/LogIn");
-});
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
