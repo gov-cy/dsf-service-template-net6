@@ -15,7 +15,7 @@
  <h1>@Localizer["CheckAndSubmit"]</h1>
  <p>@Localizer["CheckAndSubmitPara01"]</p>
  <p>@Localizer["CheckAndSubmitPara02"]</p>
-  if (Model._citizenPersonalDetails != null)
+  @if (Model._citizenPersonalDetails != null)
     {
  <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
@@ -54,6 +54,7 @@
          </tr>
      </tbody>
  </table>
- } else {
+ } 
+ else {
  <h1>No data found</h1>
  }
