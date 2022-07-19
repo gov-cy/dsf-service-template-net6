@@ -11,8 +11,8 @@ namespace dsf_service_template_net6.Services
 {
     public interface IMyHttpClient
     {
-        string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType);
-        string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request);
+        string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken="");
+        string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "");
     }
     public class MyHttpClient : IMyHttpClient
     {
@@ -25,7 +25,7 @@ namespace dsf_service_template_net6.Services
             _logger = logger;
         }
 
-        public string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType)
+        public string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken = "")
         {
             var ret = "";
 
@@ -43,7 +43,11 @@ namespace dsf_service_template_net6.Services
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
                 //httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["Ocp-Apim-Subscription-Key"]);
-
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    //Include the Bearer Token
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                }
                 Task<HttpResponseMessage> response = httpClient.GetAsync(endpoint);
                 response.Wait(TimeSpan.FromSeconds(10));
 
@@ -73,7 +77,7 @@ namespace dsf_service_template_net6.Services
             return ret;
         }
 
-        public string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request)
+        public string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "")
         {
             var ret = "";
 
