@@ -133,9 +133,18 @@ builder.Services.AddAuthentication(options =>
             context.HandleResponse();
 
             return Task.FromResult(0);
+        },
+        OnTicketReceived = ctx =>
+        {
+            var url = "/Account/LogIn";
+            ctx.ReturnUri = url;
+            return Task.CompletedTask;
         }
     };
 });
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
