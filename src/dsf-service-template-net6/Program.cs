@@ -14,6 +14,7 @@ IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true)
                             .AddUserSecrets<Program>(true)
                             .Build();
+
 var builder = WebApplication.CreateBuilder(args);
 IWebHostEnvironment environment = builder.Environment;
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
@@ -30,13 +31,17 @@ builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
-    // options.Conventions.AuthorizePage("/Privacy");
+    options.Conventions.AuthorizePage("/EmailEdit");
+    options.Conventions.AuthorizePage("/MobileEdit");
+    options.Conventions.AuthorizePage("/AddressEdit");
+    options.Conventions.AuthorizePage("/ReviewPage");
     options.Conventions.AuthorizePage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
 }).AddViewLocalization(); 
+
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
 //so that it can be used for Dependency Injection
@@ -44,7 +49,6 @@ builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
 //Added for session state
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {
-    options.IdleTimeout = TimeSpan.FromMinutes(1);
     options.Cookie.Name = "AppDataSessionCookie";
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -61,6 +65,10 @@ builder.Services.AddAuthentication(options =>
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.SameSite = SameSiteMode.Lax;
     options.Cookie.Name = "DsfCyLoginAuthCookie";
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.Cookie.MaxAge = options.ExpireTimeSpan;
+
 })
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
@@ -97,7 +105,7 @@ builder.Services.AddAuthentication(options =>
 
     //Port used for this client MUST BE 44319
     //options.SignedOutRedirectUri = "https://localhost:44319/";
-
+    
     options.ResponseType = "code";
     options.ResponseMode = "query";
 

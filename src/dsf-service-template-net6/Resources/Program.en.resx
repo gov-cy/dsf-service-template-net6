@@ -160,6 +160,14 @@
     <value>Accessibility statement</value>
     <comment>Accessibility Statement Page</comment>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="AddressDetails" xml:space="preserve">
+    <value>Address Change</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
     <value>Citizen Personal Data Change</value>
     <comment>Layout Page - Header control</comment>
@@ -176,6 +184,22 @@
   <data name="BadRoute_Title" xml:space="preserve">
     <value>Page not found</value>
     <comment>No Page Found</comment>
+  </data>
+  <data name="Change_Link" xml:space="preserve">
+    <value>Change</value>
+    <comment>Table Change Link Text</comment>
+  </data>
+  <data name="CheckAndSubmit" xml:space="preserve">
+    <value>Check and submit</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="CheckAndSubmitPara01" xml:space="preserve">
+    <value>We’ve found records showing that you have the below data in Civil Registry.</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="CheckAndSubmitPara02" xml:space="preserve">
+    <value>Before submitting your application, check that the information below is correct.</value>
+    <comment>Review Page</comment>
   </data>
   <data name="Container_content" xml:space="preserve">
     <value>Skip to main content</value>
@@ -201,6 +225,14 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Cookies on the Mock on Citizen Personal  Data Change</value>
     <comment>Cookie Policy Page</comment>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email address</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="EmailDetails" xml:space="preserve">
+    <value>Email address change</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Footer_Accessibility_Statement" xml:space="preserve">
     <value>Accessibility Statement</value>
     <comment>Layout Page - Footer Control</comment>
@@ -217,6 +249,23 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Privacy statement</value>
     <comment>Layout Page - Footer Control</comment>
   </data>
+  <data name="Index_Heading" xml:space="preserve">
+    <value>Mock Service Purpose Summary</value>
+    <comment>Index Page</comment>
+  </data>
+  <data name="Index_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;This service is demo that contains the following:&lt;/p&gt;
+    &lt;p&gt;1-How to implement federated login mechanism with Cy Login&lt;/p&gt;
+    &lt;p&gt;2-View a proposed project structure for service development&lt;/p&gt;
+    &lt;p&gt;3-Set up access to our design system with example pages (see layout Page)&lt;/p&gt;
+    &lt;p&gt;4-Provide out of the box Multilanguage Support&lt;/p&gt;
+    &lt;p&gt;5-Get indications How we use our Edit,View,Review,Success submission Pages&lt;/p&gt;
+    &lt;p&gt;6-Provide some Guidance on our must implement statistic Api Call and Calling Api samples&lt;/p&gt;
+    &lt;p&gt;7-See our proposed server side validation mechanism (Fluent Validation)&lt;/p&gt;
+    &lt;p&gt;8-Handling Session time Out and store data in sessions during the service journey&lt;/p&gt;
+    &lt;p&gt;9-See our sample Unit Tests&lt;/p&gt;</value>
+    <comment>Index Page</comment>
+  </data>
   <data name="LogOut_SignOut" xml:space="preserve">
     <value>Log out</value>
     <comment>Layout Page- Log out Control</comment>
@@ -224,6 +273,14 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="Meta_Description" xml:space="preserve">
     <value>Get a one-off payment of up to €581 after having a baby: what you need to be eligible and how to claim the payment online.</value>
     <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile phone number</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="MobileDetails" xml:space="preserve">
+    <value>Mobile phone number change</value>
+    <comment>Review Page</comment>
   </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;If you've signed in using a CY Login 'organisation' account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; return to CY Login and sign in using a 'citizen' account.&lt;/a&gt;&lt;/p&gt;

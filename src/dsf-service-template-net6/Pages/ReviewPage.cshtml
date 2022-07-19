@@ -1,0 +1,52 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using dsf_service_template_net6.Data.Models
+@model ReviewPageModel
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@{
+    Addressinfo Address = @Model._citizenPersonalDetails.data.addressInfo.First(p => p.language == Model.currentLanguage);
+
+}
+ <h1>@Localizer["CheckAndSubmit"]</h1>
+ <p>@Localizer["CheckAndSubmitPara01"]</p>
+ <p>@Localizer["CheckAndSubmitPara02"]</p>
+ <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
+     <tbody>
+         <tr>
+             <th scope="row" class="col-3">@Localizer["Address"]</th>
+             <td class="col-7">
+                 <p>
+                 <span class="govcy-d-block">@Html.Raw(Address.addressText.Replace("\n", "<br />"))</span>
+                </p>
+             </td>
+              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+                   <a asp-page="/AddressEdit" asp-route-review="true">@Localizer["Change_Link"]</a>
+              </td>
+         </tr>
+          <tr>
+             <th scope="row" class="col-3">@Localizer["Mobile"]</th>
+             <td class="col-7">
+                 <p>
+                 <span class="govcy-d-block">@Model._citizenPersonalDetails.data.mobile</span>
+                </p>
+             </td>
+              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+                   <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["Change_Link"]</a>
+              </td>
+         </tr>
+           <tr>
+             <th scope="row" class="col-3">@Localizer["Email"]</th>
+             <td class="col-7">
+                 <p>
+                  <span class="govcy-d-block">@Model._citizenPersonalDetails.data.email</span>
+                </p>
+             </td>
+              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+                   <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["Change_Link"]</a>
+              </td>
+         </tr>
+     </tbody>
+ </table>
+
