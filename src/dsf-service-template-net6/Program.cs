@@ -41,8 +41,8 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
-}).AddViewLocalization(); 
-
+}).AddViewLocalization();
+   
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
 //so that it can be used for Dependency Injection

@@ -78,7 +78,7 @@ namespace dsf_service_template_net6.Pages
                 var apiUrl = "contact-info-mock/" + currentLanguage;
                 var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
                 var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
-                if (response != null)
+                if (response != null)     
                 {
                     _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
                     if (_citizenPersonalDetails == null)
@@ -89,6 +89,10 @@ namespace dsf_service_template_net6.Pages
                     {
                         isPersonalDataRetrieve = false;
                     } 
+                }
+                else
+                {
+                    isPersonalDataRetrieve = false;
                 }
                
             }
