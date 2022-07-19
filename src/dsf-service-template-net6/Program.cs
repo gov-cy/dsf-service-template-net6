@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Middlewares;
 using dsf_service_template_net6.Services;
+using System.Net;
 
 IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -68,7 +69,7 @@ builder.Services.AddAuthentication(options =>
     options.SlidingExpiration = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     options.Cookie.MaxAge = options.ExpireTimeSpan;
-
+    
 })
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
@@ -179,6 +180,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
