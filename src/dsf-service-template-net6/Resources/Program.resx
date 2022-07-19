@@ -238,6 +238,10 @@
     <value>Αλλαγή email</value>
     <comment>Review Page</comment>
   </data>
+  <data name="ErrorMessage-General" xml:space="preserve">
+    <value>Σφάλμα</value>
+    <comment>Error Review</comment>
+  </data>
   <data name="Footer_Accessibility_Statement" xml:space="preserve">
     <value>Προσβασιμότητα</value>
     <comment>Layout Page - Footer Control</comment>
@@ -255,20 +259,16 @@
     <comment>Layout Page - Footer Control</comment>
   </data>
   <data name="Index_Heading" xml:space="preserve">
-    <value>Σύνοψη σκοπού Εικονικής Υπηρεσίας</value>
+    <value>Καλωσορίσατε στην εικονική υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
     <comment>Index Page</comment>
   </data>
   <data name="Index_Instructions" xml:space="preserve">
-    <value>&lt;p&gt;Αυτή η υπηρεσία είναι μια παρουσίαση που περιέχει τα εξής:&lt;/p&gt;
-     &lt;p&gt;1-Πώς να εφαρμόσετε τον κυβερνητικό μηχανισμό σύνδεσης με το Cy Login&lt;/p&gt;
-     &lt;p&gt;2-Να δείτε μια προτεινόμενη δομή έργου για ανάπτυξη υπηρεσιών&lt;/p&gt;
-     &lt;p&gt;3-Να στήσετε την πρόσβαση στο σύστημα σχεδιασμού μας με παραδείγματα σελίδων (δείτε τη Σελίδα διάταξης περιεχομένου)&lt;/p&gt;
-     &lt;p&gt;4-Να παρέχετε εξαρχής πολυγλωσσική υποστήριξη&lt;/p&gt;
-     &lt;p&gt;5-Να δείτε πως χρησιμοποιούμε τα Edit,View,Review,Success submission Pages&lt;/p&gt;
-     &lt;p&gt;6-Παρέχονται κάποιες οδηγίες σχετικά με τα στατιστικά δείγματα κλήσης Api καθώς και παραδείγματα κλήσης Api που πρέπει να εφαρμοστούν&lt;/p&gt;
-     &lt;p&gt;7-Να δείτε τον προτεινόμενο μηχανισμό επικύρωσης από την πλευρά του διακομιστή (Fluent Validation)&lt;/p&gt;
-     &lt;p&gt;8-Χειρισμός χρόνου σύνδεσης και αποθήκευσης δεδομένων σε περιόδους σύνδεσης κατά τη διάρκεια της χρήσης της υπηρεσιας&lt;/p&gt;
-     &lt;p&gt;9-Να δείτε δείγματα Unit Tests&lt;/p&gt;</value>
+    <value>&lt;h2&gt;Ζητήστε βοήθεια και καθοδήγηση&lt;/h2&gt;
+    &lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;Για θέματα που αφορούν Τεχνική υποστήριξη, επικοινωνήστε με το DSF:&lt;/span&gt;&lt;span class="govcy-d-block"&gt;&lt;a href="mailto:xxxx@dits.dmrid.gov.cy" target="_blank"&gt;xxxx@dits.dmrid.gov.cyy&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</value>
+    <comment>Index Page</comment>
+  </data>
+  <data name="Index_Instructions1" xml:space="preserve">
+    <value>&lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;Αυτή είναι μια εικονική υπηρεσία για την κατανόηση των βέλτιστων πρακτικών ανάπτυξης&lt;/span&gt;&lt;/p&gt;</value>
     <comment>Index Page</comment>
   </data>
   <data name="LogOut_SignOut" xml:space="preserve">
@@ -278,6 +278,10 @@
   <data name="Meta_Description" xml:space="preserve">
     <value>Παίρνεις βοήθημα μέχρι €581 όταν γεννήσεις. Μάθε τι θα χρειαστείς για να είσαι δικαιούχος και πώς να υποβάλεις αίτηση διαδικτυακά.</value>
     <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="MobEditHeading" xml:space="preserve">
+    <value>Ενημερώστε τον αριθμό του κινητού σας</value>
+    <comment>Mobile Edit Page</comment>
   </data>
   <data name="Mobile" xml:space="preserve">
     <value>Αριθμός κινητού τηλεφώνου</value>

@@ -233,6 +233,10 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Email address change</value>
     <comment>Review Page</comment>
   </data>
+  <data name="ErrorMessage-General" xml:space="preserve">
+    <value>Error</value>
+    <comment>Error Review</comment>
+  </data>
   <data name="Footer_Accessibility_Statement" xml:space="preserve">
     <value>Accessibility Statement</value>
     <comment>Layout Page - Footer Control</comment>
@@ -250,20 +254,16 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <comment>Layout Page - Footer Control</comment>
   </data>
   <data name="Index_Heading" xml:space="preserve">
-    <value>Mock Service Purpose Summary</value>
+    <value>Welcome to citizen personal details  Mock Service</value>
     <comment>Index Page</comment>
   </data>
   <data name="Index_Instructions" xml:space="preserve">
-    <value>&lt;p&gt;This service is demo that contains the following:&lt;/p&gt;
-    &lt;p&gt;1-How to implement federated login mechanism with Cy Login&lt;/p&gt;
-    &lt;p&gt;2-View a proposed project structure for service development&lt;/p&gt;
-    &lt;p&gt;3-Set up access to our design system with example pages (see layout Page)&lt;/p&gt;
-    &lt;p&gt;4-Provide out of the box Multilanguage Support&lt;/p&gt;
-    &lt;p&gt;5-Get indications How we use our Edit,View,Review,Success submission Pages&lt;/p&gt;
-    &lt;p&gt;6-Provide some Guidance on our must implement statistic Api Call and Calling Api samples&lt;/p&gt;
-    &lt;p&gt;7-See our proposed server side validation mechanism (Fluent Validation)&lt;/p&gt;
-    &lt;p&gt;8-Handling Session time Out and store data in sessions during the service journey&lt;/p&gt;
-    &lt;p&gt;9-See our sample Unit Tests&lt;/p&gt;</value>
+    <value>&lt;h2&gt;Get help and advice&lt;/h2&gt;
+    &lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;For technical support issues, contact DSF:&lt;/span&gt;&lt;span class="govcy-d-block"&gt;&lt;a href="mailto:xxxx@dits.dmrid.gov.cy" target="_blank"&gt;xxxx@dits.dmrid.gov.cy&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</value>
+    <comment>Index Page</comment>
+  </data>
+  <data name="Index_Instructions1" xml:space="preserve">
+    <value>&lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;This is a mock service for understanding best development practices &lt;/span&gt;&lt;/p&gt;</value>
     <comment>Index Page</comment>
   </data>
   <data name="LogOut_SignOut" xml:space="preserve">
@@ -273,6 +273,10 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="Meta_Description" xml:space="preserve">
     <value>Get a one-off payment of up to €581 after having a baby: what you need to be eligible and how to claim the payment online.</value>
     <comment>Layout Page- Meta Description</comment>
+  </data>
+  <data name="MobEditHeading" xml:space="preserve">
+    <value>Update your mobile number</value>
+    <comment>Mobile Edit Page</comment>
   </data>
   <data name="Mobile" xml:space="preserve">
     <value>Mobile phone number</value>

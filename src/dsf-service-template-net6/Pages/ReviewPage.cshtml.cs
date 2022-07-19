@@ -76,9 +76,9 @@ namespace dsf_service_template_net6.Pages
                 //  var id = User.Claims.First(p => p.Type == "unique_identifier").Value;
                 //call the mock Api
                 var apiUrl = "v1/MoiCrmd/contact-info-mock/" + currentLanguage;
-                //var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-                //var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
-                var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "");
+                var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
+                var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
+              //  var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "");
                 if (response != null)     
                 {
                     _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
