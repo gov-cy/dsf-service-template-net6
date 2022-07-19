@@ -51,8 +51,8 @@ namespace dsf_service_template_net6.Pages
         {
             bool isPersonalDataRetrieve = true;
           
-                //First check if user personal data have already being retrieve
-                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+           //First check if user personal data have already being retrieve
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             if (citizenPersonalDetails != null)
             {
