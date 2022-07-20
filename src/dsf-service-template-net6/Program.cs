@@ -80,7 +80,7 @@ builder.Services.AddAuthentication(options =>
     options.Cookie.SameSite = SameSiteMode.Lax;
     options.Cookie.Name = "DsfCyLoginAuthCookie";
     options.SlidingExpiration = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
     options.Cookie.MaxAge = options.ExpireTimeSpan;
     
 })

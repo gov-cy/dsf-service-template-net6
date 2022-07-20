@@ -53,14 +53,19 @@ namespace dsf_service_template_net6.Controllers
         [Authorize]
         public IActionResult LogIn()
         {
+            //First clear
+            
+            //Authenticate
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             if (isOrganization())
             {
+                LogOut();
                 return Redirect("/NoValidProfile");
 
             }
             else if (NotVerified())
             {
+                LogOut();
                 return Redirect("/NoValidProfile");
             }
             if (HttpContext.GetTokenAsync("id_token") != null)

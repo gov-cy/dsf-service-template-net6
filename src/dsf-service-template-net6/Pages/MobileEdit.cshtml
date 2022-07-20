@@ -14,7 +14,8 @@
 </div>
 <h1>@Localizer["MobEditHeading"]</h1>
 <form class="govcy-form" novalidate asp-page-handler="SetMobilePhone">
-     <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+    @Html.HiddenFor(m => m.mobEdit.prev_mobile) 
+    <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
             <label class="govcy-label govcy-mb-2">@Localizer["Mobile-Label"]</label>
             <span class="govcy-hint">@Localizer["Mobile-Hint"]</span>
            	@if (Model.MobileErrorClass.Length > 0)
