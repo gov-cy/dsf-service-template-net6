@@ -185,6 +185,10 @@
     <value>Page not found</value>
     <comment>No Page Found</comment>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Continue</value>
+    <comment>General</comment>
+  </data>
   <data name="Change_Link" xml:space="preserve">
     <value>Change</value>
     <comment>Table Change Link Text</comment>
@@ -237,6 +241,10 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Error</value>
     <comment>Error Review</comment>
   </data>
+  <data name="ERROR_ALERT" xml:space="preserve">
+    <value>Error</value>
+    <comment>General Errors</comment>
+  </data>
   <data name="Footer_Accessibility_Statement" xml:space="preserve">
     <value>Accessibility Statement</value>
     <comment>Layout Page - Footer Control</comment>
@@ -278,9 +286,21 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Update your mobile number</value>
     <comment>Mobile Edit Page</comment>
   </data>
+  <data name="MobEditParagraph" xml:space="preserve">
+    <value>After you continue you will receive an security code on your mobile and you will be asked to enter this number on the next page so that the mobile number is confirmed</value>
+    <comment>Mobile Edit Page</comment>
+  </data>
   <data name="Mobile" xml:space="preserve">
     <value>Mobile phone number</value>
     <comment>Review Page</comment>
+  </data>
+  <data name="Mobile-Hint" xml:space="preserve">
+    <value>For numbers outside of Cyprus, include the country code</value>
+    <comment>Mobile Edit Page</comment>
+  </data>
+  <data name="Mobile-Label" xml:space="preserve">
+    <value>What mobile phone number we can use to contact you?</value>
+    <comment>Mobile Edit Page</comment>
   </data>
   <data name="MobileDetails" xml:space="preserve">
     <value>Mobile phone number change</value>

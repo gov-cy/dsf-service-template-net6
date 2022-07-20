@@ -14,5 +14,22 @@
 </div>
 <h1>@Localizer["MobEditHeading"]</h1>
 <form class="govcy-form" novalidate asp-page-handler="SetMobilePhone">
-    
+     <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+            <label class="govcy-label govcy-mb-2">@Localizer["Mobile-Label"]</label>
+            <span class="govcy-hint">@Localizer["Mobile-Hint"]</span>
+           	@if (Model.MobileErrorClass.Length > 0)
+            {
+                <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+            }
+            <span class="govcy-input-error-msg" asp-validation-for="@Model.mobEdit.mobile"></span>
+            <input id="mobile" name="mobEdit.mobile" type="text" value="@Model.mobEdit.mobile" placeholder="" class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
+     </div>
+
+     <select asp-for="selected"  name="selected" asp-items="@Model.Staff" >
+        <option>Please select one</option>
+    </select>
+     <p>
+         @Localizer["MobEditParagraph"]
+     </p>
+     <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
 </form>

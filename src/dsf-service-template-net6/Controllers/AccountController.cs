@@ -73,8 +73,7 @@ namespace dsf_service_template_net6.Controllers
                 var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
                 HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
             }
-            // string idToken = HttpContext.GetTokenAsync("id_token").Result ?? "";
-            // string accessToken = HttpContext.GetTokenAsync("access_token").Result ?? "";
+            
             //After CyLogin login, redirect to default home page
             return Redirect("/");
         }

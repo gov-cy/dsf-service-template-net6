@@ -8,6 +8,11 @@ using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Middlewares;
 using dsf_service_template_net6.Services;
 using System.Net;
+using dsf_service_template_net6.Data.Models;
+using dsf_service_template_net6.Data.Validations;
+using FluentValidation;
+using Microsoft.Extensions.Localization;
+using FluentValidation.AspNetCore;
 
 IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -42,7 +47,18 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
 }).AddViewLocalization();
-   
+//Register Validator for
+//dependency injection purpose
+builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
+{
+    var Loc = sp.GetRequiredService<IStringLocalizer<cMobileEditValidator>>();
+    return new cMobileEditValidator(Loc);
+});
+builder.Services.AddFluentValidation(fv =>
+{
+    fv.AutomaticValidationEnabled = false;
+    fv.RegisterValidatorsFromAssemblyContaining<cMobileEditValidator>();
+});
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
 //so that it can be used for Dependency Injection

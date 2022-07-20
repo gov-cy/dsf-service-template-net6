@@ -2,7 +2,6 @@ using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
@@ -42,13 +41,17 @@ namespace dsf_service_template_net6.Pages
             return Page();
         }
         private void SetAccessToken()
-        {
-            if (HttpContext.GetTokenAsync("access_token") != null)
-            {
+        {        
                 var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-                var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
-                HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
-            }
+                var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
+                if (token==null)
+                {
+                    //set token
+                    
+                    var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
+                    HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
+                } 
+                   
         }
         //private void FormatAddress()
         //{
@@ -78,7 +81,6 @@ namespace dsf_service_template_net6.Pages
                 var apiUrl = "v1/MoiCrmd/contact-info-mock/" + currentLanguage;
                 var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
                 var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
-              //  var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "");
                 if (response != null)     
                 {
                     _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);

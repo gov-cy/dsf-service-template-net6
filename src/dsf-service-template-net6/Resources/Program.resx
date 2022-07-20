@@ -190,6 +190,10 @@
     <value>Ξεκινήστε</value>
     <comment>Button Text</comment>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Συνέχεια</value>
+    <comment>General</comment>
+  </data>
   <data name="Change_Link" xml:space="preserve">
     <value>Αλλαγή</value>
     <comment>Table Change Link Text</comment>
@@ -242,6 +246,10 @@
     <value>Σφάλμα</value>
     <comment>Error Review</comment>
   </data>
+  <data name="ERROR_ALERT" xml:space="preserve">
+    <value>Σφάλμα</value>
+    <comment>General Errors</comment>
+  </data>
   <data name="Footer_Accessibility_Statement" xml:space="preserve">
     <value>Προσβασιμότητα</value>
     <comment>Layout Page - Footer Control</comment>
@@ -283,9 +291,21 @@
     <value>Ενημερώστε τον αριθμό του κινητού σας</value>
     <comment>Mobile Edit Page</comment>
   </data>
+  <data name="MobEditParagraph" xml:space="preserve">
+    <value>Αφού συνεχίσετε, θα λάβετε έναν κωδικό ασφαλείας στο κινητό σας και θα σας ζητηθεί να εισαγάγετε αυτόν τον αριθμό στην επόμενη σελίδα, ώστε να επιβεβαιωθεί ο αριθμός κινητού</value>
+    <comment>Mobile Edit Page</comment>
+  </data>
   <data name="Mobile" xml:space="preserve">
     <value>Αριθμός κινητού τηλεφώνου</value>
     <comment>Review Page</comment>
+  </data>
+  <data name="Mobile-Hint" xml:space="preserve">
+    <value>Για αριθμούς εκτός Κύπρου, συμπεριλάβετε και τον κωδικό χώρας</value>
+    <comment>Mobile Edit Page</comment>
+  </data>
+  <data name="Mobile-Label" xml:space="preserve">
+    <value>Ποιον αριθμό κινητού τηλεφώνου μπορούν να χρησιμοποιήσουμε για να επικοινωνούμε μαζί σας;</value>
+    <comment>Mobile Edit Page</comment>
   </data>
   <data name="MobileDetails" xml:space="preserve">
     <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
