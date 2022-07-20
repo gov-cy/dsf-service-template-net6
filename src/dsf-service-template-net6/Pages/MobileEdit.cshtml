@@ -25,9 +25,9 @@
             <input id="mobile" name="mobEdit.mobile" type="text" value="@Model.mobEdit.mobile" placeholder="" class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
      </div>
 
-     <select asp-for="selected"  name="selected" asp-items="@Model.Staff" >
+   @*  <select asp-for="selected"  name="selected" asp-items="@Model.Staff" >
         <option>Please select one</option>
-    </select>
+    </select>*@
      <p>
          @Localizer["MobEditParagraph"]
      </p>

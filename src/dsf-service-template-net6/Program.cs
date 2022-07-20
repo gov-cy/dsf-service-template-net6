@@ -51,14 +51,11 @@ builder.Services.AddRazorPages(options =>
 //dependency injection purpose
 builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
 {
-    var Loc = sp.GetRequiredService<IStringLocalizer<cMobileEditValidator>>();
-    return new cMobileEditValidator(Loc);
+    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+        
+    return new cMobileEditValidator(LocMain);
 });
-builder.Services.AddFluentValidation(fv =>
-{
-    fv.AutomaticValidationEnabled = false;
-    fv.RegisterValidatorsFromAssemblyContaining<cMobileEditValidator>();
-});
+builder.Services.AddFluentValidation();
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
 //so that it can be used for Dependency Injection

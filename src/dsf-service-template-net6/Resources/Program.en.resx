@@ -306,6 +306,18 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Mobile phone number change</value>
     <comment>Review Page</comment>
   </data>
+  <data name="MobileNumberValid" xml:space="preserve">
+    <value>Enter a mobile phone number in the correct format, like 90000000 for Cyprus</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="MolibeNumberAlreadyExists" xml:space="preserve">
+    <value>This mobile number already exists in our records</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="MolibeNumberRequired" xml:space="preserve">
+    <value>Enter your mobile telephone number</value>
+    <comment>Mobile Validator</comment>
+  </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;If you've signed in using a CY Login 'organisation' account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; return to CY Login and sign in using a 'citizen' account.&lt;/a&gt;&lt;/p&gt;
       &lt;p&gt; If you've signed in using a CY Login 'citizen' account, you need to make sure it's 'authenticated'. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Find out how to authenticate your CY Login account.&lt;/a&gt;&lt;/p&gt;

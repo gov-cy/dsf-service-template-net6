@@ -10,7 +10,7 @@ namespace dsf_service_template_net6.Data.Validations
         string mobAlreadyExists = string.Empty;
         string mobValid= string.Empty;
         IStringLocalizer _Localizer;
-      public cMobileEditValidator(IStringLocalizer<cMobileEditValidator> localizer)
+      public cMobileEditValidator(IStringLocalizer localizer)
       {
             
             _Localizer = localizer;
