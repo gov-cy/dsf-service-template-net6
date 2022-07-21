@@ -1,14 +1,13 @@
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
 namespace dsf_service_template_net6.Pages
 {
-    [Authorize]
     [BindProperties]
     public class ReviewPageModel : PageModel
     {
@@ -31,13 +30,30 @@ namespace dsf_service_template_net6.Pages
             {
                 currentLanguage = "en";
             }
+            //Set access token
+            SetAccessToken();
             bool ret = GetCitizenData();
             if (!ret)
             {
                 return RedirectToPage("/Index");
             }
-          //  FormatAddress();
+            //  FormatAddress();
+            //Set Data from CivilRegistry
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            HttpContext.Session.SetObjectAsJson("PersonalDetails", _citizenPersonalDetails, authTime);
             return Page();
+        }
+        private void SetAccessToken()
+        {        
+                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+                var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
+                if (token==null)
+                {
+                    //set token
+                    var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
+                    HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
+                } 
+                   
         }
         //private void FormatAddress()
         //{
@@ -64,9 +80,10 @@ namespace dsf_service_template_net6.Pages
                 //get uniqueid
                 //  var id = User.Claims.First(p => p.Type == "unique_identifier").Value;
                 //call the mock Api
-                var apiUrl = "contact-info-mock/" + currentLanguage;
-                var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "");
-                if (response != null)
+                var apiUrl = "v1/MoiCrmd/contact-info-mock/" + currentLanguage;
+                var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
+                var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
+                if (response != null)     
                 {
                     _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
                     if (_citizenPersonalDetails == null)
@@ -77,6 +94,10 @@ namespace dsf_service_template_net6.Pages
                     {
                         isPersonalDataRetrieve = false;
                     } 
+                }
+                else
+                {
+                    isPersonalDataRetrieve = false;
                 }
                
             }

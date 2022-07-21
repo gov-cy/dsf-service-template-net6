@@ -8,6 +8,11 @@ using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Middlewares;
 using dsf_service_template_net6.Services;
 using System.Net;
+using dsf_service_template_net6.Data.Models;
+using dsf_service_template_net6.Data.Validations;
+using FluentValidation;
+using Microsoft.Extensions.Localization;
+using FluentValidation.AspNetCore;
 
 IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -36,13 +41,21 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizePage("/MobileEdit");
     options.Conventions.AuthorizePage("/AddressEdit");
     options.Conventions.AuthorizePage("/ReviewPage");
-    options.Conventions.AuthorizePage("/NoValidProfile");
+    options.Conventions.AllowAnonymousToPage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
-}).AddViewLocalization(); 
-
+}).AddViewLocalization();
+//Register Validator for
+//dependency injection purpose
+builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
+{
+    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+        
+    return new cMobileEditValidator(LocMain);
+});
+builder.Services.AddFluentValidation();
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
 //so that it can be used for Dependency Injection
@@ -67,10 +80,9 @@ builder.Services.AddAuthentication(options =>
     options.Cookie.SameSite = SameSiteMode.Lax;
     options.Cookie.Name = "DsfCyLoginAuthCookie";
     options.SlidingExpiration = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    options.Cookie.MaxAge = options.ExpireTimeSpan;
-    
-})
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    //options.Cookie.MaxAge = options.ExpireTimeSpan;
+ })
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
     //The ClientId and ClientSecret properties are initiated in user-secrets, not in appsettings.json
@@ -133,9 +145,18 @@ builder.Services.AddAuthentication(options =>
             context.HandleResponse();
 
             return Task.FromResult(0);
+        },
+        OnTicketReceived = ctx =>
+        {
+            var url = "/Account/LogIn";
+            ctx.ReturnUri = url;
+            return Task.CompletedTask;
         }
     };
 });
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

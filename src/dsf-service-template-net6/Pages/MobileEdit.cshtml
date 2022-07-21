@@ -1,5 +1,34 @@
 ﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using dsf_service_template_net6.Data.Models
 @model dsf_service_template_net6.Pages.MobileEditModel
-@{
-}
-<h1>To be developed</h1>
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+
+<div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
+    <h2>@Localizer["ErrorMessage-General"]</h2>
+    <p class="govcy-mb-0">
+        @Html.Raw(Model.ErrorsDesc)
+    </p>
+</div>
+<h1>@Localizer["MobEditHeading"]</h1>
+<form class="govcy-form" novalidate asp-page-handler="SetMobilePhone">
+    @Html.HiddenFor(m => m.mobEdit.prev_mobile) 
+    <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+            <label class="govcy-label govcy-mb-2">@Localizer["Mobile-Label"]</label>
+            <span class="govcy-hint">@Localizer["Mobile-Hint"]</span>
+           	@if (Model.MobileErrorClass.Length > 0)
+            {
+                <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+            }
+            <span class="govcy-input-error-msg" asp-validation-for="@Model.mobEdit.mobile"></span>
+            <input id="mobile" name="mobEdit.mobile" type="text" value="@Model.mobEdit.mobile" placeholder="" class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
+     </div>
+
+  
+     <p>
+         @Localizer["MobEditParagraph"]
+     </p>
+     <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+</form>

@@ -75,6 +75,7 @@
      {      
         <div class="govcy-text-end" id="beforeMainContainerUsername">
             <div class="govcy-text-end govcy-mb-4">
+                  @*BOB | <a href="/Account/LogOut" class="govcy-back-link">@Localizer["LogOut_SignOut"]</a>*@
 			@User.Claims.First(c => c.Type == "name").Value | <a href="/Account/LogOut" class="govcy-back-link">@Localizer["LogOut_SignOut"]</a>
 		    </div>
         </div>

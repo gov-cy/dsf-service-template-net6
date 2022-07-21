@@ -1,5 +1,16 @@
 ﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @model dsf_service_template_net6.Pages.AddressEditModel
+@inject IStringLocalizer<Program> Localizer
 @{
 }
-<h1>Alkis Form Completion</h1>
+<h1>Alkis Form Completion (Example of Drop Down)</h1>
+<form class="govcy-form" novalidate asp-page-handler="CheckKeepValue">
+   <select asp-for="selected"  name="selected" asp-items="@Model.Staff" >
+        <option>Please select one</option>
+    </select>
+     <label name="selected" class="govcy-label govcy-mb-2">@Model.selected</label>
+   <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+
+ </form>

@@ -9,12 +9,12 @@
     Layout = "_LayoutNoBackLink";
 }
     <h1>@Localizer["Index_Heading"]</h1>
-    @HtmlLocalizer["Index_Instructions"]
+    @HtmlLocalizer["Index_Instructions1"]
     <div>
-    <form asp-page-handler="ApplicationStart">        
-        <button type="submit" class="govcy-btn-primary" id="btnApplicationStart">
+       <form asp-page-handler="ApplicationStart">        
+         <button type="submit" class="govcy-btn-primary" id="btnApplicationStart">
             @Localizer["Button_Get_Started"]
-        </button>
-    </form>
-    @*<a href="ChildrenList" class="govcy-btn-primary" style="color:#FFF">@HtmlLocalizer["Button_Get_Started"]</a>*@
-   </div>
+         </button>
+       </form>
+    </div>
+   @HtmlLocalizer["Index_Instructions"]
