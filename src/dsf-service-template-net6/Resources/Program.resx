@@ -169,6 +169,10 @@
     <value>Αλλαγή Διεύθυνσης</value>
     <comment>Review Page</comment>
   </data>
+  <data name="ApplicantName" xml:space="preserve">
+    <value>Όνομα</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
     <value>Αλλαγή Προσωπικών Στοιχείων του Πολίτη</value>
     <comment>Layout Page- Header control</comment>
@@ -199,11 +203,11 @@
     <comment>Table Change Link Text</comment>
   </data>
   <data name="CheckAndSubmit" xml:space="preserve">
-    <value>Έλεγχος και υποβολή</value>
+    <value>Τα στοιχεία επικοινωνίας σας</value>
     <comment>Review Page</comment>
   </data>
   <data name="CheckAndSubmitPara01" xml:space="preserve">
-    <value>Έχουμε βρει στα αρχεία μας πως έχετε τα πιο κάτω στοιχεία στο Τμήμα αρχείου πληθυσμού</value>
+    <value>Ελέγξτε ότι οι παρακάτω πληροφορίες είναι σωστές.</value>
     <comment>Review Page</comment>
   </data>
   <data name="CheckAndSubmitPara02" xml:space="preserve">

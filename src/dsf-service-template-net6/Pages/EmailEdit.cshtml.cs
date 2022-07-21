@@ -39,16 +39,12 @@ namespace dsf_service_template_net6.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "otherEmail")
+                if (Item.PropertyName == "email")
                 {
-                    ErrorsDesc += "<a href='#otherEmail'>" + Item.ErrorMessage + "</a>";
+                    ErrorsDesc += "<a href='#email'>" + Item.ErrorMessage + "</a>";
                     EmailErrorClass = Item.ErrorMessage;
                 }
-                if (Item.PropertyName == "useAriadni")
-                {
-                    ErrorsDesc += "<a href='#useAriadni'>" + Item.ErrorMessage + "</a>";
-                    EmailSelection = Item.ErrorMessage;
-                }
+                
             }
         }
         public void OnGet()
@@ -63,7 +59,7 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             if (citizenPersonalDetails != null)
             {
-                emailEdit.otherEmail = citizenPersonalDetails.data.email;
+                emailEdit.email = citizenPersonalDetails.data.email;
             }
         }
         public IActionResult OnPostSetEmail(bool review)
@@ -80,22 +76,10 @@ namespace dsf_service_template_net6.Pages
                 SetViewErrorMessages(result);
                 return Page();
             }
-            //Mob Edit from Session
+            //Store Data 
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
-            if (SessionEmailEdit != null)
-            {
-                SessionEmailEdit.otherEmail = emailEdit.otherEmail;
-                
-                HttpContext.Session.Remove("EmailEdit");
-                HttpContext.Session.SetObjectAsJson("EmailEdit", SessionEmailEdit, authTime);
-            }
-            else
-            {
-                HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
-            }
-            //Generate One time password
-
+            HttpContext.Session.Remove("EmailEdit");
+            HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
             //Finally redirect
             return RedirectToPage("/ReviewPage");
         }

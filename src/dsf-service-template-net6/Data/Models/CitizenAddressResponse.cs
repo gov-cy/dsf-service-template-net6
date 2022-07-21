@@ -11,9 +11,14 @@
 
     public class CitizenDataDetails
     {
+        public string fullName { get; set; }
+        public string dob { get; set; }
+        public object dod { get; set; }
         public string pin { get; set; }
         public string email { get; set; }
+        public bool emailVerified { get; set; }
         public string mobile { get; set; }
+        public bool mobileVerified { get; set; }
         public Addressinfo[] addressInfo { get; set; }
     }
 
@@ -27,6 +32,7 @@
         public Parish parish { get; set; }
         public District district { get; set; }
         public Country country { get; set; }
+        public bool addressVerified { get; set; }
         public string addressText { get; set; }
     }
 
@@ -67,4 +73,5 @@
         public string name { get; set; }
     }
   
+
 }

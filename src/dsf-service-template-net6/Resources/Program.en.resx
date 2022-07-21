@@ -168,6 +168,10 @@
     <value>Address Change</value>
     <comment>Review Page</comment>
   </data>
+  <data name="ApplicantName" xml:space="preserve">
+    <value>Name</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
     <value>Citizen Personal Data Change</value>
     <comment>Layout Page - Header control</comment>
@@ -194,11 +198,11 @@
     <comment>Table Change Link Text</comment>
   </data>
   <data name="CheckAndSubmit" xml:space="preserve">
-    <value>Check and submit</value>
+    <value>Your contact details</value>
     <comment>Review Page</comment>
   </data>
   <data name="CheckAndSubmitPara01" xml:space="preserve">
-    <value>We’ve found records showing that you have the below data in Civil Registry.</value>
+    <value>Check that the information below is correct.</value>
     <comment>Review Page</comment>
   </data>
   <data name="CheckAndSubmitPara02" xml:space="preserve">

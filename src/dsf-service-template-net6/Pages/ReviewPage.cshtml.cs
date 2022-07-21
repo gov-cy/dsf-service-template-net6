@@ -19,6 +19,7 @@ namespace dsf_service_template_net6.Pages
             _configuration = configuration;
         }
         public CitizenDataResponse _citizenPersonalDetails = new CitizenDataResponse();
+        public ApplicationRequest _application = new ApplicationRequest();
         public string currentLanguage;
         public IActionResult OnGet()
         {
@@ -37,32 +38,64 @@ namespace dsf_service_template_net6.Pages
             {
                 return RedirectToPage("/Index");
             }
-            //  FormatAddress();
+           
             //Set Data from CivilRegistry
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             HttpContext.Session.SetObjectAsJson("PersonalDetails", _citizenPersonalDetails, authTime);
             return Page();
         }
-        private void SetAccessToken()
-        {        
-                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-                var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-                if (token==null)
+        public IActionResult OnPostApplicationSubmit(string applicationReference, string returnUrl = null)
+        {   //Save the Application
+            //Set ApplicationRequest
+            var  ret = SetApplication();
+            if (!ret)
+            {
+                return RedirectToPage("/Error");
+            }
+            if (SubmitApplication())
                 {
-                    //set token
-                    var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
-                    HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
-                } 
-                   
+                    return RedirectToPage("/ApplicationResponse");
+                }
+                else
+                {
+                    return RedirectToPage("/Error");
+                }
         }
-        //private void FormatAddress()
-        //{
-        //    foreach (Addressinfo item in _citizenPersonalDetails.data.addressInfo)
-        //    {
-        //        item.addressText = String.Format(item.addressText);
-        //        item.addressText=item.item.name + " " + item.item.street.streetNumber 
-        //    }
-        //}
+        private void SetAccessToken()
+        {
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
+            if (token == null)
+            {
+                //set token
+                var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
+                HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
+            }
+
+        }
+       
+        private bool SetApplication()
+        {
+            bool ret = true;
+            _application.contactInfo.addressInfo = _citizenPersonalDetails.data.addressInfo;
+            _application.reference = Guid.NewGuid().ToString();
+            _application.contactInfo.emailVerified = true;
+            _application.contactInfo.mobileVerified = true;
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
+            var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
+            if (SessionEmailEdit == null || SessionMobEdit==null)
+            {
+                ret = false;    
+            }else
+            {
+                _application.contactInfo.email =SessionEmailEdit.email;
+                _application.contactInfo.mobile = SessionMobEdit.mobile;
+            }
+
+            
+           return ret;
+        }
         private bool GetCitizenData()
         {
             bool isPersonalDataRetrieve = true;
@@ -71,10 +104,8 @@ namespace dsf_service_template_net6.Pages
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             
                 //Call Api 
-                //get uniqueid
-                //  var id = User.Claims.First(p => p.Type == "unique_identifier").Value;
                 //call the mock Api
-                var apiUrl = "v1/MoiCrmd/contact-info-mock/" + currentLanguage;
+                var apiUrl = "api/v1/MoiCrmd/contact-info-mock/" + currentLanguage;
                 var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
                 var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
                 if (response != null)     
@@ -96,6 +127,28 @@ namespace dsf_service_template_net6.Pages
                
             
             return isPersonalDataRetrieve;
+        }
+        private bool SubmitApplication()
+        {           
+            bool ret = false;
+            string jsonString = JsonConvert.SerializeObject(_application);
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
+            var response = _client.MyHttpClientPostRequest(_configuration["ApiUrl"], "api/v1/MoiCrmd/contact-info-submission-mock", "application/json", jsonString,token);
+
+            if (response != null)
+            {
+                var res = JsonConvert.DeserializeObject<ApplicationResponse>(response);
+
+                if (res != null)
+                {
+                    HttpContext.Session.SetObjectAsJson("ref_no", res.data, authTime);
+                }
+
+                ret = true;
+            }
+
+            return ret;
         }
     }
 }
