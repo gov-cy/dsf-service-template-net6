@@ -51,14 +51,11 @@ builder.Services.AddRazorPages(options =>
 //dependency injection purpose
 builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
 {
-    var Loc = sp.GetRequiredService<IStringLocalizer<cMobileEditValidator>>();
-    return new cMobileEditValidator(Loc);
+    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+        
+    return new cMobileEditValidator(LocMain);
 });
-builder.Services.AddFluentValidation(fv =>
-{
-    fv.AutomaticValidationEnabled = false;
-    fv.RegisterValidatorsFromAssemblyContaining<cMobileEditValidator>();
-});
+builder.Services.AddFluentValidation();
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
 //so that it can be used for Dependency Injection
@@ -83,7 +80,7 @@ builder.Services.AddAuthentication(options =>
     options.Cookie.SameSite = SameSiteMode.Lax;
     options.Cookie.Name = "DsfCyLoginAuthCookie";
     options.SlidingExpiration = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
     options.Cookie.MaxAge = options.ExpireTimeSpan;
     
 })

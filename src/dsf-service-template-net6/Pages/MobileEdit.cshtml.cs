@@ -60,6 +60,13 @@ namespace dsf_service_template_net6.Pages
             {
                 mobEdit = SessionMobEdit;
             }
+            //Get Previous mobile number
+            
+            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            if (citizenPersonalDetails != null)
+            {
+                mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
+            }
         }
         public IActionResult OnPostSetMobilePhone(bool review)
         {
@@ -91,6 +98,7 @@ namespace dsf_service_template_net6.Pages
                 HttpContext.Session.SetObjectAsJson("MobEdit", mobEdit, authTime);
             }
             //Generate One time password
+
             //Finally redirect
             return RedirectToPage("/ReviewPage");
 

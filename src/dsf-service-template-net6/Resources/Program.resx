@@ -311,6 +311,18 @@
     <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
     <comment>Review Page</comment>
   </data>
+  <data name="MobileNumberValid" xml:space="preserve">
+    <value>Εισάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="MolibeNumberAlreadyExists" xml:space="preserve">
+    <value>Αυτός ο αριθμός κινητού υπάρχει ήδη στα αρχεία μας</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="MolibeNumberRequired" xml:space="preserve">
+    <value>Εισάγετε τον αριθμό κινητού τηλεφώνου σας</value>
+    <comment>Mobile Validator</comment>
+  </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για οργανισμούς, χρειάζεται να &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; επιστρέψετε στο CY Login και να συνδεθείτε με λογαριασμό για πολίτες.&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για πολίτες, χρειάζεται να βεβαιωθείτε ότι ο λογαριασμός σας έχει ταυτοποιηθεί. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Μάθετε πώς μπορείτε να ταυτοποιήσετε τον λογαριασμό σας στο CY Login.&lt;/a&gt;&lt;/p&gt;

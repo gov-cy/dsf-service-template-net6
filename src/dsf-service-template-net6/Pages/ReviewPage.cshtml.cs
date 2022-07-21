@@ -37,7 +37,10 @@ namespace dsf_service_template_net6.Pages
             {
                 return RedirectToPage("/Index");
             }
-          //  FormatAddress();
+            //  FormatAddress();
+            //Set Data from CivilRegistry
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            HttpContext.Session.SetObjectAsJson("PersonalDetails", _citizenPersonalDetails, authTime);
             return Page();
         }
         private void SetAccessToken()
@@ -47,7 +50,6 @@ namespace dsf_service_template_net6.Pages
                 if (token==null)
                 {
                     //set token
-                    
                     var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
                     HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
                 } 
