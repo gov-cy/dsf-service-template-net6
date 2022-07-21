@@ -23,7 +23,7 @@
              <th scope="row" class="col-3">@Localizer["Address"]</th>
              <td class="col-7">
                  <p>
-                 <span class="govcy-d-block">@Html.Raw(Address.addressText.Replace("\n", "<br />"))</span>
+                 <span class="govcy-d-block">@Html.Raw(Address.addressText.Replace("\n", "<br/>"))</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
@@ -49,7 +49,7 @@
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
-                   <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["Change_Link"]</a>
+                   <a asp-page="/EmailEdit" asp-route-review="true">@Localizer["Change_Link"]</a>
               </td>
          </tr>
      </tbody>

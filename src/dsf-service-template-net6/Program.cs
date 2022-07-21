@@ -81,9 +81,8 @@ builder.Services.AddAuthentication(options =>
     options.Cookie.Name = "DsfCyLoginAuthCookie";
     options.SlidingExpiration = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
-    options.Cookie.MaxAge = options.ExpireTimeSpan;
-    
-})
+    //options.Cookie.MaxAge = options.ExpireTimeSpan;
+ })
 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
 {
     //The ClientId and ClientSecret properties are initiated in user-secrets, not in appsettings.json

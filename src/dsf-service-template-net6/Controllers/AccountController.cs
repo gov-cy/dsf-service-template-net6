@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using dsf_service_template_net6.Extensions;
+using dsf_service_template_net6.Data.Models;
 
 namespace dsf_service_template_net6.Controllers
 {
@@ -52,11 +53,7 @@ namespace dsf_service_template_net6.Controllers
         //The Authorize Tag will redirect to CY Login for the user to login
         [Authorize]
         public IActionResult LogIn()
-        {
-            //First clear
-            
-            //Authenticate
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+        {             
             if (isOrganization())
             {
                 return RedirectToAction("LogOutWithNotAuthorize");
@@ -66,6 +63,9 @@ namespace dsf_service_template_net6.Controllers
             {
                 return RedirectToAction("LogOutWithNotAuthorize");
             }
+            //Authentication time
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            //Set the identidy and Access Token in Session variables
             if (HttpContext.GetTokenAsync("id_token") != null)
             {
                 var value = HttpContext.GetTokenAsync("id_token").Result ?? "";
@@ -76,13 +76,23 @@ namespace dsf_service_template_net6.Controllers
                 var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
                 HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
             }
-            
             //After CyLogin login, redirect to default home page
-            return Redirect("/ReviewPage");
+            //Check the first session object store once you login
+            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            {
+              return Redirect("/ReviewPage");
+            }
+            else
+            {
+              return  RedirectToAction("LogOut");
+            }
+           
+            
         }
 
         public async Task LogOutWithNotAuthorize()
         {
+            HttpContext.Session.Clear();
             var prop = new AuthenticationProperties()
             {
                 RedirectUri = "/NoValidProfile"
@@ -91,12 +101,16 @@ namespace dsf_service_template_net6.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme, prop);
 
         }
-        public IActionResult LogOut()
+        public async Task LogOut()
         {
-            HttpContext.Session.Clear();            
-
-            return SignOut(CookieAuthenticationDefaults.AuthenticationScheme,
-                    OpenIdConnectDefaults.AuthenticationScheme);
+            HttpContext.Session.Clear();
+            var prop = new AuthenticationProperties()
+            {
+                RedirectUri = "/"
+            };
+            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme, prop);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme, prop);
+                       
         }
 
         //Ariadni requirement so that they can logout the user with a get call to the account countroller
