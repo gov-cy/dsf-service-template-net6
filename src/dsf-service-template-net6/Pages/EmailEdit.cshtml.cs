@@ -68,6 +68,33 @@ namespace dsf_service_template_net6.Pages
         }
         public IActionResult OnPostSetEmail(bool review)
         {
+            FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
+            if (!result.IsValid)
+            {
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                result.AddToModelState(this.ModelState, "emailEdit");
+                //Update Error messages on View
+                ClearErrors();
+                SetViewErrorMessages(result);
+                return Page();
+            }
+            //Mob Edit from Session
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
+            if (SessionEmailEdit != null)
+            {
+                SessionEmailEdit.otherEmail = emailEdit.otherEmail;
+                
+                HttpContext.Session.Remove("EmailEdit");
+                HttpContext.Session.SetObjectAsJson("EmailEdit", SessionEmailEdit, authTime);
+            }
+            else
+            {
+                HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
+            }
+            //Generate One time password
 
             //Finally redirect
             return RedirectToPage("/ReviewPage");
