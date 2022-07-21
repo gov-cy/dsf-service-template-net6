@@ -56,12 +56,12 @@ namespace dsf_service_template_net6.Controllers
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             if (isOrganization())
             {
-                return Redirect("/NoValidProfile");
+                return RedirectToAction("LogOutWithNotAuthorize");
 
             }
             else if (NotVerified())
             {
-                return Redirect("/NoValidProfile");
+                return RedirectToAction("LogOutWithNotAuthorize");
             }
             if (HttpContext.GetTokenAsync("id_token") != null)
             {
@@ -75,9 +75,19 @@ namespace dsf_service_template_net6.Controllers
             }
             
             //After CyLogin login, redirect to default home page
-            return Redirect("/");
+            return Redirect("/ReviewPage");
         }
 
+        public async Task LogOutWithNotAuthorize()
+        {
+            var prop = new AuthenticationProperties()
+            {
+                RedirectUri = "/NoValidProfile"
+            };
+            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme, prop);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme, prop);
+
+        }
         public IActionResult LogOut()
         {
             HttpContext.Session.Clear();            

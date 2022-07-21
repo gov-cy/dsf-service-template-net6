@@ -41,7 +41,7 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizePage("/MobileEdit");
     options.Conventions.AuthorizePage("/AddressEdit");
     options.Conventions.AuthorizePage("/ReviewPage");
-    options.Conventions.AuthorizePage("/NoValidProfile");
+    options.Conventions.AllowAnonymousToPage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
