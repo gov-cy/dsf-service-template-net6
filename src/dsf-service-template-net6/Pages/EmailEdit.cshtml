@@ -15,6 +15,18 @@
 
 <h1>@Localizer["EmailEditHeading"]</h1>
 <form class="govcy-form" novalidate asp-page-handler="SetEmail">
-     
+     <div class="@(Model.EmailErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+    <label class="govcy-label govcy-mb-2">@Localizer["Email-Label"]</label>
+    <span class="govcy-hint">@Localizer["Email-Hint"]</span>
+    @if (Model.EmailErrorClass.Length > 0)
+            {
+                <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+            }
+            <span class="govcy-input-error-msg" asp-validation-for="@Model.emailEdit.ariadniEmail"></span>
+    <input id="email" name="emailEdit.ariadniEmail" type="text" value="@Model.emailEdit.ariadniEmail" placeholder="" class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
+</div>
+<p>
+  @Localizer["EmailEditParagraph"]
+</p>
   <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
 </form>

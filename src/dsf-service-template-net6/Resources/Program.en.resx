@@ -334,6 +334,18 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Enter your mobile telephone number</value>
     <comment>Mobile Validator</comment>
   </data>
+  <data name="Email-Label" xml:space="preserve">
+    <value>What email address can we use to contact you?</value>
+    <comment>Email Edit Page</comment>
+  </data>
+   <data name="Email-Hint" xml:space="preserve">
+    <value>The email address in your CY Login account will not be change</value>
+    <comment>Email Edit Page</comment>
+  </data>
+  <data name="EmailEditParagraph" xml:space="preserve">
+    <value>After you click “continue” you will receive an email with a link that you will need to click in order to confirm your email.</value>
+    <comment>Email Edit Page</comment>
+  </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;If you've signed in using a CY Login 'organisation' account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; return to CY Login and sign in using a 'citizen' account.&lt;/a&gt;&lt;/p&gt;
       &lt;p&gt; If you've signed in using a CY Login 'citizen' account, you need to make sure it's 'authenticated'. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Find out how to authenticate your CY Login account.&lt;/a&gt;&lt;/p&gt;
