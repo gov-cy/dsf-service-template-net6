@@ -69,13 +69,7 @@ namespace dsf_service_template_net6.Pages
           
            //First check if user personal data have already being retrieve
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            if (citizenPersonalDetails != null)
-            {
-                _citizenPersonalDetails = citizenPersonalDetails;
-            }
-            else
-            {
+            
                 //Call Api 
                 //get uniqueid
                 //  var id = User.Claims.First(p => p.Type == "unique_identifier").Value;
@@ -100,7 +94,7 @@ namespace dsf_service_template_net6.Pages
                     isPersonalDataRetrieve = false;
                 }
                
-            }
+            
             return isPersonalDataRetrieve;
         }
     }
