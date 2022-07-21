@@ -210,6 +210,10 @@
     <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
     <comment>Review Page</comment>
   </data>
+  <data name="ChooseEmail" xml:space="preserve">
+    <value>Επιλέξετε αν επιθυμείτε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
+    <comment>Email Validator</comment>
+  </data>
   <data name="Container_content" xml:space="preserve">
     <value>Πλοήγηση από το πληκτρολόγιο</value>
     <comment>Layout Page- Container Content</comment>
@@ -245,6 +249,10 @@
   <data name="EmailEditHeading" xml:space="preserve">
     <value>Ενημερώστε τη διεύθυνση email σας</value>
     <comment>Email Edit Page</comment>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Εισάγετε email στη σωστή μορφή, για παράδειγμα name@example.com</value>
+    <comment>Email Validator</comment>
   </data>
   <data name="ErrorMessage-General" xml:space="preserve">
     <value>Σφάλμα</value>

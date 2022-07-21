@@ -1,5 +1,6 @@
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Data.Validations;
+using dsf_service_template_net6.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,8 @@ namespace dsf_service_template_net6.Pages
         IStringLocalizer _Loc;
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
-        public string MobileErrorClass = "";
+        public string EmailErrorClass = "";
+        public string EmailSelection = "";
         public EmailEdit emailEdit { get; set; }
         public EmailEditModel(IValidator<EmailEdit> validator, IStringLocalizer<cEmailEditValidator> Loc)
         {
@@ -27,14 +29,46 @@ namespace dsf_service_template_net6.Pages
         void ClearErrors()
         {
             displaySummary = "display:none";
-            MobileErrorClass = "";
+            EmailErrorClass = "";
             ErrorsDesc = "";
+        }
+        private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
+        {
+            //First Enable Summary Display
+            displaySummary = "display:block";
+            //Then Build Summary Error
+            foreach (ValidationFailure Item in result.Errors)
+            {
+                if (Item.PropertyName == "otherEmail")
+                {
+                    ErrorsDesc += "<a href='#otherEmail'>" + Item.ErrorMessage + "</a>";
+                    EmailErrorClass = Item.ErrorMessage;
+                }
+                if (Item.PropertyName == "useAriadni")
+                {
+                    ErrorsDesc += "<a href='#useAriadni'>" + Item.ErrorMessage + "</a>";
+                    EmailSelection = Item.ErrorMessage;
+                }
+            }
         }
         public void OnGet()
         {
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
+            if (SessionEmailEdit != null)
+            {
+                emailEdit = SessionEmailEdit;
+            }
+            //Get Previous mobile number
+            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            if (citizenPersonalDetails != null)
+            {
+                emailEdit.otherEmail = citizenPersonalDetails.data.email;
+            }
         }
         public IActionResult OnPostSetEmail(bool review)
         {
+
             //Finally redirect
             return RedirectToPage("/ReviewPage");
         }

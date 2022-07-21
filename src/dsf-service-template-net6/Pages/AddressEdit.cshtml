@@ -6,8 +6,8 @@
 @{
 }
 <h1>Alkis Form Completion (Example of Drop Down)</h1>
-<form class="govcy-form" novalidate asp-page-handler="CheckKeepValue">
-   <select asp-for="selected"  name="selected" asp-items="@Model.Staff" >
+<form class="govcy-form" novalidate method="post">
+   <select asp-for="selected" name="selected" asp-items="@Model.Staff" >
         <option>Please select one</option>
     </select>
      <label name="selected" class="govcy-label govcy-mb-2">@Model.selected</label>

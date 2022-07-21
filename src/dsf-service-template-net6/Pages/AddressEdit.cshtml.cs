@@ -20,10 +20,13 @@ namespace dsf_service_template_net6.Pages
         public void OnGet()
         {
         }
-        public IActionResult OnPostCheckKeepValue(bool review)
+        public void OnPost()
+        {
+        }
+        public void OnPostCheckKeepValue(bool review)
         {
             //Check selected value it should retain the user selection
-            return Page();
+            //return Page();
         }
     }
 }
