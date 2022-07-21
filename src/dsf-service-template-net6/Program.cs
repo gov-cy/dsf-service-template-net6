@@ -55,6 +55,12 @@ builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
         
     return new cMobileEditValidator(LocMain);
 });
+builder.Services.AddScoped<IValidator<EmailEdit>, cEmailEditValidator>(sp =>
+{
+    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+
+    return new cEmailEditValidator(LocMain);
+});
 builder.Services.AddFluentValidation();
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient
