@@ -335,6 +335,18 @@
     <value>Εισάγετε τον αριθμό κινητού τηλεφώνου σας</value>
     <comment>Mobile Validator</comment>
   </data>
+  <data name="Email-Label" xml:space="preserve">
+    <value>Ποια διεύθυνση email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+    <comment>Email Edit Page</comment>
+  </data>
+   <data name="Email-Hint" xml:space="preserve">
+    <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>
+    <comment>Email Edit Page</comment>
+  </data>
+  <data name="EmailEditParagraph" xml:space="preserve">
+    <value>Αφού κάνετε κλικ στο «συνέχεια» θα λάβετε ένα email με έναν σύνδεσμο στον οποίο θα πρέπει να κάνετε κλικ για να επιβεβαιώσετε το email σας.</value>
+    <comment>Email Edit Page</comment>
+  </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για οργανισμούς, χρειάζεται να &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; επιστρέψετε στο CY Login και να συνδεθείτε με λογαριασμό για πολίτες.&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για πολίτες, χρειάζεται να βεβαιωθείτε ότι ο λογαριασμός σας έχει ταυτοποιηθεί. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Μάθετε πώς μπορείτε να ταυτοποιήσετε τον λογαριασμό σας στο CY Login.&lt;/a&gt;&lt;/p&gt;
