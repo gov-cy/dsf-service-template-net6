@@ -53,7 +53,9 @@ namespace dsf_service_template_net6.Controllers
         //The Authorize Tag will redirect to CY Login for the user to login
         [Authorize]
         public IActionResult LogIn()
-        {             
+        {
+            //Authentication time
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             if (isOrganization())
             {
                 return RedirectToAction("LogOutWithNotAuthorize");
@@ -63,8 +65,7 @@ namespace dsf_service_template_net6.Controllers
             {
                 return RedirectToAction("LogOutWithNotAuthorize");
             }
-            //Authentication time
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            
             //Set the identidy and Access Token in Session variables
             if (HttpContext.GetTokenAsync("id_token") != null)
             {
