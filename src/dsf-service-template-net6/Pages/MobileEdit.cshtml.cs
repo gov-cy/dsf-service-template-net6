@@ -13,8 +13,7 @@ namespace dsf_service_template_net6.Pages
     [BindProperties]
     public class MobileEditModel : PageModel
     {
-        public int selected { get; set; }
-        public List<SelectListItem> Staff;
+       
         private IValidator<MobileEdit> _validator;
         IStringLocalizer _Loc;
         public string displaySummary = "display:none";
@@ -23,11 +22,7 @@ namespace dsf_service_template_net6.Pages
         public MobileEdit mobEdit { get; set; }
         public MobileEditModel(IValidator<MobileEdit> validator, IStringLocalizer<cMobileEditValidator> Loc)
         {
-            Staff = new List<SelectListItem>
-    {
-        new SelectListItem {Text = "Shyju", Value = "1"},
-        new SelectListItem {Text = "Sean", Value = "2"}
-    };
+          
             _validator = validator;
             _Loc = Loc;
             mobEdit = new MobileEdit();
