@@ -206,7 +206,7 @@
     <comment>Review Page</comment>
   </data>
   <data name="ChooseEmail" xml:space="preserve">
-    <value />
+    <value>Choose if you'd like to use your CY Login email address or a different one</value>
     <comment>Email Validator</comment>
   </data>
   <data name="Container_content" xml:space="preserve">
@@ -246,7 +246,7 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <comment>Email Edit Page</comment>
   </data>
   <data name="EmailRequired" xml:space="preserve">
-    <value />
+    <value>Enter an email address in the correct format, for example name@example.com</value>
     <comment>Email Validator</comment>
   </data>
   <data name="ErrorMessage-General" xml:space="preserve">
