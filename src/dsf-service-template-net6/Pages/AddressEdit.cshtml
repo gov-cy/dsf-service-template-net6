@@ -10,5 +10,7 @@
    <select asp-for="selected"  name="selected" asp-items="@Model.Staff" >
         <option>Please select one</option>
     </select>
+     <label name="selected" class="govcy-label govcy-mb-2">@Model.selected</label>
    <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+
  </form>
