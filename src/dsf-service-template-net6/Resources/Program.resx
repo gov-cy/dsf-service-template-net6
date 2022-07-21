@@ -242,6 +242,10 @@
     <value>Αλλαγή email</value>
     <comment>Review Page</comment>
   </data>
+  <data name="EmailEditHeading" xml:space="preserve">
+    <value>Ενημερώστε τη διεύθυνση email σας</value>
+    <comment>Email Edit Page</comment>
+  </data>
   <data name="ErrorMessage-General" xml:space="preserve">
     <value>Σφάλμα</value>
     <comment>Error Review</comment>

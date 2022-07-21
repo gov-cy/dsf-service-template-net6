@@ -1,5 +1,20 @@
 ﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @model dsf_service_template_net6.Pages.EmailEditModel
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
 @{
 }
-<h1>To be developed</h1>
+<div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
+    <h2>@Localizer["ErrorMessage-General"]</h2>
+    <p class="govcy-mb-0">
+        @Html.Raw(Model.ErrorsDesc)
+    </p>
+</div>
+
+<h1>@Localizer["EmailEditHeading"]</h1>
+<form class="govcy-form" novalidate asp-page-handler="SetEmail">
+     
+  <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+</form>

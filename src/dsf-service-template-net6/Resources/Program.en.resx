@@ -237,6 +237,10 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Email address change</value>
     <comment>Review Page</comment>
   </data>
+  <data name="EmailEditHeading" xml:space="preserve">
+    <value>Update your email address</value>
+    <comment>Email Edit Page</comment>
+  </data>
   <data name="ErrorMessage-General" xml:space="preserve">
     <value>Error</value>
     <comment>Error Review</comment>
