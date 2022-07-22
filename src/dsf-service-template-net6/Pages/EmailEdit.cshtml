@@ -22,8 +22,8 @@
             {
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
             }
-            <span class="govcy-input-error-msg" asp-validation-for="@Model.emailEdit.ariadniEmail"></span>
-    <input id="email" name="emailEdit.ariadniEmail" type="text" value="@Model.emailEdit.ariadniEmail" placeholder="" class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
+            <span class="govcy-input-error-msg" asp-validation-for="@Model.emailEdit.email"></span>
+    <input id="email" name="emailEdit.email" type="text" value="@Model.emailEdit.email" placeholder="" class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
 </div>
 <p>
   @Localizer["EmailEditParagraph"]

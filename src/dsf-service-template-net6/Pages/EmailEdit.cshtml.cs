@@ -18,6 +18,8 @@ namespace dsf_service_template_net6.Pages
         public string ErrorsDesc = "";
         public string EmailErrorClass = "";
         public string EmailSelection = "";
+        
+        
         public EmailEdit emailEdit { get; set; }
         public EmailEditModel(IValidator<EmailEdit> validator, IStringLocalizer<cEmailEditValidator> Loc)
         {
@@ -50,6 +52,7 @@ namespace dsf_service_template_net6.Pages
         public void OnGet()
         {
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            //GetData from session 
             var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
             if (SessionEmailEdit != null)
             {

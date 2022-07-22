@@ -17,8 +17,10 @@ namespace dsf_service_template_net6.Pages
                new SelectListItem {Text = "Sean", Value = "2"}
             };
         }
+
         public void OnGet()
         {
+
         }
         public void OnPost()
         {

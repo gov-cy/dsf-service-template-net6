@@ -21,6 +21,10 @@ namespace dsf_service_template_net6.Pages
         public CitizenDataResponse _citizenPersonalDetails = new CitizenDataResponse();
         public ApplicationRequest _application = new ApplicationRequest();
         public string currentLanguage;
+        //Data retrieve from other pages
+        private Addressinfo[] ret_address;
+        private string ret_email = string.Empty;
+        private string ret_mobile = string.Empty;
         public IActionResult OnGet()
         {
             if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
@@ -31,6 +35,7 @@ namespace dsf_service_template_net6.Pages
             {
                 currentLanguage = "en";
             }
+           
             //Set access token
             SetAccessToken();
             bool ret = GetCitizenData();
@@ -42,6 +47,8 @@ namespace dsf_service_template_net6.Pages
             //Set Data from CivilRegistry
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             HttpContext.Session.SetObjectAsJson("PersonalDetails", _citizenPersonalDetails, authTime);
+            //Set Data from journey pages
+            bool proceed = SetUserJourneyData();
             return Page();
         }
         public IActionResult OnPostApplicationSubmit(string applicationReference, string returnUrl = null)
@@ -73,27 +80,34 @@ namespace dsf_service_template_net6.Pages
             }
 
         }
-       
-        private bool SetApplication()
-        {
+       private bool SetUserJourneyData()
+       {
             bool ret = true;
-            _application.contactInfo.addressInfo = _citizenPersonalDetails.data.addressInfo;
-            _application.reference = Guid.NewGuid().ToString();
-            _application.contactInfo.emailVerified = true;
-            _application.contactInfo.mobileVerified = true;
+            ret_address = _citizenPersonalDetails.data.addressInfo;
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
             var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
-            if (SessionEmailEdit == null || SessionMobEdit==null)
+            ret_email = SessionEmailEdit.email;
+            ret_mobile = SessionMobEdit.mobile;
+            return ret;
+       }
+        private bool SetApplication()
+        {
+            bool ret = true;
+            _application.contactInfo.addressInfo = ret_address;
+            if (string.IsNullOrEmpty(ret_email) || string.IsNullOrEmpty(ret_mobile))
             {
-                ret = false;    
+               ret = false;
             }else
             {
-                _application.contactInfo.email =SessionEmailEdit.email;
-                _application.contactInfo.mobile = SessionMobEdit.mobile;
+                _application.contactInfo.email = ret_email;
+                _application.contactInfo.mobile = ret_mobile;
             }
-
-            
+            _application.reference = Guid.NewGuid().ToString();
+           
+            _application.contactInfo.emailVerified = true;
+            _application.contactInfo.mobileVerified = true;
+                       
            return ret;
         }
         private bool GetCitizenData()
