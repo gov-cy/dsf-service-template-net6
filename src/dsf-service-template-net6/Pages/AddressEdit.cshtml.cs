@@ -68,7 +68,7 @@ namespace dsf_service_template_net6.Pages
             if (PostalCode.Length>0)
             {
 
-                string apiURL = "v1/MoiCrmd/address-mock/" + PostalCode + "/el";
+                string apiURL = "api/v1/MoiCrmd/address-mock/" + PostalCode + "/el";
                 var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiURL, "");
               
                 try
