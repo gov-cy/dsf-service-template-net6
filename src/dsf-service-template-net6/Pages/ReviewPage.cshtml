@@ -7,9 +7,9 @@
 @inject IHtmlLocalizer<Program> HtmlLocalizer
 @{
     Addressinfo Address = new Addressinfo();
-    if (Model._citizenPersonalDetails != null)
+    if (Model.ret_address != null)
     {
-       Address = @Model._citizenPersonalDetails.data.addressInfo.First(p => p.language == Model.currentLanguage);
+       Address = @Model.ret_address.First();
     }
 }
  <h1>@Localizer["CheckAndSubmit"]</h1>
@@ -45,7 +45,7 @@
              <th scope="row" class="col-3">@Localizer["Mobile"]</th>
              <td class="col-7">
                  <p>
-                 <span class="govcy-d-block">@Model._citizenPersonalDetails.data.mobile</span>
+                 <span class="govcy-d-block">@Model.ret_mobile</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
@@ -56,7 +56,7 @@
              <th scope="row" class="col-3">@Localizer["Email"]</th>
              <td class="col-7">
                  <p>
-                  <span class="govcy-d-block">@Model._citizenPersonalDetails.data.email</span>
+                  <span class="govcy-d-block">@Model.ret_email</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">

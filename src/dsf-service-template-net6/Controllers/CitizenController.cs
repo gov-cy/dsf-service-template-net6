@@ -51,11 +51,14 @@ namespace dsf_service_template_net6.Controllers
             {
                 isPersonalDataRetrieve = false;
             }
+           
             if (isPersonalDataRetrieve)
             {
-             //Store Data in session
+                //Store Data in session
+                //Set Data from CivilRegistry
 
-              return  RedirectToPage("/" + returnUrl);
+                HttpContext.Session.SetObjectAsJson("PersonalDetails", _citizenPersonalDetails, authTime);
+                return  RedirectToPage("/" + returnUrl);
             }
             else
             {

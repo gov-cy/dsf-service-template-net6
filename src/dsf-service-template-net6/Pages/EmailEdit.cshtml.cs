@@ -62,7 +62,8 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             if (citizenPersonalDetails != null)
             {
-                emailEdit.email = citizenPersonalDetails.data.email;
+                //Defult ariadni value
+                emailEdit.email = User.Claims.First(c => c.Type == "email").Value; ;
             }
         }
         public IActionResult OnPostSetEmail(bool review)
