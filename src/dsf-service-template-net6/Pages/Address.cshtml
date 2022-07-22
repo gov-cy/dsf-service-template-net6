@@ -1,0 +1,47 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using dsf_service_template_net6.Data.Models
+@model dsf_service_template_net6.Pages.AddressModel
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@{
+}
+<h1>@Localizer["AddressHeading"]</h1>
+<p>@Localizer["AddressPara01"]</p>
+<table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
+     <tbody>
+           <tr>
+             <th scope="row" class="col-3">@Localizer["ApplicantName"]</th>
+             <td class="col-7">
+                 <span class="govcy-d-block">ΑΝΔΡΕΑΣ ΑΝΩΝΥΜΟΣ</span>
+             </td>
+          </tr>
+          <tr>
+             <th scope="row" class="col-3">@Localizer["Address"]</th>
+             <td class="col-7">
+                 <span class="govcy-d-block">FASARIAS 17A AP. 101<br>2323 LAKATAMIA, NICOSIA<br>CYPRUS</span>
+             </td>
+          </tr>
+     </tbody>
+ </table>
+<div class="govcy-container">
+  <form action="" novalidate class="govcy-form">
+  <fieldset class="govcy-fieldset govcy-mb-0">
+      <legend class="govcy-legend">@Localizer["AddressLegend"]</legend>
+      <div class="govcy-form-control">
+        <label class="govcy-radio">@Localizer["AddressOptionYes"]
+          <input class="govcy-radio-input" type="radio" checked="checked" name="radio">
+          <span class="govcy-radio-checked"></span>
+        </label>
+        <label class="govcy-radio">@Localizer["AddressOptionNo"]
+          <input class="govcy-radio-input" type="radio" name="radio">
+          <span class="govcy-radio-checked"></span>
+        </label>
+      </div>
+    </fieldset>
+  </form>
+  <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+</div>
+  
+  

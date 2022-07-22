@@ -168,6 +168,10 @@
     <value>Address Change</value>
     <comment>Review Page</comment>
   </data>
+  <data name="ApplicantName" xml:space="preserve">
+    <value>Name</value>
+    <comment>Review Page</comment>
+  </data>
   <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
     <value>Citizen Personal Data Change</value>
     <comment>Layout Page - Header control</comment>
@@ -194,16 +198,20 @@
     <comment>Table Change Link Text</comment>
   </data>
   <data name="CheckAndSubmit" xml:space="preserve">
-    <value>Check and submit</value>
+    <value>Your contact details</value>
     <comment>Review Page</comment>
   </data>
   <data name="CheckAndSubmitPara01" xml:space="preserve">
-    <value>We’ve found records showing that you have the below data in Civil Registry.</value>
+    <value>Check that the information below is correct.</value>
     <comment>Review Page</comment>
   </data>
   <data name="CheckAndSubmitPara02" xml:space="preserve">
     <value>Before submitting your application, check that the information below is correct.</value>
     <comment>Review Page</comment>
+  </data>
+  <data name="ChooseEmail" xml:space="preserve">
+    <value>Choose if you'd like to use your CY Login email address or a different one</value>
+    <comment>Email Validator</comment>
   </data>
   <data name="Container_content" xml:space="preserve">
     <value>Skip to main content</value>
@@ -236,6 +244,14 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="EmailDetails" xml:space="preserve">
     <value>Email address change</value>
     <comment>Review Page</comment>
+  </data>
+  <data name="EmailEditHeading" xml:space="preserve">
+    <value>Update your email address</value>
+    <comment>Email Edit Page</comment>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Enter an email address in the correct format, for example name@example.com</value>
+    <comment>Email Validator</comment>
   </data>
   <data name="ErrorMessage-General" xml:space="preserve">
     <value>Error</value>
@@ -318,6 +334,38 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Enter your mobile telephone number</value>
     <comment>Mobile Validator</comment>
   </data>
+  <data name="Email-Label" xml:space="preserve">
+    <value>What email address can we use to contact you?</value>
+    <comment>Email Edit Page</comment>
+  </data>
+  <data name="Email-Hint" xml:space="preserve">
+    <value>The email address in your CY Login account will not be change</value>
+    <comment>Email Edit Page</comment>
+  </data>
+  <data name="EmailEditParagraph" xml:space="preserve">
+    <value>After you click “continue” you will receive an email with a link that you will need to click in order to confirm your email.</value>
+    <comment>Email Edit Page</comment>
+  </data>
+   <data name="AddressHeading" xml:space="preserve">
+    <value>What address can we use to contact you?</value>
+    <comment>Address page</comment>
+  </data>
+  <data name="AddressPara01" xml:space="preserve">
+    <value>This is the address we have found in our database.</value>
+    <comment>Address page</comment>
+  </data>
+  <data name="AddressLegend" xml:space="preserve">
+    <value>Do you want to use this address?</value>
+    <comment>Address page</comment>
+  </data>
+  <data name="AddressOptionYes" xml:space="preserve">
+    <value>Yes</value>
+    <comment>Address page</comment>
+  </data>
+  <data name="AddressOptionNo" xml:space="preserve">
+    <value>No, I want to use different one</value>
+    <comment>Address page</comment>
+  </data>
   <data name="NoValid_Profile_Instructions" xml:space="preserve">
     <value>&lt;p&gt;If you've signed in using a CY Login 'organisation' account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; return to CY Login and sign in using a 'citizen' account.&lt;/a&gt;&lt;/p&gt;
       &lt;p&gt; If you've signed in using a CY Login 'citizen' account, you need to make sure it's 'authenticated'. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Find out how to authenticate your CY Login account.&lt;/a&gt;&lt;/p&gt;
@@ -378,5 +426,9 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="PrivacyStatement_Title" xml:space="preserve">
     <value>Privacy policy – your personal information</value>
     <comment>Privacy Statement Page</comment>
+  </data>
+  <data name="Button_Submit" xml:space="preserve">
+    <value>Submit application</value>
+    <comment>Review Page</comment>
   </data>
 </root>

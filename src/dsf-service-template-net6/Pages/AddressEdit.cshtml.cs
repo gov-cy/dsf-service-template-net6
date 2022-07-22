@@ -23,7 +23,7 @@ namespace dsf_service_template_net6.Pages
         }
 
         [BindProperty]
-        [Required(ErrorMessage ="Παρακαλώ κααραχωρείστε ΤΧ")]
+        [Required(ErrorMessage ="οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½")]
         
         public string PostalCode { get; set; }
                   
