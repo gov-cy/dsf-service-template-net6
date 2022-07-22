@@ -55,14 +55,7 @@ namespace dsf_service_template_net6.Pages
                 } 
                    
         }
-        //private void FormatAddress()
-        //{
-        //    foreach (Addressinfo item in _citizenPersonalDetails.data.addressInfo)
-        //    {
-        //        item.addressText = String.Format(item.addressText);
-        //        item.addressText=item.item.name + " " + item.item.street.streetNumber 
-        //    }
-        //}
+       
         private bool GetCitizenData()
         {
             bool isPersonalDataRetrieve = true;
