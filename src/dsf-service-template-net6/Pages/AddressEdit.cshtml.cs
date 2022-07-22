@@ -30,5 +30,10 @@ namespace dsf_service_template_net6.Pages
             //Check selected value it should retain the user selection
             //return Page();
         }
+        public IActionResult OnPostSetAddress(bool review)
+        {
+            //Check selected value it should retain the user selection
+            return RedirectToPage("/MobileEdit");
+        }
     }
 }

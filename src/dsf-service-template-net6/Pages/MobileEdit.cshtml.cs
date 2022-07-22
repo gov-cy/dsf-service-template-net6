@@ -95,7 +95,7 @@ namespace dsf_service_template_net6.Pages
             //Generate One time password
 
             //Finally redirect
-            return RedirectToPage("/ReviewPage");
+            return RedirectToPage("/EmailEdit");
 
         }
     }
