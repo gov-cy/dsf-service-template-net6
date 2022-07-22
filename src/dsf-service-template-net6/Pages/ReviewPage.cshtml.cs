@@ -22,31 +22,15 @@ namespace dsf_service_template_net6.Pages
         public ApplicationRequest _application = new ApplicationRequest();
         public string currentLanguage;
         //Data retrieve from other pages
-        private Addressinfo[] ret_address;
-        private string ret_email = string.Empty;
-        private string ret_mobile = string.Empty;
+        public Addressinfo[] ret_address;
+        public string ret_email = string.Empty;
+        public string ret_mobile = string.Empty;
         public IActionResult OnGet()
         {
-            if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
-            {
-                currentLanguage = "el";
-            }
-            else
-            {
-                currentLanguage = "en";
-            }
-           
+                    
             //Set access token
             SetAccessToken();
-            bool ret = GetCitizenData();
-            if (!ret)
-            {
-                return RedirectToPage("/Index");
-            }
-           
-            //Set Data from CivilRegistry
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            HttpContext.Session.SetObjectAsJson("PersonalDetails", _citizenPersonalDetails, authTime);
+               
             //Set Data from journey pages
             bool proceed = SetUserJourneyData();
             return Page();
@@ -80,11 +64,13 @@ namespace dsf_service_template_net6.Pages
             }
 
         }
-       private bool SetUserJourneyData()
+        private bool SetUserJourneyData()
        {
             bool ret = true;
-            ret_address = _citizenPersonalDetails.data.addressInfo;
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            _citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            ret_address = _citizenPersonalDetails.data.addressInfo;
+           
             var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
             var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
             ret_email = SessionEmailEdit.email;
@@ -94,15 +80,22 @@ namespace dsf_service_template_net6.Pages
         private bool SetApplication()
         {
             bool ret = true;
-            _application.contactInfo.addressInfo = ret_address;
-            if (string.IsNullOrEmpty(ret_email) || string.IsNullOrEmpty(ret_mobile))
+            bool isDataRetrieve =SetUserJourneyData();
+            if (isDataRetrieve)
             {
-               ret = false;
-            }else
-            {
+                _application.contactInfo = new Contactinfo();
+                _application.contactInfo.addressInfo = new Addressinfo[] {};
+                _application.contactInfo.addressInfo = ret_address;
+                if (string.IsNullOrEmpty(ret_email) || string.IsNullOrEmpty(ret_mobile))
+                {
+                  ret = false;
+                }else
+                {
                 _application.contactInfo.email = ret_email;
                 _application.contactInfo.mobile = ret_mobile;
+                }
             }
+         
             _application.reference = Guid.NewGuid().ToString();
            
             _application.contactInfo.emailVerified = true;
@@ -110,38 +103,7 @@ namespace dsf_service_template_net6.Pages
                        
            return ret;
         }
-        private bool GetCitizenData()
-        {
-            bool isPersonalDataRetrieve = true;
-          
-           //First check if user personal data have already being retrieve
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            
-                //Call Api 
-                //call the mock Api
-                var apiUrl = "api/v1/MoiCrmd/contact-info-mock/" + currentLanguage;
-                var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-                var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
-                if (response != null)     
-                {
-                    _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
-                    if (_citizenPersonalDetails == null)
-                    {
-                        isPersonalDataRetrieve = false;
-                    }
-                    else if (!_citizenPersonalDetails.succeeded)
-                    {
-                        isPersonalDataRetrieve = false;
-                    } 
-                }
-                else
-                {
-                    isPersonalDataRetrieve = false;
-                }
-               
-            
-            return isPersonalDataRetrieve;
-        }
+       
         private bool SubmitApplication()
         {           
             bool ret = false;

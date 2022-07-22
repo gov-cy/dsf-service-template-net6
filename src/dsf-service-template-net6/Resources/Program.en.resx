@@ -338,7 +338,7 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>What email address can we use to contact you?</value>
     <comment>Email Edit Page</comment>
   </data>
-   <data name="Email-Hint" xml:space="preserve">
+  <data name="Email-Hint" xml:space="preserve">
     <value>The email address in your CY Login account will not be change</value>
     <comment>Email Edit Page</comment>
   </data>
@@ -418,5 +418,9 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="PrivacyStatement_Title" xml:space="preserve">
     <value>Privacy policy – your personal information</value>
     <comment>Privacy Statement Page</comment>
+  </data>
+  <data name="Button_Submit" xml:space="preserve">
+    <value>Submit application</value>
+    <comment>Review Page</comment>
   </data>
 </root>

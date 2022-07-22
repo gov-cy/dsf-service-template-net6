@@ -94,7 +94,11 @@ namespace dsf_service_template_net6.Services
 
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
-           
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    //Include the Bearer Token
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                }
                 HttpContent content = new StringContent(request, Encoding.UTF8, contentType);
                 content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
 

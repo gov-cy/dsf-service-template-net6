@@ -137,7 +137,7 @@ builder.Services.AddAuthentication(options =>
     options.ClaimActions.MapJsonKey("unique_identifier", "unique_identifier");
     options.ClaimActions.MapJsonKey("legal_unique_identifier", "legal_unique_identifier");
     options.ClaimActions.MapJsonKey("legal_main_profile", "legal_main_profile");
-    //EIDAS
+     //EIDAS
     options.ClaimActions.MapJsonKey("given_name", "given_name");
     options.ClaimActions.MapJsonKey("family_name", "family_name");
     options.ClaimActions.MapJsonKey("birthdate", "birthdate");

@@ -61,6 +61,7 @@ namespace dsf_service_template_net6.Pages
             if (citizenPersonalDetails != null)
             {
                 mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
+                //mobEdit.mobile = User.Claims.First(c => c.Type == "email").Value;
             }
         }
         public IActionResult OnPostSetMobilePhone(bool review)

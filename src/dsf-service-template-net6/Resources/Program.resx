@@ -343,7 +343,7 @@
     <value>Ποια διεύθυνση email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
     <comment>Email Edit Page</comment>
   </data>
-   <data name="Email-Hint" xml:space="preserve">
+  <data name="Email-Hint" xml:space="preserve">
     <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>
     <comment>Email Edit Page</comment>
   </data>
@@ -411,5 +411,9 @@
   <data name="PrivacyStatement_Title" xml:space="preserve">
     <value>Πολιτική απορρήτου – τα προσωπικά σας στοιχεία</value>
     <comment>Privacy Statement Page</comment>
+  </data>
+  <data name="Button_Submit" xml:space="preserve">
+    <value>Υποβολή αίτησης</value>
+    <comment>Review Page</comment>
   </data>
 </root>
