@@ -1,0 +1,46 @@
+﻿@page "{review:bool?}"
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using dsf_service_template_net6.Data.Models
+@model dsf_service_template_net6.Pages.MobileModel
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@{
+}
+<div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
+    <h2>@Localizer["ErrorMessage-General"]</h2>
+    <p class="govcy-mb-0">
+        @Html.Raw(Model.ErrorsDesc)
+    </p>
+</div>
+
+<h1>@Localizer["MobileHeading"]</h1>
+<p>@Localizer["MobilePara01"]</p>
+
+<div class="govcy-container">
+  <form method="post"  novalidate class="govcy-form">
+     
+  <fieldset class="govcy-fieldset govcy-mb-0">
+       <legend class="govcy-legend">@Localizer["MobileLegend"]</legend>
+      <div class="@((Model.MobileSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+			@if (Model.MobileSelection.Length>0)
+			{
+                <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+                <span class="govcy-input-error-msg">@Model.MobileSelection</span>
+            }
+          <label class="govcy-radio">@Localizer["MobileOptionYes"]
+          <input class="govcy-radio-input" type="radio" value="1" id="crbMobile" name="crbMobile" @(Model.option1 == "true" ? "checked" : "")>
+          <span class="govcy-radio-checked"></span>
+        </label>
+        <label class="govcy-radio">@Localizer["MobileOptionNo"]
+          <input class="govcy-radio-input" type="radio" value="2" name="crbMobile"  @(Model.option2 == "true" ? "checked" : "")>
+          <span class="govcy-radio-checked"></span>
+        </label>
+      </div> 
+       </fieldset>
+     <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+  </form>
+ 
+</div>
+  
+  

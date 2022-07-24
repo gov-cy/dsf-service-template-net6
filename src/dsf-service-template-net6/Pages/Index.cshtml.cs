@@ -18,8 +18,8 @@ namespace dsf_service_template_net6.Pages
         }
         public IActionResult OnPostApplicationStart(string applicationReference, string? returnUrl = null)
         {
-            //it will redirect to review page
-            return RedirectToPage("/ReviewPage");
+            //it will redirect to first wizard page
+            return RedirectToPage("/Address");
 
         }
     }

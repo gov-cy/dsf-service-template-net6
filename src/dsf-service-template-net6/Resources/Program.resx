@@ -436,4 +436,40 @@
     <value>Υποβολή αίτησης</value>
     <comment>Review Page</comment>
   </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>Δεν βρέθηκε διεύθυνση από τα αρχεία μας</value>
+    <comment>Address Selection Page</comment>
+  </data>
+  <data name="AdressSelection" xml:space="preserve">
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτή η Διεύθυνση</value>
+    <comment>Address Selection Page</comment>
+  </data>
+  <data name="MobileHeading" xml:space="preserve">
+    <value>Ποιό κινητό μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileLegend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileOptionNo" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileOptionYes" xml:space="preserve">
+    <value>Ναί</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobilePara01" xml:space="preserve">
+    <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileNotFound" xml:space="preserve">
+    <value>Δεν βρέθηκε ο αριθμός κινητού τηλεφώνου από τα αρχεία μας</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="MobileSelection" xml:space="preserve">
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός οαριθμός κινητού τηλεφώνου</value>
+    <comment>Mobile Validator</comment>
+  </data>
 </root>

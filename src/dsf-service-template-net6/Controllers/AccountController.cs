@@ -81,7 +81,7 @@ namespace dsf_service_template_net6.Controllers
             //Check the first session object store once you login
             if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
             {
-              return RedirectToAction("GetPersonalData", "Citizen", new { currentLanguage = "el", returnUrl = "AddressEdit"});
+              return RedirectToAction("GetPersonalData", "Citizen", new { currentLanguage = "el", returnUrl = "Address"});
             }
             else
             {
