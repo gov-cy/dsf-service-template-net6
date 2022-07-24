@@ -469,7 +469,7 @@
     <comment>Mobile Validator</comment>
   </data>
   <data name="MobileSelection" xml:space="preserve">
-    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός οαριθμός κινητού τηλεφώνου</value>
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
     <comment>Mobile Validator</comment>
   </data>
 </root>
