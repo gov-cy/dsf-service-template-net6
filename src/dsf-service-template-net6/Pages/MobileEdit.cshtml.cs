@@ -47,8 +47,28 @@ namespace dsf_service_template_net6.Pages
                 }
             }
         }
-        public void OnGet()
+        private bool AllowToProceed()
         {
+            bool ret = true;
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            {
+                ret = false;
+            }
+            if (HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime) == null)
+            {
+                ret = false;
+            }
+            return ret;
+        }
+        public IActionResult OnGet()
+        {
+            //Chack if user has sequentialy load the page
+            bool allow = AllowToProceed();
+            if (!allow)
+            {
+                return RedirectToAction("LogOut", "Account");
+            }
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
             if (SessionMobEdit != null)
@@ -63,6 +83,7 @@ namespace dsf_service_template_net6.Pages
                 mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
                 //mobEdit.mobile = User.Claims.First(c => c.Type == "email").Value;
             }
+            return Page();
         }
         public IActionResult OnPostSetMobilePhone(bool review)
         {

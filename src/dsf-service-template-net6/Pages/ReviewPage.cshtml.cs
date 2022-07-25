@@ -32,14 +32,14 @@ namespace dsf_service_template_net6.Pages
             bool allow = AllowToProceed();
             if (!allow)
             {
-                RedirectToAction("LogOut", "Account");
+              return RedirectToAction("LogOut", "Account");
             }
                
             //Set Data from journey pages
             bool proceed = SetUserJourneyData();
             if (!proceed)
             {
-                RedirectToAction("LogOut", "Account");
+              return  RedirectToAction("LogOut", "Account");
             }
             return Page();
         }
