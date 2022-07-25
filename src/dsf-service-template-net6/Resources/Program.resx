@@ -457,7 +457,7 @@
     <comment>Mobile Page</comment>
   </data>
   <data name="MobileOptionYes" xml:space="preserve">
-    <value>Ναί</value>
+    <value>Ο  αριθμός κινητού τηλεφώνου που είναι καταχωρημένο στα αρχεία μας:</value>
     <comment>Mobile Page</comment>
   </data>
   <data name="MobilePara01" xml:space="preserve">
@@ -471,5 +471,41 @@
   <data name="MobileSelection" xml:space="preserve">
     <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
     <comment>Mobile Validator</comment>
+  </data>
+  <data name="EmailHeading" xml:space="preserve">
+    <value>Ποιό email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailPara01" xml:space="preserve">
+    <value>Αυτό είναι το email που βρήκαμε στη βάση δεδομένων μας.</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailLegend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό το email;</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionNo" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionYes" xml:space="preserve">
+    <value>Το email που είναι καταχωρημένο στα αρχεία μας:</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>Δεν βρέθηκε το email από τα αρχεία μας</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="EmailSelection" xml:space="preserve">
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτό το email</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="ServerError_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;Δοκιμάστε ξανά αργότερα.&lt;/p&gt;</value>
+    <comment>Server Error Page</comment>
+  </data>
+  <data name="ServerError_Title" xml:space="preserve">
+    <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
+    <comment>Server Error Page</comment>
   </data>
 </root>

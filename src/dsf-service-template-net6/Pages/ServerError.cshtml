@@ -1,0 +1,11 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@model dsf_service_template_net6.Pages.ServerErrorModel
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@{
+    Layout = "_LayoutNoBackLink";
+}
+<h1>@Localizer["ServerError_Title"]</h1>
+@HtmlLocalizer["ServerError_Instructions"]

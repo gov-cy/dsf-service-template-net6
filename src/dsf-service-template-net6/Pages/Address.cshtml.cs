@@ -114,7 +114,7 @@ namespace dsf_service_template_net6.Pages
               res=GetCitizenData();
                 if (res.succeeded == false)
                 {
-                    RedirectToPage("/Error");
+                    RedirectToPage("/ServerError");
                 }
                 else
                 {
@@ -161,6 +161,7 @@ namespace dsf_service_template_net6.Pages
                 address_select.use_from_civil = false;
                 address_select.use_other = false;
             }
+            //Re-assign defult adressInfo
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             address_select.addressInfo = citizen_data.data.addressInfo;

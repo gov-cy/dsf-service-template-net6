@@ -452,7 +452,7 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <comment>Mobile Page</comment>
   </data>
   <data name="MobileOptionYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>The mobile phone number that is register in our records:</value>
     <comment>Mobile Page</comment>
   </data>
   <data name="MobilePara01" xml:space="preserve">
@@ -466,5 +466,41 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="MobileSelection" xml:space="preserve">
     <value>Select if you want to use this mobile phone number</value>
     <comment>Mobile Validator</comment>
+  </data>
+  <data name="EmailHeading" xml:space="preserve">
+    <value>What email can we use to contact you?</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailPara01" xml:space="preserve">
+    <value>This is the email we have found in our database.</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailLegend" xml:space="preserve">
+    <value>Do you want to use this email ?</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionNo" xml:space="preserve">
+    <value>No, I want to use different one</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionYes" xml:space="preserve">
+    <value>The email that is register in our records:</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>No email found from our records</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="EmailSelection" xml:space="preserve">
+    <value>Select if you want to use this email</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="ServerError_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;Try again later.&lt;/p&gt;</value>
+    <comment>Server Error Page</comment>
+  </data>
+  <data name="ServerError_Title" xml:space="preserve">
+    <value>Sorry, there is a problem with the service</value>
+    <comment>Server Error Page</comment>
   </data>
 </root>

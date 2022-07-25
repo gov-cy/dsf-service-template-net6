@@ -37,6 +37,7 @@ builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
+    options.Conventions.AuthorizePage("/Email");
     options.Conventions.AuthorizePage("/Mobile");
     options.Conventions.AuthorizePage("/Address");
     options.Conventions.AuthorizePage("/EmailEdit");
@@ -74,6 +75,12 @@ builder.Services.AddScoped<IValidator<MobileSelect>, MobileSelectValidator>(sp =
     var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
 
     return new MobileSelectValidator(LocMain);
+});
+builder.Services.AddScoped<IValidator<EmailSelect>, EmailSelectValidator>(sp =>
+{
+    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+
+    return new EmailSelectValidator(LocMain);
 });
 builder.Services.AddFluentValidation();
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
