@@ -1,0 +1,23 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@model dsf_service_template_net6.Pages.ApplicationResponseModel
+@inject IStringLocalizer<Program> Localizer
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@{
+}
+<div class="govcy-col-9 govcy-mb-4">
+    <div class="govcy-alert-completed-notification govcy-px-0 govcy-mb-4">
+        <div class="govcy-alert-completed-notification-body govcy-bg-success">
+
+            @if (true)
+            {
+                <h1>@Localizer["Response_Success_Header_Title"] <br /> <span style="font-size:medium">@Localizer["Response_Success_Header_Ref"] @Model._applResponse</span> </h1>
+            }
+            else
+            {
+                <h1>@Localizer["Response_Success_Header_Title"] </h1>
+            }
+        </div>
+    </div>
+</div>

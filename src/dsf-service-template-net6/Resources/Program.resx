@@ -436,4 +436,84 @@
     <value>Υποβολή αίτησης</value>
     <comment>Review Page</comment>
   </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>Δεν βρέθηκε διεύθυνση από τα αρχεία μας</value>
+    <comment>Address Selection Page</comment>
+  </data>
+  <data name="AdressSelection" xml:space="preserve">
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτή η Διεύθυνση</value>
+    <comment>Address Selection Page</comment>
+  </data>
+  <data name="MobileHeading" xml:space="preserve">
+    <value>Ποιό κινητό μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileLegend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileOptionNo" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileOptionYes" xml:space="preserve">
+    <value>Ο  αριθμός κινητού τηλεφώνου που είναι καταχωρημένο στα αρχεία μας:</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobilePara01" xml:space="preserve">
+    <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileNotFound" xml:space="preserve">
+    <value>Δεν βρέθηκε ο αριθμός κινητού τηλεφώνου από τα αρχεία μας</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="MobileSelection" xml:space="preserve">
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="EmailHeading" xml:space="preserve">
+    <value>Ποιό email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailPara01" xml:space="preserve">
+    <value>Αυτό είναι το email που βρήκαμε στη βάση δεδομένων μας.</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailLegend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό το email;</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionNo" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionYes" xml:space="preserve">
+    <value>Το email που είναι καταχωρημένο στα αρχεία μας:</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>Δεν βρέθηκε το email από τα αρχεία μας</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="EmailSelection" xml:space="preserve">
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτό το email</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="Response_Success_Header_Ref" xml:space="preserve">
+    <value>Αρ, Αναφοράς</value>
+    <comment>Response Header Success Page</comment>
+  </data>
+  <data name="Response_Success_Header_Title" xml:space="preserve">
+    <value>Η αίτηση σας έχει υποβληθεί</value>
+    <comment>Response Header Success Page</comment>
+  </data>
+  <data name="ServerError_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;Δοκιμάστε ξανά αργότερα.&lt;/p&gt;</value>
+    <comment>Server Error Page</comment>
+  </data>
+  <data name="ServerError_Title" xml:space="preserve">
+    <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
+    <comment>Server Error Page</comment>
+  </data>
 </root>

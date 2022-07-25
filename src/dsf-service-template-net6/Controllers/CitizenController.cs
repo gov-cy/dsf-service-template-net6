@@ -34,20 +34,27 @@ namespace dsf_service_template_net6.Controllers
             //call the mock Api
             var apiUrl = "api/v1/MoiCrmd/contact-info-mock/" + currentLanguage;
             var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-            var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
-            if (response != null)
+            try
             {
-                _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
-                if (_citizenPersonalDetails == null)
+                var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
+                if (response != null)
                 {
-                    isPersonalDataRetrieve = false;
+                    _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
+                    if (_citizenPersonalDetails == null)
+                    {
+                        isPersonalDataRetrieve = false;
+                    }
+                    else if (!_citizenPersonalDetails.succeeded)
+                    {
+                        isPersonalDataRetrieve = false;
+                    }
                 }
-                else if (!_citizenPersonalDetails.succeeded)
+                else
                 {
                     isPersonalDataRetrieve = false;
                 }
             }
-            else
+             catch
             {
                 isPersonalDataRetrieve = false;
             }
@@ -62,7 +69,7 @@ namespace dsf_service_template_net6.Controllers
             }
             else
             {
-               return RedirectToPage("/Error");
+               return RedirectToPage("/ServerError");
             }
 
         }

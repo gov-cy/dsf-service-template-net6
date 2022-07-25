@@ -101,7 +101,7 @@ namespace dsf_service_template_net6.Pages
                 return RedirectToPage("/ReviewPage");
             }else
             {
-                return RedirectToPage("/EmailEdit");
+                return RedirectToPage("/Email");
             }
          }
     }

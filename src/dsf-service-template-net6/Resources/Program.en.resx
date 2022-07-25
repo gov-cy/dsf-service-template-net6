@@ -346,7 +346,7 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>After you click “continue” you will receive an email with a link that you will need to click in order to confirm your email.</value>
     <comment>Email Edit Page</comment>
   </data>
-   <data name="AddressHeading" xml:space="preserve">
+  <data name="AddressHeading" xml:space="preserve">
     <value>What address can we use to contact you?</value>
     <comment>Address page</comment>
   </data>
@@ -430,5 +430,85 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="Button_Submit" xml:space="preserve">
     <value>Submit application</value>
     <comment>Review Page</comment>
+  </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>No address found from our records</value>
+    <comment>Address Selection Page</comment>
+  </data>
+  <data name="AdressSelection" xml:space="preserve">
+    <value>Select if you want to use this address</value>
+    <comment>Address Selection Page</comment>
+  </data>
+  <data name="MobileHeading" xml:space="preserve">
+    <value>What mobile phone number can we use to contact you?</value>
+    <comment>Mobile page</comment>
+  </data>
+  <data name="MobileLegend" xml:space="preserve">
+    <value>Do you want to use this mobile phone number ?</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileOptionNo" xml:space="preserve">
+    <value>No, I want to use different one</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileOptionYes" xml:space="preserve">
+    <value>The mobile phone number that is register in our records:</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobilePara01" xml:space="preserve">
+    <value>This is the mobile phone number we have found in our database.</value>
+    <comment>Mobile Page</comment>
+  </data>
+  <data name="MobileNotFound" xml:space="preserve">
+    <value>No mobile phone number found from our records</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="MobileSelection" xml:space="preserve">
+    <value>Select if you want to use this mobile phone number</value>
+    <comment>Mobile Validator</comment>
+  </data>
+  <data name="EmailHeading" xml:space="preserve">
+    <value>What email can we use to contact you?</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailPara01" xml:space="preserve">
+    <value>This is the email we have found in our database.</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailLegend" xml:space="preserve">
+    <value>Do you want to use this email ?</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionNo" xml:space="preserve">
+    <value>No, I want to use different one</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailOptionYes" xml:space="preserve">
+    <value>The email that is register in our records:</value>
+    <comment>Email Page</comment>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>No email found from our records</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="EmailSelection" xml:space="preserve">
+    <value>Select if you want to use this email</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="Response_Success_Header_Ref" xml:space="preserve">
+    <value>Your Reference Number</value>
+    <comment>Response Header Success Page</comment>
+  </data>
+  <data name="Response_Success_Header_Title" xml:space="preserve">
+    <value>Your application has been sent</value>
+    <comment>Response Header Success Page</comment>
+  </data>
+  <data name="ServerError_Instructions" xml:space="preserve">
+    <value>&lt;p&gt;Try again later.&lt;/p&gt;</value>
+    <comment>Server Error Page</comment>
+  </data>
+  <data name="ServerError_Title" xml:space="preserve">
+    <value>Sorry, there is a problem with the service</value>
+    <comment>Server Error Page</comment>
   </data>
 </root>
