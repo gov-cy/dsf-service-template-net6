@@ -17,8 +17,25 @@ This service is demo that contains the following:
 ## Integrations
 
 ### CyLogin Mock Integration
-This project simulates CYLogin functionality by using a mock IdentityServer.  Details of this configuration can be found in the project's `appsettings.json` file.
-User the following test accounts to login:
+This project simulates CYLogin functionality by using a mock IdentityServer.
+Usage:
+- Configure OIDC settings in a configuration file:
+```
+"Oidc:Scopes": "<scopes>",
+"Oidc:RedirectUri": "https://localhost:44319/signin-oidc",
+"Oidc:ClientSecret": "<password>",
+"Oidc:ClientId": "<client_id>",
+"Oidc:Authority": "<authority_url>",
+"RedirectUri": "https://localhost:44319/",
+```
+- Configure OIDC Authentication in the Program.cs file of the project:
+```
+builder.Services.AddAuthentication
+
+```
+
+Details of this configuration can be found in the project's `appsettings.json` file and the Program.cs file.
+The following test accounts can be used to simulate the login functionality:
 `bob/bob, alice/alice, or company1/company1`
 
 ### Mock API Calls
@@ -39,10 +56,7 @@ dotnet run
 * Dependency Injection
 * Server side validation
 * Properties Binding
-* Session Encryption
-* TempData
-* Data Annotations
-* UserSecrets
+* Session Management
 * API Calls [dsf-mock-apis]
 
 ## License
