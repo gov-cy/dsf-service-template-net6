@@ -89,7 +89,7 @@ namespace dsf_service_template_net6.Pages
             if (citizenPersonalDetails != null)
             {
                 //Defult ariadni value
-                emailEdit.email = User.Claims.First(c => c.Type == "email").Value; ;
+                //emailEdit.email = User.Claims.First(c => c.Type == "email").Value; ;
             }
             return Page();
         }
