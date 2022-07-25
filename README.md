@@ -54,7 +54,7 @@ dotnet run
 * Oidc Authentication (Mock CyLogin) [dsf-idsrv-dev]
 * Razor Pages Authentication (Startup configuration)
 * Dependency Injection
-* Server side validation
+* Server side validation [https://docs.fluentvalidation.net/en/latest/]
 * Properties Binding
 * Session Management
 * API Calls [dsf-mock-apis]
