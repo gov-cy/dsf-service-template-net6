@@ -13,16 +13,18 @@ namespace dsf_service_template_net6.Pages
     [BindProperties]
     public class MobileEditModel : PageModel
     {
-       
+        #region "Variables"
         private IValidator<MobileEdit> _validator;
         IStringLocalizer _Loc;
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
         public string MobileErrorClass = "";
         public MobileEdit mobEdit { get; set; }
+        #endregion
+        #region "Custom Methods"
         public MobileEditModel(IValidator<MobileEdit> validator, IStringLocalizer<cMobileEditValidator> Loc)
         {
-          
+
             _validator = validator;
             _Loc = Loc;
             mobEdit = new MobileEdit();
@@ -61,6 +63,7 @@ namespace dsf_service_template_net6.Pages
             }
             return ret;
         }
+        #endregion
         public IActionResult OnGet()
         {
             //Chack if user has sequentialy load the page
@@ -76,16 +79,16 @@ namespace dsf_service_template_net6.Pages
                 mobEdit = SessionMobEdit;
             }
             //Get Previous mobile number
-            
+
             var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             if (citizenPersonalDetails != null)
             {
                 mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
-                //mobEdit.mobile = User.Claims.First(c => c.Type == "email").Value;
+               
             }
             return Page();
         }
-        public IActionResult OnPostSetMobilePhone(bool review)
+        public IActionResult OnPost(bool review)
         {
             FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
             if (!result.IsValid)
@@ -114,16 +117,16 @@ namespace dsf_service_template_net6.Pages
             {
                 HttpContext.Session.SetObjectAsJson("MobEdit", mobEdit, authTime);
             }
-            //Generate One time password
 
             //Finally redirect
             if (review)
             {
-                return RedirectToPage("/ReviewPage");
-            }else
-            {
-                return RedirectToPage("/Email");
+                return RedirectToPage("/ReviewPage", null, "RedirectTarget");
             }
-         }
+            else
+            {
+                return RedirectToPage("/Email", null, "RedirectTarget");
+            }
+        }
     }
 }

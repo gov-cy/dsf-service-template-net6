@@ -79,32 +79,32 @@ namespace dsf_service_template_net6.Pages
                 token = HttpContext.GetTokenAsync("access_token").Result ?? "";
                 HttpContext.Session.SetObjectAsJson("access_token", token, authTime);
             }
-            try { 
-
-            var response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
-                if (response != null)
-                {
-
-                    var _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
-                    if (_citizenPersonalDetails != null)
-                    {
-
-                        if (_citizenPersonalDetails.succeeded & _citizenPersonalDetails.data != null)
-                        {
-                            Res = _citizenPersonalDetails;
-                        }
-                    }
-                }
+            string response;
+            CitizenDataResponse _citizenPersonalDetails;
+            try
+            {
+                response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
+                _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
             }
-            catch 
+            catch
+            {
+                _citizenPersonalDetails = new CitizenDataResponse();
+                response = "";
+            }
+            if (_citizenPersonalDetails.succeeded & _citizenPersonalDetails.data != null)
+            {
+                Res = _citizenPersonalDetails;
+
+            }
+            else
             {
                 Res = new CitizenDataResponse();
             }
-                
+
             return Res;
         }
         #endregion
-        public void OnGet()
+        public IActionResult OnGet()
         {
             //Check if no Citize details loaded
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
@@ -114,7 +114,7 @@ namespace dsf_service_template_net6.Pages
               res=GetCitizenData();
                 if (res.succeeded == false)
                 {
-                    RedirectToPage("/ServerError");
+                  return RedirectToPage("/ServerError");
                 }
                 else
                 {
@@ -142,7 +142,8 @@ namespace dsf_service_template_net6.Pages
                     option1 = "false";
                     option2 = "true";
                 }
-            } 
+            }
+            return Page();
         }
         public IActionResult OnPost(bool review)
         {
@@ -189,18 +190,18 @@ namespace dsf_service_template_net6.Pages
                     return RedirectToPage("/AddressEdit", new { review = "true" });
                 } else
                 {
-                    return RedirectToPage("/ReviewPage");
+                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
                 }
             } 
             else
             {
                 if (address_select.use_other)
                 {
-                  return  RedirectToPage("/AddressEdit");
+                  return  RedirectToPage("/AddressEdit", null, "RedirectTarget");
                 } 
                 else
                 {
-                  return  RedirectToPage("/Mobile");
+                  return  RedirectToPage("/Mobile",null, "RedirectTarget");
                 }
             }
            

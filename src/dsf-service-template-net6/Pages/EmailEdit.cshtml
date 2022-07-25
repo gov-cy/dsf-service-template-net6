@@ -1,4 +1,4 @@
-﻿@page "{review:bool?}"
+﻿@page "/SetEmail/{review:bool?}"
 @using Microsoft.Extensions.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @model dsf_service_template_net6.Pages.EmailEditModel
@@ -14,7 +14,7 @@
 </div>
 
 <h1>@Localizer["EmailEditHeading"]</h1>
-<form class="govcy-form" novalidate asp-page-handler="SetEmail">
+<form class="govcy-form" novalidate method="post">
      <div class="@(Model.EmailErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
     <label class="govcy-label govcy-mb-2">@Localizer["Email-Label"]</label>
     <span class="govcy-hint">@Localizer["Email-Hint"]</span>
