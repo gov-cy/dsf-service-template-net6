@@ -500,6 +500,14 @@
     <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτό το email</value>
     <comment>Email Validator</comment>
   </data>
+  <data name="Response_Success_Header_Ref" xml:space="preserve">
+    <value>Αρ, Αναφοράς</value>
+    <comment>Response Header Success Page</comment>
+  </data>
+  <data name="Response_Success_Header_Title" xml:space="preserve">
+    <value>Η αίτηση σας έχει υποβληθεί</value>
+    <comment>Response Header Success Page</comment>
+  </data>
   <data name="ServerError_Instructions" xml:space="preserve">
     <value>&lt;p&gt;Δοκιμάστε ξανά αργότερα.&lt;/p&gt;</value>
     <comment>Server Error Page</comment>

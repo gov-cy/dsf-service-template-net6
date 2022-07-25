@@ -495,6 +495,14 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Select if you want to use this email</value>
     <comment>Email Validator</comment>
   </data>
+  <data name="Response_Success_Header_Ref" xml:space="preserve">
+    <value>Your Reference Number</value>
+    <comment>Response Header Success Page</comment>
+  </data>
+  <data name="Response_Success_Header_Title" xml:space="preserve">
+    <value>Your application has been sent</value>
+    <comment>Response Header Success Page</comment>
+  </data>
   <data name="ServerError_Instructions" xml:space="preserve">
     <value>&lt;p&gt;Try again later.&lt;/p&gt;</value>
     <comment>Server Error Page</comment>
