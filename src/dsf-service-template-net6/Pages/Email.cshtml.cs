@@ -78,13 +78,13 @@ namespace dsf_service_template_net6.Pages
             return ret;
         }
         #endregion
-        public void OnGet()
+        public IActionResult OnGet()
         {
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
             {
-                RedirectToAction("LogOut", "Account");
+              return  RedirectToAction("LogOut", "Account");
             }
             //Get  Citize details loaded
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
@@ -107,6 +107,7 @@ namespace dsf_service_template_net6.Pages
                     option2 = "true";
                 }
             }
+            return Page();
         }
         public IActionResult OnPost(bool review)
         {

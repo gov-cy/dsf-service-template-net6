@@ -15,6 +15,8 @@ namespace dsf_service_template_net6.Pages
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             _applResponse = HttpContext.Session.GetObjectFromJson<string>("ref_no", authTime);
             HttpContext.Session.Clear();
+            //Keep the refence in session for lang change
+            HttpContext.Session.SetObjectAsJson("ref_no", _applResponse, authTime);
         }
     }
 }

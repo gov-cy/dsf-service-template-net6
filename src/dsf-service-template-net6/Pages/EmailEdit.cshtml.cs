@@ -34,6 +34,7 @@ namespace dsf_service_template_net6.Pages
             EmailErrorClass = "";
             ErrorsDesc = "";
         }
+
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
             //First Enable Summary Display
@@ -49,8 +50,32 @@ namespace dsf_service_template_net6.Pages
                 
             }
         }
-        public void OnGet()
+        private bool AllowToProceed()
         {
+            bool ret = true;
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            {
+                ret = false;
+            }
+            if (HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime) == null)
+            {
+                ret = false;
+            }
+            if (HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null)
+            {
+                ret = false;
+            }
+            return ret;
+        }
+        public IActionResult OnGet()
+        {
+            //Chack if user has sequentialy load the page
+            bool allow = AllowToProceed();
+            if (!allow)
+            {
+                return RedirectToAction("LogOut", "Account");
+            }
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             //GetData from session 
             var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
@@ -65,6 +90,7 @@ namespace dsf_service_template_net6.Pages
                 //Defult ariadni value
                 emailEdit.email = User.Claims.First(c => c.Type == "email").Value; ;
             }
+            return Page();
         }
         public IActionResult OnPostSetEmail(bool review)
         {
