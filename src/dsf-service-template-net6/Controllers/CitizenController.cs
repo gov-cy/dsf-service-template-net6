@@ -10,12 +10,14 @@ namespace dsf_service_template_net6.Controllers
     public class CitizenController : Controller
     {
         private CitizenDataResponse _citizenPersonalDetails = new CitizenDataResponse();
+        private readonly ILogger<CitizenController> _logger;
         private IMyHttpClient _client { get; set; }
         private IConfiguration _configuration;
-        public CitizenController(IMyHttpClient client, IConfiguration configuration)
+        public CitizenController(IMyHttpClient client, IConfiguration configuration, ILogger<CitizenController> logger)
         {
             _client = client;
             _configuration = configuration;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -56,6 +58,7 @@ namespace dsf_service_template_net6.Controllers
             }
              catch
             {
+                _logger.LogError("Could not get valid response from " + apiUrl);
                 isPersonalDataRetrieve = false;
             }
            

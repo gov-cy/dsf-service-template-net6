@@ -1,1 +1,0 @@
-﻿All custom Component methods 

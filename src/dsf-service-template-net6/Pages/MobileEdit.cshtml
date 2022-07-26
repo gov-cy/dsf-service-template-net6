@@ -1,4 +1,4 @@
-﻿@page "{review:bool?}"
+﻿@page "/SetMobile/{review:bool?}"
 @using Microsoft.Extensions.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @using dsf_service_template_net6.Data.Models
@@ -13,7 +13,7 @@
     </p>
 </div>
 <h1>@Localizer["MobEditHeading"]</h1>
-<form class="govcy-form" novalidate asp-page-handler="SetMobilePhone">
+<form class="govcy-form" novalidate method="post">
     @Html.HiddenFor(m => m.mobEdit.prev_mobile) 
     <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
             <label class="govcy-label govcy-mb-2">@Localizer["Mobile-Label"]</label>

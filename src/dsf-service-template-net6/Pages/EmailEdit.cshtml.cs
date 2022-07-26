@@ -12,15 +12,16 @@ namespace dsf_service_template_net6.Pages
     [BindProperties]
     public class EmailEditModel : PageModel
     {
+        #region "Variables"
         private IValidator<EmailEdit> _validator;
         IStringLocalizer _Loc;
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
         public string EmailErrorClass = "";
         public string EmailSelection = "";
-        
-        
         public EmailEdit emailEdit { get; set; }
+        #endregion
+        #region "Custom Methods"
         public EmailEditModel(IValidator<EmailEdit> validator, IStringLocalizer<cEmailEditValidator> Loc)
         {
 
@@ -34,7 +35,6 @@ namespace dsf_service_template_net6.Pages
             EmailErrorClass = "";
             ErrorsDesc = "";
         }
-
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
             //First Enable Summary Display
@@ -68,6 +68,7 @@ namespace dsf_service_template_net6.Pages
             }
             return ret;
         }
+        #endregion
         public IActionResult OnGet()
         {
             //Chack if user has sequentialy load the page
@@ -88,11 +89,11 @@ namespace dsf_service_template_net6.Pages
             if (citizenPersonalDetails != null)
             {
                 //Defult ariadni value
-                emailEdit.email = User.Claims.First(c => c.Type == "email").Value; ;
+                //emailEdit.email = User.Claims.First(c => c.Type == "email").Value; ;
             }
             return Page();
         }
-        public IActionResult OnPostSetEmail(bool review)
+        public IActionResult OnPost(bool review)
         {
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
@@ -111,7 +112,7 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("EmailEdit");
             HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
             //Finally redirect
-            return RedirectToPage("/ReviewPage");
+            return RedirectToPage("/ReviewPage", null, "RedirectTarget");
         }
     }
 }

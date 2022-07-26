@@ -152,7 +152,7 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage");
+                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
                 }
             }
             else
@@ -163,7 +163,7 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                    return RedirectToPage("/Email");
+                    return  RedirectToPage("/Email",null,null);
                 }
             }
 

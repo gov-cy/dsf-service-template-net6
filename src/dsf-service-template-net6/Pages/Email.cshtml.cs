@@ -156,18 +156,18 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage");
+                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
                 }
             }
             else
             {
                 if (Email_select.use_other)
                 {
-                    return RedirectToPage("/EmailEdit");
+                    return RedirectToPage("/EmailEdit", null, "RedirectTarget");
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage");
+                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
                 }
             }
 
