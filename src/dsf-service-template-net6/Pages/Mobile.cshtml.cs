@@ -163,7 +163,7 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                    return  RedirectToPage("/Email",null,null);
+                    return  RedirectToPage("/Email",null, "RedirectTarget");
                 }
             }
 
