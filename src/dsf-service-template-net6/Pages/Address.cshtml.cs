@@ -24,6 +24,7 @@ namespace dsf_service_template_net6.Pages
         public string ErrorsDesc = "";
         public string AddressSelection = "";
         //Dependancy injection Variables
+        private readonly ILogger<AddressModel> _logger;
         public IMyHttpClient _client;
         private IConfiguration _configuration;
         private IValidator<AddressSelect> _validator;
@@ -31,12 +32,13 @@ namespace dsf_service_template_net6.Pages
         public AddressSelect address_select;
         #endregion
         #region "Custom Methods"
-         public AddressModel(IValidator<AddressSelect> validator, IMyHttpClient client, IConfiguration config)     
+         public AddressModel(IValidator<AddressSelect> validator, IMyHttpClient client, IConfiguration config, ILogger<AddressModel> logger)
         {
             _client = client;
             _configuration = config;
             _validator = validator;
             address_select = new AddressSelect();
+            _logger = logger;
         }
         void ClearErrors()
         {
@@ -88,6 +90,7 @@ namespace dsf_service_template_net6.Pages
             }
             catch
             {
+                _logger.LogError("Could not get valid response from " + apiUrl);
                 _citizenPersonalDetails = new CitizenDataResponse();
                 response = "";
             }

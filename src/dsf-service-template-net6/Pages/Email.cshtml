@@ -17,30 +17,32 @@
 <h1>@Localizer["EmailHeading"]</h1>
 <p>@Localizer["EmailPara01"]</p>
 
-<div class="govcy-container">
-  <form method="post"  novalidate class="govcy-form">
-     
-  <fieldset class="govcy-fieldset govcy-mb-0">
-       <legend class="govcy-legend">@Localizer["EmailLegend"] <span>@Model.Email_select.email</span></legend>
-       
-      <div class="@((Model.EmailSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-			@if (Model.EmailSelection.Length>0)
-			{
+
+<form method="post" novalidate class="govcy-form">
+
+    <fieldset class="govcy-fieldset">
+        <legend class="govcy-legend">@Localizer["EmailLegend"] <span>@Model.Email_select.email</span></legend>
+
+        <div class="@((Model.EmailSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+            @if (Model.EmailSelection.Length > 0)
+            {
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
                 <span class="govcy-input-error-msg">@Model.EmailSelection</span>
             }
-          <label class="govcy-radio">@Localizer["EmailOptionYes"]
-          <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.option1 == "true" ? "checked" : "")>
-          <span class="govcy-radio-checked"></span>
-        </label>
-        <label class="govcy-radio">@Localizer["EmailOptionNo"]
-          <input class="govcy-radio-input" type="radio" value="2" name="crbEmail"  @(Model.option2 == "true" ? "checked" : "")>
-          <span class="govcy-radio-checked"></span>
-        </label>
-      </div> 
-       </fieldset>
-     <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
-  </form>
+            <label class="govcy-radio">
+                @Localizer["EmailOptionYes"]
+                <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.option1 == "true" ? "checked" : "")>
+                <span class="govcy-radio-checked"></span>
+            </label>
+            <label class="govcy-radio">
+                @Localizer["EmailOptionNo"]
+                <input class="govcy-radio-input" type="radio" value="2" name="crbEmail" @(Model.option2 == "true" ? "checked" : "")>
+                <span class="govcy-radio-checked"></span>
+            </label>
+        </div>
+    </fieldset>
+    <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+</form>
  
-</div>
+
   
