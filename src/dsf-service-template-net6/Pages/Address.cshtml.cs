@@ -61,18 +61,10 @@ namespace dsf_service_template_net6.Pages
                 
             }
         }
-        private CitizenDataResponse GetCitizenData()
+        private CitizenDataResponse GetCitizenData(string lang)
         {
             CitizenDataResponse Res = new CitizenDataResponse();
-            var lang = "";
-            if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
-            {
-                lang = "el";
-            }
-            else
-            {
-                lang = "en";
-            }
+           
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var apiUrl = "api/v1/MoiCrmd/contact-info-mock/" + lang;
             var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
@@ -112,9 +104,18 @@ namespace dsf_service_template_net6.Pages
             //Check if no Citize details loaded
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res;
-            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            //get the current lang
+            var lang = "";
+            if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
             {
-              res=GetCitizenData();
+                lang = "el";
+            }
+            else
+            {
+                lang = "en";
+            }
+           
+              res=GetCitizenData(lang);
                 if (res.succeeded == false)
                 {
                   return RedirectToPage("/ServerError");
@@ -124,12 +125,7 @@ namespace dsf_service_template_net6.Pages
                     //if loaded set in session
                     HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
                 }
-            }
-            else
-            {
-                //if we need to get it from session
-                res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            }
+           
             //Set address info to model class
             address_select.addressInfo = res.data.addressInfo;
             //Check if already selected 
