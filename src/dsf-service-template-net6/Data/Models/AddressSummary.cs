@@ -5,5 +5,7 @@
         public string Street { get; set; }
         public string Parish { get; set; }
         public string City { get; set; }
+        public string  StreetNumber { get; set; }
+        public string ApartmentNumber { get; set; }
     }
 }
