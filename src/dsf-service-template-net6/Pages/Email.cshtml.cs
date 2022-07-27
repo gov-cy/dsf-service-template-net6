@@ -91,7 +91,16 @@ namespace dsf_service_template_net6.Pages
             CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
 
             //Set Email info to model class
-            Email_select.email = res.data.email;
+            if (string.IsNullOrEmpty(res.data?.email))
+            {
+               
+                Email_select.email = User.Claims.First(c => c.Type == "email").Value;
+            }
+            else
+            {
+               Email_select.email = res.data.email;
+            }
+            
             //Check if already selected 
             var selectedoptions = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime);
             if (selectedoptions != null)
@@ -130,8 +139,14 @@ namespace dsf_service_template_net6.Pages
             //Re-assign defult email
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            Email_select.email = citizen_data.data.email;
-            //Validate Model
+           if (string.IsNullOrEmpty(citizen_data.data?.email))
+           {
+                Email_select.email= User.Claims.First(c => c.Type == "email").Value;
+           }else
+           {
+                Email_select.email = citizen_data.data.email;
+           }
+           //Validate Model
             FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
             if (!result.IsValid)
             {

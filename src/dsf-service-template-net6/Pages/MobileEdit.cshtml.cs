@@ -124,10 +124,6 @@ namespace dsf_service_template_net6.Pages
             {
                 return RedirectToPage("/ReviewPage", null, "RedirectTarget");
             }
-            else if (string.IsNullOrEmpty(citizen_data.data.email))
-            {
-                return RedirectToPage("/EmailEdit", null, "RedirectTarget");
-            }
             else
             {
                 return RedirectToPage("/Email", null, "RedirectTarget");

@@ -130,12 +130,12 @@ namespace dsf_service_template_net6.Pages
             {
                 if (emailSelect.use_from_civil)
                 {
-                ret_email= _citizenPersonalDetails.data.email;
-                 } else 
-                 {
+                ret_email= _citizenPersonalDetails.data.email ?? User.Claims.First(c => c.Type == "email").Value; 
+                } else 
+                {
                 var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
                 ret_email = SessionEmailEdit.email;
-                 }
+                }
             }else
             {
                 //Directrly to email edit
