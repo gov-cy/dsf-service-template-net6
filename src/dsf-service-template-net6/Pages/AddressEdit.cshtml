@@ -2,106 +2,91 @@
 @using dsf_service_template_net6.Data.Models
 @model dsf_service_template_net6.Pages.AddressEditModel
 
+@{
+
+
+}
 
 <div class="govcy-container">
     <form class="govcy-form" novalidate method="post" asp-page-handler="View">
-        <div class="govcy-form-control align-middle align-content-center">
+        
+        <div class="@Model.FormClass">   @*@(Model.ModelState.IsValid ? formClassWithError : formClassWithError)>*@
+
             <label class="govcy-label" for="input">Ταχ. Κώδικας</label>
-            <input type="text" class="govcy-text-input govcy-text-input-char_4" placeholder="" maxlength="4" asp-for="@Model.PostalCode">
+            <span asp-validation-for="@Model.PostalCode" class="govcy-input-error-msg"></span>
+            <input type="text" class="govcy-text-input govcy-text-input-char_4" placeholder="" maxlength="4" asp-for="@Model.PostalCode" autocomplete="on">
         </div>
 
-        <button class="govcy-btn-primary">Αναζητήση</button>
+        <button class="govcy-btn-secondary">Αναζητήση</button>
     </form>
+
+
     @if (Model.HasUserEnteredPostalCcode || Model.HasUserSelectedAddress)
     {
+
         <form class="govcy-form" novalidate method="post" asp-page-handler="SelectAddressFromDropDown">
 
-            @* <input type="text" id="hfPersonId" name="PersonId" asp-for="@Model.PostalCode2"/>*@
-            <hr />
             <div class="govcy-col-6">
-                <div class="govcy-form-control">
+                <div class="govcy-form-control govcy-mb-4">
                     <label class="govcy-label" for="input">Επιλογή Διεύθυνσης</label>
-                    <select class="govcy-select" name="addressCode" onchange="this.form.submit()" >
+                    <select class="govcy-select" name="addressCode" onchange="this.form.submit()" asp-for="AddressSelected">
                         @if (Model.addressinfo != null)
                         {
                             <option value="0"></option>
                             @foreach (var address in Model.addressinfo.data.items.ToList())
                             {
 
-                                <option value="@address.code" class="govcy-mb-4">@address.name, @Model.addressinfo.data.parish.name, @Model.addressinfo.data.district.name</option>
+                                if (Model.AddressSelected == address.code)
+                                {
+                                    <option selected value="@address.code" class="govcy-mb-4">@address.name, @Model.addressinfo.data.parish.name, @Model.addressinfo.data.district.name</option>
+                                }
+                                else
+                                {
+                                    <option value="@address.code" class="govcy-mb-4">@address.name, @Model.addressinfo.data.parish.name, @Model.addressinfo.data.district.name</option>
+                                }
                             }
                         }
                     </select>
                 </div>
             </div>
-
-
         </form>
-    }
-    <br />
 
-    <form class="govcy-form" novalidate method="post" asp-page-handler="SelectAddressFromDropDown">
-        @*<input type="hidden"  asp-for="@Model.PostalCode2" name="h1">*@
+    }
+    <form class="govcy-form" novalidate method="post" asp-page-handler="VerifyAddress">
         @if (Model.HasUserSelectedAddress)
         {
-            <div class="govcy-br-3 govcy-br-input govcy-pt-3 govcy-pb-3">
+            <fieldset class="govcy-fieldset">
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="input">Δρόμος</label>
+                    <input type="text" class="govcy-text-input govcy-w-50" disabled asp-for="@Model.addressSummary.Street">
+                </div>
 
-                <div class="govcy-form-control govcy-mb-0">
-                    <div class="row  govcy-ml-1">
-                        <div class="col-5">
-                        </div>
-                        <div class="col-2">
-                            <label class="govcy-label" for="input">Αρ. Οδού</label>
-                        </div>
-                        <div class="col-2">
-                            <label class="govcy-label" for="input">Αρ. Διαμερ.</label>
-                        </div>
-                    </div>
-                    <div class="row govcy-ml-1">
-                        <div class="col-5">
-                            <label class="govcy-label govcy-fw-normal">
-                                @Model.addressSummary.Street
-                            </label>
-                        </div>
-                        <div class="col-2">
-                            <input type="text" class="govcy-text-input govcy-text-input-char_4" placeholder="" maxlength="4" >
-                        </div>
-                        <div class="col-2">
-                            <input type="text" class="govcy-text-input govcy-text-input-char_4" placeholder="" maxlength="4">
-                        </div>
-                    </div>
-                    <div class="row govcy-ml-1">
-                        <div class="col-5">
-                            <label class="govcy-label govcy-fw-normal">
-                                2311, &nbsp @Model.addressSummary.Parish
-                            </label>
-                        </div>
-                        <div class="col-2">
-                        </div>
-                        <div class="col-2">
-                        </div>
-                    </div>
-                    <div class="row govcy-ml-1">
-                        <div class="col-5">
-                            <label class="govcy-label govcy-fw-normal">
-                                @Model.addressSummary.City
-                            </label>
-                        </div>
-                        <div class="col-2">
-                        </div>
-                        <div class="col-2">
-                        </div>
-                    </div>
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="input">Ενορία</label>
+                    <input type="text" class="govcy-text-input govcy-w-50" disabled asp-for="@Model.addressSummary.Parish">
                 </div>
-            </div>
-            <div class="row" style="margin-top:15px">
-                <div class="col">
-                    <button type="button" class="govcy-btn-secondary">Εντάξει</button>
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="input">Πόλη</label>
+                    <input type="text" class="govcy-text-input govcy-w-50" disabled asp-for="@Model.addressSummary.City>
+          </div>
+          <div class=" govcy-form-control">
+                    <label class="govcy-label" for="input">Αριθμός Οδού</label>
+                    <input type="text" class="govcy-text-input govcy-text-input-char_5">
                 </div>
-            </div>
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="input">Αριθμός Διαμερίσματος (Προαιρετικό)</label>
+                    <input type="text" class="govcy-text-input govcy-text-input-char_5">
+                </div>
+
+                <div class="govcy-form-control">
+                    <a href="#">Έχετε Ταχυδρομική Θυρίδα Τ.Χ ή μένετε εκτός Κύπρου</a>
+                </div>
+                <div class="govcy-form-control">
+                    <button type="button" class="govcy-btn-primary govcy-mb-0">Συνέχεια</button>
+                </div>
+
+            </fieldset>
         }
     </form>
-
-
+     <partial name="_ValidationScriptsPartial"/>
 </div>
-

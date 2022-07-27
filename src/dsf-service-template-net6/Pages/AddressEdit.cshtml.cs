@@ -22,11 +22,20 @@ namespace dsf_service_template_net6.Pages
             _configuration = configuration;
         }
 
-        [BindProperty]
-        [Required(ErrorMessage ="�������� ������������� ��")]
-        
+        [BindProperty, Required(ErrorMessage = "Postal Code required")]
+                
         public string PostalCode { get; set; }
-                  
+
+
+        [BindProperty]
+        public int AddressSelected { get; set; }
+
+
+        public string FormClassNoError { get; set; } = "govcy-form-control";
+        public string FormClassWithError { get; set; } = "govcy-form-control govcy-form-control-error";        
+        public string FormClass { get; set; } = "govcy-form-control";
+
+
         public bool HasUserEnteredPostalCcode { get; set; } = false;
         public bool HasUserSelectedAddress { get; set; } = false;
         public AddressSummary addressSummary { get; set;}      
@@ -34,26 +43,35 @@ namespace dsf_service_template_net6.Pages
 
         public void OnGet()
         {
-          
+            FormClass = FormClassNoError;
         }
 
         public void OnPost()
         {
-          
+           
         }
        
-        public void OnPostView()
+        public IActionResult OnPostView()
         {
 
             if (ModelState.IsValid)
             {
                 HttpContext.Session.SetString("PostalCode", PostalCode);
                 GetAddressesForPostalCode();
+                FormClass = FormClassNoError;
+                return Page();
+            }
+            else
+            {
+                FormClass = FormClassWithError;
+                return Page();
+              
             }
         }
 
         public void OnPostSelectAddressFromDropDown(int addressCode)
         {
+            AddressSelected = addressCode;
             if (HttpContext.Session.GetString("PostalCode") != null)
             { 
                 PostalCode = HttpContext.Session.GetString("PostalCode");
@@ -63,6 +81,10 @@ namespace dsf_service_template_net6.Pages
             }          
         }
 
+        public void OnPostVerifyAddress()
+        {
+
+        }
         public void GetAddressesForPostalCode()
         {
             if (PostalCode.Length>0)
