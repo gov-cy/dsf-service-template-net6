@@ -62,7 +62,7 @@ namespace dsf_service_template_net6.Pages
             {
                 ret = false;
             }
-            if (HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null)
+            if ((HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null) && (HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime) == null))
             {
                 ret = false;
             }
