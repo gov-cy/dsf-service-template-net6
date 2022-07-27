@@ -26,6 +26,8 @@ namespace dsf_service_template_net6.Pages
         public Addressinfo[] ret_address;
         public string ret_email = string.Empty;
         public string ret_mobile = string.Empty;
+        public bool useEmailEditOnly = false;
+        public bool useMobileEditOnly = false;
         #endregion
         public IActionResult OnGet()
         {
@@ -74,11 +76,12 @@ namespace dsf_service_template_net6.Pages
             {
                 ret = false;
             }
-            if (HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null)
+            if ((HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null) && (HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime) == null))
             {
                 ret = false;
             }
-            if (HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime) == null)
+
+            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime) == null))
             {
                 ret = false;
             }
@@ -102,23 +105,46 @@ namespace dsf_service_template_net6.Pages
                 ret_address = citizenEdit.addressInfo;
             }
             var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime);
-            if (mobSelect.use_from_civil)
-            {
+            if (mobSelect != null)
+            {   
+                if (mobSelect.use_from_civil)
+                {
                 ret_mobile = _citizenPersonalDetails.data.mobile;
-            }else
-            {
+                }
+                else
+                {
                 var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
                 ret_mobile = SessionMobEdit.mobile;
+                }
+
+            } else
+            {
+                //Directly to edit
+                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
+                ret_mobile = SessionMobEdit.mobile;
+                useMobileEditOnly = true;
             }
+         
             var emailSelect = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime);
-            if (emailSelect.use_from_civil)
+           if (emailSelect != null)
             {
+                if (emailSelect.use_from_civil)
+                {
                 ret_email= _citizenPersonalDetails.data.email;
-            } else 
-            {
+                 } else 
+                 {
                 var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
                 ret_email = SessionEmailEdit.email;
+                 }
+            }else
+            {
+                //Directrly to email edit
+                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
+                ret_email = SessionEmailEdit.email;
+                useEmailEditOnly = true;
             }
+           
+            
              return ret;
         }
           private bool SetApplication()
