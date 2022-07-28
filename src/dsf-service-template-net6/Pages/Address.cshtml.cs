@@ -198,9 +198,13 @@ namespace dsf_service_template_net6.Pages
                 {
                   return  RedirectToPage("/AddressEdit", null, "RedirectTarget");
                 } 
-                else
+                else if (string.IsNullOrEmpty(citizen_data.data.mobile))
                 {
-                  return  RedirectToPage("/Mobile",null, "RedirectTarget");
+                  return RedirectToPage("/MobileEdit", null, "RedirectTarget");
+                }
+                else 
+                {
+                  return RedirectToPage("/Mobile", null, "RedirectTarget");
                 }
             }
            

@@ -104,6 +104,7 @@ namespace dsf_service_template_net6.Pages
             }
             //Mob Edit from Session
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
             if (SessionMobEdit != null)
             {

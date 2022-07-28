@@ -161,6 +161,7 @@ namespace dsf_service_template_net6.Pages
                 {
                     return RedirectToPage("/MobileEdit");
                 }
+               
                 else
                 {
                     return  RedirectToPage("/Email",null, "RedirectTarget");

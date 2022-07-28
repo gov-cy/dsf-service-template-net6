@@ -511,4 +511,8 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Sorry, there is a problem with the service</value>
     <comment>Server Error Page</comment>
   </data>
+  <data name="Button_Get_Started" xml:space="preserve">
+    <value>Get Started</value>
+    <comment>Button Text</comment>
+  </data>
 </root>
