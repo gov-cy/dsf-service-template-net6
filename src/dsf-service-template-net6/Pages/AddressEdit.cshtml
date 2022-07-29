@@ -1,15 +1,32 @@
 ﻿@page "/SetAddress/{review:bool?}"
+@using Microsoft.AspNetCore.Mvc.Localization
 @using dsf_service_template_net6.Data.Models
 @model dsf_service_template_net6.Pages.AddressEditModel
+@inject IHtmlLocalizer<Program> HtmlLocalizer
+@{
+}
+
 
 <div class="govcy-container">
-    <form class="govcy-form"  method="post" asp-page-handler="View">
-        
-        <div class="@Model.PostalCodeFormClass"> 
+
+    @if (Model.ShowErrorSummary)
+    {
+        <div class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
+            <h2>There is a problem</h2>
+            <p>
+               @Html.Raw(Model.ErrorDesc)
+            </p>
+        </div>
+    }
+    @Model.ErrorDesc
+
+    <form class="govcy-form" method="post" asp-page-handler="View">
+
+        <div class="@Model.PostalCodeFormClass">
 
             <label class="govcy-label" for="input">Ταχ. Κώδικας</label>
             <span asp-validation-for="@Model.PostalCode" class="govcy-input-error-msg"></span>
-            <input type="text" class="govcy-text-input govcy-text-input-char_4" placeholder="" maxlength="4" asp-for="@Model.PostalCode" autocomplete="on">
+            <input type="text" class="@Model.PostalCodeTextboxCSS" placeholder="" maxlength="4" asp-for="@Model.PostalCode" autocomplete="on">
         </div>
 
         <button class="govcy-btn-secondary">Αναζητήση</button>
@@ -19,7 +36,7 @@
     @if (Model.HasUserEnteredPostalCcode || Model.HasUserSelectedAddress)
     {
 
-        <form class="govcy-form"  method="post" asp-page-handler="SelectAddressFromDropDown" >
+        <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown">
 
             <div class="govcy-col-6">
                 <div class="govcy-form-control govcy-mb-4">
@@ -47,9 +64,9 @@
         </form>
 
     }
-      @if (Model.HasUserSelectedAddress)
+    @if (Model.HasUserSelectedAddress)
     {
-        <form class="govcy-form"  method="post" asp-page-handler="VerifyAddress">
+        <form class="govcy-form" method="post" asp-page-handler="VerifyAddress">
 
             <fieldset class="govcy-fieldset">
                 <div class="govcy-form-control">
@@ -65,26 +82,26 @@
                     <label class="govcy-label" for="input">Πόλη</label>
                     <input type="text" class="govcy-text-input govcy-w-50" disabled asp-for="@Model.AddressSummary.City">
                 </div>
-              <div class="@Model.VerifyAddressFormClass">
+                <div class="@Model.VerifyAddressFormClass">
                     <label class="govcy-label" for="input">Αριθμός Οδού</label>
                     <span asp-validation-for="@Model.StreetNo" class="govcy-input-error-msg"></span>
-                    <input type="text" class="govcy-text-input govcy-text-input-char_5" asp-for="@Model.StreetNo">
+                    <input type="text" class="@Model.FlatNoTextboxCSS" asp-for="@Model.StreetNo">
                 </div>
                 <div class="govcy-form-control">
                     <label class="govcy-label" for="input">Αριθμός Διαμερίσματος (Προαιρετικό)</label>
-                    <input type="text" class="govcy-text-input govcy-text-input-char_5" >
+                    <input type="text" class="govcy-text-input govcy-text-input-char_5" asp-for="@Model.FlatNo">
                 </div>
 
                 <div class="govcy-form-control">
                     <a href="#">Έχετε Ταχυδρομική Θυρίδα Τ.Χ ή μένετε εκτός Κύπρου</a>
                 </div>
                 <div class="govcy-form-control">
-                    <button  class="govcy-btn-primary govcy-mb-0">Επικύρωση</button>
+                    <button class="govcy-btn-primary govcy-mb-0">Επικύρωση</button>
                 </div>
 
             </fieldset>
-        
-    </form>
+
+        </form>
     }
-     <partial name="_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial" />
 </div>
