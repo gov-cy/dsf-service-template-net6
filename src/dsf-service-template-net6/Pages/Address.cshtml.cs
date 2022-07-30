@@ -12,17 +12,22 @@ using Newtonsoft.Json;
 
 namespace dsf_service_template_net6.Pages
 {
-    [BindProperties]
     public class AddressModel : PageModel
     {
         #region "Variables"
         //control variables
+        [BindProperty]
         public string crbAddress { get; set; }
-        public string option1 { get; set; } = "false";
-        public string option2 { get; set; } = "false";
-        public string displaySummary = "display:none";
-        public string ErrorsDesc = "";
-        public string AddressSelection = "";
+        [BindProperty]
+        public string option1 => (string)TempData[nameof(option1)];
+        [BindProperty]
+        public string option2 => (string)TempData[nameof(option2)];
+        [BindProperty]
+        public string displaySummary { get; set; } = "display:none";
+        [BindProperty]
+        public string ErrorsDesc { get; set; } = "";
+        [BindProperty]
+        public string AddressSelection { get; set; } = "";
         //Dependancy injection Variables
         private readonly ILogger<AddressModel> _logger;
         public IMyHttpClient _client;
@@ -30,16 +35,38 @@ namespace dsf_service_template_net6.Pages
         private IValidator<AddressSelect> _validator;
         //Object for session data 
         public AddressSelect address_select;
+      //  public ValidationResult valresult => (ValidationResult)TempData[nameof(valresult)];
+
         #endregion
         #region "Custom Methods"
-         public AddressModel(IValidator<AddressSelect> validator, IMyHttpClient client, IConfiguration config, ILogger<AddressModel> logger)
-        {
-            _client = client;
-            _configuration = config;
-            _validator = validator;
-            address_select = new AddressSelect();
-            _logger = logger;
+        public AddressModel(IValidator<AddressSelect> validator, IMyHttpClient client, IConfiguration config, ILogger<AddressModel> logger)
+        {            
+          
+                _client = client;
+                _configuration = config;
+                _validator = validator;
+                address_select = new AddressSelect();
+                _logger = logger;
+          
+          
         }
+        void ShowErrors()
+        {
+            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
+            
+            {
+                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                res.AddToModelState(this.ModelState, "address_select");
+                //Update Error messages on View
+                ClearErrors();
+                SetViewErrorMessages(res);
+
+            }
+        }
+
         void ClearErrors()
         {
             displaySummary = "display:none";
@@ -58,13 +85,13 @@ namespace dsf_service_template_net6.Pages
                     ErrorsDesc += "<a href='#crbAddress'>" + Item.ErrorMessage + "</a>";
                     AddressSelection = Item.ErrorMessage;
                 }
-                
+
             }
         }
         private CitizenDataResponse GetCitizenData(string lang)
         {
             CitizenDataResponse Res = new CitizenDataResponse();
-           
+
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var apiUrl = "api/v1/MoiCrmd/contact-info-mock/" + lang;
             var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
@@ -101,6 +128,8 @@ namespace dsf_service_template_net6.Pages
         #endregion
         public IActionResult OnGet()
         {
+            //If coming fromPost
+            ShowErrors();
             //Check if no Citize details loaded
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res;
@@ -114,18 +143,18 @@ namespace dsf_service_template_net6.Pages
             {
                 lang = "en";
             }
-           
-              res=GetCitizenData(lang);
-                if (res.succeeded == false)
-                {
-                  return RedirectToPage("/ServerError");
-                }
-                else
-                {
-                    //if loaded set in session
-                    HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
-                }
-           
+
+            res = GetCitizenData(lang);
+            if (res.succeeded == false)
+            {
+                return RedirectToPage("/ServerError");
+            }
+            else
+            {
+                //if loaded set in session
+                HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
+            }
+
             //Set address info to model class
             address_select.addressInfo = res.data.addressInfo;
             //Check if already selected 
@@ -134,24 +163,29 @@ namespace dsf_service_template_net6.Pages
             {
                 if (selectedoptions.use_from_civil)
                 {
-                    option1 = "true";
-                    option2 = "false";
-                } else
+                    TempData["option1"] = "true";
+                    TempData["option2"] = "false";
+                }
+                else
                 {
-                    option1 = "false";
-                    option2 = "true";
+                    TempData["option1"] = "false";
+                    TempData["option2"] = "true";
                 }
             }
+
             return Page();
         }
+
         public IActionResult OnPost(bool review)
         {
+
             //Set class Model before validation
             if (crbAddress == "1")
             {
                 address_select.use_from_civil = true;
                 address_select.use_other = false;
-            } else if (crbAddress == "2")
+            }
+            else if (crbAddress == "2")
             {
                 address_select.use_from_civil = false;
                 address_select.use_other = true;
@@ -165,49 +199,48 @@ namespace dsf_service_template_net6.Pages
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             address_select.addressInfo = citizen_data.data.addressInfo;
-           //Validate Model
+            //Validate Model
             FluentValidation.Results.ValidationResult result = _validator.Validate(address_select);
             if (!result.IsValid)
             {
-                // Copy the validation results into ModelState.
-                // ASP.NET uses the ModelState collection to populate 
-                // error messages in the View.
-                result.AddToModelState(this.ModelState, "address_select");
-                //Update Error messages on View
-                ClearErrors();
-                SetViewErrorMessages(result);
-                return Page();
+                HttpContext.Session.SetObjectAsJson("valresult",  result);
+                return RedirectToPage("Address");
             }
             //Model is valid so strore 
             HttpContext.Session.Remove("AddressSelect");
             HttpContext.Session.SetObjectAsJson("AddressSelect", address_select, authTime);
+            //Remove Error Session 
+            HttpContext.Session.Remove("valresult");
             //Finally redirect
             if (review)
             {
                 if (address_select.use_other)
                 {
                     return RedirectToPage("/AddressEdit", new { review = "true" });
-                } else
+                }
+                else
                 {
                     return RedirectToPage("/ReviewPage", null, "RedirectTarget");
                 }
-            } 
+            }
             else
             {
                 if (address_select.use_other)
                 {
-                  return  RedirectToPage("/AddressEdit", null, "RedirectTarget");
-                } 
+                    return RedirectToPage("/AddressEdit", null, "RedirectTarget");
+                }
                 else if (string.IsNullOrEmpty(citizen_data.data.mobile))
                 {
-                  return RedirectToPage("/MobileEdit", null, "RedirectTarget");
+                    return RedirectToPage("/MobileEdit", null, "RedirectTarget");
                 }
-                else 
+                else
                 {
-                  return RedirectToPage("/Mobile", null, "RedirectTarget");
+                    return RedirectToPage("/Mobile", null, "RedirectTarget");
                 }
             }
-           
+
         }
+
     }
+
 }

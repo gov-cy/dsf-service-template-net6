@@ -125,7 +125,7 @@ namespace dsf_service_template_net6.Pages
             }
         }
 
-        public IActionResult OnPostVerifyAddress()
+        public IActionResult OnPostVerifyAddress(bool review)
         {
 
             var val = ModelState.FirstOrDefault(o => o.Key == "StreetNo").Value;// = ModelValidationState.Valid;
@@ -142,7 +142,14 @@ namespace dsf_service_template_net6.Pages
                 FlatNoTextboxCSS = FlatNoTextboxCSSNoError;
                 ShowErrorSummary = false;
                 CreateSubmitData();
-                return RedirectToPage("/Mobile");
+                if (review)
+                {
+                    return RedirectToPage("/ReviewPage", null, "mainContainer");
+                } else
+                {
+                    return RedirectToPage("/Mobile", null, "mainContainer");
+                }
+              
             }
             else
             {

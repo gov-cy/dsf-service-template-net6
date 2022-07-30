@@ -148,23 +148,23 @@ namespace dsf_service_template_net6.Pages
             {
                 if (Mobile_select.use_other)
                 {
-                    return RedirectToPage("/MobileEdit", new { review = "true" });
+                    return RedirectToPage("/MobileEdit", null,new { review = "true" }, "mainContainer");
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                    return RedirectToPage("/ReviewPage", null, "mainContainer");
                 }
             }
             else
             {
                 if (Mobile_select.use_other)
                 {
-                    return RedirectToPage("/MobileEdit");
+                    return RedirectToPage("/MobileEdit",null, "mainContainer");
                 }
                
                 else
                 {
-                    return  RedirectToPage("/Email",null, "RedirectTarget");
+                    return  RedirectToPage("/Email",null, "mainContainer");
                 }
             }
 

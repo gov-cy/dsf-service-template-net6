@@ -167,22 +167,22 @@ namespace dsf_service_template_net6.Pages
             {
                 if (Email_select.use_other)
                 {
-                    return RedirectToPage("/EmailEdit", new { review = "true" });
+                    return RedirectToPage("/EmailEdit", null,new { review = "true" }, "mainContainer");
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                    return RedirectToPage("/ReviewPage", null, "mainContainer");
                 }
             }
             else
             {
                 if (Email_select.use_other)
                 {
-                    return RedirectToPage("/EmailEdit", null, "RedirectTarget");
+                    return RedirectToPage("/EmailEdit", null, "mainContainer");
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                    return RedirectToPage("/ReviewPage", null, "mainContainer");
                 }
             }
 

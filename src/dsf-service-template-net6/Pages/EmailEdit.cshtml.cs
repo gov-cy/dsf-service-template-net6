@@ -112,7 +112,7 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("EmailEdit");
             HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
             //Finally redirect
-            return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+            return RedirectToPage("/ReviewPage", null, "mainContainer");
         }
     }
 }

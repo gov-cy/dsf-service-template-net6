@@ -122,11 +122,11 @@ namespace dsf_service_template_net6.Pages
             //Finally redirect
             if (review)
             {
-                return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                return RedirectToPage("/ReviewPage", null, "mainContainer");
             }
             else
             {
-                return RedirectToPage("/Email", null, "RedirectTarget");
+                return RedirectToPage("/Email", null, "mainContainer");
             }
         }
     }
