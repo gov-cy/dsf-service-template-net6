@@ -50,7 +50,7 @@ namespace dsf_service_template_net6.Pages
           
           
         }
-        void ShowErrors()
+        bool ShowErrors()
         {
             if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
             
@@ -63,7 +63,10 @@ namespace dsf_service_template_net6.Pages
                 //Update Error messages on View
                 ClearErrors();
                 SetViewErrorMessages(res);
-
+                return true;
+            } else
+            {
+                return false;
             }
         }
 
@@ -128,32 +131,38 @@ namespace dsf_service_template_net6.Pages
         #endregion
         public IActionResult OnGet()
         {
-            //If coming fromPost
-            ShowErrors();
-            //Check if no Citize details loaded
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res;
-            //get the current lang
-            var lang = "";
-            if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
+            //If coming fromPost
+            if (!ShowErrors()){
+                //Check if no Citize details loaded
+
+                //get the current lang
+                var lang = "";
+                if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
+                {
+                    lang = "el";
+                }
+                else
+                {
+                    lang = "en";
+                }
+
+                res = GetCitizenData(lang);
+                if (res.succeeded == false)
+                {
+                    return RedirectToPage("/ServerError");
+                }
+                else
+                {
+                    //if loaded set in session
+                    HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
+                }
+            }else
             {
-                lang = "el";
-            }
-            else
-            {
-                lang = "en";
+                res= HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             }
 
-            res = GetCitizenData(lang);
-            if (res.succeeded == false)
-            {
-                return RedirectToPage("/ServerError");
-            }
-            else
-            {
-                //if loaded set in session
-                HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
-            }
 
             //Set address info to model class
             address_select.addressInfo = res.data.addressInfo;
