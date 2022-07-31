@@ -101,8 +101,8 @@ namespace dsf_service_template_net6.Pages
             } else
             {
                 //Wait for Alkis Session Storage
-                var citizenEdit= HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressEdit", authTime);
-                ret_address = citizenEdit.addressInfo;
+                var citizenEdit= HttpContext.Session.GetObjectFromJson<Addressinfo>("AddressEdit", authTime);
+                ret_address.Append(citizenEdit);
             }
             var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime);
             if (mobSelect != null)

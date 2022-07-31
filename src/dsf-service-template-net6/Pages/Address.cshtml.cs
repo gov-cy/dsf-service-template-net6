@@ -147,7 +147,9 @@ namespace dsf_service_template_net6.Pages
                 {
                     lang = "en";
                 }
-
+                //if user is already login then the Citizen controller
+                //has not being executed.
+                //Call the citizen personal details from civil registry  
                 res = GetCitizenData(lang);
                 if (res.succeeded == false)
                 {
@@ -225,26 +227,26 @@ namespace dsf_service_template_net6.Pages
             {
                 if (address_select.use_other)
                 {
-                    return RedirectToPage("/AddressEdit", new { review = "true" });
+                    return RedirectToPage("/AddressEdit", null,new { review = "true" }, "mainContainer");
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                    return RedirectToPage("/ReviewPage", null, "mainContainer");
                 }
             }
             else
             {
                 if (address_select.use_other)
                 {
-                    return RedirectToPage("/AddressEdit", null, "RedirectTarget");
+                    return RedirectToPage("/AddressEdit", null, "mainContainer");
                 }
                 else if (string.IsNullOrEmpty(citizen_data.data.mobile))
                 {
-                    return RedirectToPage("/MobileEdit", null, "RedirectTarget");
+                    return RedirectToPage("/MobileEdit", null, "mainContainer");
                 }
                 else
                 {
-                    return RedirectToPage("/Mobile", null, "RedirectTarget");
+                    return RedirectToPage("/Mobile", null, "mainContainer");
                 }
             }
 

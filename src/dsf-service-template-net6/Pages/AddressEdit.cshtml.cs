@@ -142,14 +142,23 @@ namespace dsf_service_template_net6.Pages
                 FlatNoTextboxCSS = FlatNoTextboxCSSNoError;
                 ShowErrorSummary = false;
                 CreateSubmitData();
+                //Finall redirect NR code addition
+                //Re-assign defult adressInfo
+                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+                var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
                 if (review)
                 {
                     return RedirectToPage("/ReviewPage", null, "mainContainer");
-                } else
+                } 
+                else if (string.IsNullOrEmpty(citizen_data.data.mobile))
                 {
-                    return RedirectToPage("/Mobile", null, "mainContainer");
+                        return RedirectToPage("/MobileEdit", null, "mainContainer");
                 }
-              
+                else
+                {
+                        return RedirectToPage("/Mobile", null, "mainContainer");
+                }
+                  
             }
             else
             {
@@ -228,8 +237,9 @@ namespace dsf_service_template_net6.Pages
             addressFinal.parish = Addressinfo.data.parish;
             addressFinal.district = Addressinfo.data.district;
             addressFinal.country = Addressinfo.data.country;
-           
-            HttpContext.Session.SetObjectAsJson("AddressEdit", addressFinal);
+           //Nr we use authenticate time for encrypting and decrypting the data
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            HttpContext.Session.SetObjectAsJson("AddressEdit", addressFinal,authTime);
         }
 
         private void GetDataFromSession(string key)
