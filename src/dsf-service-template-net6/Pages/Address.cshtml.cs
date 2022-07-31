@@ -33,23 +33,20 @@ namespace dsf_service_template_net6.Pages
         public IMyHttpClient _client;
         private IConfiguration _configuration;
         private IValidator<AddressSelect> _validator;
-        //Object for session data 
+        //Object for session data, will be set internally
+        //from web form variables
         public AddressSelect address_select;
-      //  public ValidationResult valresult => (ValidationResult)TempData[nameof(valresult)];
-
         #endregion
         #region "Custom Methods"
+        //Constructor
         public AddressModel(IValidator<AddressSelect> validator, IMyHttpClient client, IConfiguration config, ILogger<AddressModel> logger)
-        {            
-          
-                _client = client;
+        {      _client = client;
                 _configuration = config;
                 _validator = validator;
                 address_select = new AddressSelect();
                 _logger = logger;
-          
-          
         }
+       //Use to show error messages if web form has errors
         bool ShowErrors()
         {
             if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
@@ -69,7 +66,6 @@ namespace dsf_service_template_net6.Pages
                 return false;
             }
         }
-
         void ClearErrors()
         {
             displaySummary = "display:none";
@@ -91,6 +87,7 @@ namespace dsf_service_template_net6.Pages
 
             }
         }
+       //api call to get personal data from Civil Registry
         private CitizenDataResponse GetCitizenData(string lang)
         {
             CitizenDataResponse Res = new CitizenDataResponse();
@@ -135,8 +132,7 @@ namespace dsf_service_template_net6.Pages
             CitizenDataResponse res;
             //If coming fromPost
             if (!ShowErrors()){
-                //Check if no Citize details loaded
-
+                //Load the web form
                 //get the current lang
                 var lang = "";
                 if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
@@ -162,10 +158,9 @@ namespace dsf_service_template_net6.Pages
                 }
             }else
             {
+                //Show error data
                 res= HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             }
-
-
             //Set address info to model class
             address_select.addressInfo = res.data.addressInfo;
             //Check if already selected 
@@ -186,7 +181,6 @@ namespace dsf_service_template_net6.Pages
 
             return Page();
         }
-
         public IActionResult OnPost(bool review)
         {
 
@@ -251,7 +245,6 @@ namespace dsf_service_template_net6.Pages
             }
 
         }
-
     }
 
 }
