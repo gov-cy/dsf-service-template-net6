@@ -3,9 +3,5 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-    if (window.history.replaceState) {
-        //prevents browser from storing history with each change:
-        window.history.replaceState(statedata, title, url);
-    }
-
+   
 });
