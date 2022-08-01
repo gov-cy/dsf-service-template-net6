@@ -123,7 +123,7 @@ namespace dsf_service_template_net6.Pages
             }
             else
             {
-                email = HttpContext.Session.GetObjectFromJson<string>("emailval");
+                email = HttpContext.Session.GetObjectFromJson<string>("emailval") ?? "";
             }
 
             return Page();

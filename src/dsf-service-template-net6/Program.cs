@@ -55,7 +55,7 @@ builder.Services.AddRazorPages(options =>
 builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
-        
+
     return new cMobileEditValidator(LocMain);
 });
 builder.Services.AddScoped<IValidator<EmailEdit>, cEmailEditValidator>(sp =>
