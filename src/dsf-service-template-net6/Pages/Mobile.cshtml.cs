@@ -18,8 +18,8 @@ namespace dsf_service_template_net6.Pages
         #region "Variables"
         //control variables
         public string crbMobile { get; set; }
-        public string option1 { get; set; } = "false";
-        public string option2 { get; set; } = "false";
+        public string option1 => (string)TempData[nameof(option1)];
+        public string option2 => (string)TempData[nameof(option2)];
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
         public string MobileSelection = "";
@@ -37,6 +37,26 @@ namespace dsf_service_template_net6.Pages
             _configuration = config;
             _validator = validator;
             Mobile_select = new MobileSelect();
+        }
+        bool ShowErrors()
+        {
+            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
+
+            {
+                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                res.AddToModelState(this.ModelState, "Mobile_select");
+                //Update Error messages on View
+                ClearErrors();
+                SetViewErrorMessages(res);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         void ClearErrors()
         {
@@ -85,22 +105,25 @@ namespace dsf_service_template_net6.Pages
             //Get  Citize details loaded
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res= HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-           
-            //Set Mobile info to model class
-            Mobile_select.mobile = res.data.mobile;
+            //If coming fromPost
+            if (!ShowErrors())
+            {
+                //Set Mobile info to model class
+                Mobile_select.mobile = res.data.mobile;
+            }
             //Check if already selected 
             var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime);
             if (selectedoptions != null)
             {
                 if (selectedoptions.use_from_civil)
                 {
-                    option1 = "true";
-                    option2 = "false";
+                    TempData["option1"] = "true";
+                    TempData["option2"] = "false";
                 }
                 else
                 {
-                    option1 = "false";
-                    option2 = "true";
+                    TempData["option1"] = "false";
+                    TempData["option2"] = "true";
                 }
             }
             return Page();
@@ -131,18 +154,14 @@ namespace dsf_service_template_net6.Pages
             FluentValidation.Results.ValidationResult result = _validator.Validate(Mobile_select);
             if (!result.IsValid)
             {
-                // Copy the validation results into ModelState.
-                // ASP.NET uses the ModelState collection to populate 
-                // error messages in the View.
-                result.AddToModelState(this.ModelState, "Mobile_select");
-                //Update Error messages on View
-                ClearErrors();
-                SetViewErrorMessages(result);
-                return Page();
+                HttpContext.Session.SetObjectAsJson("valresult", result);
+                return RedirectToPage("Mobile");
             }
             //Model is valid so strore 
             HttpContext.Session.Remove("MobileSelect");
             HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, authTime);
+            //Remove Error Session 
+            HttpContext.Session.Remove("valresult");
             //Finally redirect
             if (review)
             {
