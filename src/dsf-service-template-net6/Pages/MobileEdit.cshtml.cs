@@ -106,13 +106,7 @@ namespace dsf_service_template_net6.Pages
                 {
                     mobEdit = SessionMobEdit;
                 }
-                //Get Previous mobile number
-                var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-                if (citizenPersonalDetails != null)
-                {
-                    mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
-
-                }
+              
             }
             else
             {
@@ -123,6 +117,14 @@ namespace dsf_service_template_net6.Pages
         }
         public IActionResult OnPost(bool review)
         {
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            //Get Previous mobile number
+            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            if (citizenPersonalDetails != null)
+            {
+                mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
+
+            }
             // Update the class before validation
             mobEdit.mobile = mobile;
         FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
@@ -133,7 +135,7 @@ namespace dsf_service_template_net6.Pages
                 return RedirectToPage("MobileEdit");
             }
             //Mob Edit from Session
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+           
             var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
             if (SessionMobEdit != null)

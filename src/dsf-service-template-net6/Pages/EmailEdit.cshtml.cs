@@ -109,7 +109,6 @@ namespace dsf_service_template_net6.Pages
             //If coming fromPost
             if (!ShowErrors())
             {
-
                 //GetData from session 
                 var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
                 var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
@@ -117,9 +116,7 @@ namespace dsf_service_template_net6.Pages
                 {
                     email = SessionEmailEdit.email;
                 }
-
-                //Get Previous mobile number
-                var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+               
             }
             else
             {
@@ -131,7 +128,15 @@ namespace dsf_service_template_net6.Pages
         public IActionResult OnPost(bool review)
         {
             //Update the class before validation
-            emailEdit.email = email;           
+            emailEdit.email = email;
+            //Get Previous mobile number
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            if (citizenPersonalDetails != null)
+            {
+                emailEdit.prev_email = citizenPersonalDetails.data.email;
+
+            }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
             {
@@ -140,7 +145,6 @@ namespace dsf_service_template_net6.Pages
                 return RedirectToPage("EmailEdit");
             }
             //Store Data 
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             HttpContext.Session.Remove("EmailEdit");
             HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
             //Remove Error Session 

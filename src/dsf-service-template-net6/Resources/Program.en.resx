@@ -515,4 +515,8 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Get Started</value>
     <comment>Button Text</comment>
   </data>
+  <data name="EmailNumberAlreadyExists" xml:space="preserve">
+    <value>This email already exists in our records</value>
+    <comment>Email Validator</comment>
+  </data>
 </root>

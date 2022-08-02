@@ -516,4 +516,8 @@
     <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
     <comment>Server Error Page</comment>
   </data>
+  <data name="EmailNumberAlreadyExists" xml:space="preserve">
+    <value>Αυτό το email υπάρχει ήδη στα αρχεία μας</value>
+    <comment>Email Validator</comment>
+  </data>
 </root>
