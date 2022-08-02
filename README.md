@@ -1,6 +1,9 @@
 # dsf-service-template-net6
 ## A quickstart template for creating a sample DSF service (Request an address change)
-This project is an example of a DSF mock service developed in .NET6 Razor Pages  
+This project is an example of a DSF mock service developed in .NET6 Razor Pages
+
+## Why .Net6 Razor Pages
+Razor Pages is a newer, simplified web application programming model. It removes much of the ceremony of ASP.NET MVC by adopting a file-based routing approach. Each Razor Pages file found under the Pages directory equates to an endpoint. Razor Pages have an associated C# objected called the page model, which holds each page's behavior. Additionally, each page works on the limited semantics of HTML, only supporting GET and POST methods
 
 ## Features
 This service is demo that contains the following:
@@ -54,7 +57,7 @@ dotnet run
 * Oidc Authentication (Mock CyLogin) [dsf-idsrv-dev]
 * Razor Pages Authentication (Startup configuration)
 * Dependency Injection
-* Server side validation
+* Server side validation [Fluent-url]
 * Properties Binding
 * Session Management
 * API Calls [dsf-mock-apis]
@@ -70,4 +73,4 @@ MIT
    [dsf-idsrv-dev]: <https://dsf-idsrv-dev.dmrid.gov.cy>
    [dsf-mock-apis]: <https://dsf-api-test.dmrid.gov.cy/index.html>
    [git-repo-url]: <https://github.com/gov-cy/dsf-service-template-net6.git>
-   
+   [Fluent-url]: <https://docs.fluentvalidation.net/en/latest/>
