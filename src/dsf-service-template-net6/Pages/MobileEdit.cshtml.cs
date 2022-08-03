@@ -127,7 +127,7 @@ namespace dsf_service_template_net6.Pages
             }
             // Update the class before validation
             mobEdit.mobile = mobile;
-        FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
+            FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
             if (!result.IsValid)
             {
                 HttpContext.Session.SetObjectAsJson("valresult", result);

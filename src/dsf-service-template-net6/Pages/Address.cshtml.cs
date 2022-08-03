@@ -131,7 +131,8 @@ namespace dsf_service_template_net6.Pages
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res;
             //If coming fromPost
-            if (!ShowErrors()){
+            if (!ShowErrors())
+            {
                 //Load the web form
                 //get the current lang
                 var lang = "";
@@ -153,14 +154,15 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                    //if loaded set in session
+                    //if the user is already login and not passed from login, set in session
                     HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
+
                 }
-            }else
-            {
-                //Show error data
-                res= HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+                
+                
             }
+            //Bind Data
+            res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             //Set address info to model class
             address_select.addressInfo = res.data.addressInfo;
             //Check if already selected 

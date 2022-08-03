@@ -32,9 +32,7 @@ namespace dsf_service_template_net6.Pages
         #endregion
         #region "Custom Methods"
         public EmailEditModel(IValidator<EmailEdit> validator, IStringLocalizer<cEmailEditValidator> Loc)
-        {
-
-            _validator = validator;
+        {   _validator = validator;
             _Loc = Loc;
             emailEdit = new EmailEdit();
         }
@@ -120,7 +118,7 @@ namespace dsf_service_template_net6.Pages
             }
             else
             {
-                email = HttpContext.Session.GetObjectFromJson<string>("emailval") ?? "";
+                email = HttpContext.Session.GetObjectFromJson<string>("emailval") ;
             }
 
             return Page();
@@ -134,7 +132,7 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             if (citizenPersonalDetails != null)
             {
-                emailEdit.prev_email = citizenPersonalDetails.data.email;
+                emailEdit.prev_email = citizenPersonalDetails.data.email ??  User.Claims.First(c => c.Type == "email").Value;
 
             }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
