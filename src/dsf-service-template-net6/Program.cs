@@ -82,6 +82,12 @@ builder.Services.AddScoped<IValidator<EmailSelect>, EmailSelectValidator>(sp =>
 
     return new EmailSelectValidator(LocMain);
 });
+builder.Services.AddScoped<IValidator<AddressEditViewModel>, AddressEditValidator>(sp =>
+{
+    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+
+    return new AddressEditValidator(LocMain);
+});
 builder.Services.AddFluentValidation();
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //Register HttpClient

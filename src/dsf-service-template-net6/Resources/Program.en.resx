@@ -519,4 +519,16 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>This email already exists in our records</value>
     <comment>Email Validator</comment>
   </data>
+  <data name="AddressEditHeading" xml:space="preserve">
+    <value>Find your address</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PostalRequired" xml:space="preserve">
+    <value>Enter your postal code</value>
+    <comment>Address Edit Validator</comment>
+  </data>
 </root>

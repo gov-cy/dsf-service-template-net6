@@ -520,4 +520,16 @@
     <value>Αυτό το email υπάρχει ήδη στα αρχεία μας</value>
     <comment>Email Validator</comment>
   </data>
+  <data name="AddressEditHeading" xml:space="preserve">
+    <value>Βρείτε τη διεύθυνσή σας</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Ταχυδρομικός Κώδικας</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PostalRequired" xml:space="preserve">
+    <value>Εισάγετε τον ταχυδρομικό σας κώδικα</value>
+    <comment>Address Edit Validator</comment>
+  </data>
 </root>
