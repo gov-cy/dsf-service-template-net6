@@ -3,5 +3,6 @@
     public class EmailEdit
     {           
         public string email { get; set; }
+        public string prev_email { get; set; }
     }
 }

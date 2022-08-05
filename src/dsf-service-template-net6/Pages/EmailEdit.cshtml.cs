@@ -9,23 +9,30 @@ using Microsoft.Extensions.Localization;
 
 namespace dsf_service_template_net6.Pages
 {
-    [BindProperties]
+    
     public class EmailEditModel : PageModel
     {
         #region "Variables"
+        //Dependancy injection Variables
         private IValidator<EmailEdit> _validator;
         IStringLocalizer _Loc;
-        public string displaySummary = "display:none";
-        public string ErrorsDesc = "";
-        public string EmailErrorClass = "";
-        public string EmailSelection = "";
-        public EmailEdit emailEdit { get; set; }
+        [BindProperty]
+        //control variables
+        public string displaySummary { get; set; } = "display:none";
+        [BindProperty]
+        public string ErrorsDesc { get; set; } = "";
+        [BindProperty]
+        public string EmailErrorClass { get; set; } = "";
+        [BindProperty]
+        public string EmailSelection { get; set; } = "";
+        [BindProperty]
+        public string email { get; set; }
+        //Object for session data 
+        public EmailEdit emailEdit;
         #endregion
         #region "Custom Methods"
         public EmailEditModel(IValidator<EmailEdit> validator, IStringLocalizer<cEmailEditValidator> Loc)
-        {
-
-            _validator = validator;
+        {   _validator = validator;
             _Loc = Loc;
             emailEdit = new EmailEdit();
         }
@@ -34,6 +41,26 @@ namespace dsf_service_template_net6.Pages
             displaySummary = "display:none";
             EmailErrorClass = "";
             ErrorsDesc = "";
+        }
+        bool ShowErrors()
+        {
+            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
+
+            {
+                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                res.AddToModelState(this.ModelState, "emailEdit");
+                //Update Error messages on View
+                ClearErrors();
+                SetViewErrorMessages(res);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
@@ -77,42 +104,53 @@ namespace dsf_service_template_net6.Pages
             {
                 return RedirectToAction("LogOut", "Account");
             }
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            //GetData from session 
-            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
-            if (SessionEmailEdit != null)
+            //If coming fromPost
+            if (!ShowErrors())
             {
-                emailEdit = SessionEmailEdit;
+                //GetData from session 
+                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
+                if (SessionEmailEdit != null)
+                {
+                    email = SessionEmailEdit.email;
+                }
+               
             }
-            //Get Previous mobile number
-            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            if (citizenPersonalDetails != null)
+            else
             {
-                //Defult ariadni value
-                //emailEdit.email = User.Claims.First(c => c.Type == "email").Value; ;
+                email = HttpContext.Session.GetObjectFromJson<string>("emailval") ;
             }
+
             return Page();
         }
         public IActionResult OnPost(bool review)
         {
+            //Update the class before validation
+            emailEdit.email = email;
+            //Get Previous mobile number
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            if (citizenPersonalDetails != null)
+            {
+                emailEdit.prev_email = citizenPersonalDetails.data.email ??  User.Claims.First(c => c.Type == "email").Value;
+
+            }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
             {
-                // Copy the validation results into ModelState.
-                // ASP.NET uses the ModelState collection to populate 
-                // error messages in the View.
-                result.AddToModelState(this.ModelState, "emailEdit");
-                //Update Error messages on View
-                ClearErrors();
-                SetViewErrorMessages(result);
-                return Page();
+                HttpContext.Session.SetObjectAsJson("valresult", result);
+                HttpContext.Session.SetObjectAsJson("emailval", email);
+                return RedirectToPage("EmailEdit");
             }
             //Store Data 
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             HttpContext.Session.Remove("EmailEdit");
             HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
+            //Remove Error Session 
+            HttpContext.Session.Remove("valresult");
+            HttpContext.Session.Remove("emailval");
             //Finally redirect
-            return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+            return RedirectToPage("/ReviewPage", null, "mainContainer");
         }
     }
+   
 }

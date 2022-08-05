@@ -1,107 +1,107 @@
 ﻿@page "/SetAddress/{review:bool?}"
+@using Microsoft.Extensions.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @using dsf_service_template_net6.Data.Models
 @model dsf_service_template_net6.Pages.AddressEditModel
-@inject IHtmlLocalizer<Program> HtmlLocalizer
-@{
-}
 
+@inject IStringLocalizer<Program> Localizer
 
 <div class="govcy-container">
+    <div style="@((!Model.ViewModel.ShowErrorSummary) ? "display:none" : "")" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
+        <h2>@Localizer["ErrorMessage-General"]</h2>
+        <p class="govcy-mb-0">
+            @Html.Raw(Model.ViewModel.ErrorDesc)
+        </p>
+    </div>
 
-    @if (Model.ShowErrorSummary)
-    {
-        <div class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
-            <h2>There is a problem</h2>
-            <p>
-               @Html.Raw(Model.ErrorDesc)
-            </p>
+    <h1>@Localizer["AddressEditHeading"]</h1>
+    <form class="govcy-form"  asp-page-handler="PostalCode" novalidate>
+        <div class="@(Model.PostalCodeErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+            <label class="govcy-label govcy-mb-2">@Localizer["PostalCode"]</label>
+            	@if (Model.PostalCodeErrorClass.Length > 0)
+            {
+                <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+            }
+             <span class="govcy-input-error-msg" asp-validation-for="@Model.ViewModel.postalCode"></span>
+             <input id="PostalCode" name="ViewModel.postalCode" type="text" value="@Model.ViewModel.postalCode" placeholder="" class="@(Model.PostalCodeErrorClass.Length >0 ? " govcy-text-input govcy-text-input-char_4 govcy-text-input-error": "govcy-text-input govcy-text-input-char_4")"> 
         </div>
-    }
-    @Model.ErrorDesc
-
-    <form class="govcy-form" method="post" asp-page-handler="View">
-
-        <div class="@Model.PostalCodeFormClass">
-
-            <label class="govcy-label" for="input">Ταχ. Κώδικας</label>
-            <span asp-validation-for="@Model.PostalCode" class="govcy-input-error-msg"></span>
-            <input type="text" class="@Model.PostalCodeTextboxCSS" placeholder="" maxlength="4" asp-for="@Model.PostalCode" autocomplete="on">
-        </div>
-
-        <button class="govcy-btn-secondary">Αναζητήση</button>
+        <button class="govcy-btn-secondary">@Localizer["Find"]</button>
     </form>
 
-
-    @if (Model.HasUserEnteredPostalCcode || Model.HasUserSelectedAddress)
+    @if (Model.ViewModel.Addresses?.Count >0 || Model.ViewModel.HasUserSelectedAddress)
     {
-
-        <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown">
-
-            <div class="govcy-col-6">
-                <div class="govcy-form-control govcy-mb-4">
-                    <label class="govcy-label" for="input">Επιλογή Διεύθυνσης</label>
-                    <select class="govcy-select" name="addressCode" onchange="this.form.submit()" asp-for="AddressSelected">
-                        @if (Model.Addressinfo != null)
-                        {
-                            <option value="0"></option>
-                            @foreach (var address in Model.Addressinfo.data.items.ToList())
-                            {
-
-                                if (Model.AddressSelected == address.code)
-                                {
-                                    <option selected value="@address.code" class="govcy-mb-4">@address.name, @Model.Addressinfo.data.parish.name, @Model.Addressinfo.data.district.name</option>
-                                }
-                                else
-                                {
-                                    <option value="@address.code" class="govcy-mb-4">@address.name, @Model.Addressinfo.data.parish.name, @Model.Addressinfo.data.district.name</option>
-                                }
-                            }
-                        }
+        <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown" novalidate>
+            <input type="hidden" asp-for="@Model.ViewModel.postalCode">
+            <div class="govcy-form-control govcy-mb-4">
+                    <label class="govcy-label" for="input">@Localizer["SelectAddress"]</label>
+                    <select class="govcy-select" onchange="this.form.submit()" asp-for="@Model.ViewModel.SelectedAddress" asp-items="@Model.ViewModel.Addresses">
                     </select>
                 </div>
-            </div>
         </form>
 
     }
-    @if (Model.HasUserSelectedAddress)
+    @if (Model.ViewModel.HasUserSelectedAddress)
     {
-        <form class="govcy-form" method="post" asp-page-handler="VerifyAddress">
-
+        <form class="govcy-form" method="post" asp-page-handler="VerifyAddress" novalidate>
+            <input type="hidden" asp-for="@Model.ViewModel.postalCode">
+            <input type="hidden" asp-for="@Model.ViewModel.SelectedAddress">
             <fieldset class="govcy-fieldset">
-                <div class="govcy-form-control">
-                    <label class="govcy-label" for="input">Δρόμος</label>
-                    <input type="text" class="govcy-text-input govcy-w-50" disabled asp-for="@Model.AddressSummary.Street">
+
+                <div class="@(Model.StreetErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+                    <label class="govcy-label govcy-mb-2">@Localizer["StreetNo"]</label>
+                    @if (Model.StreetErrorClass.Length > 0)
+                    {
+                        <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+                    }
+                    <span asp-validation-for="@Model.ViewModel.StreetNo" class="govcy-input-error-msg"></span>
+                    <input id="StreetNo" name="ViewModel.StreetNo" value="@Model.ViewModel.StreetNo" type="text" class="@(Model.StreetErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_5 govcy-text-input-error": "govcy-text-input govcy-text-input-char_5")">
                 </div>
+                <div class="@(Model.FlatErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+                    <label class="govcy-label govcy-mb-2">@Localizer["FlatNo"]</label>
+                    @if (Model.FlatErrorClass.Length > 0)
+                    {
+                        <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+                    }
+                    <span asp-validation-for="@Model.ViewModel.FlatNo" class="govcy-input-error-msg"></span>
+                    <input id="FlatNo" name="ViewModel.FlatNo" value="@Model.ViewModel.FlatNo" type="text" class="@(Model.FlatErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_5 govcy-text-input-error": "govcy-text-input govcy-text-input-char_5")">
+                </div>
+                @*Table*@
+                <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="col-3">@Localizer["PostalCode"]</th>
+                            <td class="col-7">
+                                <span class="govcy-d-block">@Model.ViewModel.postalCode</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" class="col-3">@Localizer["Street"]</th>
+                            <td class="col-7">
+                                <span class="govcy-d-block">@Model.ViewModel.SelectedAddressName.Split(" ").First()</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" class="col-3">@Localizer["Parish"]</th>
+                            <td class="col-7">
+                                <span class="govcy-d-block">@Model.ViewModel.Parish</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row" class="col-3">@Localizer["City"]</th>
+                            <td class="col-7">
+                                <span class="govcy-d-block">@Model.ViewModel.City</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <div class="govcy-form-control">
-                    <label class="govcy-label" for="input">Ενορία</label>
-                    <input type="text" class="govcy-text-input govcy-w-50" disabled asp-for="@Model.AddressSummary.Parish">
+                    <button class="govcy-btn-primary govcy-mb-0">@Localizer["Button_Next"]</button>
                 </div>
-                <div class="govcy-form-control">
-                    <label class="govcy-label" for="input">Πόλη</label>
-                    <input type="text" class="govcy-text-input govcy-w-50" disabled asp-for="@Model.AddressSummary.City">
-                </div>
-                <div class="@Model.VerifyAddressFormClass">
-                    <label class="govcy-label" for="input">Αριθμός Οδού</label>
-                    <span asp-validation-for="@Model.StreetNo" class="govcy-input-error-msg"></span>
-                    <input type="text" class="@Model.FlatNoTextboxCSS" asp-for="@Model.StreetNo">
-                </div>
-                <div class="govcy-form-control">
-                    <label class="govcy-label" for="input">Αριθμός Διαμερίσματος (Προαιρετικό)</label>
-                    <input type="text" class="govcy-text-input govcy-text-input-char_5" asp-for="@Model.FlatNo">
-                </div>
-
-                <div class="govcy-form-control">
-                    <a href="#">Έχετε Ταχυδρομική Θυρίδα Τ.Χ ή μένετε εκτός Κύπρου</a>
-                </div>
-                <div class="govcy-form-control">
-                    <button class="govcy-btn-primary govcy-mb-0">Επικύρωση</button>
-                </div>
-
             </fieldset>
-
         </form>
     }
-    <partial name="_ValidationScriptsPartial" />
 </div>

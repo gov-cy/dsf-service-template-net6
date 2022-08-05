@@ -12,17 +12,22 @@ using Newtonsoft.Json;
 
 namespace dsf_service_template_net6.Pages
 {
-    [BindProperties]
-    public class EmailModel : PageModel
+       public class EmailModel : PageModel
     {
         #region "Variables"
         //control variables
+        [BindProperty]
         public string crbEmail { get; set; }
-        public string option1 { get; set; } = "false";
-        public string option2 { get; set; } = "false";
-        public string displaySummary = "display:none";
-        public string ErrorsDesc = "";
-        public string EmailSelection = "";
+        [BindProperty]
+        public string option1 => (string)TempData[nameof(option1)];
+        [BindProperty]
+        public string option2 => (string)TempData[nameof(option2)];
+        [BindProperty]
+        public string displaySummary { get; set; } = "display:none";
+        [BindProperty]
+        public string ErrorsDesc { get; set; } = "";
+        [BindProperty]
+        public string EmailSelection { get; set; } = "";
         //Dependancy injection Variables
         public IMyHttpClient _client;
         private IConfiguration _configuration;
@@ -37,6 +42,27 @@ namespace dsf_service_template_net6.Pages
             _configuration = config;
             _validator = validator;
             Email_select = new EmailSelect();
+        }
+        //Use to show error messages if web form has errors
+        bool ShowErrors()
+        {
+            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
+
+            {
+                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                res.AddToModelState(this.ModelState, "Email_select");
+                //Update Error messages on View
+                ClearErrors();
+                SetViewErrorMessages(res);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         void ClearErrors()
         {
@@ -89,17 +115,21 @@ namespace dsf_service_template_net6.Pages
             //Get  Citize details loaded
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            //If coming fromPost
+            if (!ShowErrors())
+            {
+                //Set Email info to model class
+                if (string.IsNullOrEmpty(res.data?.email))
+                {
 
-            //Set Email info to model class
-            if (string.IsNullOrEmpty(res.data?.email))
-            {
-               
-                Email_select.email = User.Claims.First(c => c.Type == "email").Value;
+                    Email_select.email = User.Claims.First(c => c.Type == "email").Value;
+                }
+                else
+                {
+                    Email_select.email = res.data.email;
+                }
             }
-            else
-            {
-               Email_select.email = res.data.email;
-            }
+           
             
             //Check if already selected 
             var selectedoptions = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime);
@@ -107,13 +137,13 @@ namespace dsf_service_template_net6.Pages
             {
                 if (selectedoptions.use_from_civil)
                 {
-                    option1 = "true";
-                    option2 = "false";
+                    TempData["option1"] = "true";
+                    TempData["option2"] = "false";
                 }
                 else
                 {
-                    option1 = "false";
-                    option2 = "true";
+                    TempData["option1"] = "false";
+                    TempData["option2"] = "true";
                 }
             }
             return Page();
@@ -150,39 +180,35 @@ namespace dsf_service_template_net6.Pages
             FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
             if (!result.IsValid)
             {
-                // Copy the validation results into ModelState.
-                // ASP.NET uses the ModelState collection to populate 
-                // error messages in the View.
-                result.AddToModelState(this.ModelState, "Email_select");
-                //Update Error messages on View
-                ClearErrors();
-                SetViewErrorMessages(result);
-                return Page();
+                HttpContext.Session.SetObjectAsJson("valresult", result);
+                return RedirectToPage("Email");
             }
             //Model is valid so strore 
             HttpContext.Session.Remove("EmailSelect");
             HttpContext.Session.SetObjectAsJson("EmailSelect", Email_select, authTime);
+            //Remove Error Session 
+            HttpContext.Session.Remove("valresult");
             //Finally redirect
             if (review)
             {
                 if (Email_select.use_other)
                 {
-                    return RedirectToPage("/EmailEdit", new { review = "true" });
+                    return RedirectToPage("/EmailEdit", null,new { review = "true" }, "mainContainer");
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                    return RedirectToPage("/ReviewPage", null, "mainContainer");
                 }
             }
             else
             {
                 if (Email_select.use_other)
                 {
-                    return RedirectToPage("/EmailEdit", null, "RedirectTarget");
+                    return RedirectToPage("/EmailEdit", null, "mainContainer");
                 }
                 else
                 {
-                    return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                    return RedirectToPage("/ReviewPage", null, "mainContainer");
                 }
             }
 

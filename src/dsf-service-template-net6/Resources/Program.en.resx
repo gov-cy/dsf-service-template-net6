@@ -515,4 +515,52 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Get Started</value>
     <comment>Button Text</comment>
   </data>
+  <data name="EmailNumberAlreadyExists" xml:space="preserve">
+    <value>This email already exists in our records</value>
+    <comment>Email Validator</comment>
+  </data>
+  <data name="AddressEditHeading" xml:space="preserve">
+    <value>Find your address</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PostalRequired" xml:space="preserve">
+    <value>Enter your postal code</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Find</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PleaseSelectAddress" xml:space="preserve">
+    <value>Please Select Address</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="SelectAddress" xml:space="preserve">
+    <value>Address Selection</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="FlatNo" xml:space="preserve">
+    <value>Flat Number</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="Parish" xml:space="preserve">
+    <value>Parish</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Address</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="StreetNo" xml:space="preserve">
+    <value>Street Number</value>
+    <comment>Address Edit Page</comment>
+  </data>
 </root>

@@ -23,7 +23,7 @@ namespace dsf_service_template_net6.Pages
         public ApplicationRequest _application = new ApplicationRequest();
         public string currentLanguage;
         //Data retrieve from other pages
-        public Addressinfo[] ret_address;
+        public Addressinfo[] ret_address = Array.Empty<Addressinfo>();
         public string ret_email = string.Empty;
         public string ret_mobile = string.Empty;
         public bool useEmailEditOnly = false;
@@ -101,8 +101,10 @@ namespace dsf_service_template_net6.Pages
             } else
             {
                 //Wait for Alkis Session Storage
-                var citizenEdit= HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressEdit", authTime);
-                ret_address = citizenEdit.addressInfo;
+                var citizenEdit= HttpContext.Session.GetObjectFromJson<Addressinfo>("AddressEdit", authTime);
+                List<Addressinfo> items = new();
+                items.Add(citizenEdit); 
+                ret_address= items.ToArray();
             }
             var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime);
             if (mobSelect != null)

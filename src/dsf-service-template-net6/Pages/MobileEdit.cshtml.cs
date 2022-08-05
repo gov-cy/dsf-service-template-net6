@@ -10,22 +10,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace dsf_service_template_net6.Pages
 {
-    [BindProperties]
-    public class MobileEditModel : PageModel
+       public class MobileEditModel : PageModel
     {
         #region "Variables"
+        //Dependancy injection Variables
         private IValidator<MobileEdit> _validator;
         IStringLocalizer _Loc;
-        public string displaySummary = "display:none";
-        public string ErrorsDesc = "";
-        public string MobileErrorClass = "";
+        //control variables
+        [BindProperty]
+        public string displaySummary { get; set; } = "display:none";
+        [BindProperty]
+        public string ErrorsDesc { get; set; } = "";
+        [BindProperty]
+        public string MobileErrorClass { get; set; } = "";
+        [BindProperty]
+        public string mobile { get; set; }
+        //Object for session data 
         public MobileEdit mobEdit { get; set; }
         #endregion
         #region "Custom Methods"
         public MobileEditModel(IValidator<MobileEdit> validator, IStringLocalizer<cMobileEditValidator> Loc)
-        {
-
-            _validator = validator;
+        {  _validator = validator;
             _Loc = Loc;
             mobEdit = new MobileEdit();
         }
@@ -34,6 +39,26 @@ namespace dsf_service_template_net6.Pages
             displaySummary = "display:none";
             MobileErrorClass = "";
             ErrorsDesc = "";
+        }
+        bool ShowErrors()
+        {
+            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
+
+            {
+                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                // Copy the validation results into ModelState.
+                // ASP.NET uses the ModelState collection to populate 
+                // error messages in the View.
+                res.AddToModelState(this.ModelState, "mobEdit");
+                //Update Error messages on View
+                ClearErrors();
+                SetViewErrorMessages(res);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
@@ -72,38 +97,45 @@ namespace dsf_service_template_net6.Pages
             {
                 return RedirectToAction("LogOut", "Account");
             }
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
-            if (SessionMobEdit != null)
+            //If coming fromPost
+            if (!ShowErrors())
             {
-                mobEdit = SessionMobEdit;
+                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
+                if (SessionMobEdit != null)
+                {
+                    mobEdit = SessionMobEdit;
+                }
+              
             }
-            //Get Previous mobile number
+            else
+            {
+                mobile = HttpContext.Session.GetObjectFromJson<string>("mobileval") ?? "";
+            }
 
-            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            if (citizenPersonalDetails != null)
-            {
-                mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
-               
-            }
             return Page();
         }
         public IActionResult OnPost(bool review)
         {
+            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            //Get Previous mobile number
+            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            if (citizenPersonalDetails != null)
+            {
+                mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
+
+            }
+            // Update the class before validation
+            mobEdit.mobile = mobile;
             FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
             if (!result.IsValid)
             {
-                // Copy the validation results into ModelState.
-                // ASP.NET uses the ModelState collection to populate 
-                // error messages in the View.
-                result.AddToModelState(this.ModelState, "mobEdit");
-                //Update Error messages on View
-                ClearErrors();
-                SetViewErrorMessages(result);
-                return Page();
+                HttpContext.Session.SetObjectAsJson("valresult", result);
+                HttpContext.Session.SetObjectAsJson("mobileval", mobile);
+                return RedirectToPage("MobileEdit");
             }
             //Mob Edit from Session
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+           
             var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
             var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
             if (SessionMobEdit != null)
@@ -118,15 +150,17 @@ namespace dsf_service_template_net6.Pages
             {
                 HttpContext.Session.SetObjectAsJson("MobEdit", mobEdit, authTime);
             }
-
+            //Remove Error Session 
+            HttpContext.Session.Remove("valresult");
+            HttpContext.Session.Remove("mobileval");
             //Finally redirect
             if (review)
             {
-                return RedirectToPage("/ReviewPage", null, "RedirectTarget");
+                return RedirectToPage("/ReviewPage", null, "mainContainer");
             }
             else
             {
-                return RedirectToPage("/Email", null, "RedirectTarget");
+                return RedirectToPage("/Email", null, "mainContainer");
             }
         }
     }

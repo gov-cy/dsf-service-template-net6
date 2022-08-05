@@ -38,7 +38,7 @@
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
-                   <a asp-page="/Address" asp-route-review="true">@Localizer["Change_Link"]</a>
+                   <a asp-page="/Address" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
               </td>
          </tr>
           <tr>
@@ -51,10 +51,10 @@
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useMobileEditOnly)
                     {
-                        <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["Change_Link"]</a>
+                        <a asp-page="/MobileEdit" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
                     } else
                     {
-                        <a asp-page="/Mobile" asp-route-review="true">@Localizer["Change_Link"]</a>
+                        <a asp-page="/Mobile" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
                     }
               </td>
          </tr>
@@ -68,10 +68,10 @@
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useEmailEditOnly)
                     {
-                        <a asp-page="/EmailEdit" asp-route-review="true">@Localizer["Change_Link"]</a>
+                        <a asp-page="/EmailEdit" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
                     }else
                     {
-                        <a asp-page="/Email" asp-route-review="true">@Localizer["Change_Link"]</a>
+                        <a asp-page="/Email" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
                     }
                     
               </td>

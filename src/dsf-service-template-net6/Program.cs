@@ -55,7 +55,7 @@ builder.Services.AddRazorPages(options =>
 builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
-        
+
     return new cMobileEditValidator(LocMain);
 });
 builder.Services.AddScoped<IValidator<EmailEdit>, cEmailEditValidator>(sp =>
@@ -81,6 +81,12 @@ builder.Services.AddScoped<IValidator<EmailSelect>, EmailSelectValidator>(sp =>
     var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
 
     return new EmailSelectValidator(LocMain);
+});
+builder.Services.AddScoped<IValidator<AddressEditViewModel>, AddressEditValidator>(sp =>
+{
+    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+
+    return new AddressEditValidator(LocMain);
 });
 builder.Services.AddFluentValidation();
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
