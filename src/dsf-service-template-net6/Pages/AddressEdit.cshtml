@@ -34,8 +34,26 @@
             <input type="hidden" asp-for="@Model.ViewModel.postalCode">
             <div class="govcy-form-control govcy-mb-4">
                     <label class="govcy-label" for="input">@Localizer["SelectAddress"]</label>
-                    <select class="govcy-select" onchange="this.form.submit()" asp-for="@Model.ViewModel.SelectedAddress" asp-items="@Model.ViewModel.Addresses">
-                    </select>
+                  
+                    @*<select class="govcy-select" onchange="this.form.submit()" asp-for="@Model.ViewModel.SelectedAddress" asp-items="@Model.ViewModel.Addresses">
+                    </select>*@
+				<select class="govcy-select" id="selectedAddressCode" onchange="this.form.submit()" name="ViewModel.SelectedAddress">
+					<option value="">@Localizer["PleaseSelectAddress"]</option>
+					@if (@Model.ViewModel.Addresses != null)
+					{
+						@foreach (var item in @Model.ViewModel.Addresses)
+						{
+							if (@Model.ViewModel.SelectedAddress == item.Value)
+							{
+								<option selected value="@item.Value">@item.Text</option>
+							}
+							else
+							{
+								<option value="@item.Value">@item.Text</option>
+							}
+						}
+					}
+				</select>
                 </div>
         </form>
 
@@ -78,7 +96,7 @@
                         <tr>
                             <th scope="row" class="col-3">@Localizer["Street"]</th>
                             <td class="col-7">
-                                <span class="govcy-d-block">@Model.ViewModel.SelectedAddressName.Split(" ").First()</span>
+                                <span class="govcy-d-block">@Model.ViewModel.SelectedAddressName</span>
                             </td>
                         </tr>
 
