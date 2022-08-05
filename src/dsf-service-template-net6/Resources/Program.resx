@@ -532,4 +532,36 @@
     <value>Εισάγετε τον ταχυδρομικό σας κώδικα</value>
     <comment>Address Edit Validator</comment>
   </data>
+  <data name="Find" xml:space="preserve">
+    <value>Αναζήτηση</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="PleaseSelectAddress" xml:space="preserve">
+    <value>Επιλέξτε Διεύθυνση</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="SelectAddress" xml:space="preserve">
+    <value>Επιλογή Διεύθυνσης</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Πόλη</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="FlatNo" xml:space="preserve">
+    <value>Αριθμός διαμερίσματος</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="Parish" xml:space="preserve">
+    <value>Ενορία</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>διεύθυνση</value>
+    <comment>Address Edit Page</comment>
+  </data>
+  <data name="StreetNo" xml:space="preserve">
+    <value>Αριθμός οδού</value>
+    <comment>Address Edit Page</comment>
+  </data>
 </root>

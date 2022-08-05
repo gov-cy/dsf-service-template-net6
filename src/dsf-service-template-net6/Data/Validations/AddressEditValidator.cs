@@ -12,10 +12,27 @@ namespace dsf_service_template_net6.Data.Validations
         {
 
             _Localizer = localizer;
-             PostalRequiredMsg = _Localizer["PostalRequired"];
+            PostalRequiredMsg = _Localizer["PostalRequired"];
             RuleFor(x => x.postalCode)
             .Cascade(CascadeMode.Stop)
-            .NotEmpty().WithMessage(PostalRequiredMsg);
+            .NotEmpty().WithMessage(PostalRequiredMsg)
+           .Length(4).WithMessage(_Localizer["PostCodeLength"]);
+            When(p => !string.IsNullOrEmpty(p.postalCode) && !string.IsNullOrEmpty(p.SelectedAddress), () =>
+            {
+                RuleFor(address => address.StreetNo)
+                    .Cascade(CascadeMode.Stop)
+                    .NotEmpty()
+                    .WithMessage(_Localizer["StreetNoMandatory"])
+                     .MaximumLength(5)
+                        .WithMessage(_Localizer["StreetNoLength"]);
+                       
+                    RuleFor(address => address.FlatNo)
+                         
+                        .MaximumLength(5).When(address => !string.IsNullOrEmpty(address.FlatNo))
+                        .WithMessage(_Localizer["FlatNoLength"]);
+            });
         }
+
+
     }
 }
