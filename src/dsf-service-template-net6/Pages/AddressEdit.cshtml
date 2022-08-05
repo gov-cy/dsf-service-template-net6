@@ -17,18 +17,18 @@
     <h1>@Localizer["AddressEditHeading"]</h1>
     <form class="govcy-form"  asp-page-handler="PostalCode" novalidate>
         <div class="@(Model.PostalCodeErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <label class="govcy-label" for="input">@Localizer["PostalCode"]</label>
+            <label class="govcy-label govcy-mb-2">@Localizer["PostalCode"]</label>
             	@if (Model.PostalCodeErrorClass.Length > 0)
             {
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
             }
-            <span asp-validation-for="@Model.ViewModel.postalCode" class="govcy-input-error-msg"></span>
-            <input id="PostalCode" type="text" class="govcy-text-input govcy-text-input-char_4" asp-for="@Model.ViewModel.postalCode" autocomplete="on">
+             <span class="govcy-input-error-msg" asp-validation-for="@Model.ViewModel.postalCode"></span>
+             <input id="PostalCode" name="ViewModel.postalCode" type="text" value="@Model.ViewModel.postalCode" placeholder="" class="@(Model.PostalCodeErrorClass.Length >0 ? " govcy-text-input govcy-text-input-char_4 govcy-text-input-error": "govcy-text-input govcy-text-input-char_4")"> 
         </div>
         <button class="govcy-btn-secondary">@Localizer["Find"]</button>
     </form>
 
-    @if (Model.ViewModel.HasUserEnteredPostalCode || Model.ViewModel.HasUserSelectedAddress)
+    @if (Model.ViewModel.Addresses?.Count >0 || Model.ViewModel.HasUserSelectedAddress)
     {
         <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown" novalidate>
             <input type="hidden" asp-for="@Model.ViewModel.postalCode">

@@ -14,7 +14,7 @@ using dsf_service_template_net6.Extensions;
 using System.Collections.Generic;
 
 namespace dsf_service_template_net6.Pages
-{
+{ 
     public class AddressEditModel : PageModel
     {
         #region "Variables"
@@ -47,7 +47,8 @@ namespace dsf_service_template_net6.Pages
 
                 //Update Error messages on View
                 ClearErrors();
-                res.AddToModelState(this.ModelState, "AddressEditViewModel");
+                res.AddToModelState(this.ModelState, "ViewModel");
+                //Update Error messages on View
                 CreateErrorSummary(res);
                 return true;
             }
@@ -103,7 +104,7 @@ namespace dsf_service_template_net6.Pages
                                     item = new() { code = i.code, name = i.name },
                                 };
                             }).ToList();
-                            HttpContext.Session.SetObjectAsJson("AddressesForPostalCode", addressesForPostalCode); ;
+                            
                         }
                     }
                     catch
@@ -168,16 +169,30 @@ namespace dsf_service_template_net6.Pages
 
         private void ClearErrors()
         {
+            //Clear form errors
+            //Clear errors before
+            foreach (var modelValue in ModelState.Values)
+            {
+                modelValue.Errors.Clear();
+            }
             ViewModel.PostalCodeFormClass = ViewModel.FormClassNoError;
             ViewModel.PostalCodeTextboxCSS = ViewModel.PostalCodeTextboxCSSNoError;
             ViewModel.FlatNoTextboxCSS = ViewModel.FlatNoTextboxCSSNoError;
+            PostalCodeErrorClass = "";
+            HttpContext.Session.Remove("valresult");
+            
         }
 
         private void CreateErrorSummary(ValidationResult result)
         {
             foreach (var error in result.Errors)
             {
-                ViewModel.ErrorDesc += "<a href='#ViewModel_" + error.PropertyName + "'>" + error.ErrorMessage + "</a>";
+                if (error.PropertyName == "postalCode")
+                {
+                    ViewModel.ErrorDesc += "<a href='#PostalCode'>" + error.ErrorMessage + "</a>";
+                    PostalCodeErrorClass = error.ErrorMessage;
+                }
+                 
             }
             ViewModel.ShowErrorSummary = true;
         }
@@ -215,8 +230,16 @@ namespace dsf_service_template_net6.Pages
                 ViewModel.HasUserSelectedAddress = HttpContext.Session.GetObjectFromJson<bool?>("HasUserSelectedAddress") ?? false;
                 ViewModel.SelectedAddress = HttpContext.Session.GetObjectFromJson<string?>("SelectedAddress") ?? "";
                 ViewModel.postalCode = HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCode") ?? "";
-
-                addressFromSession = AddressesForPostalCode.First(a => a.item.code == int.Parse(ViewModel.SelectedAddress));
+                //if only search from postal code make check
+                if (HttpContext.Session.GetObjectFromJson<List<SelectListItem>>("AddressesForPostalCode") != null)
+                {
+                    ViewModel.Addresses = HttpContext.Session.GetObjectFromJson<List<SelectListItem>>("AddressesForPostalCode");
+                }
+                if (ViewModel.Addresses?.Count >0 && !string.IsNullOrEmpty(ViewModel?.SelectedAddress))
+                {
+                    addressFromSession = AddressesForPostalCode.First(a => a.item.code == int.Parse(ViewModel.SelectedAddress));
+                }
+                
 
             }
             else
@@ -229,6 +252,9 @@ namespace dsf_service_template_net6.Pages
                 ViewModel.StreetNo = addressFromSession.item.street?.streetNumber ?? "";
                 ViewModel.FlatNo = addressFromSession.item.street?.apartmentNumber ?? "";
                 SetViewModelAddresses();//ViewModel.Addresses
+                //Set the Api results
+                HttpContext.Session.SetObjectAsJson("AddressesForPostalCode", ViewModel.Addresses);
+
                 ViewModel.SelectedAddressName = addressFromSession.addressText;
                 ViewModel.City = addressFromSession.district.name;
                 ViewModel.Parish = addressFromSession.parish.name;
@@ -236,54 +262,78 @@ namespace dsf_service_template_net6.Pages
                 ViewModel.HasUserEnteredPostalCode = true;
                 ViewModel.HasUserSelectedAddress = true;
             }
+            else if (HttpContext.Session.GetObjectFromJson<string?>("SelectedAddress") != null)
+            {   //Update View Model
+                ViewModel.postalCode = HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCode") ?? "";
+                ViewModel.SelectedAddress = HttpContext.Session.GetObjectFromJson<string?>("SelectedAddress") ?? "";
+                ViewModel.HasUserEnteredPostalCode = true;
+                ViewModel.HasUserSelectedAddress = true;
+                //try to bind the list if it has Data
+                if (HttpContext.Session.GetObjectFromJson<List<SelectListItem>>("AddressesForPostalCode") != null)
+                {
+                    ViewModel.Addresses = HttpContext.Session.GetObjectFromJson<List<SelectListItem>>("AddressesForPostalCode");
+                    
+                }
+                Addressinfo selectedAddressInfo = AddressesForPostalCode.First(a => a.item.code == int.Parse(ViewModel.SelectedAddress));
+                ViewModel.SelectedAddressName = selectedAddressInfo.addressText;
+                ViewModel.City = selectedAddressInfo.town.name ?? "";
+                ViewModel.Parish = selectedAddressInfo.parish.name ?? "";
+            }
             else if (HttpContext.Session.GetObjectFromJson<string>("SelectedPostalCode") != null)
             {
                 ViewModel.postalCode = HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCode") ?? "";
                 ViewModel.HasUserEnteredPostalCode = true;
                 //try to bind the list if it has Data
 
-                if (HttpContext.Session.GetObjectFromJson<List<SelectListItem>>("ResultList") != null)
+                if (HttpContext.Session.GetObjectFromJson<List<Addressinfo>>("AddressesForPostalCode") != null)
                 {
-                    ViewModel.Addresses = HttpContext.Session.GetObjectFromJson<List<SelectListItem>>("ResultList");
+                    //Cast InfoAddress to SelectItemList
+                    SetViewModelAddresses(); 
                 }
             }
             return Page();
         }
+        /// <summary>
+        /// Called when use enters postal code
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostPostalCode()
         {
-            ViewModel.HasUserEnteredPostalCode = true;
+           
             HttpContext.Session.SetObjectAsJson("SelectedPostalCode", ViewModel.postalCode);
             ValidationResult result = _validator.Validate(ViewModel);
             if (result.IsValid)
             {
-                ViewModel.PostalCodeFormClass = ViewModel.FormClassNoError;
-                ViewModel.PostalCodeTextboxCSS = ViewModel.PostalCodeTextboxCSSNoError;
-                ViewModel.FlatNoTextboxCSS = ViewModel.FlatNoTextboxCSSNoError;
-                ViewModel.ShowErrorSummary = false;
-                SetViewModelAddresses();
-                HttpContext.Session.SetObjectAsJson("ResultList", ViewModel.Addresses);
-                ClearErrors();
+                //Valid postal code
+                 HttpContext.Session.SetObjectAsJson("HasUserEnteredPostalCode", true);
+                 ClearErrors();
+                //Show DropDown
+                HttpContext.Session.SetObjectAsJson("AddressesForPostalCode", AddressesForPostalCode);
+                
             }
             else
             {
                 HttpContext.Session.SetObjectAsJson("valresult", result);
                 HttpContext.Session.SetObjectAsJson("HasUserEnteredPostalCode", ViewModel.HasUserEnteredPostalCode);
-                return RedirectToPage("AddressEdit");
+               
             }
            return RedirectToPage("AddressEdit");
         }
-        public void OnPostSelectAddressFromDropDown()
+        public IActionResult OnPostSelectAddressFromDropDown()
         {
             ViewModel.HasUserEnteredPostalCode = true;
             ViewModel.HasUserSelectedAddress = true;
+            ClearErrors();   
+            //Need to store the selected address code
+            HttpContext.Session.SetObjectAsJson("SelectedAddress", ViewModel.SelectedAddress);
 
-            ClearErrors();
-            SetViewModelAddresses();
-            Addressinfo selectedAddressInfo = AddressesForPostalCode.First(a => a.item.code == int.Parse(ViewModel.SelectedAddress));
-            ViewModel.SelectedAddressName = selectedAddressInfo.addressText;
-            ViewModel.City = selectedAddressInfo.town.name ?? "";
-            ViewModel.Parish = selectedAddressInfo.parish.name ?? "";
+            return RedirectToPage("AddressEdit");
         }
+        /// <summary>
+        /// if Valid move to next page , after session save
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
         public IActionResult OnPostVerifyAddress(bool review)
         {
             ViewModel.HasUserEnteredPostalCode = true;
