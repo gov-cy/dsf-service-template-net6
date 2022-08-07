@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace dsf_service_template_net6.Pages
 {
     [BindProperties]
-    public class MobileModel : PageModel
+    public class MobileModel : BasePage
     {
         #region "Variables"
         //control variables
@@ -94,8 +94,10 @@ namespace dsf_service_template_net6.Pages
             return ret;
         }
         #endregion
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool review)
         {
+            //Set the Back and Next Link
+            SetLinks("MobileSelection", review, "No");
             //Chack if user has sequentialy load the page
             bool allow=AllowToProceed();
             if (!allow)
@@ -163,29 +165,16 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
-            if (review)
+            //Set the Back and Next Link
+            if (Mobile_select.use_other)
             {
-                if (Mobile_select.use_other)
-                {
-                    return RedirectToPage("/MobileEdit", null,new { review = "true" }, "mainContainer");
-                }
-                else
-                {
-                    return RedirectToPage("/ReviewPage", null, "mainContainer");
-                }
+                SetLinks("MobileSelection", review, "No");
             }
             else
             {
-                if (Mobile_select.use_other)
-                {
-                    return RedirectToPage("/MobileEdit",null, "mainContainer");
-                }
-               
-                else
-                {
-                    return  RedirectToPage("/Email",null, "mainContainer");
-                }
+                SetLinks("MobileSelection", review, "Yes");
             }
+            return RedirectToPage(NextLink, null, "mainContainer");
 
         }
     }

@@ -1,6 +1,7 @@
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
+using dsf_service_template_net6.Pages.Shared;
 using dsf_service_template_net6.Services;
 using FluentValidation;
 using FluentValidation.Results;
@@ -12,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace dsf_service_template_net6.Pages
 {
-    public class AddressModel : PageModel
+    public class AddressModel : BasePage
     {
         #region "Variables"
         //control variables
@@ -45,6 +46,7 @@ namespace dsf_service_template_net6.Pages
                 _validator = validator;
                 address_select = new AddressSelect();
                 _logger = logger;
+            
         }
        //Use to show error messages if web form has errors
         bool ShowErrors()
@@ -126,13 +128,16 @@ namespace dsf_service_template_net6.Pages
             return Res;
         }
         #endregion
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool review)
         {
+            //Set the Back and Next Link
+            SetLinks("AddressSelection", review, "No");            
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res;
             //If coming fromPost
             if (!ShowErrors())
             {
+                
                 //Load the web form
                 //get the current lang
                 var lang = "";
@@ -219,33 +224,15 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
-            if (review)
+            //Set the Back and Next Link
+            if (address_select.use_other)
             {
-                if (address_select.use_other)
-                {
-                    return RedirectToPage("/AddressEdit", null,new { review = "true" }, "mainContainer");
-                }
-                else
-                {
-                    return RedirectToPage("/ReviewPage", null, "mainContainer");
-                }
-            }
-            else
+                SetLinks("AddressSelection", review, "No");
+            }else
             {
-                if (address_select.use_other)
-                {
-                    return RedirectToPage("/AddressEdit", null, "mainContainer");
-                }
-                else if (string.IsNullOrEmpty(citizen_data.data.mobile))
-                {
-                    return RedirectToPage("/MobileEdit", null, "mainContainer");
-                }
-                else
-                {
-                    return RedirectToPage("/Mobile", null, "mainContainer");
-                }
+                SetLinks("AddressSelection", review, "Yes");
             }
-
+            return RedirectToPage(NextLink, null, "mainContainer");
         }
     }
 

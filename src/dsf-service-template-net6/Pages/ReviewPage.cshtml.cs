@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace dsf_service_template_net6.Pages
 {
     [BindProperties]
-    public class ReviewPageModel : PageModel
+    public class ReviewPageModel : BasePage
     {
         public IMyHttpClient _client;
         private IConfiguration _configuration;
@@ -31,6 +31,8 @@ namespace dsf_service_template_net6.Pages
         #endregion
         public IActionResult OnGet()
         {
+            //Set back and Next Link
+            SetLinks("ReviewPage", false);
             bool allow = AllowToProceed();
             if (!allow)
             {

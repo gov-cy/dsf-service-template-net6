@@ -4,5 +4,8 @@
 @inject IStringLocalizer<Program> Localizer
 @inject IHtmlLocalizer<Program> HtmlLocalizer
 @model CookiePolicyModel
+@{
+    ViewBag.PreviousUrl=Model.BackLink;
+}
 <h1>@Localizer["CookiePolicy_Title"]</h1>
 @HtmlLocalizer["CookiePolicy_Instructions"]

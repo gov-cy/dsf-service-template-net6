@@ -3,9 +3,10 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using dsf_service_template_net6.Data.Models
 @model dsf_service_template_net6.Pages.AddressEditModel
-
 @inject IStringLocalizer<Program> Localizer
-
+@{
+    ViewBag.PreviousUrl=Model.BackLink;
+}
 <div class="govcy-container">
     <div style="@((!Model.ViewModel.ShowErrorSummary) ? "display:none" : "")" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
         <h2>@Localizer["ErrorMessage-General"]</h2>
@@ -27,8 +28,11 @@
         </div>
         <button class="govcy-btn-secondary">@Localizer["Find"]</button>
     </form>
-
-    @if (Model.ViewModel.Addresses?.Count >0 || Model.ViewModel.HasUserSelectedAddress)
+      <div style="@((!Model.ViewModel.NoResultsFound) ? "display:none" : "")" class="govcy-alert-warning">
+       <span class="material-icons govcy-alert-warning-icon">error</span>
+       <span class="govcy-alert-warning-text" >@Localizer["PostalResultsNotFound"]</span>
+    </div>
+    @if (Model.ViewModel.Addresses?.Count >0 || (Model.ViewModel.HasUserSelectedAddress && !Model.ViewModel.NoResultsFound))
     {
         <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown" novalidate>
             <input type="hidden" asp-for="@Model.ViewModel.postalCode">

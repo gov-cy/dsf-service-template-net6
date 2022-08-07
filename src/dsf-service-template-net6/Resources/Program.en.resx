@@ -563,4 +563,24 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Street Number</value>
     <comment>Address Edit Page</comment>
   </data>
+  <data name="FlatNoLength" xml:space="preserve">
+    <value>5 Characters Allowed</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="PostalResultsNotFound" xml:space="preserve">
+    <value>No address found</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="PostCodeLength" xml:space="preserve">
+    <value>4 Characters Allowed</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="StreetNoLength" xml:space="preserve">
+    <value>5 Characters Allowed</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="StreetNoMandatory" xml:space="preserve">
+    <value>The Street Number is required</value>
+    <comment>Address Edit Validator</comment>
+  </data>
 </root>

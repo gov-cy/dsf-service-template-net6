@@ -6,6 +6,7 @@
 @inject IStringLocalizer<Program> Localizer
 @inject IHtmlLocalizer<Program> HtmlLocalizer
 @{
+    ViewBag.PreviousUrl=Model.BackLink;
 }
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["ErrorMessage-General"]</h2>

@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace dsf_service_template_net6.Pages
 {
-       public class EmailModel : PageModel
+       public class EmailModel : BasePage
     {
         #region "Variables"
         //control variables
@@ -23,7 +23,7 @@ namespace dsf_service_template_net6.Pages
         [BindProperty]
         public string option2 => (string)TempData[nameof(option2)];
         [BindProperty]
-        public string displaySummary { get; set; } = "display:none";
+        public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
         public string ErrorsDesc { get; set; } = "";
         [BindProperty]
@@ -66,14 +66,14 @@ namespace dsf_service_template_net6.Pages
         }
         void ClearErrors()
         {
-            displaySummary = "display:none";
+            DisplaySummary = "display:none";
             EmailSelection = "";
             ErrorsDesc = "";
         }
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
             //First Enable Summary Display
-            displaySummary = "display:block";
+            DisplaySummary = "display:block";
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
@@ -104,8 +104,10 @@ namespace dsf_service_template_net6.Pages
             return ret;
         }
         #endregion
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool review)
         {
+            //Set the Back and Next Link
+            SetLinks("EmailSelection", review, "No");
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
@@ -169,14 +171,15 @@ namespace dsf_service_template_net6.Pages
             //Re-assign defult email
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-           if (string.IsNullOrEmpty(citizen_data.data?.email))
-           {
-                Email_select.email= User.Claims.First(c => c.Type == "email").Value;
-           }else
-           {
+            if (string.IsNullOrEmpty(citizen_data.data?.email))
+            {
+                Email_select.email = User.Claims.First(c => c.Type == "email").Value;
+            }
+            else
+            {
                 Email_select.email = citizen_data.data.email;
-           }
-           //Validate Model
+            }
+            //Validate Model
             FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
             if (!result.IsValid)
             {
@@ -189,29 +192,16 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
-            if (review)
+            //Set the Back and Next Link
+            if (Email_select.use_other)
             {
-                if (Email_select.use_other)
-                {
-                    return RedirectToPage("/EmailEdit", null,new { review = "true" }, "mainContainer");
-                }
-                else
-                {
-                    return RedirectToPage("/ReviewPage", null, "mainContainer");
-                }
+                SetLinks("EmailSelection", review, "No");
             }
             else
             {
-                if (Email_select.use_other)
-                {
-                    return RedirectToPage("/EmailEdit", null, "mainContainer");
-                }
-                else
-                {
-                    return RedirectToPage("/ReviewPage", null, "mainContainer");
-                }
+                SetLinks("EmailSelection", review, "Yes");
             }
-
+            return RedirectToPage(NextLink, null, "mainContainer");
         }
     }
 }

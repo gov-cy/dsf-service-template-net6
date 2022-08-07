@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace dsf_service_template_net6.Pages
 {
-       public class MobileEditModel : PageModel
+       public class MobileEditModel : BasePage
     {
         #region "Variables"
         //Dependancy injection Variables
@@ -89,8 +89,9 @@ namespace dsf_service_template_net6.Pages
             return ret;
         }
         #endregion
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool review)
         {
+            SetLinks("SetMobile", review);
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
@@ -154,14 +155,8 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("mobileval");
             //Finally redirect
-            if (review)
-            {
-                return RedirectToPage("/ReviewPage", null, "mainContainer");
-            }
-            else
-            {
-                return RedirectToPage("/Email", null, "mainContainer");
-            }
+            SetLinks("SetMobile", review);
+            return RedirectToPage(NextLink, null, "mainContainer");
         }
     }
 }

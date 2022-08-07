@@ -6,6 +6,9 @@
 @inject IStringLocalizer<Program> Localizer
 @inject IHtmlLocalizer<Program> HtmlLocalizer
 @{
+    ViewBag.PreviousUrl=Model.BackLink;
+}
+@{
     Addressinfo Address = new Addressinfo();
     if (Model.ret_address != null)
     {

@@ -8,7 +8,8 @@ namespace dsf_service_template_net6.Data.Models
         public List<SelectListItem> Addresses;
         public bool HasUserEnteredPostalCode { get; set; } = false;
         public bool HasUserSelectedAddress { get; set; } = false;
-        public bool ShowErrorSummary { get; set; } = false; 
+        public bool ShowErrorSummary { get; set; } = false;
+        public bool NoResultsFound { get; set; } = false;
         public string ErrorDesc { get; set; } = string.Empty;
         public string SelectedAddress { get; set; }
         public string City { get; set; }
