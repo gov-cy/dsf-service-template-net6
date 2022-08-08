@@ -371,6 +371,7 @@ namespace dsf_service_template_net6.Pages
             {
                 HttpContext.Session.SetObjectAsJson("valresult", result_for_postal);
                 HttpContext.Session.SetObjectAsJson("SelectedPostalCodeOnly", ViewModel.postalCode);
+                HttpContext.Session.Remove("AddressEdit");
                 return RedirectToPage("AddressEdit");
             }
             //Get The drop down list before validation
