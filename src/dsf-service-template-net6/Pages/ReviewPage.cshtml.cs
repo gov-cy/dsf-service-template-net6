@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace dsf_service_template_net6.Pages
 {
     [BindProperties]
-    public class ReviewPageModel : BasePage
+    public class ReviewPageModel : PageModel
     {
         public IMyHttpClient _client;
         private IConfiguration _configuration;
@@ -28,11 +28,53 @@ namespace dsf_service_template_net6.Pages
         public string ret_mobile = string.Empty;
         public bool useEmailEditOnly = false;
         public bool useMobileEditOnly = false;
+        [BindProperty]
+        public string BackLink { get; set; } = "";
         #endregion
-        public IActionResult OnGet()
+        public void AddHistoryLinks(string curr)
         {
+
+            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
+            if (History.Count == 0)
+            {
+                History.Add("/");
+            }
+            int LastIndex = History.Count - 1;
+            if (History[LastIndex] != curr)
+            {
+                //Add to History
+                History.Add(curr);
+                //Set to memory
+
+                HttpContext.Session.SetObjectAsJson("History", History);
+            }
+        }
+        private string GetBackLink(string curr)
+        {
+            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
+            int currentIndex = History.FindIndex(x => x == curr);
+            //if not found
+            if (currentIndex == -1)
+            {
+                return "/";
+            }
+            //Last value in history
+            else if (currentIndex == 0)
+            {
+                var index = History.Count - 1;
+                return History[index].ToString();
+            }
+            //Return the previus of current
+            else
+            {
+                return History[currentIndex - 1].ToString();
+            }
+        }
+        public IActionResult OnGet()
+        {           
             //Set back and Next Link
-            SetLinks("ReviewPage", false);
+            AddHistoryLinks("ReviewPage");
+            BackLink = GetBackLink("/" + "ReviewPage");
             bool allow = AllowToProceed();
             if (!allow)
             {

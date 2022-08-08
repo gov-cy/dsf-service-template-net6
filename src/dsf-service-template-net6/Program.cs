@@ -37,6 +37,7 @@ builder.Services.AddControllers();
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
+    options.Conventions.AuthorizePage("/Navigation");
     options.Conventions.AuthorizePage("/Email");
     options.Conventions.AuthorizePage("/Mobile");
     options.Conventions.AuthorizePage("/Address");

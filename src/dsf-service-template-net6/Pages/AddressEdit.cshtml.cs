@@ -16,7 +16,7 @@ using dsf_service_template_net6.Pages.Shared;
 
 namespace dsf_service_template_net6.Pages
 {
-    public class AddressEditModel : BasePage
+    public class AddressEditModel : PageModel
     {
         #region "Variables"
         //Dependancy injection Variables
@@ -25,7 +25,8 @@ namespace dsf_service_template_net6.Pages
         public readonly IMyHttpClient _client;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AddressEditModel> _logger;
-        
+        Navigation _nav = new Navigation();
+
         //Form Controls
         [BindProperty]
         public string PostalCodeErrorClass { get; set; } = "";
@@ -33,8 +34,12 @@ namespace dsf_service_template_net6.Pages
         public string StreetErrorClass { get; set; } = "";
         [BindProperty]
         public string FlatErrorClass { get; set; } = "";
+        [BindProperty]
+        public string BackLink { get; set; } = "";
+       
+        [BindProperty]
+        public string NextLink { get; set; } = "";
         #endregion
-
         public AddressEditModel(IStringLocalizer<AddressEdit> localizer, IValidator<AddressEditViewModel> validator, IMyHttpClient client, IConfiguration config, ILogger<AddressEditModel> logger)
         {
             _localizer = localizer;
@@ -45,6 +50,77 @@ namespace dsf_service_template_net6.Pages
         }
 
         #region "Custom Methods"
+        public void AddHistoryLinks(string curr)
+        {
+
+            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
+            if (History.Count == 0)
+            {
+                History.Add("/");
+            }
+            int LastIndex = History.Count - 1;
+            if (History[LastIndex] != curr)
+            {
+                //Add to History
+                History.Add(curr);
+                //Set to memory
+
+                HttpContext.Session.SetObjectAsJson("History", History);
+            }
+        }
+        public void SetLinks(string curr, bool Review, string choice = "0")
+        {
+            //First add current page to History
+            AddHistoryLinks("/" + curr);
+            var authTime = string.Empty;
+          
+                authTime = User.Claims.First(c => c.Type == "auth_time").Value ;
+           
+            var citizen_data = new CitizenDataResponse();
+            if (!string.IsNullOrEmpty(authTime))
+            {
+                citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            }
+
+            if (Review)
+            {
+                NextLink = "/ReviewPage";
+
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(citizen_data?.data.mobile))
+                {
+                    NextLink = "/MobileEdit";
+                }
+                else
+                {
+                    NextLink = "/Mobile";
+                }
+
+            }
+        }
+        private string GetBackLink(string curr)
+        {
+            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
+            int currentIndex = History.FindIndex(x => x == curr);
+            //if not found
+            if (currentIndex == -1)
+            {
+                return "/";
+            }
+            //Last value in history
+            else if (currentIndex == 0)
+            {
+                var index = History.Count - 1;
+                return History[index].ToString();
+            }
+            //Return the previus of current
+            else
+            {
+                return History[currentIndex - 1].ToString();
+            }
+        }
         private List<Addressinfo> AddressesForPostalCode
         {
             get
@@ -232,8 +308,10 @@ namespace dsf_service_template_net6.Pages
         /// </summary>
         public IActionResult OnGet(bool review)
         {
+            Navigation _nav = new Navigation();
             //Set back and Next Link
             SetLinks("SetAddress", review);
+            BackLink = GetBackLink("/" + "SetAddress");
             //Check if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
@@ -356,6 +434,8 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("TypeStreetNo");
             HttpContext.Session.Remove("TypeFlatNo");
             //Finall redirect NR code addition
+            Navigation _nav = new Navigation();
+            //Set back and Next Link
             SetLinks("SetAddress", review);
             return RedirectToPage(NextLink, null, "mainContainer");
             

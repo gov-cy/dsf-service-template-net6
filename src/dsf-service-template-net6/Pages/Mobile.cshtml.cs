@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace dsf_service_template_net6.Pages
 {
     [BindProperties]
-    public class MobileModel : BasePage
+    public class MobileModel : PageModel
     {
         #region "Variables"
         //control variables
@@ -23,12 +23,19 @@ namespace dsf_service_template_net6.Pages
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
         public string MobileSelection = "";
+        [BindProperty]
+        public string BackLink { get; set; } = "";
+
+        [BindProperty]
+        public string NextLink { get; set; } = "";
+
         //Dependancy injection Variables
         public IMyHttpClient _client;
         private IConfiguration _configuration;
         private IValidator<MobileSelect> _validator;
         //Object for session data 
         public MobileSelect Mobile_select;
+        Navigation _nav = new Navigation();
         #endregion
         #region "Custom Methods"
         public MobileModel(IValidator<MobileSelect> validator, IMyHttpClient client, IConfiguration config)
@@ -37,6 +44,79 @@ namespace dsf_service_template_net6.Pages
             _configuration = config;
             _validator = validator;
             Mobile_select = new MobileSelect();
+        }
+        public void AddHistoryLinks(string curr)
+        {
+
+            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
+            if (History.Count == 0)
+            {
+                History.Add("/");
+            }
+            int LastIndex = History.Count - 1;
+            if (History[LastIndex] != curr)
+            {
+                //Add to History
+                History.Add(curr);
+                //Set to memory
+
+                HttpContext.Session.SetObjectAsJson("History", History);
+            }
+        }
+        public void SetLinks(string curr, bool Review, string choice = "0")
+        {
+            //First add current page to History
+            AddHistoryLinks("/" + curr);
+            //Get Citizen data from Session
+                        
+            if (Review)
+            {  //For Selection Pages only Yes and No exists
+                if (choice == "Yes")
+                {
+                    NextLink = "/ReviewPage";
+                }
+                else if (choice == "No")
+                {
+                    NextLink = "/MobileEdit/true";
+                }
+
+            }
+            else
+            {
+                //Find the back link
+                if (choice == "Yes")
+                {
+                    NextLink = "/Email";
+
+                }
+                else if (choice == "No")
+                {
+                    NextLink = "/MobileEdit";
+                }
+
+            }
+
+        }
+        private string GetBackLink(string curr)
+        {
+            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
+            int currentIndex = History.FindIndex(x => x == curr);
+            //if not found
+            if (currentIndex == -1)
+            {
+                return "/";
+            }
+            //Last value in history
+            else if (currentIndex == 0)
+            {
+                var index = History.Count - 1;
+                return History[index].ToString();
+            }
+            //Return the previus of current
+            else
+            {
+                return History[currentIndex - 1].ToString();
+            }
         }
         bool ShowErrors()
         {
@@ -96,8 +176,10 @@ namespace dsf_service_template_net6.Pages
         #endregion
         public IActionResult OnGet(bool review)
         {
-            //Set the Back and Next Link
+            Navigation _nav = new Navigation();
+             //Set back and Next Link
             SetLinks("MobileSelection", review, "No");
+            BackLink = GetBackLink("/" + "MobileSelection");
             //Chack if user has sequentialy load the page
             bool allow=AllowToProceed();
             if (!allow)
@@ -166,6 +248,9 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("valresult");
             //Finally redirect
             //Set the Back and Next Link
+            Navigation _nav = new Navigation();
+            //Set back and Next Link
+            
             if (Mobile_select.use_other)
             {
                 SetLinks("MobileSelection", review, "No");

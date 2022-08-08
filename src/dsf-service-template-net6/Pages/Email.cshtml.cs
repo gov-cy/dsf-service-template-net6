@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace dsf_service_template_net6.Pages
 {
-       public class EmailModel : BasePage
+       public class EmailModel : PageModel
     {
         #region "Variables"
         //control variables
@@ -28,6 +28,10 @@ namespace dsf_service_template_net6.Pages
         public string ErrorsDesc { get; set; } = "";
         [BindProperty]
         public string EmailSelection { get; set; } = "";
+        [BindProperty]
+        public string BackLink { get; set; } = "";
+        [BindProperty]
+        public string NextLink { get; set; } = "";
         //Dependancy injection Variables
         public IMyHttpClient _client;
         private IConfiguration _configuration;
@@ -44,6 +48,62 @@ namespace dsf_service_template_net6.Pages
             Email_select = new EmailSelect();
         }
         //Use to show error messages if web form has errors
+        public void AddHistoryLinks(string curr)
+        {
+
+            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
+            if (History.Count == 0)
+            {
+                History.Add("/");
+            }
+            int LastIndex = History.Count - 1;
+            if (History[LastIndex] != curr)
+            {
+                //Add to History
+                History.Add(curr);
+                //Set to memory
+
+                HttpContext.Session.SetObjectAsJson("History", History);
+            }
+        }
+        public void SetLinks(string curr, bool Review, string choice = "0")
+        {
+            //First add current page to History
+            AddHistoryLinks("/" + curr);
+            //Get Citizen data from Session
+            if (choice == "Yes")
+            {
+                NextLink = "/ReviewPage";
+            }
+            else if (choice == "No")
+            {
+                NextLink = "/EmailEdit";
+            }
+
+
+
+        }
+        private string GetBackLink(string curr)
+        {
+            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
+            int currentIndex = History.FindIndex(x => x == curr);
+            //if not found
+            if (currentIndex == -1)
+            {
+                return "/";
+            }
+            //Last value in history
+            else if (currentIndex == 0)
+            {
+                var index = History.Count - 1;
+                return History[index].ToString();
+            }
+            //Return the previus of current
+            else
+            {
+                return History[currentIndex - 1].ToString();
+            }
+        }
         bool ShowErrors()
         {
             if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
@@ -106,8 +166,10 @@ namespace dsf_service_template_net6.Pages
         #endregion
         public IActionResult OnGet(bool review)
         {
-            //Set the Back and Next Link
+            Navigation _nav = new Navigation();
+            //Set back and Next Link
             SetLinks("EmailSelection", review, "No");
+            BackLink = GetBackLink("/" + "EmailSelection");
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
@@ -193,6 +255,9 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("valresult");
             //Finally redirect
             //Set the Back and Next Link
+            
+            //Set back and Next Link
+            
             if (Email_select.use_other)
             {
                 SetLinks("EmailSelection", review, "No");
@@ -201,6 +266,7 @@ namespace dsf_service_template_net6.Pages
             {
                 SetLinks("EmailSelection", review, "Yes");
             }
+
             return RedirectToPage(NextLink, null, "mainContainer");
         }
     }
