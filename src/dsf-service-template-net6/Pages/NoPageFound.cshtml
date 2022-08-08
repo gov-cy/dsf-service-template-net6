@@ -4,5 +4,8 @@
 @inject IStringLocalizer<Program> Localizer
 @inject IHtmlLocalizer<Program> HtmlLocalizer
 @model NoPageFoundModel
+@{
+    Layout = "_LayoutNoBackLink";
+}
 <h1>@Localizer["BadRoute_Title"]</h1>
 @HtmlLocalizer["BadRoute_Instructions"]

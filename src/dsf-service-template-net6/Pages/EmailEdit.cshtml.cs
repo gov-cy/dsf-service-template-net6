@@ -14,11 +14,10 @@ namespace dsf_service_template_net6.Pages
     {
         #region "Variables"
         //Dependancy injection Variables
-        private IValidator<EmailEdit> _validator;
-        IStringLocalizer _Loc;
+        private readonly IValidator<EmailEdit> _validator;
         [BindProperty]
         //control variables
-        public string displaySummary { get; set; } = "display:none";
+        public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
         public string ErrorsDesc { get; set; } = "";
         [BindProperty]
@@ -27,18 +26,69 @@ namespace dsf_service_template_net6.Pages
         public string EmailSelection { get; set; } = "";
         [BindProperty]
         public string email { get; set; }
+        [BindProperty]
+        public string BackLink { get; set; } = "";
+
+        [BindProperty]
+        public string NextLink { get; set; } = "";
         //Object for session data 
         public EmailEdit emailEdit;
+        Navigation _nav = new Navigation();
         #endregion
         #region "Custom Methods"
-        public EmailEditModel(IValidator<EmailEdit> validator, IStringLocalizer<cEmailEditValidator> Loc)
+        public EmailEditModel(IValidator<EmailEdit> validator)
         {   _validator = validator;
-            _Loc = Loc;
-            emailEdit = new EmailEdit();
+             emailEdit = new EmailEdit();
+        }
+        public void AddHistoryLinks(string curr)
+        {
+
+            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
+            if (History.Count == 0)
+            {
+                History.Add("/");
+            }
+            int LastIndex = History.Count - 1;
+            if (History[LastIndex] != curr)
+            {
+                //Add to History
+                History.Add(curr);
+                //Set to memory
+
+                HttpContext.Session.SetObjectAsJson("History", History);
+            }
+        }
+        public void SetLinks(string curr, bool Review, string choice = "0")
+        {
+            //First add current page to History
+           AddHistoryLinks("/" + curr);
+
+            NextLink = "/ReviewPage";
+        }
+        private string GetBackLink(string curr)
+        {
+            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
+            int currentIndex = History.FindIndex(x => x == curr);
+            //if not found
+            if (currentIndex == -1)
+            {
+                return "/";
+            }
+            //Last value in history
+            else if (currentIndex == 0)
+            {
+                var index = History.Count - 1;
+                return History[index].ToString();
+            }
+            //Return the previus of current
+            else
+            {
+                return History[currentIndex - 1].ToString();
+            }
         }
         void ClearErrors()
         {
-            displaySummary = "display:none";
+            DisplaySummary = "display:none";
             EmailErrorClass = "";
             ErrorsDesc = "";
         }
@@ -65,7 +115,7 @@ namespace dsf_service_template_net6.Pages
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
             //First Enable Summary Display
-            displaySummary = "display:block";
+            DisplaySummary = "display:block";
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
@@ -96,8 +146,12 @@ namespace dsf_service_template_net6.Pages
             return ret;
         }
         #endregion
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool review)
         {
+            Navigation _nav = new Navigation();
+            //Set back and Next Link
+           SetLinks("SetEmail", review);
+           BackLink = GetBackLink("/" + "SetEmail");
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
@@ -148,8 +202,11 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("emailval");
-            //Finally redirect
-            return RedirectToPage("/ReviewPage", null, "mainContainer");
+            //Finall redirect
+            Navigation _nav = new Navigation();
+            //Set back and Next Link
+            SetLinks("SetEmail", review);
+            return RedirectToPage(NextLink, null, "mainContainer");
         }
     }
    

@@ -7,6 +7,7 @@ namespace dsf_service_template_net6.Pages
     {
         public void OnGet()
         {
+            
         }
     }
 }

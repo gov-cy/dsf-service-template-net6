@@ -1,6 +1,7 @@
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
+using dsf_service_template_net6.Pages.Shared;
 using dsf_service_template_net6.Services;
 using FluentValidation;
 using FluentValidation.Results;
@@ -28,6 +29,11 @@ namespace dsf_service_template_net6.Pages
         public string ErrorsDesc { get; set; } = "";
         [BindProperty]
         public string AddressSelection { get; set; } = "";
+        [BindProperty]
+        public string BackLink { get; set; } = "";
+
+        [BindProperty]
+        public string NextLink { get; set; } = "";
         //Dependancy injection Variables
         private readonly ILogger<AddressModel> _logger;
         public IMyHttpClient _client;
@@ -36,6 +42,7 @@ namespace dsf_service_template_net6.Pages
         //Object for session data, will be set internally
         //from web form variables
         public AddressSelect address_select;
+        
         #endregion
         #region "Custom Methods"
         //Constructor
@@ -45,8 +52,102 @@ namespace dsf_service_template_net6.Pages
                 _validator = validator;
                 address_select = new AddressSelect();
                 _logger = logger;
+            
         }
-       //Use to show error messages if web form has errors
+        public void AddHistoryLinks(string curr)
+        {
+
+            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
+            if (History.Count == 0)
+            {
+                History.Add("/");
+            }
+            int LastIndex = History.Count - 1;
+            if (History[LastIndex] != curr)
+            {
+                //Add to History
+                History.Add(curr);
+                //Set to memory
+
+                HttpContext.Session.SetObjectAsJson("History", History);
+            }
+        }
+        public void SetLinks(string curr, bool Review, string choice = "0")
+        {
+            //First add current page to History
+            AddHistoryLinks("/" + curr);
+            //Get Citizen data from Session
+
+            var citizen_data = new CitizenDataResponse();
+
+           
+               var authTime = User.Claims.First(c => c.Type == "auth_time").Value ;
+           
+               citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails",authTime);
+
+
+           
+                    if (Review)
+                    {  //For Selection Pages only Yes and No exists
+                        if (choice == "Yes")
+                        {
+                            NextLink = "/ReviewPage";
+
+                        }
+                        else if (choice == "No")
+                        {
+
+                            NextLink = "/AddressEdit/true";
+                        }
+
+                    }
+                    else
+                    {
+
+                        if (choice == "Yes")
+                        {
+                            if (string.IsNullOrEmpty(citizen_data?.data.mobile))
+                            {
+                                NextLink = "/MobileEdit";
+                            }
+                            else
+                            {
+                                NextLink = "/Mobile";
+                            }
+
+                        }
+                        else if (choice == "No")
+                        {
+
+                            NextLink = "/AddressEdit";
+                        }
+
+                    }
+                      
+        }
+        private string GetBackLink(string curr)
+        {
+            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
+            
+            int currentIndex = History?.FindIndex(x => x == curr) ?? -1;
+            //if not found
+            if (currentIndex == -1)
+            {
+                return "/";
+            }
+            //Last value in history
+            else if (currentIndex == 0)
+            {
+                var index = History.Count - 1;
+                return History[index].ToString();
+            }
+            //Return the previus of current
+            else
+            {
+                return History[currentIndex - 1].ToString();
+            }
+        }
+        //Use to show error messages if web form has errors
         bool ShowErrors()
         {
             if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
@@ -126,13 +227,18 @@ namespace dsf_service_template_net6.Pages
             return Res;
         }
         #endregion
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool review)
         {
+           
+            //Set back and Next Link
+            SetLinks("AddressSelection", review, "No");
+            BackLink = GetBackLink("/" + "AddressSelection");
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
             CitizenDataResponse res;
             //If coming fromPost
             if (!ShowErrors())
             {
+                
                 //Load the web form
                 //get the current lang
                 var lang = "";
@@ -219,33 +325,15 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
-            if (review)
+            //Set the Back and Next Link
+            if (address_select.use_other)
             {
-                if (address_select.use_other)
-                {
-                    return RedirectToPage("/AddressEdit", null,new { review = "true" }, "mainContainer");
-                }
-                else
-                {
-                    return RedirectToPage("/ReviewPage", null, "mainContainer");
-                }
-            }
-            else
+                SetLinks("AddressSelection", review, "No");
+            }else
             {
-                if (address_select.use_other)
-                {
-                    return RedirectToPage("/AddressEdit", null, "mainContainer");
-                }
-                else if (string.IsNullOrEmpty(citizen_data.data.mobile))
-                {
-                    return RedirectToPage("/MobileEdit", null, "mainContainer");
-                }
-                else
-                {
-                    return RedirectToPage("/Mobile", null, "mainContainer");
-                }
+                SetLinks("AddressSelection", review, "Yes");
             }
-
+            return RedirectToPage(NextLink, null, "mainContainer");
         }
     }
 

@@ -564,4 +564,24 @@
     <value>Αριθμός οδού</value>
     <comment>Address Edit Page</comment>
   </data>
+  <data name="FlatNoLength" xml:space="preserve">
+    <value>5 Χαρακτήρες Επιτρέποντεαι</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="PostalResultsNotFound" xml:space="preserve">
+    <value>Δεν βρέθηκαν διευθύνσεις </value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="PostCodeLength" xml:space="preserve">
+    <value>4 Χαρακτήρες Επιτρέποντεαι</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="StreetNoLength" xml:space="preserve">
+    <value>5 Χαρακτήρες Επιτρέποντεαι</value>
+    <comment>Address Edit Validator</comment>
+  </data>
+  <data name="StreetNoMandatory" xml:space="preserve">
+    <value>Ο Αριθμός οδού είναι υποχρεωτικός</value>
+    <comment>Address Edit Validator</comment>
+  </data>
 </root>

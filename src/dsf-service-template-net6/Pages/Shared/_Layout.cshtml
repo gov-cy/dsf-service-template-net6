@@ -75,8 +75,9 @@
         {
             <div class="govcy-mb-4 govcy-float-start">
                 <span class="bi bi-chevron-left"></span>
-                <a class="govcy-back-link" href="javascript:history.back();">@Localizer["BackButton_Link"]</a>
+                <a class="govcy-back-link" href="@ViewBag.PreviousUrl">@Localizer["BackButton_Link"]</a>
             </div>
+		
             <div class="govcy-text-end" id="beforeMainContainerUsername">
                 <div class="govcy-text-end govcy-mb-4">
                     @User.Claims.First(c => c.Type == "name")?.Value | <a href="/Account/LogOut" class="govcy-back-link">@Localizer["LogOut_SignOut"]</a>
@@ -87,8 +88,9 @@
         {
             <div class="govcy-mb-4">
                 <span class="bi bi-chevron-left"></span>
-                <a class="govcy-back-link" href="javascript:history.back();">@Localizer["BackButton_Link"]</a>
+                <a class="govcy-back-link" href="@ViewBag.PreviousUrl">@Localizer["BackButton_Link"]</a>
             </div>
+		
         }
     </section>
     @*Main Body*@

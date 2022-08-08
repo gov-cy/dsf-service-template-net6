@@ -3,9 +3,10 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using dsf_service_template_net6.Data.Models
 @model dsf_service_template_net6.Pages.AddressEditModel
-
 @inject IStringLocalizer<Program> Localizer
-
+@{
+    ViewBag.PreviousUrl=Model.BackLink;
+}
 <div class="govcy-container">
     <div style="@((!Model.ViewModel.ShowErrorSummary) ? "display:none" : "")" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
         <h2>@Localizer["ErrorMessage-General"]</h2>
@@ -27,15 +28,36 @@
         </div>
         <button class="govcy-btn-secondary">@Localizer["Find"]</button>
     </form>
-
-    @if (Model.ViewModel.Addresses?.Count >0 || Model.ViewModel.HasUserSelectedAddress)
+      <div style="@((!Model.ViewModel.NoResultsFound) ? "display:none" : "")" class="govcy-alert-warning">
+       <span class="material-icons govcy-alert-warning-icon">error</span>
+       <span class="govcy-alert-warning-text" >@Localizer["PostalResultsNotFound"]</span>
+    </div>
+    @if (Model.ViewModel.Addresses?.Count >0 || (Model.ViewModel.HasUserSelectedAddress && !Model.ViewModel.NoResultsFound))
     {
         <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown" novalidate>
             <input type="hidden" asp-for="@Model.ViewModel.postalCode">
             <div class="govcy-form-control govcy-mb-4">
                     <label class="govcy-label" for="input">@Localizer["SelectAddress"]</label>
-                    <select class="govcy-select" onchange="this.form.submit()" asp-for="@Model.ViewModel.SelectedAddress" asp-items="@Model.ViewModel.Addresses">
-                    </select>
+                  
+                    @*<select class="govcy-select" onchange="this.form.submit()" asp-for="@Model.ViewModel.SelectedAddress" asp-items="@Model.ViewModel.Addresses">
+                    </select>*@
+				<select class="govcy-select" id="selectedAddressCode" onchange="this.form.submit()" name="ViewModel.SelectedAddress">
+					<option value="">@Localizer["PleaseSelectAddress"]</option>
+					@if (@Model.ViewModel.Addresses != null)
+					{
+						@foreach (var item in @Model.ViewModel.Addresses)
+						{
+							if (@Model.ViewModel.SelectedAddress == item.Value)
+							{
+								<option selected value="@item.Value">@item.Text</option>
+							}
+							else
+							{
+								<option value="@item.Value">@item.Text</option>
+							}
+						}
+					}
+				</select>
                 </div>
         </form>
 
@@ -78,7 +100,7 @@
                         <tr>
                             <th scope="row" class="col-3">@Localizer["Street"]</th>
                             <td class="col-7">
-                                <span class="govcy-d-block">@Model.ViewModel.SelectedAddressName.Split(" ").First()</span>
+                                <span class="govcy-d-block">@Model.ViewModel.SelectedAddressName</span>
                             </td>
                         </tr>
 
