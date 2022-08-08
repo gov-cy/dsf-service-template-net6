@@ -206,7 +206,9 @@ namespace dsf_service_template_net6.Pages
             Navigation _nav = new Navigation();
             //Set back and Next Link
             SetLinks("SetEmail", review);
-            return RedirectToPage(NextLink, null, "mainContainer");
+           
+                return RedirectToPage(NextLink, null, "mainContainer");
+            
         }
     }
    

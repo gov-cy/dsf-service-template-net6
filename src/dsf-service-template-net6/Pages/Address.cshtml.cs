@@ -97,7 +97,7 @@ namespace dsf_service_template_net6.Pages
                         else if (choice == "No")
                         {
 
-                            NextLink = "/AddressEdit/true";
+                            NextLink = "/AddressEdit";
                         }
 
                     }
@@ -333,7 +333,14 @@ namespace dsf_service_template_net6.Pages
             {
                 SetLinks("AddressSelection", review, "Yes");
             }
-            return RedirectToPage(NextLink, null, "mainContainer");
+            if (review)
+            {
+                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+            }
+            else
+            {
+                return RedirectToPage(NextLink, null, "mainContainer");
+            }
         }
     }
 

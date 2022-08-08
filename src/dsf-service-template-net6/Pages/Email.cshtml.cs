@@ -255,9 +255,9 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("valresult");
             //Finally redirect
             //Set the Back and Next Link
-            
+
             //Set back and Next Link
-            
+
             if (Email_select.use_other)
             {
                 SetLinks("EmailSelection", review, "No");
@@ -267,7 +267,14 @@ namespace dsf_service_template_net6.Pages
                 SetLinks("EmailSelection", review, "Yes");
             }
 
-            return RedirectToPage(NextLink, null, "mainContainer");
+            if (review)
+            {
+                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+            }
+            else
+            {
+                return RedirectToPage(NextLink, null, "mainContainer");
+            }
         }
     }
 }
