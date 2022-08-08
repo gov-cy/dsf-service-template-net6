@@ -321,6 +321,7 @@ namespace dsf_service_template_net6.Pages
             
             Addressinfo addressFromSession = HttpContext.Session.GetObjectFromJson<Addressinfo>("AddressEdit", User.Claims.First(c => c.Type == "auth_time").Value);
             ViewModel.postalCode = HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCode") ?? addressFromSession?.postalCode.ToString() ?? "";
+           
             ViewModel.SelectedAddress = HttpContext.Session.GetObjectFromJson<string?>("SelectedAddress") ?? addressFromSession?.item.code.ToString() ?? "";
             ViewModel.StreetNo = HttpContext.Session.GetObjectFromJson<string?>("TypeStreetNo") ?? addressFromSession?.item.street.streetNumber.ToString() ?? "";
             ViewModel.FlatNo = HttpContext.Session.GetObjectFromJson<string?>("TypeFlatNo") ?? addressFromSession?.item.street?.apartmentNumber?.ToString() ?? "";
@@ -349,6 +350,10 @@ namespace dsf_service_template_net6.Pages
                 //Remove list
                 ViewModel.Addresses?.Clear();
             }
+            if (ViewModel.postalCode == "")
+            {
+                ViewModel.postalCode = HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCodeOnly") ?? "";
+            }
             return Page();
         }
 
@@ -360,12 +365,21 @@ namespace dsf_service_template_net6.Pages
         {
             //1-Initialize the user selection first
             HttpContext.Session.Remove("SelectedAddress");
+            //Validate only postal code first
+            ValidationResult result_for_postal = _validator.Validate(ViewModel);
+            if (!result_for_postal.IsValid)
+            {
+                HttpContext.Session.SetObjectAsJson("valresult", result_for_postal);
+                HttpContext.Session.SetObjectAsJson("SelectedPostalCodeOnly", ViewModel.postalCode);
+                return RedirectToPage("AddressEdit");
+            }
             //Get The drop down list before validation
             if (!string.IsNullOrEmpty(ViewModel.postalCode))
             {
                 ViewModel.Addresses= GetViewModelAddresses();
             }
-            ViewModel.HasUserEnteredPostalCode = true;
+           
+                ViewModel.HasUserEnteredPostalCode = true;
             ViewModel.HasUserSelectedAddress = false;
             //2-Validate
             ValidationResult result = _validator.Validate(ViewModel);
