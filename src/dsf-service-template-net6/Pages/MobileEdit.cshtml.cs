@@ -76,7 +76,7 @@ namespace dsf_service_template_net6.Pages
         private string GetBackLink(string curr)
         {
             var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindIndex(x => x == curr);
+            int currentIndex = History.FindLastIndex(x => x == curr);
             //if not found
             if (currentIndex == -1)
             {
@@ -150,8 +150,7 @@ namespace dsf_service_template_net6.Pages
         }
         #endregion
         public IActionResult OnGet(bool review)
-        {
-            Navigation _nav = new Navigation();
+        {           
             //Set back and Next Link
             SetLinks("SetMobile", review);
             BackLink = GetBackLink("/" + "SetMobile");
@@ -169,6 +168,7 @@ namespace dsf_service_template_net6.Pages
                 if (SessionMobEdit != null)
                 {
                     mobEdit = SessionMobEdit;
+                    mobile = mobEdit.mobile;
                 }
               
             }
@@ -221,7 +221,14 @@ namespace dsf_service_template_net6.Pages
             Navigation _nav = new Navigation();
             //Set back and Next Link
             SetLinks("SetMobile", review);
-            return RedirectToPage(NextLink, null, "mainContainer");
+            if (review)
+            {
+                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+            }
+            else
+            {
+                return RedirectToPage(NextLink, null, "mainContainer");
+            }
         }
     }
 }

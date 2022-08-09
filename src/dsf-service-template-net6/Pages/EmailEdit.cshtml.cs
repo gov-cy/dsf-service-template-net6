@@ -68,7 +68,7 @@ namespace dsf_service_template_net6.Pages
         private string GetBackLink(string curr)
         {
             var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindIndex(x => x == curr);
+            int currentIndex = History.FindLastIndex(x => x == curr);
             //if not found
             if (currentIndex == -1)
             {
@@ -206,7 +206,9 @@ namespace dsf_service_template_net6.Pages
             Navigation _nav = new Navigation();
             //Set back and Next Link
             SetLinks("SetEmail", review);
-            return RedirectToPage(NextLink, null, "mainContainer");
+           
+                return RedirectToPage(NextLink, null, "mainContainer");
+            
         }
     }
    

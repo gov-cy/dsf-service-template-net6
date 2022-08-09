@@ -584,4 +584,8 @@
     <value>Ο Αριθμός οδού είναι υποχρεωτικός</value>
     <comment>Address Edit Validator</comment>
   </data>
+  <data name="PostCodeValid" xml:space="preserve">
+    <value>Μόνο 4 αριθμοί επιτρέπονται</value>
+    <comment>Address Edit Validator</comment>
+  </data>
 </root>

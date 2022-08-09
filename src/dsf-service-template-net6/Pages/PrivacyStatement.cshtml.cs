@@ -17,7 +17,7 @@ namespace dsf_service_template_net6.Pages
         private string GetBackLink(string curr)
         {
             var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindIndex(x => x == curr);
+            int currentIndex = History.FindLastIndex(x => x == curr);
             //if not found
             if (currentIndex == -1)
             {

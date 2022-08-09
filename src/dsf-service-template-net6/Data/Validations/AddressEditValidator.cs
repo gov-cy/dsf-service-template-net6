@@ -16,8 +16,9 @@ namespace dsf_service_template_net6.Data.Validations
             RuleFor(x => x.postalCode)
             .Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage(PostalRequiredMsg)
-           .Length(4).WithMessage(_Localizer["PostCodeLength"]);
-            When(p => !string.IsNullOrEmpty(p.postalCode) && p.HasUserSelectedAddress==false, () =>
+            .Length(4).WithMessage(_Localizer["PostCodeLength"])
+            .Matches("^[0-9]{4}$").WithMessage(_Localizer["PostCodeValid"]);
+            When(p => !string.IsNullOrEmpty(p.postalCode) && p.HasUserSelectedAddress==false && p.HasUserEnteredPostalCode == true, () =>
             {
                 RuleFor(x => x.Addresses)
                 .Cascade(CascadeMode.Stop)

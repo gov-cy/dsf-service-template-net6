@@ -77,7 +77,7 @@ namespace dsf_service_template_net6.Pages
                 }
                 else if (choice == "No")
                 {
-                    NextLink = "/MobileEdit/true";
+                    NextLink = "/MobileEdit";
                 }
 
             }
@@ -100,7 +100,7 @@ namespace dsf_service_template_net6.Pages
         private string GetBackLink(string curr)
         {
             var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindIndex(x => x == curr);
+            int currentIndex = History.FindLastIndex(x => x == curr);
             //if not found
             if (currentIndex == -1)
             {
@@ -259,7 +259,14 @@ namespace dsf_service_template_net6.Pages
             {
                 SetLinks("MobileSelection", review, "Yes");
             }
-            return RedirectToPage(NextLink, null, "mainContainer");
+            if (review)
+            {
+                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+            }
+            else
+            {
+                return RedirectToPage(NextLink, null, "mainContainer");
+            }
 
         }
     }

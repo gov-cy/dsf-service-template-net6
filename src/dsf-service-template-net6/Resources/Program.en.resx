@@ -583,4 +583,8 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>The Street Number is required</value>
     <comment>Address Edit Validator</comment>
   </data>
+  <data name="PostCodeValid" xml:space="preserve">
+    <value>4 Numbers are allowed</value>
+    <comment>Address Edit Validator</comment>
+  </data>
 </root>

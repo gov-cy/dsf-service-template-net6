@@ -25,8 +25,7 @@ namespace dsf_service_template_net6.Pages
         public readonly IMyHttpClient _client;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AddressEditModel> _logger;
-        Navigation _nav = new Navigation();
-
+       
         //Form Controls
         [BindProperty]
         public string PostalCodeErrorClass { get; set; } = "";
@@ -103,7 +102,7 @@ namespace dsf_service_template_net6.Pages
         private string GetBackLink(string curr)
         {
             var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindIndex(x => x == curr);
+            int currentIndex = History.FindLastIndex(x => x == curr);
             //if not found
             if (currentIndex == -1)
             {
@@ -172,6 +171,7 @@ namespace dsf_service_template_net6.Pages
             {
                 return new List<Addressinfo>();
             }
+            
             if (ViewModel?.postalCode?.Length > 0)
             {
                     string response;
@@ -307,8 +307,7 @@ namespace dsf_service_template_net6.Pages
         /// Get Method use to load the content for each post
         /// </summary>
         public IActionResult OnGet(bool review)
-        {
-            Navigation _nav = new Navigation();
+        {            
             //Set back and Next Link
             SetLinks("SetAddress", review);
             BackLink = GetBackLink("/" + "SetAddress");
@@ -318,17 +317,20 @@ namespace dsf_service_template_net6.Pages
             {
                 return RedirectToAction("LogOut", "Account");
             }
-
+           
+            
             Addressinfo addressFromSession = HttpContext.Session.GetObjectFromJson<Addressinfo>("AddressEdit", User.Claims.First(c => c.Type == "auth_time").Value);
-            ViewModel.postalCode = addressFromSession?.postalCode.ToString() ?? HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCode") ?? "";
-            ViewModel.SelectedAddress = addressFromSession?.item.code.ToString() ?? HttpContext.Session.GetObjectFromJson<string?>("SelectedAddress") ?? "";
+            ViewModel.postalCode = HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCode") ?? addressFromSession?.postalCode.ToString() ?? "";
+           
+            ViewModel.SelectedAddress = HttpContext.Session.GetObjectFromJson<string?>("SelectedAddress") ?? addressFromSession?.item.code.ToString() ?? "";
             ViewModel.StreetNo = HttpContext.Session.GetObjectFromJson<string?>("TypeStreetNo") ?? addressFromSession?.item.street.streetNumber.ToString() ?? "";
             ViewModel.FlatNo = HttpContext.Session.GetObjectFromJson<string?>("TypeFlatNo") ?? addressFromSession?.item.street?.apartmentNumber?.ToString() ?? "";
             ViewModel.HasUserEnteredPostalCode = !string.IsNullOrEmpty(ViewModel.postalCode);
             ViewModel.HasUserSelectedAddress = !string.IsNullOrEmpty(ViewModel.SelectedAddress);
-                        
+             
+         
             //if user has selected adress
-            if (ViewModel.HasUserSelectedAddress)
+             if (ViewModel.HasUserSelectedAddress)
             {
                 if (addressFromSession == null)
                     addressFromSession = AddressesForPostalCode.First(a => a.item.code == int.Parse(ViewModel.SelectedAddress));
@@ -348,6 +350,10 @@ namespace dsf_service_template_net6.Pages
                 //Remove list
                 ViewModel.Addresses?.Clear();
             }
+            if (ViewModel.postalCode == "")
+            {
+                ViewModel.postalCode = HttpContext.Session.GetObjectFromJson<string?>("SelectedPostalCodeOnly") ?? "";
+            }
             return Page();
         }
 
@@ -359,12 +365,22 @@ namespace dsf_service_template_net6.Pages
         {
             //1-Initialize the user selection first
             HttpContext.Session.Remove("SelectedAddress");
+            //Validate only postal code first
+            ValidationResult result_for_postal = _validator.Validate(ViewModel);
+            if (!result_for_postal.IsValid)
+            {
+                HttpContext.Session.SetObjectAsJson("valresult", result_for_postal);
+                HttpContext.Session.SetObjectAsJson("SelectedPostalCodeOnly", ViewModel.postalCode);
+                HttpContext.Session.Remove("AddressEdit");
+                return RedirectToPage("AddressEdit");
+            }
             //Get The drop down list before validation
             if (!string.IsNullOrEmpty(ViewModel.postalCode))
             {
                 ViewModel.Addresses= GetViewModelAddresses();
             }
-            ViewModel.HasUserEnteredPostalCode = true;
+           
+                ViewModel.HasUserEnteredPostalCode = true;
             ViewModel.HasUserSelectedAddress = false;
             //2-Validate
             ValidationResult result = _validator.Validate(ViewModel);
@@ -398,7 +414,7 @@ namespace dsf_service_template_net6.Pages
             HttpContext.Session.Remove("AddressEdit");
             //Need to store the selected address code
             HttpContext.Session.SetObjectAsJson("SelectedAddress", ViewModel.SelectedAddress);
-           
+            HttpContext.Session.SetObjectAsJson("SelectedPostalCode", ViewModel.postalCode);
 
             return RedirectToPage("AddressEdit");
         }
@@ -437,7 +453,14 @@ namespace dsf_service_template_net6.Pages
             Navigation _nav = new Navigation();
             //Set back and Next Link
             SetLinks("SetAddress", review);
-            return RedirectToPage(NextLink, null, "mainContainer");
+            if (review)
+            {
+                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+            }else
+            {
+                return RedirectToPage(NextLink, null, "mainContainer");
+            }
+           
             
         }
     }
