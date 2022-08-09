@@ -129,7 +129,7 @@ namespace dsf_service_template_net6.Pages
         {
             var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
             
-            int currentIndex = History?.FindIndex(x => x == curr) ?? -1;
+            int currentIndex = History?.FindLastIndex(x => x == curr) ?? -1;
             //if not found
             if (currentIndex == -1)
             {
