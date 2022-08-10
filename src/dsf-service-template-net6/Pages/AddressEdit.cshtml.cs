@@ -247,11 +247,24 @@ namespace dsf_service_template_net6.Pages
 
         private static string BuildAddressText(Addressinfo addressEdit)
         {
+            string appart = "";
+            if (!string.IsNullOrEmpty(addressEdit.item.street.apartmentNumber))
+            {
+                if (GetLanguage() == "/el")
+                {
+                    appart = "ΔΙΑΜ. ";
+                }
+                else
+                {
+                    appart = "APARTEMENT NO. ";
+                }
+
+            }
             return addressEdit.addressText = addressEdit.item.name + " " + addressEdit.item.street.streetNumber + " " +
-                (!string.IsNullOrEmpty(addressEdit.item.street.apartmentNumber) && GetLanguage() == "/el"
-                    ? "ΔΙΑΜ. " + addressEdit.item.street.apartmentNumber
-                    : "APARTEMENT NO. " + addressEdit.item.street.apartmentNumber
-                ) + "\n" + addressEdit.town.name + " " + addressEdit.district.name + "\n" + addressEdit.country.name;
+               (!string.IsNullOrEmpty(addressEdit.item.street.apartmentNumber)
+                   ? appart + addressEdit.item.street.apartmentNumber
+                   : ""
+               ) + "\n" + addressEdit.town.name + " " + addressEdit.district.name + "\n" + addressEdit.country.name;
         }
 
         private void ClearErrors()
