@@ -26,15 +26,15 @@
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
                 <span class="govcy-input-error-msg">@Model.MobileSelection</span>
             }
-            <label class="govcy-radio">
+            <label class="govcy-radio" for="crbMobile">
                 <strong>@Model.Mobile_select.mobile</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbMobile" name="crbMobile" @(Model.option1 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
                 <span class="govcy-hint">@Localizer["MobilePara01"]</span>
             </label>
-            <label class="govcy-radio">
+            <label class="govcy-radio" for="MobileOptionNo">
                 @Localizer["MobileOptionNo"]
-                <input class="govcy-radio-input" type="radio" value="2" name="crbMobile" @(Model.option2 == "true" ? "checked" : "")>
+                <input class="govcy-radio-input" id="MobileOptionNo" type="radio" value="2" name="crbMobile" @(Model.option2 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
             </label>
         </div>

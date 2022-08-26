@@ -28,15 +28,15 @@
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
                 <span class="govcy-input-error-msg">@Model.EmailSelection</span>
             }
-            <label class="govcy-radio">
+            <label class="govcy-radio" for="crbEmail">
                 <strong>@Model.Email_select.email</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.option1 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
                 <span class="govcy-hint">@Localizer["EmailPara01"]</span>
             </label>
-            <label class="govcy-radio">
+            <label class="govcy-radio" for="EmailOptionNo">
                 @Localizer["EmailOptionNo"]
-                <input class="govcy-radio-input" type="radio" value="2" name="crbEmail" @(Model.option2 == "true" ? "checked" : "")>
+                <input class="govcy-radio-input" id="EmailOptionNo" type="radio" value="2" name="crbEmail" @(Model.option2 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
             </label>
         </div>

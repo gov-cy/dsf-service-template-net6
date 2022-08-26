@@ -18,7 +18,7 @@
     <h1>@Localizer["AddressEditHeading"]</h1>
     <form class="govcy-form"  asp-page-handler="PostalCode" novalidate>
         <div class="@(Model.PostalCodeErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <label class="govcy-label govcy-mb-2">@Localizer["PostalCode"]</label>
+            <label class="govcy-label govcy-mb-2" for="PostalCode">@Localizer["PostalCode"]</label>
             	@if (Model.PostalCodeErrorClass.Length > 0)
             {
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
@@ -37,7 +37,7 @@
         <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown" novalidate>
             <input type="hidden" asp-for="@Model.ViewModel.postalCode">
             <div class="govcy-form-control govcy-mb-4">
-                    <label class="govcy-label" for="input">@Localizer["SelectAddress"]</label>
+                    <label class="govcy-label" for="selectedAddressCode">@Localizer["SelectAddress"]</label>
                   
                     @*<select class="govcy-select" onchange="this.form.submit()" asp-for="@Model.ViewModel.SelectedAddress" asp-items="@Model.ViewModel.Addresses">
                     </select>*@
@@ -70,7 +70,7 @@
             <fieldset class="govcy-fieldset">
 
                 <div class="@(Model.StreetErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-                    <label class="govcy-label govcy-mb-2">@Localizer["StreetNo"]</label>
+                    <label class="govcy-label govcy-mb-2" for="StreetNo">@Localizer["StreetNo"]</label>
                     @if (Model.StreetErrorClass.Length > 0)
                     {
                         <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
@@ -79,7 +79,7 @@
                     <input id="StreetNo" name="ViewModel.StreetNo" value="@Model.ViewModel.StreetNo" type="text" class="@(Model.StreetErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_5 govcy-text-input-error": "govcy-text-input govcy-text-input-char_5")">
                 </div>
                 <div class="@(Model.FlatErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-                    <label class="govcy-label govcy-mb-2">@Localizer["FlatNo"]</label>
+                    <label class="govcy-label govcy-mb-2" for="FlatNo">@Localizer["FlatNo"]</label>
                     @if (Model.FlatErrorClass.Length > 0)
                     {
                         <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>

@@ -17,7 +17,7 @@
 <h1>@Localizer["EmailEditHeading"]</h1>
 <form class="govcy-form" novalidate method="post">
     <div class="@(Model.EmailErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-        <label class="govcy-label govcy-mb-2">@Localizer["Email-Label"]</label>
+        <label class="govcy-label govcy-mb-2" for="email">@Localizer["Email-Label"]</label>
         <span class="govcy-hint">@Localizer["Email-Hint"]</span>
         @if (Model.EmailErrorClass.Length > 0)
         {

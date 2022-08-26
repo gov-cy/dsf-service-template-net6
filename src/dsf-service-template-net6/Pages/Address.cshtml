@@ -26,15 +26,15 @@
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
                 <span class="govcy-input-error-msg">@Model.AddressSelection</span>
             }
-            <label class="govcy-radio">
+            <label class="govcy-radio" for="crbAddress">
                 <strong>@Html.Raw(Model.address_select.addressInfo.First().addressText.Replace("\n", "<br/>"))</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbAddress" name="crbAddress" @(Model.option1 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
                 <span class="govcy-hint">@Localizer["AddressPara01"]</span>
             </label>
-            <label class="govcy-radio">
+            <label class="govcy-radio" for="AddressOptionNo">
                 @Localizer["AddressOptionNo"]
-                <input class="govcy-radio-input" type="radio" value="2" name="crbAddress" @(Model.option2 == "true" ? "checked" : "")>
+                <input class="govcy-radio-input" id="AddressOptionNo" type="radio" value="2" name="crbAddress" @(Model.option2 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
             </label>
         </div>
