@@ -20,25 +20,21 @@
  
   @if (Model._citizenPersonalDetails != null)
     {
- <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
+ <table class="govcy-table govcy-table-responsive-vertical">
      <tbody>
            <tr>
-             <th scope="row" class="col-3">@Localizer["ApplicantName"]</th>
-             <td class="col-7">
-                 <p>
-                 <span class="govcy-d-block">@Model._citizenPersonalDetails.data.fullName</span>
-                </p>
-             </td>
-             <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+            <th scope="row" class="col-3">@Localizer["ApplicantName"]</th>
+            <td class="col-7">
+                @Model._citizenPersonalDetails.data.fullName
+            </td>
+            <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                    
-              </td>
+            </td>
           </tr>
          <tr>
              <th scope="row" class="col-3">@Localizer["Address"]</th>
              <td class="col-7">
-                 <p>
-                 <span class="govcy-d-block">@Html.Raw(Address.addressText.Replace("\n", "<br/>"))</span>
-                </p>
+                 @Html.Raw(Address.addressText.Replace("\n", "<br/>"))
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                    <a asp-page="/Address" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
@@ -47,9 +43,7 @@
           <tr>
              <th scope="row" class="col-3">@Localizer["Mobile"]</th>
              <td class="col-7">
-                 <p>
-                 <span class="govcy-d-block">@Model.ret_mobile</span>
-                </p>
+                @Model.ret_mobile
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useMobileEditOnly)
@@ -64,9 +58,7 @@
            <tr>
              <th scope="row" class="col-3">@Localizer["Email"]</th>
              <td class="col-7">
-                 <p>
-                  <span class="govcy-d-block">@Model.ret_email</span>
-                </p>
+                 @Model.ret_email
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useEmailEditOnly)

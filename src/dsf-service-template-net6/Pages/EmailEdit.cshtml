@@ -9,25 +9,27 @@
 }
 <div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["ErrorMessage-General"]</h2>
-    <p class="govcy-mb-0">
+    <ul>
+      <li>
         @Html.Raw(Model.ErrorsDesc)
-    </p>
+      </li>
+    </ul>
 </div>
 
 <h1>@Localizer["EmailEditHeading"]</h1>
 <form class="govcy-form" novalidate method="post">
     <div class="@(Model.EmailErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-        <label class="govcy-label govcy-mb-2" for="email">@Localizer["Email-Label"]</label>
-        <span class="govcy-hint">@Localizer["Email-Hint"]</span>
+        <label class="govcy-label" for="email">@Localizer["Email-Label"]</label>
+        <span id="email-hint" class="govcy-hint">@Localizer["Email-Hint"]</span>
         @if (Model.EmailErrorClass.Length > 0)
         {
             <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
         }
         <span class="govcy-input-error-msg" asp-validation-for="@Model.emailEdit.email"></span>
-        <input id="email" name="email" type="text" value="@Model.email" placeholder="" class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
+        <input id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email" value="@Model.email" placeholder="" class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
     </div>
 <p>
   @Localizer["EmailEditParagraph"]
 </p>
-  <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+  <button type="submit" class="govcy-btn-primary">@Localizer["Button_Next"]</button>
 </form>

@@ -10,27 +10,29 @@
 }
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["ErrorMessage-General"]</h2>
-    <p class="govcy-mb-0">
+    <ul>
+      <li>
         @Html.Raw(Model.ErrorsDesc)
-    </p>
+      </li>
+    </ul>
 </div>
 <h1>@Localizer["MobEditHeading"]</h1>
 <form class="govcy-form" novalidate method="post">
     @Html.HiddenFor(m => m.mobEdit.prev_mobile) 
     <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <label class="govcy-label govcy-mb-2" for="mobile">@Localizer["Mobile-Label"]</label>
-            <span class="govcy-hint">@Localizer["Mobile-Hint"]</span>
+            <label class="govcy-label" for="mobile">@Localizer["Mobile-Label"]</label>
+            <span id="tel-hint" class="govcy-hint">@Localizer["Mobile-Hint"]</span>
            	@if (Model.MobileErrorClass.Length > 0)
             {
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
             }
             <span class="govcy-input-error-msg" asp-validation-for="@Model.mobEdit.mobile"></span>
-            <input id="mobile" name="mobile" type="text" value="@Model.mobile" placeholder="" class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")">
+            <input id="mobile" name="mobile" type="tel" spellcheck="false" aria-describedby="tel-hint" autocomplete="tel" value="@Model.mobile" placeholder="" class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_20 govcy-text-input-error": "govcy-text-input govcy-text-input-char_20")">
      </div>
 
   
      <p>
          @Localizer["MobEditParagraph"]
      </p>
-     <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+     <button type="submit" class="govcy-btn-primary">@Localizer["Button_Next"]</button>
 </form>

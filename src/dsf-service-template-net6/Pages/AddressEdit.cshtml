@@ -9,16 +9,18 @@
 }
 <div class="govcy-container">
     <div style="@((!Model.ViewModel.ShowErrorSummary) ? "display:none" : "")" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
-        <h2>@Localizer["ErrorMessage-General"]</h2>
-        <p class="govcy-mb-0">
-            @Html.Raw(Model.ViewModel.ErrorDesc)
-        </p>
+      <h2>@Localizer["ErrorMessage-General"]</h2>
+      <ul>
+        <li>
+          @Html.Raw(Model.ViewModel.ErrorDesc)
+        </li>
+      </ul>
     </div>
 
     <h1>@Localizer["AddressEditHeading"]</h1>
     <form class="govcy-form"  asp-page-handler="PostalCode" novalidate>
         <div class="@(Model.PostalCodeErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <label class="govcy-label govcy-mb-2" for="PostalCode">@Localizer["PostalCode"]</label>
+            <label class="govcy-label" for="PostalCode">@Localizer["PostalCode"]</label>
             	@if (Model.PostalCodeErrorClass.Length > 0)
             {
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
@@ -36,7 +38,7 @@
     {
         <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown" novalidate>
             <input type="hidden" asp-for="@Model.ViewModel.postalCode">
-            <div class="govcy-form-control govcy-mb-4">
+            <div class="govcy-form-control">
                     <label class="govcy-label" for="selectedAddressCode">@Localizer["SelectAddress"]</label>
                   
                     @*<select class="govcy-select" onchange="this.form.submit()" asp-for="@Model.ViewModel.SelectedAddress" asp-items="@Model.ViewModel.Addresses">
@@ -67,10 +69,10 @@
         <form class="govcy-form" method="post" asp-page-handler="VerifyAddress" novalidate>
             <input type="hidden" asp-for="@Model.ViewModel.postalCode">
             <input type="hidden" asp-for="@Model.ViewModel.SelectedAddress">
-            <fieldset class="govcy-fieldset">
+            
 
                 <div class="@(Model.StreetErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-                    <label class="govcy-label govcy-mb-2" for="StreetNo">@Localizer["StreetNo"]</label>
+                    <label class="govcy-label" for="StreetNo">@Localizer["StreetNo"]</label>
                     @if (Model.StreetErrorClass.Length > 0)
                     {
                         <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
@@ -79,7 +81,7 @@
                     <input id="StreetNo" name="ViewModel.StreetNo" value="@Model.ViewModel.StreetNo" type="text" class="@(Model.StreetErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_5 govcy-text-input-error": "govcy-text-input govcy-text-input-char_5")">
                 </div>
                 <div class="@(Model.FlatErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-                    <label class="govcy-label govcy-mb-2" for="FlatNo">@Localizer["FlatNo"]</label>
+                    <label class="govcy-label" for="FlatNo">@Localizer["FlatNo"]</label>
                     @if (Model.FlatErrorClass.Length > 0)
                     {
                         <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
@@ -88,33 +90,33 @@
                     <input id="FlatNo" name="ViewModel.FlatNo" value="@Model.ViewModel.FlatNo" type="text" class="@(Model.FlatErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_5 govcy-text-input-error": "govcy-text-input govcy-text-input-char_5")">
                 </div>
                 @*Table*@
-                <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
+                <table class="govcy-table govcy-table-responsive-vertical">
                     <tbody>
                         <tr>
                             <th scope="row" class="col-3">@Localizer["PostalCode"]</th>
                             <td class="col-7">
-                                <span class="govcy-d-block">@Model.ViewModel.postalCode</span>
+                                @Model.ViewModel.postalCode
                             </td>
                         </tr>
 
                         <tr>
                             <th scope="row" class="col-3">@Localizer["Street"]</th>
                             <td class="col-7">
-                                <span class="govcy-d-block">@Model.ViewModel.SelectedAddressName</span>
+                                @Model.ViewModel.SelectedAddressName
                             </td>
                         </tr>
 
                         <tr>
                             <th scope="row" class="col-3">@Localizer["Parish"]</th>
                             <td class="col-7">
-                                <span class="govcy-d-block">@Model.ViewModel.Parish</span>
+                                @Model.ViewModel.Parish
                             </td>
                         </tr>
 
                         <tr>
                             <th scope="row" class="col-3">@Localizer["City"]</th>
                             <td class="col-7">
-                                <span class="govcy-d-block">@Model.ViewModel.City</span>
+                                @Model.ViewModel.City
                             </td>
                         </tr>
                     </tbody>
@@ -123,7 +125,6 @@
                 <div class="govcy-form-control">
                     <button class="govcy-btn-primary govcy-mb-0">@Localizer["Button_Next"]</button>
                 </div>
-            </fieldset>
         </form>
     }
 </div>

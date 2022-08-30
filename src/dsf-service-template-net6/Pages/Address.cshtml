@@ -9,10 +9,12 @@
     ViewBag.PreviousUrl=Model.BackLink;
 }
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
-    <h2>@Localizer["ErrorMessage-General"]</h2>
-    <p class="govcy-mb-0">
-        @Html.Raw(Model.ErrorsDesc)
-    </p>
+  <h2>@Localizer["ErrorMessage-General"]</h2>
+  <ul>
+    <li>
+      @Html.Raw(Model.ErrorsDesc)
+    </li>
+  </ul>
 </div>
 
 <h1>@Localizer["AddressHeading"]</h1>
@@ -39,7 +41,7 @@
             </label>
         </div>
     </fieldset>
-    <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+    <button type="submit" class="govcy-btn-primary">@Localizer["Button_Next"]</button>
 </form>
 
 

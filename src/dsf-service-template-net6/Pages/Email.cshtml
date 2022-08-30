@@ -10,9 +10,11 @@
 }
 <div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["ErrorMessage-General"]</h2>
-    <p class="govcy-mb-0">
+    <ul>
+      <li>
         @Html.Raw(Model.ErrorsDesc)
-    </p>
+      </li>
+    </ul>
 </div>
 
 <h1>@Localizer["EmailHeading"]</h1>
@@ -41,7 +43,7 @@
             </label>
         </div>
     </fieldset>
-    <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+    <button type="submit" class="govcy-btn-primary">@Localizer["Button_Next"]</button>
 </form>
  
 
