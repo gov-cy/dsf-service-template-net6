@@ -62,6 +62,10 @@ dotnet run
 * Session Management
 * API Calls [dsf-mock-apis]
 
+## Other
+* Statistics API Calls
+* Matomo Integration
+
 ## License
 
 MIT
