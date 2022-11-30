@@ -1,4 +1,5 @@
 ﻿using dsf_service_template_net6.Data.Models;
+using dsf_service_template_net6.Resources;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 namespace dsf_service_template_net6.Data.Validations
@@ -9,8 +10,8 @@ namespace dsf_service_template_net6.Data.Validations
         string mobReq = string.Empty;
         string mobAlreadyExists = string.Empty;
         string mobValid= string.Empty;
-        IStringLocalizer _Localizer;
-      public cMobileEditValidator(IStringLocalizer localizer)
+        IResourceViewlocalizer _Localizer;
+      public cMobileEditValidator(IResourceViewlocalizer localizer)
       {
             
             _Localizer = localizer;

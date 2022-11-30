@@ -317,7 +317,7 @@ namespace dsf_service_template_net6.Pages
             if (!result.IsValid)
             {
                 HttpContext.Session.SetObjectAsJson("valresult",  result);
-                return RedirectToPage("Address");
+                return RedirectToPage("Address",null,new { fromPost = true }, "mainContainer");
             }
             //Model is valid so strore 
             HttpContext.Session.Remove("AddressSelect");

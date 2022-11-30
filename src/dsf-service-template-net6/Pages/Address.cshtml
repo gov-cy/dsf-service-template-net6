@@ -1,45 +1,56 @@
-﻿@page "/AddressSelection/{review:bool?}"
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@using dsf_service_template_net6.Data.Models
+﻿@page "/address-selection/{review:bool?}"
+@using dsf_service_template_net6.Resources
 @model dsf_service_template_net6.Pages.AddressModel
-@inject IStringLocalizer<Program> Localizer
-@inject IHtmlLocalizer<Program> HtmlLocalizer
+@inject IResourceViewlocalizer Localizer
 @{
-    ViewBag.PreviousUrl=Model.BackLink;
+     ViewData["Title"] = Localizer["address-selection.title"];
 }
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
-    <h2>@Localizer["ErrorMessage-General"]</h2>
+    <h2>@Localizer["common.error_message"]</h2>
     <p class="govcy-mb-0">
         @Html.Raw(Model.ErrorsDesc)
     </p>
 </div>
 
-<h1>@Localizer["AddressHeading"]</h1>
+<h1>@Localizer["address-selection.title"]</h1>
 <form method="post" novalidate class="govcy-form">
 
     <fieldset class="govcy-fieldset">
-        <legend class="govcy-legend govcy-fw-normal">@Localizer["AddressLegend"]</legend>
+        <legend>
+            @Localizer["address-selection.legend"]
+        </legend>
         <div class="@((Model.AddressSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
             @if (Model.AddressSelection.Length > 0)
             {
-                <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
-                <span class="govcy-input-error-msg">@Model.AddressSelection</span>
+                 <p id="error" class="govcy-input-error-msg">
+                    <span class="govcy-visually-hidden-error">
+                        @Localizer["common.error_alert"]:
+                    </span>
+                    @Model.AddressSelection
+                </p>
             }
             <label class="govcy-radio">
-                <strong>@Html.Raw(Model.address_select.addressInfo.First().addressText.Replace("\n", "<br/>"))</strong>
-                <input class="govcy-radio-input" type="radio" value="1" id="crbAddress" name="crbAddress" @(Model.option1 == "true" ? "checked" : "")>
+                @Html.Raw(Model.address_select.addressInfo.First().addressText.Replace("\n", "<br/>"))
+                <input class="govcy-radio-input" 
+                type="radio" 
+                value="1" 
+                id="crbAddress" 
+                name="crbAddress" @(Model.option1 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
-                <span class="govcy-hint">@Localizer["AddressPara01"]</span>
+                <span class="govcy-hint">@Localizer["address-selection.p1"]</span>
             </label>
+
             <label class="govcy-radio">
-                @Localizer["AddressOptionNo"]
-                <input class="govcy-radio-input" type="radio" value="2" name="crbAddress" @(Model.option2 == "true" ? "checked" : "")>
+                @Localizer["address-selection.no"]
+                <input class="govcy-radio-input"
+                type="radio" 
+                value="2" 
+                name="crbAddress" @(Model.option2 == "true" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
             </label>
         </div>
     </fieldset>
-    <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["Button_Next"]</button>
+    <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["common.button_next"]</button>
 </form>
 
 

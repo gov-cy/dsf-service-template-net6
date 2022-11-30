@@ -1,4 +1,5 @@
 ﻿using dsf_service_template_net6.Data.Models;
+using dsf_service_template_net6.Resources;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
@@ -6,9 +7,9 @@ namespace dsf_service_template_net6.Data.Validations
 {
     public class AddressEditValidator : AbstractValidator<AddressEditViewModel>
     {
-        IStringLocalizer _Localizer;
+        IResourceViewlocalizer _Localizer;
         string PostalRequiredMsg = string.Empty;
-        public AddressEditValidator(IStringLocalizer localizer)
+        public AddressEditValidator(IResourceViewlocalizer localizer)
         {
 
             _Localizer = localizer;

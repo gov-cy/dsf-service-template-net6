@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="accessibility-statement.instructions" xml:space="preserve">
+    <value>&lt;p&gt;Η παρούσα αποτελεί δήλωση προσβασιμότητας για την υπηρεσία «Βοήθημα Τοκετού» του Υπουργείου Εργασίας και Κοινωνικών Ασφαλίσεων.&lt;/p&gt;
+      &lt;h2&gt;Κατάσταση συμμόρφωσης&lt;/h2&gt;
+      &lt;p&gt;Οι Οδηγίες Προσβασιμότητας Περιεχομένου (&lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;WCAG&lt;/a&gt;) καθορίζουν απαιτήσεις για σχεδιαστές και προγραμματιστές για τη βελτίωση της προσβασιμότητας των ατόμων με αναπηρίες. Καθορίζουν τρία επίπεδα συμμόρφωσης: Επίπεδο A, Επίπεδο AA, και Επίπεδο AAA. Η υπηρεσία συμμορφώνεται μερικώς με τις Οδηγίες του WCAG 2.1 επίπεδο AA. Συμμορφώνεται μερικώς σημαίνει ότι ορισμένα μέρη του περιεχομένου δεν συμμορφώνονται πλήρως με το πρότυπο προσβασιμότητας.&lt;/p&gt;
+      &lt;h2&gt;Συμβατότητα με τους φυλλομετρητές και τους υποστηρικτές τεχνολογίας&lt;/h2&gt;
+      &lt;p&gt;Η υπηρεσία δεν είναι συμβατή με:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;Internet Explorer 9 και παλαιότερες εκδόσεις &lt;/li&gt;
+        &lt;li&gt;Safari browser σε υπολογιστές με Windows&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Περιορισμοί και εναλλακτικές λύσεις&lt;/h2&gt;
+      &lt;p&gt;Παρά τις προσπάθειές μας να διασφαλίσουμε την προσβασιμότητα της υπηρεσίας, ενδέχεται να υπάρχουν ορισμένοι περιορισμοί. Ακολουθεί περιγραφή γνωστών περιορισμών και πιθανών λύσεων. Επικοινωνήστε μαζί μας εάν παρατηρήσετε κάποιο πρόβλημα που δεν αναφέρεται παρακάτω.&lt;/p&gt;
+      &lt;p&gt;Οι εικόνες κεφαλίδας είναι ένας γνωστός περιορισμός για την υπηρεσία. Οι εικόνες δεν έχουν εναλλακτικό κείμενο για εικόνες επειδή δεν έχουμε ορίσει το χαρακτηριστικό "alt". Θα προσθέσουμε ένα κενό χαρακτηριστικό alt, καθώς οι εικόνες χρησιμοποιούνται για διακοσμητικούς σκοπούς.&lt;/p&gt;
+      &lt;p&gt;Για να λειτουργεί κανονικά η υπηρεσία απαιτείται Javascript.&lt;/p&gt;
+      &lt;h2&gt;Προσέγγιση αξιολόγησης&lt;/h2&gt;
+      &lt;p&gt;Το Digital Services Factory αξιολόγησε την προσβασιμότητα της υπηρεσίας χρησιμοποιώντας τα εξής εργαλεία:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;&lt;a href="https://wave.webaim.org/" target="_blank"&gt;WebAIM’s WAVE Evaluation tool&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://developers.google.com/web/tools/lighthouse" target="_blank"&gt;Google Chrome’s Lighthouse tool&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Ανατροφοδότηση και παράπονα&lt;/h2&gt;
+      &lt;p&gt;Τα σχόλιά σας σχετικά με την προσβασιμότητα της υπηρεσίας είναι ευπρόσδεκτα. Παρακαλούμε όπως μας ενημερώσετε εάν συναντήσετε εμπόδια προσβασιμότητας:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;Email: &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;Προσπαθούμε να ανταποκριθούμε στα σχόλια εντός 30 εργάσιμων ημερών.&lt;/p&gt;
+      &lt;p&gt;
+        &lt;span class="govcy-d-block"&gt;Εάν δεν απαντήσουμε ή δεν επιλύσουμε το πρόβλημα, μπορείτε να στείλετε ένα παράπονο στο:&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;Υφυπουργείο Έρευνας, Καινοτομίας και Ψηφιακής Πολιτικής&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;Λεωφόρος Βύρωνος 29&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;1096 Λευκωσία&lt;/span&gt;
+        &lt;span class="govcy-d-block"&gt;Κύπρος &lt;/span&gt;
+      &lt;/p&gt;
+      &lt;p&gt;Ή μπορείτε να στείλετε email: &lt;a href="mailto:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Εάν δεν είστε ικανοποιημένοι με την απάντησή τους, μπορείτε να &lt;a href="https://eforms.mof.gov.cy/eforms/eforms.nsf/complaintformombudsman_gr/complaintformombudsman_gr?OpenForm" target="_blank"&gt; Γραφείο Επιτρόπου Διοικήσεως και Προστασίας Ανθρωπίνων Δικαιωμάτων.&lt;/a&gt;&lt;/p&gt;
+      &lt;h2&gt;Ημερομηνία&lt;/h2&gt;
+      &lt;p&gt;Η δήλωση αυτή δημιουργήθηκε στις 28 Μαρτίου 2022 με τη χρήση του εργαλείου W3C Accessibility Statement Generator.&lt;/p&gt;
+      &lt;p&gt;Η δήλωση αυτή μεταφράστηκε στις 7 Απριλίου 2022.&lt;/p&gt;</value>
+  </data>
+  <data name="accessibility-statement.title" xml:space="preserve">
+    <value>Δήλωση προσβασιμότητας</value>
+  </data>
+  <data name="address-selection.legend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτήν τη διεύθυνση;</value>
+  </data>
+  <data name="address-selection.no" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετική</value>
+  </data>
+  <data name="address-selection.p1" xml:space="preserve">
+    <value>Αυτή είναι η διεύθυνση που βρήκαμε στη βάση δεδομένων μας.</value>
+  </data>
+  <data name="address-selection.title" xml:space="preserve">
+    <value>Ποια διεύθυνση μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+  </data>
+  <data name="address-selection.yes" xml:space="preserve">
+    <value>Ναί</value>
+  </data>
+  <data name="application-response.header_ref" xml:space="preserve">
+    <value>Αρ, Αναφοράς</value>
+  </data>
+  <data name="application-response.header_title" xml:space="preserve">
+    <value>Η αίτηση σας έχει υποβληθεί</value>
+  </data>
+  <data name="cookie-policy.instructions" xml:space="preserve">
+    <value>&lt;p&gt;Η υπηρεσία Αλλαγή Προσωπικών Στοιχείων του Πολίτη (χχχχχχχ.service.gov.cy) χρησιμοποιεί μόνο cookies που είναι απολύτως απαραίτητα για τη σωστή λειτουργία του διαδικτυακού τόπου.&lt;/p&gt;
+      &lt;h2&gt;Cookies που χρησιμοποιούνται&lt;/h2&gt;
+      &lt;h3&gt;DSFServiceDataCookie&lt;/h3&gt;
+      &lt;p&gt;Αυτό το cookie περιέχει κρυπτογραφημένες πληροφορίες που έχουν εισαχθεί στη φόρμα.
+Διαγράφεται αυτόματα μετά την αποσύνδεση του χρήστη ή μετά από 14 ημέρες.&lt;/p&gt;
+      &lt;h3&gt;INGRESSCOOKIE&lt;/h3&gt;
+      &lt;p&gt;Αυτό το cookie διασφαλίζει ότι οι πληροφορίες που αποστέλλονται στο διακομιστή μας πηγαίνουν στο σωστό μέρος.
+Διαγράφεται αυτόματα όταν ο χρήστης κλείσει τον φυλλομετρητή του (browser).&lt;/p&gt;
+      &lt;h2&gt;Χρήση σύνδεσης CY&lt;/h2&gt;
+      &lt;p&gt;Όταν συνδέεστε χρησιμοποιώντας το CY Login (γνωστό και ως «Αριάδνη») για πρόσβαση στην υπηρεσία για το Βοήθημα Τοκετού, θα αποθηκεύονται &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/privacy" target="_blank"&gt;επιπλέον cookies στη συσκευή σας.&lt;/a&gt; &lt;/p&gt;
+      &lt;h2&gt;Πώς να ελέγχετε τα cookies&lt;/h2&gt;
+      &lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Μάθετε πώς να ελέγχετε και να διαγράφετε τα cookies στη συσκευή σας. &lt;/a&gt;
+      &lt;p&gt;Μπορείτε να διαγράψετε όλα τα cookies που υπάρχουν ήδη στον υπολογιστή σας και μπορείτε να ρυθμίσετε τους περισσότερους φυλλομετρητές (browsers) ώστε να αποτρέπουν την τοποθέτησή τους. Εάν το κάνετε αυτό, ωστόσο, ίσως χρειαστεί να προσαρμόζετε με μη αυτόματο τρόπο ορισμένες επιλογές κάθε φορά που επισκέπτεστε έναν διαδικτυακό τόπο και ορισμένες υπηρεσίες και λειτουργίες ενδέχεται να μην λειτουργούν.&lt;/p&gt;</value>
+  </data>
+  <data name="cookie-policy.title" xml:space="preserve">
+    <value>Cookies στην υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
+  </data>
+  <data name="email-selection.legend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό το email;</value>
+  </data>
+  <data name="email-selection.no" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
+  </data>
+  <data name="email-selection.p1" xml:space="preserve">
+    <value>Αυτό είναι το email που βρήκαμε στη βάση δεδομένων μας.</value>
+  </data>
+  <data name="email-selection.title" xml:space="preserve">
+    <value>Ποιό email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+  </data>
+  <data name="email-selection.yes" xml:space="preserve">
+    <value>Το email που είναι καταχωρημένο στα αρχεία μας:</value>
+  </data>
+  <data name="index.instructions" xml:space="preserve">
+    <value>&lt;h2&gt;Ζητήστε βοήθεια και καθοδήγηση&lt;/h2&gt;
+    &lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;Για θέματα που αφορούν Τεχνική υποστήριξη, επικοινωνήστε με το DSF:&lt;/span&gt;&lt;span class="govcy-d-block"&gt;&lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="index.instructions1" xml:space="preserve">
+    <value>&lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;Αυτή είναι μια εικονική υπηρεσία για την κατανόηση των βέλτιστων πρακτικών ανάπτυξης&lt;/span&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="index.title" xml:space="preserve">
+    <value>Καλωσορίσατε στην εικονική υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
+  </data>
+  <data name="mobile-selection.legend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
+  </data>
+  <data name="mobile-selection.no" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
+  </data>
+  <data name="mobile-selection.p1" xml:space="preserve">
+    <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
+  </data>
+  <data name="mobile-selection.title" xml:space="preserve">
+    <value>Ποιό κινητό μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+  </data>
+  <data name="mobile-selection.yes" xml:space="preserve">
+    <value>Ο  αριθμός κινητού τηλεφώνου που είναι καταχωρημένο στα αρχεία μας:</value>
+  </data>
+  <data name="no-page-found.instructions" xml:space="preserve">
+    <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
+      &lt;p&gt;Αν αντιγράψατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι επικολλήσατε ολόκληρη τη διεύθυνση.&lt;/p&gt;</value>
+  </data>
+  <data name="no-page-found.title" xml:space="preserve">
+    <value>Δεν βρέθηκε η σελίδα</value>
+  </data>
+  <data name="no-valid-profile.instructions" xml:space="preserve">
+    <value>&lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για οργανισμούς, χρειάζεται να &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; επιστρέψετε στο CY Login και να συνδεθείτε με λογαριασμό για πολίτες.&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για πολίτες, χρειάζεται να βεβαιωθείτε ότι ο λογαριασμός σας έχει ταυτοποιηθεί. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Μάθετε πώς μπορείτε να ταυτοποιήσετε τον λογαριασμό σας στο CY Login.&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Μπορείτε, επίσης, να &lt;a href="http://www.mlsi.gov.cy/mlsi/sid/sidv2.nsf/All/B85AA4D88E3630B4C2257B18003B2C9D?OpenDocument" target="_blank"&gt; υποβάλετε αίτηση γραπτώς.&lt;/a&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="no-valid-profile.title" xml:space="preserve">
+    <value>Ελέγξτε τον λογαριασμό σας στο CY Login</value>
+  </data>
+  <data name="privacy-statement..instructions" xml:space="preserve">
+    <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς οι Υπηρεσίες Κοινωνικών Ασφαλίσεων (ΥΚΑ) χρησιμοποιούν πληροφορίες σχετικά με εσάς, προκειμένου να διεκπεραιώσουν την αίτησή σας για το βοήθημα τοκετού.&lt;/p&gt;
+      &lt;h2&gt;Τύποι πληροφοριών που συλλέγονται και χρησιμοποιούνται&lt;/h2&gt;
+      &lt;p&gt;Οι  ΥΚΑ συλλέγουν τις ακόλουθες πληροφορίες απευθείας από εσάς:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;την προτιμητέα διεύθυνση email σας&lt;/li&gt;
+        &lt;li&gt;τον αριθμό του τηλεφώνου σας&lt;/li&gt;
+        &lt;li&gt;τον διεθνή αριθμό τραπεζικού λογαριασμού σας (IBAN)&lt;/li&gt;
+        &lt;li&gt;τον κωδικό SWIFT σας (αν έχετε τραπεζικό λογαριασμό εκτός Κύπρου)&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;Οι  ΥΚΑ συλλέγουν τις ακόλουθες πληροφορίες για εσάς από το &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;το όνομά σας&lt;/li&gt;
+        &lt;li&gt;το email σας&lt;/li&gt;
+        &lt;li&gt;τον αριθμό ταυτότητας ή τον αριθμό αλλοδαπού σας&lt;/li&gt;
+		&lt;li&gt;τον αριθμό κοινωνικών ασφαλίσεών σας&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;Οι ΥΚΑ συλλέγουν τις ακόλουθες πληροφορίες για εσάς από το Τμήμα Αρχείου Πληθυσμού και Μετανάστευσης:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;την ημερομηνία γέννησης, το φύλο, την εθνικότητα και την κοινότητα στην οποία ανήκετε&lt;/li&gt;
+        &lt;li&gt;στοιχεία του παιδιού ή των παιδιών σας ως εξής:&lt;ul&gt;&lt;li&gt;το όνομα, την ημερομηνία γέννησης, το φύλο και τον αριθμό κυπριακής ταυτότητας ή αριθμό αλλοδαπού &lt;/li&gt; &lt;li&gt;την εθνικότητα και την κοινότητα στην οποία ανήκει&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+         &lt;li&gt;στοιχεία του συζύγου ή του συντρόφου σας με τον οποίο έχετε συνάψει σύμφωνο συμβίωσης ως εξής (όπου χρειάζεται, και εάν το παιδί σας είναι κάτω των 12 μηνών):&lt;ul&gt;&lt;li&gt;το όνομα, την ημερομηνία γέννησης, το φύλο και τον αριθμό κυπριακής ταυτότητας ή αριθμό αλλοδαπού &lt;/li&gt; &lt;li&gt;την εθνικότητα και την κοινότητα στην οποία ανήκει&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;Οι ΥΚΑ χρησιμοποιούν τις ακόλουθες πληροφορίες για εσάς από τα δικά τους αρχεία:&lt;/p&gt;
+      &lt;ul&gt;  
+        &lt;li&gt;τις εισφορές κοινωνικών ασφαλίσεών σας&lt;/li&gt;
+        &lt;li&gt;τις εισφορές κοινωνικών ασφαλίσεων του συζύγου ή του συντρόφου σας με τον οποίο έχετε συνάψει σύμφωνο συμβίωσης (όπου χρειάζεται)&lt;/li&gt;
+        &lt;li&gt;το IBAN σας (αν είναι ήδη αποθηκευμένο)&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Γιατί χρησιμοποιούν τα στοιχεία σας&lt;/h2&gt;
+      &lt;p&gt;Αυτές οι πληροφορίες θα συγκεντρωθούν για τον προγραμματικό έλεγχο ότι είστε δικαιούχος για την πληρωμή και στη συνέχεια θα χρησιμοποιηθούν από τους εξεταστές στις ΥΚΑ.&lt;/p&gt;
+      &lt;p&gt;Χωρίς πρόσβαση στα στοιχεία που αναφέρονται παραπάνω, οι ΥΚΑ δεν μπορούν να επεξεργαστούν την αίτησή σας.&lt;/p&gt;
+      &lt;h2&gt;Πώς αποθηκεύονται τα προσωπικά σας στοιχεία&lt;/h2&gt;
+      &lt;p&gt;Οι πληροφορίες που περιλαμβάνονται στην αίτησή σας αποθηκεύονται με ασφάλεια σε διακομιστές με έδρα την Κύπρο.&lt;/p&gt;
+      &lt;h2&gt;Τα δικαιώματά σας&lt;/h2&gt;
+      &lt;p&gt;Επικοινωνήστε στο &lt;a href="mailto:cchristou@sid.mlsi.gov.cy" target="_blank"&gt;cchristou@sid.mlsi.gov.cy&lt;/a&gt; εάν θέλετε:&lt;/p&gt;
+      &lt;ul&gt; 
+        &lt;li&gt;να λάβετε αντίγραφο των πληροφοριών που διατηρούνται για εσάς&lt;/li&gt;
+        &lt;li&gt;να περιορίσετε την επεξεργασία των δεδομένων σας&lt;/li&gt;
+        &lt;li&gt;να διορθώστε ή να ενημερώστε τα προσωπικά σας στοιχεία&lt;/li&gt;
+        &lt;li&gt;να υποβάλετε ένσταση για την επεξεργασία των προσωπικών σας πληροφοριών&lt;/li&gt;
+        &lt;li&gt;να μεταφερθούν τα στοιχεία σας σε άλλο οργανισμό ή σε εσάς&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;h2&gt;Παράπονα&lt;/h2&gt;
+      &lt;p&gt;Μπορείτε να υποβάλετε παράπονο για τον τρόπο με τον οποίο χρησιμοποιήθηκαν τα προσωπικά σας στοιχεία &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt; επικοινωνώντας με το Γραφείο του Επιτρόπου Προστασίας Δεδομένων Προσωπικού Χαρακτήρα&lt;/a&gt;.&lt;/p&gt;</value>
+  </data>
+  <data name="privacy-statement.title" xml:space="preserve">
+    <value>Πολιτική απορρήτου – τα προσωπικά σας στοιχεία</value>
+  </data>
+  <data name="review.address" xml:space="preserve">
+    <value>Διεύθυνση</value>
+  </data>
+  <data name="review.address_details" xml:space="preserve">
+    <value>Αλλαγή Διεύθυνσης</value>
+  </data>
+  <data name="review.applicant_name" xml:space="preserve">
+    <value>Όνομα</value>
+  </data>
+  <data name="review.email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="review.email_details" xml:space="preserve">
+    <value>Αλλαγή email</value>
+  </data>
+  <data name="review.mobile" xml:space="preserve">
+    <value>Αριθμός κινητού τηλεφώνου</value>
+  </data>
+  <data name="review.mobile_details" xml:space="preserve">
+    <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
+  </data>
+  <data name="review.p1" xml:space="preserve">
+    <value>Τα στοιχεία επικοινωνίας σας</value>
+  </data>
+  <data name="review.p2" xml:space="preserve">
+    <value>Ελέγξτε ότι οι παρακάτω πληροφορίες είναι σωστές.</value>
+  </data>
+  <data name="review.p3" xml:space="preserve">
+    <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
+  </data>
+  <data name="server-error.instructions" xml:space="preserve">
+    <value>&lt;p&gt;Δοκιμάστε ξανά αργότερα.&lt;/p&gt;</value>
+  </data>
+  <data name="server-error.title" xml:space="preserve">
+    <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
+  </data>
+  <data name="set-address.city" xml:space="preserve">
+    <value>Πόλη</value>
+  </data>
+  <data name="set-address.find_button" xml:space="preserve">
+    <value>Αναζήτηση</value>
+  </data>
+  <data name="set-address.first_selection_address" xml:space="preserve">
+    <value>Επιλέξτε Διεύθυνση</value>
+  </data>
+  <data name="set-address.flat_no" xml:space="preserve">
+    <value>Αριθμός διαμερίσματος</value>
+  </data>
+  <data name="set-address.parish" xml:space="preserve">
+    <value>Ενορία</value>
+  </data>
+  <data name="set-address.postal_code" xml:space="preserve">
+    <value>Ταχυδρομικός Κώδικας</value>
+  </data>
+  <data name="set-address.select_address_label" xml:space="preserve">
+    <value>Επιλογή Διεύθυνσης</value>
+  </data>
+  <data name="set-address.street" xml:space="preserve">
+    <value>διεύθυνση</value>
+  </data>
+  <data name="set-address.street_no" xml:space="preserve">
+    <value>Αριθμός οδού</value>
+  </data>
+  <data name="set-address.title" xml:space="preserve">
+    <value>Βρείτε τη διεύθυνσή σας</value>
+  </data>
+  <data name="set-email.email_hint" xml:space="preserve">
+    <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>
+  </data>
+  <data name="set-email.email_label" xml:space="preserve">
+    <value>Ποια διεύθυνση email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+  </data>
+  <data name="set-email.p1" xml:space="preserve">
+    <value>Αφού κάνετε κλικ στο «συνέχεια» θα λάβετε ένα email με έναν σύνδεσμο στον οποίο θα πρέπει να κάνετε κλικ για να επιβεβαιώσετε το email σας.</value>
+  </data>
+  <data name="set-email.title" xml:space="preserve">
+    <value>Ενημερώστε τη διεύθυνση email σας</value>
+  </data>
+  <data name="set-mobile.mobile_hint" xml:space="preserve">
+    <value>Για αριθμούς εκτός Κύπρου, συμπεριλάβετε και τον κωδικό χώρας</value>
+  </data>
+  <data name="set-mobile.mobile_label" xml:space="preserve">
+    <value>Ποιον αριθμό κινητού τηλεφώνου μπορούν να χρησιμοποιήσουμε για να επικοινωνούμε μαζί σας;</value>
+  </data>
+  <data name="set-mobile.p1" xml:space="preserve">
+    <value>Αφού συνεχίσετε, θα λάβετε έναν κωδικό ασφαλείας στο κινητό σας και θα σας ζητηθεί να εισαγάγετε αυτόν τον αριθμό στην επόμενη σελίδα, ώστε να επιβεβαιωθεί ο αριθμός κινητού</value>
+  </data>
+  <data name="set-mobile.title" xml:space="preserve">
+    <value>Ενημερώστε τον αριθμό του κινητού σας</value>
+  </data>
+</root>
