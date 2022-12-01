@@ -349,6 +349,9 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="set-address.flat_no" xml:space="preserve">
     <value>Flat Number</value>
   </data>
+  <data name="set-address.NotFound" xml:space="preserve">
+    <value>Δεν βρέθηκαν διευθύνσεις</value>
+  </data>
   <data name="set-address.parish" xml:space="preserve">
     <value>Parish</value>
   </data>
@@ -366,6 +369,9 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   </data>
   <data name="set-address.title" xml:space="preserve">
     <value>What address can we use to contact you?</value>
+  </data>
+  <data name="set-address.type_postal_code" xml:space="preserve">
+    <value>Enter your postal code</value>
   </data>
   <data name="set-email.email_hint" xml:space="preserve">
     <value>The email address in your CY Login account will not be change</value>

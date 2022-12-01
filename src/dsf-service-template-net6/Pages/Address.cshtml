@@ -3,6 +3,7 @@
 @model dsf_service_template_net6.Pages.AddressModel
 @inject IResourceViewlocalizer Localizer
 @{
+    ViewBag.PreviousUrl=Model.BackLink;
      ViewData["Title"] = Localizer["address-selection.title"];
 }
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
@@ -19,14 +20,14 @@
         <legend>
             @Localizer["address-selection.legend"]
         </legend>
-        <div class="@((Model.AddressSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            @if (Model.AddressSelection.Length > 0)
+        <div class="@((Model.AddSellectError.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+            @if (Model.AddSellectError.Length > 0)
             {
                  <p id="error" class="govcy-input-error-msg">
                     <span class="govcy-visually-hidden-error">
                         @Localizer["common.error_alert"]:
                     </span>
-                    @Model.AddressSelection
+                    @Model.AddSellectError
                 </p>
             }
             <label class="govcy-radio">

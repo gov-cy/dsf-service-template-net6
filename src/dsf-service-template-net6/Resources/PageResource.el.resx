@@ -350,6 +350,9 @@
   <data name="set-address.flat_no" xml:space="preserve">
     <value>Αριθμός διαμερίσματος</value>
   </data>
+  <data name="set-address.NotFound" xml:space="preserve">
+    <value>Δεν βρέθηκαν διευθύνσεις</value>
+  </data>
   <data name="set-address.parish" xml:space="preserve">
     <value>Ενορία</value>
   </data>
@@ -367,6 +370,9 @@
   </data>
   <data name="set-address.title" xml:space="preserve">
     <value>Βρείτε τη διεύθυνσή σας</value>
+  </data>
+  <data name="set-address.type_postal_code" xml:space="preserve">
+    <value>Εισάγετε τον ταχυδρομικό σας κώδικα</value>
   </data>
   <data name="set-email.email_hint" xml:space="preserve">
     <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>

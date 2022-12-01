@@ -1,37 +1,53 @@
-﻿@page "/SetAddress/{review:bool?}"
+﻿@page "/set-address/{review:bool?}"
 @using Microsoft.Extensions.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @using dsf_service_template_net6.Data.Models
 @model dsf_service_template_net6.Pages.AddressEditModel
 @inject IStringLocalizer<Program> Localizer
 @{
-    ViewBag.PreviousUrl=Model.BackLink;
+     ViewBag.PreviousUrl=Model.BackLink;
+     ViewData["Title"] = @Localizer["set-address.title"];
+     string PostalCode=(Model.ViewModel.HasUserEnteredPostalCode?Localizer["set-address.postal_code"]:Localizer["set-address.type_postal_code"]);
+	string ExtraParagraph = (!Model.ViewModel.HasUserSelectedAddress && Model.ViewModel.HasUserEnteredPostalCode? Localizer["set-email.p1"]:""); 
 }
 <div class="govcy-container">
     <div style="@((!Model.ViewModel.ShowErrorSummary) ? "display:none" : "")" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
-        <h2>@Localizer["ErrorMessage-General"]</h2>
+        <h2>@Localizer["common.error_message"]</h2>
         <p class="govcy-mb-0">
             @Html.Raw(Model.ViewModel.ErrorDesc)
         </p>
     </div>
 
-    <h1>@Localizer["AddressEditHeading"]</h1>
+    <h1>@Localizer["set-address.title"]</h1>
+    
+	  <div style="@((!Model.ViewModel.NoResultsFound) ? "display:none" : "")" class="govcy-alert-warning">
+       <span class="material-icons govcy-alert-warning-icon">error</span>
+       <span class="govcy-alert-warning-text" >@Localizer["set-address.NotFound"]</span>
+    </div>
+
     <form class="govcy-form"  asp-page-handler="PostalCode" novalidate>
         <div class="@(Model.PostalCodeErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <label class="govcy-label govcy-mb-2">@Localizer["PostalCode"]</label>
-            	@if (Model.PostalCodeErrorClass.Length > 0)
+            <label class="govcy-label govcy-mb-2">@PostalCode</label>
+            @if (Model.PostalCodeErrorClass.Length > 0)
             {
+                <p id="PostalCode-error" class="govcy-input-error-msg">
                 <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
+                @Html.ValidationMessage(nameof(Model.ViewModel.PostalCode))
+                </p>
             }
-             <span class="govcy-input-error-msg" asp-validation-for="@Model.ViewModel.postalCode"></span>
-             <input id="PostalCode" name="ViewModel.postalCode" type="text" value="@Model.ViewModel.postalCode" placeholder="" class="@(Model.PostalCodeErrorClass.Length >0 ? " govcy-text-input govcy-text-input-char_4 govcy-text-input-error": "govcy-text-input govcy-text-input-char_4")"> 
+             
+             <input id="PostalCode" name="ViewModel.postalCode" 
+             type="text" 
+             value="@Model.ViewModel.postalCode" 
+             class="@(Model.PostalCodeErrorClass.Length >0 ? " govcy-text-input govcy-text-input-char_4 govcy-text-input-error": "govcy-text-input govcy-text-input-char_4")"
+            autocomplete="postal-code"
+            spellcheck="false"
+            maxlength="4"
+            @(Model.PostalCodeErrorClass.Length > 0 ? $"aria-describedby=\"PostalCode-error\"" : "")> 
         </div>
         <button class="govcy-btn-secondary">@Localizer["Find"]</button>
     </form>
-      <div style="@((!Model.ViewModel.NoResultsFound) ? "display:none" : "")" class="govcy-alert-warning">
-       <span class="material-icons govcy-alert-warning-icon">error</span>
-       <span class="govcy-alert-warning-text" >@Localizer["PostalResultsNotFound"]</span>
-    </div>
+    
     @if (Model.ViewModel.Addresses?.Count >0 || (Model.ViewModel.HasUserSelectedAddress && !Model.ViewModel.NoResultsFound))
     {
         <form class="govcy-form" method="post" asp-page-handler="SelectAddressFromDropDown" novalidate>

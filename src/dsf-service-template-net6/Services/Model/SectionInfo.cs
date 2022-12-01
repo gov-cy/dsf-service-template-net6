@@ -7,8 +7,9 @@
     }
     public class SectionInfo
     {
-        public string Section=string.Empty;
-        public SectionType PageType= SectionType.SelectionAndInput;
+        public string Name=string.Empty;
+        public SectionType Type= SectionType.SelectionAndInput;
+        public List<string> pages = new List<string>();
         public int SectionOrder=0;
     }
 }

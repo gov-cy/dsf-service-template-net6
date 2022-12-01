@@ -104,6 +104,10 @@ builder.Services.AddHttpContextAccessor();
 //so that it can be used for Dependency Injection
 //for calling all http client requests 
 builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
+//Register Navigation Service
+builder.Services.AddScoped<INavigation, Navigation>();
+//Register the Api service for MoiCrmd
+builder.Services.AddScoped<IMoiCrmd, MoiCrmd>();
 //Added for session state
 builder.Services.AddSession(options => {
     options.Cookie.Name = "AppDataSessionCookie";
