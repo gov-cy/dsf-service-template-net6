@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Localization;
+﻿using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.Extensions.Localization;
 
 namespace dsf_service_template_net6.Resources
 {
@@ -9,8 +10,14 @@ namespace dsf_service_template_net6.Resources
         {
             get;
         }
+       
         LocalizedString GetPagesLocalizedString(string key) ;
+        LocalizedHtmlString GetPagesLocalizedHtml(string key);
+        LocalizedHtmlString GetPagesLocalizedHtml(string key, params object[] arguments);
+
         LocalizedString GetErrorLocalizedString(string key);
+
         LocalizedString GetCommonLocalizedString(string key);
+        LocalizedHtmlString GetCommonLocalizedHtml(string key);
     }
 }

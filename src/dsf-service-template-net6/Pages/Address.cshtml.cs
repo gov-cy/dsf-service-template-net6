@@ -118,44 +118,7 @@ namespace dsf_service_template_net6.Pages
                 return false;
             }
         }
-        //api call to get personal data from Civil Registry
-        private CitizenDataResponse GetCitizenData(string lang)
-        {
-            CitizenDataResponse Res = new CitizenDataResponse();
 
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            var apiUrl = "api/v1/MoiCrmd/contact-info-mock/" + lang;
-            var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-            if (token == null)
-            {
-                token = HttpContext.GetTokenAsync("access_token").Result ?? "";
-                HttpContext.Session.SetObjectAsJson("access_token", token, authTime);
-            }
-            string response;
-            CitizenDataResponse _citizenPersonalDetails;
-            try
-            {
-                response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "", token);
-                _citizenPersonalDetails = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
-            }
-            catch
-            {
-                _logger.LogError("Could not get valid response from " + apiUrl);
-                _citizenPersonalDetails = new CitizenDataResponse();
-                response = "";
-            }
-            if (_citizenPersonalDetails.succeeded & _citizenPersonalDetails.data != null)
-            {
-                Res = _citizenPersonalDetails;
-
-            }
-            else
-            {
-                Res = new CitizenDataResponse();
-            }
-
-            return Res;
-        }
         #endregion
         public IActionResult OnGet(bool review, bool fromPost)
         {
@@ -163,7 +126,12 @@ namespace dsf_service_template_net6.Pages
             BackLink = _nav.GetBackLink("/address-selection", review);
             if (fromPost)
             {
+                //I just need to bind address info 
+                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+                CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+                address_select.addressInfo = res.data.addressInfo;
                 ShowErrors(true);
+
             }
             else
             {
@@ -172,10 +140,11 @@ namespace dsf_service_template_net6.Pages
                 if (!revisit)
                 {
                     //Check whether api data were retrieve from login , otherwise call again
+                    var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
                     CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
                     if (res == null)
                     {
-                        var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+
                         var lang = "";
                         if (Thread.CurrentThread.CurrentUICulture.Name == "el-GR")
                         {
@@ -199,6 +168,9 @@ namespace dsf_service_template_net6.Pages
                             HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
 
                         }
+                    } else
+                    {
+                        address_select.addressInfo = res.data.addressInfo;
                     }
 
                 }
@@ -241,11 +213,11 @@ namespace dsf_service_template_net6.Pages
             //Set the Back and Next Link
             if (address_select.use_other)
             {
-              NextLink= _nav.SetLinks("address-selection", "address", review, "No");
+                NextLink = _nav.SetLinks("address-selection", "Address", review, "No");
             }
             else
             {
-                NextLink = _nav.SetLinks("address-selection", "address", review, "Yes");
+                NextLink = _nav.SetLinks("address-selection", "Address", review, "Yes");
             }
             if (review)
             {

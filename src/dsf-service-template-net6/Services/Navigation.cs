@@ -5,6 +5,8 @@ namespace dsf_service_template_net6.Services
     using dsf_service_template_net6.Data.Models;
     using dsf_service_template_net6.Extensions;
     using Microsoft.AspNetCore.Http;
+    using System.Collections;
+
     public enum FormSelection
     {
         Yes,
@@ -31,7 +33,16 @@ namespace dsf_service_template_net6.Services
         public string BackLink { get; set; }
         public string NextLink { get; set; }
         private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
-     
+        Dictionary<string, string> _routes = new()
+        {
+            { "/Address", "/address-selection" },
+            { "/AddressEdit", "/set-address" },
+            { "/Email", "/email-selection" },
+            { "/EmailEdit", "/set-email" },
+            { "/Mobile", "/mobile-selection" },
+            { "/MobileEdit", "/set-mobile" },
+        };
+
         private void AddHistoryLinks(string currPage, bool review)
         {
             HistoryItem historyItem = new HistoryItem();
@@ -43,11 +54,11 @@ namespace dsf_service_template_net6.Services
                 historyItem.PageName = "/";
                 History.Add(historyItem);
             }
-            else if (History[LastIndex - 1].PageName != CurrPage)
+            else if (History[LastIndex - 1].PageName != currPage)
             {
                 //Add to History
                 historyItem.Review = review;
-                historyItem.PageName = CurrPage;
+                historyItem.PageName = currPage;
                 History.Add(historyItem);
                 //Set to memory
 
@@ -106,25 +117,31 @@ namespace dsf_service_template_net6.Services
         public Navigation(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
-            var ListItem= _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList").First();
-            BackLink = "/";
-            setSectionPages(ClaimsPrincipal.Current);
-            NextLink = (ListItem.Type==SectionType.SelectionAndInput?"/address-selection": "/set-address");
+            var ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList")?.First();
+            if (ListItem == null)
+            {
+                BackLink = "/";
+
+                setSectionPages(_httpContextAccessor?.HttpContext?.User);
+                ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList").First();
+                NextLink = "/" + ListItem.pages.First();
+            }
+            
         }
 
         public string GetBackLink(string currPage, bool fromReview = false)
         {
             History = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<HistoryItem>>("History");
-            if (FromReview)
+            if (!fromReview)
             {
-                AddHistoryLinks(CurrPage, FromReview);
+                AddHistoryLinks(currPage, fromReview);
             }
-            HistoryItem Item = History.Find(x => x.PageName == CurrPage && x.Review == FromReview);
+            HistoryItem Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
             HistoryItem PrevItem = null;
             //if not found get the previous
             if (Item == null)
             {
-                bool Found = History.Exists(x => x.PageName == CurrPage);
+                bool Found = History.Exists(x => x.PageName == currPage);
                 if (Found)
                 {
                     PrevItem = (History.Count > 1 ? History[History.Count - 2] : History[History.Count - 1]);
@@ -139,7 +156,7 @@ namespace dsf_service_template_net6.Services
                     Item = new HistoryItem();
                     Item.PageName = "/";
                     Item.PageName = (Item.Review ? Item.PageName + "?review=true" : Item.PageName);
-                    Item.Review = FromReview;
+                    Item.Review = fromReview;
                     BackLink = Item.PageName;
 
                     return Item.PageName;
@@ -184,19 +201,25 @@ namespace dsf_service_template_net6.Services
                 //Mobile section always appears last for all users
                 NextLink = "/ReviewPage";
             }
+            //Should go to edit page
+            else if  ((sections.Count != index ) && selectChoice == FormSelection.No.ToString())
+            {
+                NextLink = "/" + section.pages[pageIndex + 1];
+            }
             else
             {
                 //follow work flow
                 if (section.pages.Count == 1)
                 {
                     //go to next section first page
-                    NextLink = sections[index + 1].pages[0];
+                    NextLink = "/" + sections[index + 1].pages[0];
                 } else
                 {
-                    NextLink = sections[index + 1].pages[pageIndex +1];
+                    NextLink = "/" + sections[index + 1].pages[pageIndex +1];
                 }
 
             }
+            NextLink = _routes.Single(s=> s.Value == NextLink).Key;
             return NextLink;
         }
     }

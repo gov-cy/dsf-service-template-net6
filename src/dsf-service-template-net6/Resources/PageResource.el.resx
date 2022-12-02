@@ -353,6 +353,9 @@
   <data name="set-address.NotFound" xml:space="preserve">
     <value>Δεν βρέθηκαν διευθύνσεις</value>
   </data>
+  <data name="set-address.no_address_found_text" xml:space="preserve">
+    <value>Αν δεν μπορείτε να βρείτε τη διεύθυνσή σας εδώ, μπορείτε να χρησιμοποιήσετε την  &lt;a href="{0}" target="_blank"&gt;έντυπη μορφή της αίτησης&lt;/a&gt;.</value>
+  </data>
   <data name="set-address.parish" xml:space="preserve">
     <value>Ενορία</value>
   </data>

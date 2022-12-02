@@ -39,7 +39,7 @@
     public class Item
     {
         public Street street { get; set; }
-        public int code { get; set; }
+        public string code { get; set; }
         public string name { get; set; }
     }
 

@@ -352,6 +352,9 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="set-address.NotFound" xml:space="preserve">
     <value>Δεν βρέθηκαν διευθύνσεις</value>
   </data>
+  <data name="set-address.no_address_found_text" xml:space="preserve">
+    <value>If you cannot find your address here, you can download the  &lt;a href="{0}" target="_blank"&gt;manual address form&lt;/a&gt;.</value>
+  </data>
   <data name="set-address.parish" xml:space="preserve">
     <value>Parish</value>
   </data>

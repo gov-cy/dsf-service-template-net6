@@ -13,6 +13,7 @@ namespace dsf_service_template_net6.Data.Models
         public string ErrorDesc { get; set; } = string.Empty;
         public string SelectedAddress { get; set; }
         public string City { get; set; }
+        public string Town { get; set; }
         public string Parish { get; set; }
         public string SelectedAddressName { get; set; }
         public string FlatNo { get; set; }
