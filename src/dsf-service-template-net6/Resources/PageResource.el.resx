@@ -159,21 +159,6 @@
   <data name="accessibility-statement.title" xml:space="preserve">
     <value>Δήλωση προσβασιμότητας</value>
   </data>
-  <data name="address-selection.legend" xml:space="preserve">
-    <value>Θέλετε να χρησιμοποιήσετε αυτήν τη διεύθυνση;</value>
-  </data>
-  <data name="address-selection.no" xml:space="preserve">
-    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετική</value>
-  </data>
-  <data name="address-selection.p1" xml:space="preserve">
-    <value>Αυτή είναι η διεύθυνση που βρήκαμε στη βάση δεδομένων μας.</value>
-  </data>
-  <data name="address-selection.title" xml:space="preserve">
-    <value>Ποια διεύθυνση μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
-  </data>
-  <data name="address-selection.yes" xml:space="preserve">
-    <value>Ναί</value>
-  </data>
   <data name="application-response.header_ref" xml:space="preserve">
     <value>Αρ, Αναφοράς</value>
   </data>
@@ -337,45 +322,6 @@
   </data>
   <data name="server-error.title" xml:space="preserve">
     <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
-  </data>
-  <data name="set-address.city" xml:space="preserve">
-    <value>Πόλη</value>
-  </data>
-  <data name="set-address.find_button" xml:space="preserve">
-    <value>Αναζήτηση</value>
-  </data>
-  <data name="set-address.first_selection_address" xml:space="preserve">
-    <value>Επιλέξτε Διεύθυνση</value>
-  </data>
-  <data name="set-address.flat_no" xml:space="preserve">
-    <value>Αριθμός διαμερίσματος</value>
-  </data>
-  <data name="set-address.NotFound" xml:space="preserve">
-    <value>Δεν βρέθηκαν διευθύνσεις</value>
-  </data>
-  <data name="set-address.no_address_found_text" xml:space="preserve">
-    <value>Αν δεν μπορείτε να βρείτε τη διεύθυνσή σας εδώ, μπορείτε να χρησιμοποιήσετε την  &lt;a href="{0}" target="_blank"&gt;έντυπη μορφή της αίτησης&lt;/a&gt;.</value>
-  </data>
-  <data name="set-address.parish" xml:space="preserve">
-    <value>Ενορία</value>
-  </data>
-  <data name="set-address.postal_code" xml:space="preserve">
-    <value>Ταχυδρομικός Κώδικας</value>
-  </data>
-  <data name="set-address.select_address_label" xml:space="preserve">
-    <value>Επιλογή Διεύθυνσης</value>
-  </data>
-  <data name="set-address.street" xml:space="preserve">
-    <value>διεύθυνση</value>
-  </data>
-  <data name="set-address.street_no" xml:space="preserve">
-    <value>Αριθμός οδού</value>
-  </data>
-  <data name="set-address.title" xml:space="preserve">
-    <value>Βρείτε τη διεύθυνσή σας</value>
-  </data>
-  <data name="set-address.type_postal_code" xml:space="preserve">
-    <value>Εισάγετε τον ταχυδρομικό σας κώδικα</value>
   </data>
   <data name="set-email.email_hint" xml:space="preserve">
     <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>

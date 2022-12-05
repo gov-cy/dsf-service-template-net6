@@ -11,17 +11,18 @@ namespace dsf_service_template_net6.Pages
     [BindProperties]
     public class ReviewPageModel : PageModel
     {
-        public IMyHttpClient _client;
-        private IConfiguration _configuration;
-        public ReviewPageModel(IConfiguration configuration, IMyHttpClient client)
+        //Dependancy injection Variables
+        private readonly INavigation _nav;
+        private readonly IMoiCrmd _service;
+        public ReviewPageModel(INavigation nav, IMoiCrmd service)
         {
-            _client = client;
-            _configuration = configuration;
+            _nav = nav;
+            _service = service;
         }
         #region "Variables"
         public CitizenDataResponse _citizenPersonalDetails = new CitizenDataResponse();
         public ApplicationRequest _application = new ApplicationRequest();
-        public string currentLanguage;
+        public string currentLanguage="";
         //Data retrieve from other pages
         public Addressinfo[] ret_address = Array.Empty<Addressinfo>();
         public string ret_email = string.Empty;
@@ -31,56 +32,18 @@ namespace dsf_service_template_net6.Pages
         [BindProperty]
         public string BackLink { get; set; } = "";
         #endregion
-        public void AddHistoryLinks(string curr)
+        private string GetAuthTime()
         {
-
-            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
-            if (History.Count == 0)
-            {
-                History.Add("/");
-            }
-            int LastIndex = History.Count - 1;
-            if (History[LastIndex] != curr)
-            {
-                //Add to History
-                History.Add(curr);
-                //Set to memory
-
-                HttpContext.Session.SetObjectAsJson("History", History);
-            }
-        }
-        private string GetBackLink(string curr)
-        {
-            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindLastIndex(x => x == curr);
-            //if not found
-            if (currentIndex == -1)
-            {
-                return "/";
-            }
-            //Last value in history
-            else if (currentIndex == 0)
-            {
-                var index = History.Count - 1;
-                return History[index].ToString();
-            }
-            //Return the previus of current
-            else
-            {
-                return History[currentIndex - 1].ToString();
-            }
+            return User.Claims.First(c => c.Type == "auth_time").Value;
         }
         public IActionResult OnGet()
-        {           
-            //Set back and Next Link
-            AddHistoryLinks("/" + "ReviewPage");
-            BackLink = GetBackLink("/" + "ReviewPage");
-            bool allow = AllowToProceed();
+        {   bool allow = AllowToProceed();
             if (!allow)
             {
               return RedirectToAction("LogOut", "Account");
             }
-               
+            //Get back link
+           
             //Set Data from journey pages
             bool proceed = SetUserJourneyData();
             if (!proceed)
@@ -111,21 +74,18 @@ namespace dsf_service_template_net6.Pages
         {
             //Make sure the sequence has been kept
             bool ret = true;
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            
+            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", GetAuthTime()) == null)
             {
                 ret = false;
             }
-            if (HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime) == null)
-            {
-                ret = false;
-            }
-            if ((HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null) && (HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime) == null))
+           
+            if ((HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime()) == null))
             {
                 ret = false;
             }
 
-            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime) == null))
+            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime()) == null))
             {
                 ret = false;
             }
@@ -134,23 +94,12 @@ namespace dsf_service_template_net6.Pages
           private bool SetUserJourneyData()
           {
             bool ret = true;
-
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+                     
             //first get Address Select
-            _citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            var addressSelect = HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime);
-            if (addressSelect.use_from_civil)
-            {               
-                ret_address = _citizenPersonalDetails.data.addressInfo;
-            } else
-            {
-                //Wait for Alkis Session Storage
-                var citizenEdit= HttpContext.Session.GetObjectFromJson<Addressinfo>("AddressEdit", authTime);
-                List<Addressinfo> items = new();
-                items.Add(citizenEdit); 
-                ret_address= items.ToArray();
-            }
-            var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime);
+            _citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", GetAuthTime());
+            
+          
+            var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime());
             if (mobSelect != null)
             {   
                 if (mobSelect.use_from_civil)
@@ -159,19 +108,19 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
+                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
                 ret_mobile = SessionMobEdit.mobile;
                 }
 
             } else
             {
                 //Directly to edit
-                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
+                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
                 ret_mobile = SessionMobEdit.mobile;
                 useMobileEditOnly = true;
             }
          
-            var emailSelect = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime);
+            var emailSelect = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime());
            if (emailSelect != null)
             {
                 if (emailSelect.use_from_civil)
@@ -179,13 +128,13 @@ namespace dsf_service_template_net6.Pages
                 ret_email= _citizenPersonalDetails.data.email ?? User.Claims.First(c => c.Type == "email").Value; 
                 } else 
                 {
-                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
+                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
                 ret_email = SessionEmailEdit.email;
                 }
             }else
             {
                 //Directrly to email edit
-                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
+                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
                 ret_email = SessionEmailEdit.email;
                 useEmailEditOnly = true;
             }
@@ -223,31 +172,28 @@ namespace dsf_service_template_net6.Pages
           private bool SubmitApplication()
         {
             bool ret = false;
-            string jsonString = JsonConvert.SerializeObject(_application);
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
+            var authTime = GetAuthTime();
             var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-            try 
+            var res = _service.SubmitApplication(_application, token);
+            if (res.succeeded)
             {
-                var response = _client.MyHttpClientPostRequest(_configuration["ApiUrl"], "api/v1/MoiCrmd/contact-info-submission-mock", "application/json", jsonString, token);
-
-                if (response != null)
+                //Redirect if error code is <> 0
+                if (res.errorCode == 0)
                 {
-                    var res = JsonConvert.DeserializeObject<ApplicationResponse>(response);
-
-                    if (res != null)
-                    {
-                        HttpContext.Session.SetObjectAsJson("ref_no", res.data, authTime);
-                    }
-
                     ret = true;
+                    HttpContext.Session.SetObjectAsJson("ApplReq", _application, authTime);
+                    HttpContext.Session.SetObjectAsJson("ref_no", res.data, authTime);
                 }
-
-                
+                else
+                {
+                    //Log response error
+                    HttpContext.Session.SetObjectAsJson("ApplRes", res, authTime);
+                }
             }
-            catch
+            else
             {
-                //Log
-                ret=false;
+                //Log response error
+                HttpContext.Session.SetObjectAsJson("ApplRes", res, authTime);
             }
             return ret;
         }

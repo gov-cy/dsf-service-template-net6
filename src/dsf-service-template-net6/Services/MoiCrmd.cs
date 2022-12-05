@@ -6,7 +6,6 @@
     public interface IMoiCrmd
     {
         CitizenDataResponse GetCitizenData(string language, string accesstoken);
-        List<Addressinfo> GetAdressesForPostalCode(string language, string postalCode);
         ApplicationResponse SubmitApplication(ApplicationRequest req, string accesstoken);
 
 
@@ -23,81 +22,7 @@
             _logger = logger;
             _client = client;
         }
-        public List<Addressinfo> GetAdressesForPostalCode(string language, string postalCode)
-        {
-            List<Addressinfo> addressesForPostalCode = new();
-            if (!string.IsNullOrEmpty(postalCode))
-            {
-                AddressEdit apiResponse;
-                string apiUrl = $"api/v1/MoiCrmd/address-mock/{ postalCode}/{language}";
-                string response = null;
-                try
-                {
-                    response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "application/json", "");
-                }
-                catch
-                {
-                    _logger.LogError("Fail to call Api for " + apiUrl);
-                    apiResponse = new AddressEdit();
-                }
-
-                if (response != null)
-                {
-                    try
-                    {
-
-                        apiResponse = JsonConvert.DeserializeObject<AddressEdit>(response);
-                        if (apiResponse == null)
-                        {
-                            _logger.LogError("Received Null response from " + apiUrl);
-                            apiResponse = new AddressEdit();
-                        }
-                    }
-                    catch
-                    {
-                        _logger.LogError("Could not get valid response from " + apiUrl);
-                        apiResponse = new AddressEdit();
-                    }
-
-                    if (apiResponse.succeeded)
-                    {
-                        //Set addressInfo data , so that existing functionality will 
-                        //build api response
-                        Addressinfo address_item = new();
-                        var civil = apiResponse.data;
-                        var civilItems = civil.items;
-                        var results = civilItems?.Count();
-                        if (results != null)
-                        {
-                            foreach (var item in civilItems)
-                            {
-                                address_item = new();
-                                address_item.postalCode = (civil.postalCode > 0 ? civil.postalCode : 0);
-                                address_item.language = language;
-                                address_item.addressVerified = false;
-                                address_item.country = civil.country;
-                                address_item.district = civil.district;
-                                address_item.town = civil.town;
-                                address_item.type = "vote_address";
-                                address_item.item = item;
-                                address_item.item.code = address_item.item.code;
-                                address_item.addressText = item.name;
-                                addressesForPostalCode.Add(address_item);
-                            }
-                        }
-
-                    }
-                    if (apiResponse.errorCode != 0)
-                    {
-                        var rsp = new AddressEdit();
-                        rsp.errorCode = apiResponse.errorCode;
-                        rsp.errorMessage = apiResponse.errorMessage;
-                        apiResponse = rsp;
-                    }
-                }
-            }
-            return addressesForPostalCode;
-        }
+       
 
         public CitizenDataResponse GetCitizenData(string language, string accesstoken)
         {

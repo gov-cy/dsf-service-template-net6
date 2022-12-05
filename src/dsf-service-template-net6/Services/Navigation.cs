@@ -35,8 +35,6 @@ namespace dsf_service_template_net6.Services
         private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
         Dictionary<string, string> _routes = new()
         {
-            { "/Address", "/address-selection" },
-            { "/AddressEdit", "/set-address" },
             { "/Email", "/email-selection" },
             { "/EmailEdit", "/set-email" },
             { "/Mobile", "/mobile-selection" },
@@ -71,25 +69,10 @@ namespace dsf_service_template_net6.Services
             var authTime = cp.Claims.First(c => c.Type == "auth_time").Value;
             List<SectionInfo> list = new List<SectionInfo>() ;
             var citizen= _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails",authTime);
-            SectionInfo section = new();
-            section.Name = "Address";
-            section.SectionOrder = 1;
-            //if address from api call , show selection address,otherwise only edit page 
-            section.Type= (citizen?.data?.addressInfo?.Length > 0)? SectionType.SelectionAndInput: SectionType.InputOnly;
-            if (section.Type == SectionType.InputOnly)
-            {
-                section.pages.Add("set-address");
-            }
-            else 
-            {
-                section.pages.Add("address-selection");
-                section.pages.Add("set-address");
-            }
-            list.Add(section);
             //New Section
-            section = new();
+            SectionInfo section = new();
             section.Name = "Email";
-            section.SectionOrder = 2;
+            section.SectionOrder = 1;
             //Always Select, for even API does not have email, we show email from user profile 
             section.Type =  SectionType.SelectionAndInput;
             section.pages.Add("email-selection");
@@ -98,7 +81,7 @@ namespace dsf_service_template_net6.Services
            //New Section
             section = new();
             section.Name = "Mobile";
-            section.SectionOrder = 3;
+            section.SectionOrder = 2;
             //Always Select, for even API does not have email, we show email from user profile 
             section.Type = (!string.IsNullOrEmpty(citizen?.data?.mobile)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)

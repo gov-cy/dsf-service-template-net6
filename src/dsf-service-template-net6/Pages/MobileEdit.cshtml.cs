@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using dsf_service_template_net6.Services;
 
 namespace dsf_service_template_net6.Pages
 {
@@ -14,9 +15,9 @@ namespace dsf_service_template_net6.Pages
     {
         #region "Variables"
         //Dependancy injection Variables
+        private readonly INavigation _nav;
         private IValidator<MobileEdit> _validator;
-        IStringLocalizer _Loc;
-        //control variables
+         //control variables
         [BindProperty]
         public string displaySummary { get; set; } = "display:none";
         [BindProperty]
@@ -24,7 +25,7 @@ namespace dsf_service_template_net6.Pages
         [BindProperty]
         public string MobileErrorClass { get; set; } = "";
         [BindProperty]
-        public string mobile { get; set; }
+        public string mobile { get; set; } = "";
         [BindProperty]
         public string BackLink { get; set; } = "";
 
@@ -35,74 +36,21 @@ namespace dsf_service_template_net6.Pages
        
         #endregion
         #region "Custom Methods"
-        public MobileEditModel(IValidator<MobileEdit> validator, IStringLocalizer<cMobileEditValidator> Loc)
+        public MobileEditModel(IValidator<MobileEdit> validator, INavigation nav)
         {  _validator = validator;
-            _Loc = Loc;
             mobEdit = new MobileEdit();
+            _nav = nav;
         }
-        public void AddHistoryLinks(string curr)
-        {
-
-            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
-            if (History.Count == 0)
-            {
-                History.Add("/");
-            }
-            int LastIndex = History.Count - 1;
-            if (History[LastIndex] != curr)
-            {
-                //Add to History
-                History.Add(curr);
-                //Set to memory
-
-                HttpContext.Session.SetObjectAsJson("History", History);
-            }
-        }
-        public void SetLinks(string curr, bool Review, string choice = "0")
-        {
-            //First add current page to History
-           AddHistoryLinks("/" + curr);
-
-            if (Review)
-            {
-                NextLink = "/ReviewPage";
-
-            }
-            else
-            {//user always have email
-                NextLink = "/Email";
-            }
-        }
-        private string GetBackLink(string curr)
-        {
-            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindLastIndex(x => x == curr);
-            //if not found
-            if (currentIndex == -1)
-            {
-                return "/";
-            }
-            //Last value in history
-            else if (currentIndex == 0)
-            {
-                var index = History.Count - 1;
-                return History[index].ToString();
-            }
-            //Return the previus of current
-            else
-            {
-                return History[currentIndex - 1].ToString();
-            }
-        }
+     
         void ClearErrors()
         {
             displaySummary = "display:none";
             MobileErrorClass = "";
             ErrorsDesc = "";
         }
-        bool ShowErrors()
+        bool ShowErrors(bool fromPost)
         {
-            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
+            if (fromPost)
 
             {
                 var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
@@ -137,98 +85,101 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            if (GetCitizenDataFromApi == null)
             {
                 ret = false;
             }
-            if (HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime) == null)
+            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime()) == null))
             {
                 ret = false;
             }
             return ret;
         }
+        private string GetAuthTime()
+        {
+            return User.Claims.First(c => c.Type == "auth_time").Value;
+        }
+        private CitizenDataResponse GetCitizenDataFromApi()
+        {
+            CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", GetAuthTime());
+            return res;
+        }
+        private MobileEdit GetSessionData()
+        {
+            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
+            return SessionEmailEdit;
+        }
+        private string GetTempSessionData()
+        {
+            var tempSession = HttpContext.Session.GetObjectFromJson<string>("mobileval");
+            return tempSession;
+        }
+        private bool BindData()
+        {   //Check if already selected 
+            var sessionData = GetSessionData();
+            if (sessionData != null)
+            {
+                mobile = sessionData.mobile;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
-        public IActionResult OnGet(bool review)
-        {           
-            //Set back and Next Link
-            SetLinks("SetMobile", review);
-            BackLink = GetBackLink("/" + "SetMobile");
+        public IActionResult OnGet(bool review, bool fromPost)
+        {
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
             {
                 return RedirectToAction("LogOut", "Account");
             }
+            //Set Back Link
+            BackLink = _nav.GetBackLink("/set-email", review);
             //If coming fromPost
-            if (!ShowErrors())
-            {
-                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
-                if (SessionMobEdit != null)
-                {
-                    mobEdit = SessionMobEdit;
-                    mobile = mobEdit.mobile;
-                }
-              
+            if (!fromPost)
+            { //GetData from session 
+                BindData();
             }
             else
             {
-                mobile = HttpContext.Session.GetObjectFromJson<string>("mobileval") ?? "";
+                mobile = GetTempSessionData();
+                ShowErrors(true);
             }
 
             return Page();
         }
         public IActionResult OnPost(bool review)
-        {
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            //Get Previous mobile number
-            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+        { // Update the class before validation
+            mobEdit.mobile = mobile;
+           //Get Previous mobile number
+            var citizenPersonalDetails = GetCitizenDataFromApi();
             if (citizenPersonalDetails != null)
             {
                 mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
 
             }
-            // Update the class before validation
-            mobEdit.mobile = mobile;
+           
             FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
             if (!result.IsValid)
             {
                 HttpContext.Session.SetObjectAsJson("valresult", result);
                 HttpContext.Session.SetObjectAsJson("mobileval", mobile);
-                return RedirectToPage("MobileEdit");
+                return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Mob Edit from Session
-           
-            var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime);
-            if (SessionMobEdit != null)
-            {
-                SessionMobEdit.mobile = mobEdit.mobile;
-                SessionMobEdit.prev_mobile = mobEdit.prev_mobile;
+            HttpContext.Session.Remove("MobEdit");
+            HttpContext.Session.SetObjectAsJson("MobEdit", mobEdit, GetAuthTime());
 
-                HttpContext.Session.Remove("MobEdit");
-                HttpContext.Session.SetObjectAsJson("MobEdit", SessionMobEdit, authTime);
-            }
-            else
-            {
-                HttpContext.Session.SetObjectAsJson("MobEdit", mobEdit, authTime);
-            }
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("mobileval");
-            //Finally redirect
-            Navigation _nav = new Navigation();
+    
             //Set back and Next Link
-            SetLinks("SetMobile", review);
-            if (review)
-            {
-                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
-            }
-            else
-            {
-                return RedirectToPage(NextLink, null, "mainContainer");
-            }
+            _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
+            return RedirectToPage(NextLink);
         }
     }
 }

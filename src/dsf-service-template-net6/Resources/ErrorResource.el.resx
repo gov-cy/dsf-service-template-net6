@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="address-selection.no_results_check" xml:space="preserve">
-    <value>Δεν βρέθηκε διεύθυνση από τα αρχεία μας</value>
-  </data>
-  <data name="address-selection.require_check" xml:space="preserve">
-    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτή η Διεύθυνση</value>
-  </data>
   <data name="email-selection.no_results_check" xml:space="preserve">
     <value>Δεν βρέθηκε το email από τα αρχεία μας</value>
   </data>
@@ -131,27 +125,6 @@
   </data>
   <data name="mobile-selection.require_check" xml:space="preserve">
     <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
-  </data>
-  <data name="set-address.flat_no.length_check" xml:space="preserve">
-    <value>5 Χαρακτήρες Επιτρέποντεαι</value>
-  </data>
-  <data name="set-address.postal_code.format_check" xml:space="preserve">
-    <value>Μόνο 4 αριθμοί επιτρέπονται</value>
-  </data>
-  <data name="set-address.postal_code.length_check" xml:space="preserve">
-    <value>4 Χαρακτήρες Επιτρέποντεαι</value>
-  </data>
-  <data name="set-address.postal_code.no_results_check" xml:space="preserve">
-    <value>Δεν βρέθηκαν διευθύνσεις</value>
-  </data>
-  <data name="set-address.postal_code.require_check" xml:space="preserve">
-    <value>Εισάγετε τον ταχυδρομικό σας κώδικα</value>
-  </data>
-  <data name="set-address.street_no.length_check" xml:space="preserve">
-    <value>5 Χαρακτήρες Επιτρέποντεαι</value>
-  </data>
-  <data name="set-address.street_no.require_check" xml:space="preserve">
-    <value>Ο Αριθμός οδού είναι υποχρεωτικός</value>
   </data>
   <data name="set-email.exist_check" xml:space="preserve">
     <value>Αυτό το email υπάρχει ήδη στα αρχεία μας</value>

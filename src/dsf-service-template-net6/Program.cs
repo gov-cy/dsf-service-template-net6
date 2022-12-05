@@ -70,12 +70,6 @@ builder.Services.AddScoped<IValidator<EmailEdit>, cEmailEditValidator>(sp =>
 
     return new cEmailEditValidator(LocMain);
 });
-builder.Services.AddScoped<IValidator<AddressSelect>, AddressSelectValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
-
-    return new AddressSelectValidator(LocMain);
-});
 builder.Services.AddScoped<IValidator<MobileSelect>, MobileSelectValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
@@ -87,12 +81,6 @@ builder.Services.AddScoped<IValidator<EmailSelect>, EmailSelectValidator>(sp =>
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
     return new EmailSelectValidator(LocMain);
-});
-builder.Services.AddScoped<IValidator<AddressEditViewModel>, AddressEditValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
-
-    return new AddressEditValidator(LocMain);
 });
 //Add fluent validation to .Net Core (optional use for server side validation) 
 builder.Services.AddFluentValidation();
