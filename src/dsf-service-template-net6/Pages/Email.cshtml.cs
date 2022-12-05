@@ -113,6 +113,11 @@ namespace dsf_service_template_net6.Pages
             var selectedoptions = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime());
             return selectedoptions;
         }
+        private EmailEdit GetEditSessionData()
+        {
+            var SessionEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
+            return SessionEdit;
+        }
         private void BindSelectionData()
         {
             CitizenDataResponse res = GetCitizenDataFromApi();
@@ -135,6 +140,15 @@ namespace dsf_service_template_net6.Pages
                 if (selectedoptions.use_from_civil)
                 {
                     crbEmail = "1";
+                }
+                else if (GetEditSessionData() == null)
+                {
+                    //code use when user hit back button on edit page
+                    crbEmail = "1";
+                    Email_select.use_from_civil = true;
+                    Email_select.use_other = true;
+                    Email_select.email=GetCitizenDataFromApi()?.data?.email;
+                    HttpContext.Session.SetObjectAsJson("EmailSelect", Email_select, GetAuthTime());
                 }
                 else
                 {
@@ -176,8 +190,9 @@ namespace dsf_service_template_net6.Pages
                     {
                         var lang = GetLanguage();
 
-                        //Call the citizen personal details from civil registry  
-                        res = _service.GetCitizenData(lang, "");
+                        //Call the citizen personal details from civil registry
+                        //
+                        res = _service.GetCitizenData(lang, HttpContext.GetTokenAsync("access_token")?.Result);
                         if (res.succeeded == false)
                         {
                             return RedirectToPage("/ServerError");
@@ -233,11 +248,11 @@ namespace dsf_service_template_net6.Pages
 
             if (Email_select.use_other)
             {
-                _nav.SetLinks("email-selection","Email", review, "No");
+              NextLink=  _nav.SetLinks("email-selection","Email", review, "No");
             }
             else
             {
-                _nav.SetLinks("email-selection", "Email", review, "Yes");
+              NextLink = _nav.SetLinks("email-selection", "Email", review, "Yes");
             }
 
             if (review)

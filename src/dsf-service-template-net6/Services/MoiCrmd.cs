@@ -27,7 +27,7 @@
         public CitizenDataResponse GetCitizenData(string language, string accesstoken)
         {
             CitizenDataResponse dataResponse = new();
-            var apiUrl = $"api/v1/MoiCrmd/contact-info-mock/{language}";
+            var apiUrl = $"api/v1/MoiCrmd/contact-info-mock{language}";
             string response = null;
             try
             {

@@ -39,6 +39,7 @@ namespace dsf_service_template_net6.Services
             { "/EmailEdit", "/set-email" },
             { "/Mobile", "/mobile-selection" },
             { "/MobileEdit", "/set-mobile" },
+            { "/ReviewPage", "/review" },
         };
 
         private void AddHistoryLinks(string currPage, bool review)
@@ -175,33 +176,29 @@ namespace dsf_service_template_net6.Services
             var section = sections.Find(x => x.Name == sectionName);
             int pageIndex =section!.pages.IndexOf(currPage);
             BackLink = GetBackLink(currPage, fromReview);
-            if ((sections.Count == index || fromReview) && selectChoice == FormSelection.No.ToString()) 
+            if ((sections.Count == index + 1 || fromReview) && selectChoice == FormSelection.No.ToString()) 
             {
                 NextLink = "/" + section.pages[pageIndex + 1];
             }
-            else if (sections.Count == index || fromReview)
+            else if (sections.Count == index +1 || fromReview)
             {
                 //Mobile section always appears last for all users
-                NextLink = "/ReviewPage";
+                NextLink = "/review";
             }
             //Should go to edit page
-            else if  ((sections.Count != index ) && selectChoice == FormSelection.No.ToString())
+            else if  ((sections.Count != index +1 ) && selectChoice == FormSelection.No.ToString())
             {
                 NextLink = "/" + section.pages[pageIndex + 1];
             }
             else
             {
                 //follow work flow
-                if (section.pages.Count == 1)
-                {
+               
                     //go to next section first page
                     NextLink = "/" + sections[index + 1].pages[0];
-                } else
-                {
-                    NextLink = "/" + sections[index + 1].pages[pageIndex +1];
-                }
+            } 
 
-            }
+            
             NextLink = _routes.Single(s=> s.Value == NextLink).Key;
             return NextLink;
         }

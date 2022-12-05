@@ -176,9 +176,9 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("mobileval");
-    
+
             //Set back and Next Link
-            _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
+            NextLink = _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
             return RedirectToPage(NextLink);
         }
     }

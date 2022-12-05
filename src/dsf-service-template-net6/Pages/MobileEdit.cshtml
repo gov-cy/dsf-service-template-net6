@@ -21,8 +21,8 @@
             {
                  <p id="tel-error" class="govcy-input-error-msg">
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
-                    @Html.ValidationMessage(nameof(@Model.mobEdit.mobile))
-            </p>
+                    @Model.MobileErrorClass
+                 </p>
                 
             }
             
@@ -37,8 +37,8 @@
      </div>
 
   
-     <p>
+   @*  <p>
          @Localizer["set-mobile.p1"]
-     </p>
+     </p>*@
      <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["common.button_next"]</button>
 </form>

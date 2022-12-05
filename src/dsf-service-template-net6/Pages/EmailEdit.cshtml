@@ -22,7 +22,7 @@
         {
             <p id="email-error" class="govcy-input-error-msg">
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
-                    @Html.ValidationMessage(nameof(Model.emailEdit.email))
+                    @Model.EmailErrorClass
             </p>
         }       
         <input id="email" name="email" 
@@ -32,8 +32,8 @@
         maxlength="80" spellcheck="false" autocomplete="email"
         @(Model.EmailErrorClass.Length >0) ? $" aria-describedby=\"email-error\"" : "")>
     </div>
-<p>
+@*<p>
   @Localizer["set-email.p1"]
-</p>
+</p>*@
   <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["common.button_next"]</button>
 </form>

@@ -103,6 +103,11 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
+        private MobileEdit GetEditSessionData()
+        {
+            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
+            return selectedoptions;
+        }
         private MobileSelect GetSessionData()
         {
             var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime());
@@ -127,6 +132,15 @@ namespace dsf_service_template_net6.Pages
                 if (selectedoptions.use_from_civil)
                 {
                     crbMobile = "1";
+                }
+                else if (GetEditSessionData() == null)
+                {
+                    //code use when user hit back button on edit page
+                    crbMobile = "1";
+                    Mobile_select.use_from_civil = true;
+                    Mobile_select.use_other = true;
+                    Mobile_select.mobile = GetCitizenDataFromApi()?.data?.mobile;
+                    HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
                 }
                 else
                 {
@@ -200,11 +214,11 @@ namespace dsf_service_template_net6.Pages
 
             if (Mobile_select.use_other)
             {
-                _nav.SetLinks("mobile-selection","Mobile", review, "No");
+                NextLink = _nav.SetLinks("mobile-selection","Mobile", review, "No");
             }
             else
             {
-                _nav.SetLinks("mobile-selection", "Mobile", review, "Yes");
+                NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "Yes");
             }
             if (review)
             {

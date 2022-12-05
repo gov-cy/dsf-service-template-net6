@@ -37,7 +37,8 @@ namespace dsf_service_template_net6.Pages
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
         public IActionResult OnGet()
-        {   bool allow = AllowToProceed();
+        {   
+            bool allow = AllowToProceed();
             if (!allow)
             {
               return RedirectToAction("LogOut", "Account");

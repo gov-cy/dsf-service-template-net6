@@ -170,9 +170,9 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("emailval");
-         
+
             //Set back and Next Link
-            _nav.SetLinks("set-email","Email", review, "NoSelection");
+            NextLink = _nav.SetLinks("set-email","Email", review, "NoSelection");
            
                 return RedirectToPage(NextLink);
             
