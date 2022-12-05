@@ -36,7 +36,7 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        public IActionResult OnGet()
+        public IActionResult OnGet(bool review)
         {   
             bool allow = AllowToProceed();
             if (!allow)
@@ -44,7 +44,7 @@ namespace dsf_service_template_net6.Pages
               return RedirectToAction("LogOut", "Account");
             }
             //Get back link
-           
+            BackLink = _nav.GetBackLink("/review-page", true);
             //Set Data from journey pages
             bool proceed = SetUserJourneyData();
             if (!proceed)
@@ -53,7 +53,7 @@ namespace dsf_service_template_net6.Pages
             }
             return Page();
         }
-        public IActionResult OnPostApplicationSubmit(string applicationReference, string returnUrl = null)
+        public IActionResult OnPostApplicationSubmit()
         {   //Save the Application
             //Set ApplicationRequest
             var  ret = SetApplication();

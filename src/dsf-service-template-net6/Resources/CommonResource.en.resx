@@ -159,6 +159,9 @@
   <data name="common.signout" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="common.submit" xml:space="preserve">
+    <value>Submit application</value>
+  </data>
   <data name="common.url_paper_form" xml:space="preserve">
     <value>http://www.elections.gov.cy/moi/elections/elections.nsf/elections07c_el/elections07c_el?OpenDocument</value>
   </data>

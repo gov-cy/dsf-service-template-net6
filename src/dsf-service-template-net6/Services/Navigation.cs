@@ -39,7 +39,7 @@ namespace dsf_service_template_net6.Services
             { "/EmailEdit", "/set-email" },
             { "/Mobile", "/mobile-selection" },
             { "/MobileEdit", "/set-mobile" },
-            { "/ReviewPage", "/review" },
+            { "/ReviewPage", "/review-page" },
         };
 
         private void AddHistoryLinks(string currPage, bool review)
@@ -183,7 +183,7 @@ namespace dsf_service_template_net6.Services
             else if (sections.Count == index +1 || fromReview)
             {
                 //Mobile section always appears last for all users
-                NextLink = "/review";
+                NextLink = "/review-page";
             }
             //Should go to edit page
             else if  ((sections.Count != index +1 ) && selectChoice == FormSelection.No.ToString())

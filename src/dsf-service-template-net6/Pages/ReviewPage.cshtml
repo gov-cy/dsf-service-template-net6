@@ -1,25 +1,24 @@
-﻿@page "/review"
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
+﻿@page "/review-page"
+@using dsf_service_template_net6.Resources
 @using dsf_service_template_net6.Data.Models
 @model ReviewPageModel
-@inject IStringLocalizer<Program> Localizer
-@inject IHtmlLocalizer<Program> HtmlLocalizer
+@inject IResourceViewlocalizer Localizer
 @{
     ViewBag.PreviousUrl=Model.BackLink;
+    ViewData["Title"] = Localizer["review.p2"];
 }
 @{
     
 }
- <h1>@Localizer["CheckAndSubmit"]</h1>
- <p>@Localizer["CheckAndSubmitPara01"]</p>
+ <h1>@Localizer["review.p2"]</h1>
+ <p>@Localizer["review.p1"]</p>
  
   @if (Model._citizenPersonalDetails != null)
     {
  <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
            <tr>
-             <th scope="row" class="col-3">@Localizer["ApplicantName"]</th>
+             <th scope="row" class="col-3">@Localizer["review.applicant_name"]</th>
              <td class="col-7">
                  <p>
                  <span class="govcy-d-block">@Model._citizenPersonalDetails.data.fullName</span>
@@ -30,7 +29,7 @@
               </td>
           </tr>
           <tr>
-             <th scope="row" class="col-3">@Localizer["Mobile"]</th>
+             <th scope="row" class="col-3">@Localizer["review.mobile"]</th>
              <td class="col-7">
                  <p>
                  <span class="govcy-d-block">@Model.ret_mobile</span>
@@ -39,15 +38,15 @@
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useMobileEditOnly)
                     {
-                        <a asp-page="/MobileEdit" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
+                        <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["common.change_link"]</a>
                     } else
                     {
-                        <a asp-page="/Mobile" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
+                        <a asp-page="/Mobile" asp-route-review="true">@Localizer["common.change_link"]</a>
                     }
               </td>
          </tr>
            <tr>
-             <th scope="row" class="col-3">@Localizer["Email"]</th>
+             <th scope="row" class="col-3">@Localizer["review.email"]</th>
              <td class="col-7">
                  <p>
                   <span class="govcy-d-block">@Model.ret_email</span>
@@ -56,10 +55,10 @@
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useEmailEditOnly)
                     {
-                        <a asp-page="/EmailEdit" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
+                        <a asp-page="/EmailEdit" asp-route-review="true">@Localizer["common.change_link"]</a>
                     }else
                     {
-                        <a asp-page="/Email" asp-route-review="true" asp-fragment="mainContainer">@Localizer["Change_Link"]</a>
+                        <a asp-page="/Email" asp-route-review="true">@Localizer["common.change_link"]</a>
                     }
                     
               </td>
@@ -72,6 +71,6 @@
  }
     <form asp-page-handler="ApplicationSubmit">
             <button type="submit" class="govcy-btn-primary" id="btnApplicationSubmit">
-                @Localizer["Button_Submit"]
+                @Localizer["common.submit"]
             </button>
    </form>

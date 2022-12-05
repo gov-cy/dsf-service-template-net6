@@ -317,6 +317,9 @@
   <data name="review.p3" xml:space="preserve">
     <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
   </data>
+  <data name="review.title" xml:space="preserve">
+    <value />
+  </data>
   <data name="server-error.instructions" xml:space="preserve">
     <value>&lt;p&gt;Δοκιμάστε ξανά αργότερα.&lt;/p&gt;</value>
   </data>
