@@ -237,7 +237,7 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
   <data name="no-valid-profile.title" xml:space="preserve">
     <value>Check your CY Login account</value>
   </data>
-  <data name="privacy-statement..instructions" xml:space="preserve">
+  <data name="privacy-statement.instructions" xml:space="preserve">
     <value>&lt;p&gt;This privacy policy explains how Social Insurance Services (SIS) uses information about you, in order to process your application for a child birth grant.&lt;/p&gt;
       &lt;h2&gt;Types of information collected and used&lt;/h2&gt;
       &lt;p&gt;SIS collects the following information from you directly:&lt;/p&gt;

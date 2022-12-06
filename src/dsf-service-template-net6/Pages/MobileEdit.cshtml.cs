@@ -1,12 +1,10 @@
 using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
+using dsf_service_template_net6.Services.Model;
 using dsf_service_template_net6.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Localization;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using dsf_service_template_net6.Services;
 
 namespace dsf_service_template_net6.Pages
@@ -99,9 +97,9 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private CitizenDataResponse GetCitizenDataFromApi()
+        private TasksResponse GetCitizenDataFromApi()
         {
-            CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", GetAuthTime());
+            TasksResponse res = HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private MobileEdit GetSessionData()
@@ -158,7 +156,7 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = GetCitizenDataFromApi();
             if (citizenPersonalDetails != null)
             {
-                mobEdit.prev_mobile = citizenPersonalDetails.data.mobile;
+                mobEdit.prev_mobile = citizenPersonalDetails?.data?.ToList()?.Find(x=> x.id==2)?.name;
 
             }
            
@@ -176,9 +174,9 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("mobileval");
-
+    
             //Set back and Next Link
-            NextLink = _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
+            _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
             return RedirectToPage(NextLink);
         }
     }

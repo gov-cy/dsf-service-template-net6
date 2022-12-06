@@ -17,9 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Program.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\PageResource.el.resx">
 		  <Generator></Generator>
 	  </EmbeddedResource>

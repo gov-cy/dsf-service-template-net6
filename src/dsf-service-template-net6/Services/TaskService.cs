@@ -1,22 +1,21 @@
 ﻿namespace dsf_service_template_net6.Services
-{
-    using dsf_service_template_net6.Data.Models;
-    using dsf_service_template_net6.Extensions;
+{  
+    using dsf_service_template_net6.Services.Model;
     using Newtonsoft.Json;
-    public interface IMoiCrmd
+    public interface ITasks
     {
-        CitizenDataResponse GetCitizenData(string language, string accesstoken);
-        ApplicationResponse SubmitApplication(ApplicationRequest req, string accesstoken);
+        TasksResponse GetAllTasks(string accesstoken);
+        TasksResponse SubmitTask(Task req, string accesstoken);
 
 
     }
-    public class MoiCrmd : IMoiCrmd
+    public class Tasks : ITasks
     {
         private IConfiguration _configuration;
-        private readonly ILogger<MoiCrmd> _logger;
+        private readonly ILogger<Tasks> _logger;
         private IMyHttpClient _client;
 
-        public MoiCrmd(IConfiguration configuration, ILogger<MoiCrmd> logger, IMyHttpClient client)
+        public Tasks(IConfiguration configuration, ILogger<Tasks> logger, IMyHttpClient client)
         {
             _configuration = configuration;
             _logger = logger;
@@ -24,10 +23,10 @@
         }
        
 
-        public CitizenDataResponse GetCitizenData(string language, string accesstoken)
+        public TasksResponse GetAllTasks(string accesstoken)
         {
-            CitizenDataResponse dataResponse = new();
-            var apiUrl = $"api/v1/MoiCrmd/contact-info-mock{language}";
+            TasksResponse dataResponse = new();
+            var apiUrl = "api/v1/TodoItems";
             string response = null;
             try
             {
@@ -37,24 +36,24 @@
             catch
             {
                 _logger.LogError("Fail to call Api for " + apiUrl);
-                dataResponse = new CitizenDataResponse();
+                dataResponse = new TasksResponse();
             }
             if (response != null)
             {
                 try
                 {
-                    dataResponse = JsonConvert.DeserializeObject<CitizenDataResponse>(response);
+                    dataResponse = JsonConvert.DeserializeObject<TasksResponse>(response);
                     if (dataResponse == null)
                     {
                         _logger.LogError("Received Null response from " + apiUrl);
-                        dataResponse = new CitizenDataResponse();
+                        dataResponse = new TasksResponse();
                     }
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError("Could not get valid response from " + apiUrl);
                     _logger.LogError("GetCitizenData - Exception" + ex.ToString());
-                    dataResponse = new CitizenDataResponse();
+                    dataResponse = new TasksResponse();
                 }
 
                 if (dataResponse.succeeded)
@@ -65,7 +64,7 @@
                 if (dataResponse.errorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
-                    var rsp = new CitizenDataResponse();
+                    var rsp = new TasksResponse();
                     rsp.errorCode = dataResponse.errorCode;
                     rsp.errorMessage = dataResponse.errorMessage;
                     dataResponse = rsp;
@@ -74,10 +73,10 @@
             return dataResponse;
         }
 
-        public ApplicationResponse SubmitApplication(ApplicationRequest req, string accesstoken)
+        public TasksResponse SubmitTask(Task req, string accesstoken)
         {
-            ApplicationResponse dataResponse = new();
-            var apiUrl = "api/v1/MoiCrmd/contact-info-submission-mock";
+            TasksResponse dataResponse = new();
+            var apiUrl = "api/v1/TodoItems";
             string jsonString = JsonConvert.SerializeObject(req);
             string response = null;
             try
@@ -87,28 +86,28 @@
             catch
             {
                 _logger.LogError("Fail to call Api for " + apiUrl);
-                dataResponse = new ApplicationResponse();
+                dataResponse = new TasksResponse();
             }
             if (response != null)
             {
                 try
                 {
-                    dataResponse = JsonConvert.DeserializeObject<ApplicationResponse>(response);
+                    dataResponse = JsonConvert.DeserializeObject<TasksResponse>(response);
                     if (dataResponse == null)
                     {
                         _logger.LogError("Received Null response from " + apiUrl);
-                        dataResponse = new ApplicationResponse();
+                        dataResponse = new TasksResponse();
                     }
                 }
                 catch
                 {
                     _logger.LogError("Could not get valid response from " + apiUrl);
-                    dataResponse = new ApplicationResponse();
+                    dataResponse = new TasksResponse();
                 }
                 if (dataResponse.errorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
-                    var rsp = new ApplicationResponse();
+                    var rsp = new TasksResponse();
                     rsp.errorCode = dataResponse.errorCode;
                     rsp.errorMessage = dataResponse.errorMessage;
                     dataResponse = rsp;

@@ -68,23 +68,23 @@ namespace dsf_service_template_net6.Services
         private void setSectionPages(ClaimsPrincipal cp)
         {
             var authTime = cp.Claims.First(c => c.Type == "auth_time").Value;
-            List<SectionInfo> list = new List<SectionInfo>() ;
-            var citizen= _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails",authTime);
+            List<SectionInfo> list = new List<SectionInfo>();
+            var citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", authTime);
             //New Section
             SectionInfo section = new();
             section.Name = "Email";
             section.SectionOrder = 1;
             //Always Select, for even API does not have email, we show email from user profile 
-            section.Type =  SectionType.SelectionAndInput;
+            section.Type = SectionType.SelectionAndInput;
             section.pages.Add("email-selection");
             section.pages.Add("set-email");
             list.Add(section);
-           //New Section
+            //New Section
             section = new();
             section.Name = "Mobile";
             section.SectionOrder = 2;
             //Always Select, for even API does not have email, we show email from user profile 
-            section.Type = (!string.IsNullOrEmpty(citizen?.data?.mobile)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
+            section.Type = (!string.IsNullOrEmpty(citizen?.data?.ToList()?.Find(x=> x.id==2)?.name)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)
             {
                 section.pages.Add("set-mobile");
@@ -96,7 +96,7 @@ namespace dsf_service_template_net6.Services
             }
             list.Add(section);
             //Store List
-            _httpContextAccessor.HttpContext!.Session.SetObjectAsJson("NavList",list);
+            _httpContextAccessor.HttpContext!.Session.SetObjectAsJson("NavList", list);
         }
         public Navigation(IHttpContextAccessor httpContextAccessor)
         {
@@ -105,12 +105,15 @@ namespace dsf_service_template_net6.Services
             if (ListItem == null)
             {
                 BackLink = "/";
-
-                setSectionPages(_httpContextAccessor?.HttpContext?.User);
-                ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList").First();
-                NextLink = "/" + ListItem.pages.First();
+                if (_httpContextAccessor?.HttpContext?.User?.Identity?.IsAuthenticated==true)
+                {
+                    setSectionPages(_httpContextAccessor?.HttpContext?.User);
+                    ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList").First();
+                    NextLink = "/" + ListItem.pages.First();
+                }
+               
             }
-            
+
         }
 
         public string GetBackLink(string currPage, bool fromReview = false)
@@ -166,40 +169,40 @@ namespace dsf_service_template_net6.Services
                 return Item.PageName;
 
             }
-           
+
         }
 
         public string SetLinks(string currPage, string sectionName, bool fromReview, string selectChoice)
         {
-            var sections = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<SectionInfo>> ("NavList");
+            var sections = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<SectionInfo>>("NavList");
             int index = sections.FindIndex(x => x.Name == sectionName);
             var section = sections.Find(x => x.Name == sectionName);
-            int pageIndex =section!.pages.IndexOf(currPage);
+            int pageIndex = section!.pages.IndexOf(currPage);
             BackLink = GetBackLink(currPage, fromReview);
-            if ((sections.Count == index + 1 || fromReview) && selectChoice == FormSelection.No.ToString()) 
+            if ((sections.Count == index + 1 || fromReview) && selectChoice == FormSelection.No.ToString())
             {
                 NextLink = "/" + section.pages[pageIndex + 1];
             }
-            else if (sections.Count == index +1 || fromReview)
+            else if (sections.Count == index + 1 || fromReview)
             {
                 //Mobile section always appears last for all users
                 NextLink = "/review-page";
             }
             //Should go to edit page
-            else if  ((sections.Count != index +1 ) && selectChoice == FormSelection.No.ToString())
+            else if ((sections.Count != index + 1) && selectChoice == FormSelection.No.ToString())
             {
                 NextLink = "/" + section.pages[pageIndex + 1];
             }
             else
             {
                 //follow work flow
-               
-                    //go to next section first page
-                    NextLink = "/" + sections[index + 1].pages[0];
-            } 
 
-            
-            NextLink = _routes.Single(s=> s.Value == NextLink).Key;
+                //go to next section first page
+                NextLink = "/" + sections[index + 1].pages[0];
+            }
+
+
+            NextLink = _routes.Single(s => s.Value == NextLink).Key;
             return NextLink;
         }
     }

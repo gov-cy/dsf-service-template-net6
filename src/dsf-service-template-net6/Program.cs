@@ -94,8 +94,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
 //Register Navigation Service
 builder.Services.AddScoped<INavigation, Navigation>();
-//Register the Api service for MoiCrmd
-builder.Services.AddScoped<IMoiCrmd, MoiCrmd>();
+//Register the Api service for Task Get and post methods
+builder.Services.AddScoped<ITasks, Tasks>();
 //Added for session state
 builder.Services.AddSession(options => {
     options.Cookie.Name = "AppDataSessionCookie";

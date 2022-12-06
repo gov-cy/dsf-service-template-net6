@@ -1,14 +1,13 @@
 using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
+using dsf_service_template_net6.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
+
 
 namespace dsf_service_template_net6.Pages
 {
@@ -32,13 +31,13 @@ namespace dsf_service_template_net6.Pages
         public string NextLink { get; set; } = "";
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private readonly IMoiCrmd _service;
+        private readonly ITasks _service;
         private IValidator<EmailSelect> _validator;
         //Object for session data 
         public EmailSelect Email_select;
         #endregion
         #region "Custom Methods"
-        public EmailModel(IValidator<EmailSelect> validator, IMoiCrmd service, INavigation nav)
+        public EmailModel(IValidator<EmailSelect> validator, ITasks service, INavigation nav)
         {
             _service = service;
             _validator = validator;
@@ -103,9 +102,9 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private CitizenDataResponse GetCitizenDataFromApi()
+        private TasksResponse GetCitizenDataFromApi()
         {
-            CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", GetAuthTime());
+            TasksResponse res = HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private EmailSelect GetSessionData()
@@ -120,16 +119,16 @@ namespace dsf_service_template_net6.Pages
         }
         private void BindSelectionData()
         {
-            CitizenDataResponse res = GetCitizenDataFromApi();
+            TasksResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
-            if (string.IsNullOrEmpty(res.data?.email))
+            if (res?.data?.Count()==0)
             {
 
                 Email_select.email = User.Claims.First(c => c.Type == "email").Value;
             }
             else
             {
-                Email_select.email = res.data.email;
+                Email_select.email = res?.data?.First()?.name;
             }
         }
         private bool BindData()
@@ -147,7 +146,7 @@ namespace dsf_service_template_net6.Pages
                     crbEmail = "1";
                     Email_select.use_from_civil = true;
                     Email_select.use_other = true;
-                    Email_select.email=GetCitizenDataFromApi()?.data?.email;
+                    Email_select.email=GetCitizenDataFromApi()?.data?.Count() == 0? User.Claims.First(c => c.Type == "email").Value: GetCitizenDataFromApi()?.data?.First()?.name;
                     HttpContext.Session.SetObjectAsJson("EmailSelect", Email_select, GetAuthTime());
                 }
                 else
@@ -185,14 +184,14 @@ namespace dsf_service_template_net6.Pages
                 if (!revisit)
                 {
                     //Check whether api data were retrieve from login , otherwise call again
-                    CitizenDataResponse res = GetCitizenDataFromApi();
+                    TasksResponse res = GetCitizenDataFromApi();
                     if (res == null)
                     {
                         var lang = GetLanguage();
 
                         //Call the citizen personal details from civil registry
                         //
-                        res = _service.GetCitizenData(lang, HttpContext.GetTokenAsync("access_token")?.Result);
+                        res = _service.GetAllTasks(HttpContext.GetTokenAsync("access_token")?.Result);
                         if (res.succeeded == false)
                         {
                             return RedirectToPage("/ServerError");

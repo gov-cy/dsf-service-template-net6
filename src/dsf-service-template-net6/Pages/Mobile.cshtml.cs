@@ -1,14 +1,12 @@
 using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
+using dsf_service_template_net6.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
+
 
 namespace dsf_service_template_net6.Pages
 {
@@ -94,9 +92,9 @@ namespace dsf_service_template_net6.Pages
             }
             return ret;
         }
-        private CitizenDataResponse GetCitizenDataFromApi()
+        private TasksResponse GetCitizenDataFromApi()
         {
-            CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", GetAuthTime());
+            TasksResponse res = HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private string GetAuthTime()
@@ -115,12 +113,12 @@ namespace dsf_service_template_net6.Pages
         }
         private void BindSelectionData()
         {
-            CitizenDataResponse res = GetCitizenDataFromApi();
+            TasksResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
-            if (string.IsNullOrEmpty(res.data?.mobile))
+            if (string.IsNullOrEmpty(res.data?.ToList()?.Find(x => x.id == 2)?.name))
             {
 
-                Mobile_select.mobile = res.data?.mobile;
+                Mobile_select.mobile = res?.data?.ToList()?.Find(x => x.id == 2)?.name;
             }
             
         }
@@ -139,7 +137,7 @@ namespace dsf_service_template_net6.Pages
                     crbMobile = "1";
                     Mobile_select.use_from_civil = true;
                     Mobile_select.use_other = true;
-                    Mobile_select.mobile = GetCitizenDataFromApi()?.data?.mobile;
+                    Mobile_select.mobile = GetCitizenDataFromApi()?.data?.ToList()?.Find(x => x.id == 2)?.name;
                     HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
                 }
                 else

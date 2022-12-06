@@ -1,12 +1,11 @@
 using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
+using dsf_service_template_net6.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Localization;
 
 namespace dsf_service_template_net6.Pages
 {
@@ -94,9 +93,9 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private CitizenDataResponse GetCitizenDataFromApi()
+        private TasksResponse GetCitizenDataFromApi()
         {
-            CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", GetAuthTime());
+            TasksResponse res = HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private EmailEdit GetSessionData()
@@ -154,7 +153,7 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = GetCitizenDataFromApi();
             if (citizenPersonalDetails != null)
             {
-                emailEdit.prev_email = citizenPersonalDetails.data.email ??  User.Claims.First(c => c.Type == "email").Value;
+                emailEdit.prev_email = GetCitizenDataFromApi()?.data?.Count() == 0 ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi()?.data?.First()?.name; 
 
             }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
@@ -170,9 +169,9 @@ namespace dsf_service_template_net6.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("emailval");
-
+         
             //Set back and Next Link
-            NextLink = _nav.SetLinks("set-email","Email", review, "NoSelection");
+            _nav.SetLinks("set-email","Email", review, "NoSelection");
            
                 return RedirectToPage(NextLink);
             
