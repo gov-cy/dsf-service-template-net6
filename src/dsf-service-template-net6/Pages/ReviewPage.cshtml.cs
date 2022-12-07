@@ -21,7 +21,6 @@ namespace dsf_service_template_net6.Pages
             _service = service;
         }
         #region "Variables"
-        public TasksResponse _citizenPersonalDetails = new TasksResponse();
         public List<dsf_service_template_net6.Services.Model.Task> _application = new();
         public string currentLanguage="";
         //Data retrieve from other pages
@@ -54,8 +53,7 @@ namespace dsf_service_template_net6.Pages
             return Page();
         }
         public IActionResult OnPostApplicationSubmit()
-        {   //Save the Application
-            //Set ApplicationRequest
+        {   //Set ApplicationRequest
             var  ret = SetApplication();
             if (!ret)
             {
@@ -76,7 +74,7 @@ namespace dsf_service_template_net6.Pages
             //Make sure the sequence has been kept
             bool ret = true;
             
-            if (HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime()) == null)
+            if (HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime()) == null)
             {
                 ret = false;
             }
@@ -95,17 +93,12 @@ namespace dsf_service_template_net6.Pages
           private bool SetUserJourneyData()
           {
             bool ret = true;
-                     
-            //first get Address Select
-            _citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime());
-            
-          
             var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime());
             if (mobSelect != null)
             {   
                 if (mobSelect.use_from_civil)
                 {
-                ret_mobile = _citizenPersonalDetails.data?.ToList()?.Find(x => x.id == 2)?.name;
+                ret_mobile = mobSelect.mobile;
                 }
                 else
                 {
@@ -126,7 +119,7 @@ namespace dsf_service_template_net6.Pages
             {
                 if (emailSelect.use_from_civil)
                 {
-                ret_email= _citizenPersonalDetails?.data?.Count() >0 ?_citizenPersonalDetails?.data?.First()?.name : User.Claims.First(c => c.Type == "email").Value; 
+                ret_email= emailSelect.email; 
                 } else 
                 {
                 var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
@@ -174,7 +167,7 @@ namespace dsf_service_template_net6.Pages
             bool ret = false;
             var authTime = GetAuthTime();
             var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-            TasksResponse? res=new();
+            TasksPostResponse? res=new();
             foreach (Services.Model.Task item in _application)
             {
                 res = _service.SubmitTask(item, token);

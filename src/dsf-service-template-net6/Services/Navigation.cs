@@ -4,6 +4,7 @@ namespace dsf_service_template_net6.Services
 {
     using dsf_service_template_net6.Data.Models;
     using dsf_service_template_net6.Extensions;
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Http;
     using System.Collections;
 
@@ -29,6 +30,7 @@ namespace dsf_service_template_net6.Services
 
     public class Navigation : INavigation
     {
+        private readonly ITasks _service;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public string BackLink { get; set; }
         public string NextLink { get; set; }
@@ -67,9 +69,17 @@ namespace dsf_service_template_net6.Services
         }
         private void setSectionPages(ClaimsPrincipal cp)
         {
+            TasksGetResponse? res;
             var authTime = cp.Claims.First(c => c.Type == "auth_time").Value;
             List<SectionInfo> list = new List<SectionInfo>();
-            var citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", authTime);
+            var citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", authTime);
+            if (citizen == null)
+            { //Try to get data from api
+                res = _service.GetAllTasks(_httpContextAccessor.HttpContext.GetTokenAsync("access_token")?.Result);
+                //if the user is already login and not passed from login, set in session
+                _httpContextAccessor.HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
+                citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", authTime);
+            }
             //New Section
             SectionInfo section = new();
             section.Name = "Email";
@@ -84,7 +94,7 @@ namespace dsf_service_template_net6.Services
             section.Name = "Mobile";
             section.SectionOrder = 2;
             //Always Select, for even API does not have email, we show email from user profile 
-            section.Type = (!string.IsNullOrEmpty(citizen?.data?.ToList()?.Find(x=> x.id==2)?.name)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
+            section.Type = (!string.IsNullOrEmpty(citizen?.data?.ToList()?.Find(x => x.id == 2)?.name)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)
             {
                 section.pages.Add("set-mobile");
@@ -98,20 +108,21 @@ namespace dsf_service_template_net6.Services
             //Store List
             _httpContextAccessor.HttpContext!.Session.SetObjectAsJson("NavList", list);
         }
-        public Navigation(IHttpContextAccessor httpContextAccessor)
+        public Navigation(IHttpContextAccessor httpContextAccessor, ITasks service)
         {
             _httpContextAccessor = httpContextAccessor;
+            _service = service;
             var ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList")?.First();
             if (ListItem == null)
             {
                 BackLink = "/";
-                if (_httpContextAccessor?.HttpContext?.User?.Identity?.IsAuthenticated==true)
+                if (_httpContextAccessor?.HttpContext?.User?.Identity?.IsAuthenticated == true)
                 {
                     setSectionPages(_httpContextAccessor?.HttpContext?.User);
                     ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList").First();
                     NextLink = "/" + ListItem.pages.First();
                 }
-               
+
             }
 
         }
@@ -119,9 +130,9 @@ namespace dsf_service_template_net6.Services
         public string GetBackLink(string currPage, bool fromReview = false)
         {
             History = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<HistoryItem>>("History");
-          
+
             AddHistoryLinks(currPage, fromReview);
-            
+
             HistoryItem Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
             HistoryItem PrevItem = null;
             //if not found get the previous

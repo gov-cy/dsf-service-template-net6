@@ -4,8 +4,8 @@
     using Newtonsoft.Json;
     public interface ITasks
     {
-        TasksResponse GetAllTasks(string accesstoken);
-        TasksResponse SubmitTask(Task req, string accesstoken);
+        TasksGetResponse GetAllTasks(string accesstoken);
+        TasksPostResponse SubmitTask(Task req, string accesstoken);
 
 
     }
@@ -23,9 +23,9 @@
         }
    
 
-        public TasksResponse GetAllTasks(string accesstoken)
+        public TasksGetResponse GetAllTasks(string accesstoken)
         {
-            TasksResponse dataResponse = new();
+            TasksGetResponse dataResponse = new();
             var apiUrl = "api/v1/TodoItems";
             string response = null;
             try
@@ -36,24 +36,24 @@
             catch
             {
                 _logger.LogError("Fail to call Api for " + apiUrl);
-                dataResponse = new TasksResponse();
+                dataResponse = new TasksGetResponse();
             }
             if (response != null)
             {
                 try
                 {
-                    dataResponse = JsonConvert.DeserializeObject<TasksResponse>(response);
+                    dataResponse = JsonConvert.DeserializeObject<TasksGetResponse>(response);
                     if (dataResponse == null)
                     {
                         _logger.LogError("Received Null response from " + apiUrl);
-                        dataResponse = new TasksResponse();
+                        dataResponse = new TasksGetResponse();
                     }
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError("Could not get valid response from " + apiUrl);
                     _logger.LogError("GetCitizenData - Exception" + ex.ToString());
-                    dataResponse = new TasksResponse();
+                    dataResponse = new TasksGetResponse();
                 }
 
                 if (dataResponse.succeeded)
@@ -64,7 +64,7 @@
                 if (dataResponse.errorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
-                    var rsp = new TasksResponse();
+                    var rsp = new TasksGetResponse();
                     rsp.errorCode = dataResponse.errorCode;
                     rsp.errorMessage = dataResponse.errorMessage;
                     dataResponse = rsp;
@@ -73,9 +73,9 @@
             return dataResponse;
         }
 
-        public TasksResponse SubmitTask(Task req, string accesstoken)
+        public TasksPostResponse SubmitTask(Task req, string accesstoken)
         {
-            TasksResponse dataResponse = new();
+            TasksPostResponse dataResponse = new();
             var apiUrl = "api/v1/TodoItems";
             string jsonString = JsonConvert.SerializeObject(req);
             string response = null;
@@ -86,28 +86,28 @@
             catch
             {
                 _logger.LogError("Fail to call Api for " + apiUrl);
-                dataResponse = new TasksResponse();
+                dataResponse = new TasksPostResponse();
             }
             if (response != null)
             {
                 try
                 {
-                    dataResponse = JsonConvert.DeserializeObject<TasksResponse>(response);
+                    dataResponse = JsonConvert.DeserializeObject<TasksPostResponse>(response);
                     if (dataResponse == null)
                     {
                         _logger.LogError("Received Null response from " + apiUrl);
-                        dataResponse = new TasksResponse();
+                        dataResponse = new TasksPostResponse();
                     }
                 }
                 catch
                 {
                     _logger.LogError("Could not get valid response from " + apiUrl);
-                    dataResponse = new TasksResponse();
+                    dataResponse = new TasksPostResponse();
                 }
                 if (dataResponse.errorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
-                    var rsp = new TasksResponse();
+                    var rsp = new TasksPostResponse();
                     rsp.errorCode = dataResponse.errorCode;
                     rsp.errorMessage = dataResponse.errorMessage;
                     dataResponse = rsp;

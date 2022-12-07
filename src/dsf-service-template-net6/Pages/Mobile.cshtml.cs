@@ -92,9 +92,9 @@ namespace dsf_service_template_net6.Pages
             }
             return ret;
         }
-        private TasksResponse GetCitizenDataFromApi()
+        private TasksGetResponse GetCitizenDataFromApi()
         {
-            TasksResponse res = HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime());
+            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private string GetAuthTime()
@@ -113,7 +113,7 @@ namespace dsf_service_template_net6.Pages
         }
         private void BindSelectionData()
         {
-            TasksResponse res = GetCitizenDataFromApi();
+            TasksGetResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
             if (string.IsNullOrEmpty(res.data?.ToList()?.Find(x => x.id == 2)?.name))
             {

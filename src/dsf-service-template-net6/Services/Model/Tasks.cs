@@ -2,11 +2,19 @@
 {
 
  
-    public class TasksResponse
+    public class TasksGetResponse
     {
         public int errorCode { get; set; }
         public string errorMessage { get; set; }
         public Task[] data { get; set; }
+        public bool succeeded { get; set; }
+        public string informationMessage { get; set; }
+    }
+    public class TasksPostResponse
+    {
+        public int errorCode { get; set; }
+        public string errorMessage { get; set; }
+        public Task data { get; set; }
         public bool succeeded { get; set; }
         public string informationMessage { get; set; }
     }

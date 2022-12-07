@@ -13,8 +13,7 @@
  <h1>@Localizer["review.p2"]</h1>
  <p>@Localizer["review.p1"]</p>
  
-  @if (Model._citizenPersonalDetails != null)
-    {
+  
  <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
          <tr>
@@ -54,7 +53,7 @@
          </tr>
      </tbody>
  </table>
- } 
+
  
     <form asp-page-handler="ApplicationSubmit">
             <button type="submit" class="govcy-btn-primary" id="btnApplicationSubmit">

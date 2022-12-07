@@ -102,9 +102,9 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private TasksResponse GetCitizenDataFromApi()
+        private TasksGetResponse GetCitizenDataFromApi()
         {
-            TasksResponse res = HttpContext.Session.GetObjectFromJson<TasksResponse>("PersonalDetails", GetAuthTime());
+            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private EmailSelect GetSessionData()
@@ -119,7 +119,7 @@ namespace dsf_service_template_net6.Pages
         }
         private void BindSelectionData()
         {
-            TasksResponse res = GetCitizenDataFromApi();
+            TasksGetResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
             if (res?.data?.Count()==0)
             {
@@ -184,7 +184,7 @@ namespace dsf_service_template_net6.Pages
                 if (!revisit)
                 {
                     //Check whether api data were retrieve from login , otherwise call again
-                    TasksResponse res = GetCitizenDataFromApi();
+                    TasksGetResponse res = GetCitizenDataFromApi();
                     if (res == null)
                     {
                         var lang = GetLanguage();
