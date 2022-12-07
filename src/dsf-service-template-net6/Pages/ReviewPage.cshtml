@@ -1,4 +1,4 @@
-﻿@page "/review-page"
+﻿@page "/review-page/{review:bool?}"
 @using dsf_service_template_net6.Resources
 @using dsf_service_template_net6.Data.Models
 @model ReviewPageModel
@@ -17,18 +17,7 @@
     {
  <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
-     @*      <tr>
-             <th scope="row" class="col-3">@Localizer["review.applicant_name"]</th>
-             <td class="col-7">
-                 <p>
-                 <span class="govcy-d-block">@Model._citizenPersonalDetails.data.fullName</span>
-                </p>
-             </td>
-             <td class="col-2 govcy-text-sm-start govcy-text-md-end">
-                   
-              </td>
-          </tr>*@
-          <tr>
+         <tr>
              <th scope="row" class="col-3">@Localizer["review.mobile"]</th>
              <td class="col-7">
                  <p>
@@ -66,9 +55,7 @@
      </tbody>
  </table>
  } 
- else {
- <h1>No data found</h1>
- }
+ 
     <form asp-page-handler="ApplicationSubmit">
             <button type="submit" class="govcy-btn-primary" id="btnApplicationSubmit">
                 @Localizer["common.submit"]

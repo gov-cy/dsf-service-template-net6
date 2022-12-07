@@ -15,7 +15,7 @@
 <h1>@Localizer["set-mobile.title"]</h1>
 <form class="govcy-form" novalidate method="post">
      <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <label class="govcy-label govcy-mb-2">@Localizer["set-mobile.mobile_label"]</label>
+            <label class="govcy-label" for="mobile">@Localizer["set-mobile.mobile_label"]</label>
             <span class="govcy-hint">@Localizer["set-mobile.mobile_hint"]</span>
            	@if (Model.MobileErrorClass.Length > 0)
             {

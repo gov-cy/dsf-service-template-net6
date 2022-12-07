@@ -16,8 +16,8 @@ namespace dsf_service_template_net6.Data.Validations
         public cEmailEditValidator(IResourceViewlocalizer localizer)
         {
             _Localizer = localizer;
-            EmailMessage = _Localizer["EmailRequired"];
-            EmailAlreadyExists= _Localizer["EmailNumberAlreadyExists"];
+            EmailMessage = _Localizer["set-email.require_check"];
+            EmailAlreadyExists= _Localizer["set-email.exist_check"];
             RuleFor(p => p.email)
                     .Cascade(CascadeMode.Stop)
                     .NotEmpty().WithMessage(EmailMessage)

@@ -123,6 +123,9 @@
   <data name="email-selection.require_check" xml:space="preserve">
     <value>Επιλέξετε αν επιθυμείτε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
   </data>
+  <data name="mobile-selection.no_results_check" xml:space="preserve">
+    <value>Δεν βρέθηκε ο αριθμός κινητού τηλεφώνου από τα αρχεία μας</value>
+  </data>
   <data name="mobile-selection.require_check" xml:space="preserve">
     <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
   </data>

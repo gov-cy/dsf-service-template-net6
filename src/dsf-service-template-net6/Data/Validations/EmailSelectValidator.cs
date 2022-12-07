@@ -13,8 +13,8 @@ namespace dsf_service_template_net6.Data.Validations
         public EmailSelectValidator(IResourceViewlocalizer localizer)
         {
             _Localizer = localizer;
-            EmailNumNotFoundMsg = _Localizer["EmailNotFound"];
-            EmailNoSelectionMsg = _Localizer["EmailSelection"];
+            EmailNumNotFoundMsg = _Localizer["email-selection.no_results_check"];
+            EmailNoSelectionMsg = _Localizer["email-selection.require_check"];
             RuleFor(x => x.email).NotEmpty().NotNull().WithMessage(EmailNumNotFoundMsg);
             RuleFor(x => x.use_from_civil).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(EmailNoSelectionMsg);
         }

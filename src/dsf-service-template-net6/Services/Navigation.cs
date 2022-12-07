@@ -119,10 +119,9 @@ namespace dsf_service_template_net6.Services
         public string GetBackLink(string currPage, bool fromReview = false)
         {
             History = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<HistoryItem>>("History");
-            if (!fromReview)
-            {
-                AddHistoryLinks(currPage, fromReview);
-            }
+          
+            AddHistoryLinks(currPage, fromReview);
+            
             HistoryItem Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
             HistoryItem PrevItem = null;
             //if not found get the previous
@@ -178,7 +177,7 @@ namespace dsf_service_template_net6.Services
             int index = sections.FindIndex(x => x.Name == sectionName);
             var section = sections.Find(x => x.Name == sectionName);
             int pageIndex = section!.pages.IndexOf(currPage);
-            BackLink = GetBackLink(currPage, fromReview);
+            BackLink = GetBackLink("/" + currPage, fromReview);
             if ((sections.Count == index + 1 || fromReview) && selectChoice == FormSelection.No.ToString())
             {
                 NextLink = "/" + section.pages[pageIndex + 1];

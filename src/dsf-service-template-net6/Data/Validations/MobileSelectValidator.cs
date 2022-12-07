@@ -15,7 +15,7 @@ namespace dsf_service_template_net6.Data.Validations
 
             _Localizer = localizer;
             MobileNumNotFoundMsg = _Localizer["MobileNotFound"];
-            MobileNoSelectionMsg = _Localizer["MobileSelection"];
+            MobileNoSelectionMsg = _Localizer["mobile-selection.require_check"];
             RuleFor(x => x.mobile).NotEmpty().NotNull().WithMessage(MobileNumNotFoundMsg);
             RuleFor(x => x.use_from_civil).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(MobileNoSelectionMsg);
         }

@@ -126,7 +126,7 @@ namespace dsf_service_template_net6.Pages
             {
                 if (emailSelect.use_from_civil)
                 {
-                ret_email= _citizenPersonalDetails.data?.First()?.name ?? User.Claims.First(c => c.Type == "email").Value; 
+                ret_email= _citizenPersonalDetails?.data?.Count() >0 ?_citizenPersonalDetails?.data?.First()?.name : User.Claims.First(c => c.Type == "email").Value; 
                 } else 
                 {
                 var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
