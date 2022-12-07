@@ -1,113 +1,53 @@
 using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
+using dsf_service_template_net6.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
+
 
 namespace dsf_service_template_net6.Pages
 {
-       public class EmailModel : PageModel
+    public class EmailModel : PageModel
     {
         #region "Variables"
         //control variables
         [BindProperty]
-        public string crbEmail { get; set; }
-        [BindProperty]
-        public string option1 => (string)TempData[nameof(option1)];
-        [BindProperty]
-        public string option2 => (string)TempData[nameof(option2)];
+        public string crbEmail { get; set; } = "";
         [BindProperty]
         public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
         public string ErrorsDesc { get; set; } = "";
+        
         [BindProperty]
+        //Store the email selection Error
         public string EmailSelection { get; set; } = "";
         [BindProperty]
         public string BackLink { get; set; } = "";
         [BindProperty]
         public string NextLink { get; set; } = "";
         //Dependancy injection Variables
-        public IMyHttpClient _client;
-        private IConfiguration _configuration;
+        private readonly INavigation _nav;
+        private readonly ITasks _service;
         private IValidator<EmailSelect> _validator;
         //Object for session data 
         public EmailSelect Email_select;
         #endregion
         #region "Custom Methods"
-        public EmailModel(IValidator<EmailSelect> validator, IMyHttpClient client, IConfiguration config)
+        public EmailModel(IValidator<EmailSelect> validator, ITasks service, INavigation nav)
         {
-            _client = client;
-            _configuration = config;
+            _service = service;
             _validator = validator;
+            _nav = nav;
             Email_select = new EmailSelect();
         }
         //Use to show error messages if web form has errors
-        public void AddHistoryLinks(string curr)
+        bool ShowErrors(bool fromPost)
         {
-
-            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
-            if (History.Count == 0)
-            {
-                History.Add("/");
-            }
-            int LastIndex = History.Count - 1;
-            if (History[LastIndex] != curr)
-            {
-                //Add to History
-                History.Add(curr);
-                //Set to memory
-
-                HttpContext.Session.SetObjectAsJson("History", History);
-            }
-        }
-        public void SetLinks(string curr, bool Review, string choice = "0")
-        {
-            //First add current page to History
-            AddHistoryLinks("/" + curr);
-            //Get Citizen data from Session
-            if (choice == "Yes")
-            {
-                NextLink = "/ReviewPage";
-            }
-            else if (choice == "No")
-            {
-                NextLink = "/EmailEdit";
-            }
-
-
-
-        }
-        private string GetBackLink(string curr)
-        {
-            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindLastIndex(x => x == curr);
-            //if not found
-            if (currentIndex == -1)
-            {
-                return "/";
-            }
-            //Last value in history
-            else if (currentIndex == 0)
-            {
-                var index = History.Count - 1;
-                return History[index].ToString();
-            }
-            //Return the previus of current
-            else
-            {
-                return History[currentIndex - 1].ToString();
-            }
-        }
-        bool ShowErrors()
-        {
-            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
-
+            if (fromPost)
             {
                 var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
                 // Copy the validation results into ModelState.
@@ -148,68 +88,126 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
-            {
-                ret = false;
-            }
-            if (HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime) == null)
-            {
-                ret = false;
-            }
-            if ((HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null) && (HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime) == null))
+            if (GetCitizenDataFromApi == null)
             {
                 ret = false;
             }
             return ret;
         }
-        #endregion
-        public IActionResult OnGet(bool review)
+        private static string GetLanguage()
         {
-            Navigation _nav = new Navigation();
-            //Set back and Next Link
-            SetLinks("EmailSelection", review, "No");
-            BackLink = GetBackLink("/" + "EmailSelection");
-            //Chack if user has sequentialy load the page
-            bool allow = AllowToProceed();
-            if (!allow)
+            return Thread.CurrentThread.CurrentUICulture.Name == "el-GR" ? "/el" : "/en";
+        }
+        private string GetAuthTime()
+        {
+            return User.Claims.First(c => c.Type == "auth_time").Value;
+        }
+        private TasksGetResponse GetCitizenDataFromApi()
+        {
+            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
+            return res;
+        }
+        private EmailSelect GetSessionData()
+        {
+            var selectedoptions = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime());
+            return selectedoptions;
+        }
+        private EmailEdit GetEditSessionData()
+        {
+            var SessionEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
+            return SessionEdit;
+        }
+        private void BindSelectionData()
+        {
+            TasksGetResponse res = GetCitizenDataFromApi();
+            //Set Email info to model class
+            if (res?.data?.Count()==0)
             {
-              return  RedirectToAction("LogOut", "Account");
-            }
-            //Get  Citize details loaded
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            CitizenDataResponse res = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            //If coming fromPost
-            if (!ShowErrors())
-            {
-                //Set Email info to model class
-                if (string.IsNullOrEmpty(res.data?.email))
-                {
 
-                    Email_select.email = User.Claims.First(c => c.Type == "email").Value;
-                }
-                else
-                {
-                    Email_select.email = res.data.email;
-                }
+                Email_select.email = User.Claims.First(c => c.Type == "email").Value;
             }
-           
-            
-            //Check if already selected 
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", authTime);
+            else
+            {
+                Email_select.email = res?.data?.First()?.name;
+            }
+        }
+        private bool BindData()
+        {   //Check if already selected 
+            var selectedoptions = GetSessionData();
             if (selectedoptions != null)
             {
                 if (selectedoptions.use_from_civil)
                 {
-                    TempData["option1"] = "true";
-                    TempData["option2"] = "false";
+                    crbEmail = "1";
+                }
+                else if (GetEditSessionData() == null)
+                {
+                    //code use when user hit back button on edit page
+                    crbEmail = "1";
+                    Email_select.use_from_civil = true;
+                    Email_select.use_other = true;
+                    Email_select.email=GetCitizenDataFromApi()?.data?.Count() == 0? User.Claims.First(c => c.Type == "email").Value: GetCitizenDataFromApi()?.data?.First()?.name;
+                    HttpContext.Session.SetObjectAsJson("EmailSelect", Email_select, GetAuthTime());
                 }
                 else
                 {
-                    TempData["option1"] = "false";
-                    TempData["option2"] = "true";
+                    crbEmail = "2";
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion
+        public IActionResult OnGet(bool review, bool fromPost)
+        {
+            //Chack if user has sequentialy load the page
+            bool allow = AllowToProceed();
+            if (!allow)
+            {
+                return RedirectToAction("LogOut", "Account");
+            }
+            // First set back link
+            BackLink = _nav.GetBackLink("/email-selection", review);
+            
+            if (fromPost)
+            {
+                ShowErrors(true);
+            }
+            else
+            {
+                //check for revisit
+                bool revisit = BindData();
+                if (!revisit)
+                {
+                    //Check whether api data were retrieve from login , otherwise call again
+                    TasksGetResponse res = GetCitizenDataFromApi();
+                    if (res == null)
+                    {
+                        var lang = GetLanguage();
+
+                        //Call the citizen personal details from civil registry
+                        //
+                        res = _service.GetAllTasks(HttpContext.GetTokenAsync("access_token")?.Result);
+                        if (res.succeeded == false)
+                        {
+                            return RedirectToPage("/ServerError");
+                        }
+                        else
+                        {
+                            //if the user is already login and not passed from login, set in session
+                            HttpContext.Session.SetObjectAsJson("PersonalDetails", res, GetAuthTime());
+
+                        }
+                    }
+                   
                 }
             }
+            //Show selection Data 
+            BindSelectionData();
             return Page();
         }
         public IActionResult OnPost(bool review)
@@ -231,40 +229,29 @@ namespace dsf_service_template_net6.Pages
                 Email_select.use_other = false;
             }
             //Re-assign defult email
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            if (string.IsNullOrEmpty(citizen_data.data?.email))
-            {
-                Email_select.email = User.Claims.First(c => c.Type == "email").Value;
-            }
-            else
-            {
-                Email_select.email = citizen_data.data.email;
-            }
+            BindSelectionData();
             //Validate Model
             FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
             if (!result.IsValid)
             {
                 HttpContext.Session.SetObjectAsJson("valresult", result);
-                return RedirectToPage("Email");
+                return RedirectToPage("Email", null, new { fromPost = true }, "mainContainer");
             }
             //Model is valid so strore 
             HttpContext.Session.Remove("EmailSelect");
-            HttpContext.Session.SetObjectAsJson("EmailSelect", Email_select, authTime);
+            HttpContext.Session.SetObjectAsJson("EmailSelect", Email_select, GetAuthTime());
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
-            //Finally redirect
-            //Set the Back and Next Link
-
+           
             //Set back and Next Link
 
             if (Email_select.use_other)
             {
-                SetLinks("EmailSelection", review, "No");
+              NextLink=  _nav.SetLinks("email-selection","Email", review, "No");
             }
             else
             {
-                SetLinks("EmailSelection", review, "Yes");
+              NextLink = _nav.SetLinks("email-selection", "Email", review, "Yes");
             }
 
             if (review)
@@ -273,7 +260,7 @@ namespace dsf_service_template_net6.Pages
             }
             else
             {
-                return RedirectToPage(NextLink, null, "mainContainer");
+                return RedirectToPage(NextLink);
             }
         }
     }

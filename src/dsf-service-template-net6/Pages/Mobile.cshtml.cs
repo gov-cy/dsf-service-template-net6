@@ -1,14 +1,12 @@
 using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Services;
+using dsf_service_template_net6.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
+
 
 namespace dsf_service_template_net6.Pages
 {
@@ -17,9 +15,7 @@ namespace dsf_service_template_net6.Pages
     {
         #region "Variables"
         //control variables
-        public string crbMobile { get; set; }
-        public string option1 => (string)TempData[nameof(option1)];
-        public string option2 => (string)TempData[nameof(option2)];
+        public string crbMobile { get; set; } = "";
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
         public string MobileSelection = "";
@@ -30,97 +26,21 @@ namespace dsf_service_template_net6.Pages
         public string NextLink { get; set; } = "";
 
         //Dependancy injection Variables
-        public IMyHttpClient _client;
-        private IConfiguration _configuration;
+        private readonly INavigation _nav;
         private IValidator<MobileSelect> _validator;
         //Object for session data 
         public MobileSelect Mobile_select;
-        Navigation _nav = new Navigation();
         #endregion
         #region "Custom Methods"
-        public MobileModel(IValidator<MobileSelect> validator, IMyHttpClient client, IConfiguration config)
+        public MobileModel(IValidator<MobileSelect> validator, INavigation nav)
         {
-            _client = client;
-            _configuration = config;
+            _nav = nav;
             _validator = validator;
             Mobile_select = new MobileSelect();
         }
-        public void AddHistoryLinks(string curr)
+        bool ShowErrors(bool fromPost)
         {
-
-            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
-            if (History.Count == 0)
-            {
-                History.Add("/");
-            }
-            int LastIndex = History.Count - 1;
-            if (History[LastIndex] != curr)
-            {
-                //Add to History
-                History.Add(curr);
-                //Set to memory
-
-                HttpContext.Session.SetObjectAsJson("History", History);
-            }
-        }
-        public void SetLinks(string curr, bool Review, string choice = "0")
-        {
-            //First add current page to History
-            AddHistoryLinks("/" + curr);
-            //Get Citizen data from Session
-                        
-            if (Review)
-            {  //For Selection Pages only Yes and No exists
-                if (choice == "Yes")
-                {
-                    NextLink = "/ReviewPage";
-                }
-                else if (choice == "No")
-                {
-                    NextLink = "/MobileEdit";
-                }
-
-            }
-            else
-            {
-                //Find the back link
-                if (choice == "Yes")
-                {
-                    NextLink = "/Email";
-
-                }
-                else if (choice == "No")
-                {
-                    NextLink = "/MobileEdit";
-                }
-
-            }
-
-        }
-        private string GetBackLink(string curr)
-        {
-            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindLastIndex(x => x == curr);
-            //if not found
-            if (currentIndex == -1)
-            {
-                return "/";
-            }
-            //Last value in history
-            else if (currentIndex == 0)
-            {
-                var index = History.Count - 1;
-                return History[index].ToString();
-            }
-            //Return the previus of current
-            else
-            {
-                return History[currentIndex - 1].ToString();
-            }
-        }
-        bool ShowErrors()
-        {
-            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
+            if (fromPost)
 
             {
                 var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
@@ -162,54 +82,96 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            if (GetCitizenDataFromApi == null)
             {
                 ret = false;
             }
-            if (HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime) == null)
+            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime()) == null))
             {
                 ret = false;
             }
             return ret;
         }
-        #endregion
-        public IActionResult OnGet(bool review)
+        private TasksGetResponse GetCitizenDataFromApi()
         {
-            Navigation _nav = new Navigation();
-             //Set back and Next Link
-            SetLinks("MobileSelection", review, "No");
-            BackLink = GetBackLink("/" + "MobileSelection");
-            //Chack if user has sequentialy load the page
-            bool allow=AllowToProceed();
-            if (!allow)
+            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
+            return res;
+        }
+        private string GetAuthTime()
+        {
+            return User.Claims.First(c => c.Type == "auth_time").Value;
+        }
+        private MobileEdit GetEditSessionData()
+        {
+            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
+            return selectedoptions;
+        }
+        private MobileSelect GetSessionData()
+        {
+            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime());
+            return selectedoptions;
+        }
+        private void BindSelectionData()
+        {
+            TasksGetResponse res = GetCitizenDataFromApi();
+            //Set Email info to model class
+            if (string.IsNullOrEmpty(res.data?.ToList()?.Find(x => x.id == 2)?.name))
             {
-               return  RedirectToAction("LogOut", "Account");
+
+                Mobile_select.mobile = res?.data?.ToList()?.Find(x => x.id == 2)?.name;
             }
-            //Get  Citize details loaded
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            CitizenDataResponse res= HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            //If coming fromPost
-            if (!ShowErrors())
-            {
-                //Set Mobile info to model class
-                Mobile_select.mobile = res.data.mobile;
-            }
-            //Check if already selected 
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime);
+            
+        }
+        private bool BindData()
+        {   //Check if already selected 
+            var selectedoptions = GetSessionData();
             if (selectedoptions != null)
             {
                 if (selectedoptions.use_from_civil)
                 {
-                    TempData["option1"] = "true";
-                    TempData["option2"] = "false";
+                    crbMobile = "1";
+                }
+                else if (GetEditSessionData() == null)
+                {
+                    //code use when user hit back button on edit page
+                    crbMobile = "1";
+                    Mobile_select.use_from_civil = true;
+                    Mobile_select.use_other = true;
+                    Mobile_select.mobile = GetCitizenDataFromApi()?.data?.ToList()?.Find(x => x.id == 2)?.name;
+                    HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
                 }
                 else
                 {
-                    TempData["option1"] = "false";
-                    TempData["option2"] = "true";
+                    crbMobile = "2";
                 }
+                return true;
             }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
+        public IActionResult OnGet(bool review, bool fromPost)
+        {
+            //Chack if user has sequentialy load the page
+            bool allow = AllowToProceed();
+            if (!allow)
+            {
+                return RedirectToAction("LogOut", "Account");
+            }
+            // First set back link
+            BackLink = _nav.GetBackLink("/mobile-selection", review);
+            //Show selection Data 
+            BindSelectionData();
+            if (fromPost)
+            {
+                ShowErrors(true);
+            }else
+            {
+                BindData();
+            }
+          
             return Page();
         }
         public IActionResult OnPost(bool review)
@@ -230,34 +192,31 @@ namespace dsf_service_template_net6.Pages
                 Mobile_select.use_from_civil = false;
                 Mobile_select.use_other = false;
             }
-            //Re-assign defult Mobile
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            var citizen_data = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
-            Mobile_select.mobile = citizen_data.data.mobile;
+            //Re-assign defult email
+            BindSelectionData();
             //Validate Model
             FluentValidation.Results.ValidationResult result = _validator.Validate(Mobile_select);
             if (!result.IsValid)
             {
                 HttpContext.Session.SetObjectAsJson("valresult", result);
-                return RedirectToPage("Mobile");
+                return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
             }
             //Model is valid so strore 
             HttpContext.Session.Remove("MobileSelect");
-            HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, authTime);
+            HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
-            //Set the Back and Next Link
-            Navigation _nav = new Navigation();
-            //Set back and Next Link
             
+            //Set back and Next Link
+
             if (Mobile_select.use_other)
             {
-                SetLinks("MobileSelection", review, "No");
+                NextLink = _nav.SetLinks("mobile-selection","Mobile", review, "No");
             }
             else
             {
-                SetLinks("MobileSelection", review, "Yes");
+                NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "Yes");
             }
             if (review)
             {
@@ -265,7 +224,7 @@ namespace dsf_service_template_net6.Pages
             }
             else
             {
-                return RedirectToPage(NextLink, null, "mainContainer");
+                return RedirectToPage(NextLink);
             }
 
         }

@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Middlewares;
 using dsf_service_template_net6.Services;
+using dsf_service_template_net6.Resources;
 using System.Net;
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Data.Validations;
@@ -33,8 +34,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.FallBackToParentUICultures = true;
     options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
 });
+//controller addition
 builder.Services.AddControllers();
-// Add services to the container.
+// Configure authorize pages.
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizePage("/Navigation");
@@ -53,49 +55,48 @@ builder.Services.AddRazorPages(options =>
 }).AddViewLocalization();
 //Register Validator for
 //dependency injection purpose
+//for resource access
+builder.Services.AddSingleton<IResourceViewlocalizer, ResourceViewlocalizer>();
+//for server side validations
 builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
 {
-    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
     return new cMobileEditValidator(LocMain);
 });
 builder.Services.AddScoped<IValidator<EmailEdit>, cEmailEditValidator>(sp =>
 {
-    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
     return new cEmailEditValidator(LocMain);
 });
-builder.Services.AddScoped<IValidator<AddressSelect>, AddressSelectValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
-
-    return new AddressSelectValidator(LocMain);
-});
 builder.Services.AddScoped<IValidator<MobileSelect>, MobileSelectValidator>(sp =>
 {
-    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
     return new MobileSelectValidator(LocMain);
 });
 builder.Services.AddScoped<IValidator<EmailSelect>, EmailSelectValidator>(sp =>
 {
-    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
+    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
     return new EmailSelectValidator(LocMain);
 });
-builder.Services.AddScoped<IValidator<AddressEditViewModel>, AddressEditValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IStringLocalizer<Program>>();
-
-    return new AddressEditValidator(LocMain);
-});
+//Add fluent validation to .Net Core (optional use for server side validation) 
 builder.Services.AddFluentValidation();
+//multi language support localization middleware 
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
+//IHttpContextAccessor register
+builder.Services.AddHttpContextAccessor();
 //Register HttpClient
 //so that it can be used for Dependency Injection
+//for calling all http client requests 
 builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
+//Register Navigation Service
+builder.Services.AddScoped<INavigation, Navigation>();
+//Register the Api service for Task Get and post methods
+builder.Services.AddScoped<ITasks, Tasks>();
 //Added for session state
-builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {
     options.Cookie.Name = "AppDataSessionCookie";
     options.Cookie.HttpOnly = true;
@@ -103,10 +104,7 @@ builder.Services.AddSession(options => {
     options.Cookie.IsEssential = true;
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
-
-
-builder.Services.AddMemoryCache();
-
+//open id authentication settings
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -194,11 +192,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline middlewares.
 if (!app.Environment.IsDevelopment())
 {
     app.UseStatusCodePagesWithRedirects("/NoPageFound");

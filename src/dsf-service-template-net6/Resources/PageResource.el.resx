@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessibilityStatement_Instructions" xml:space="preserve">
+  <data name="accessibility-statement.instructions" xml:space="preserve">
     <value>&lt;p&gt;Η παρούσα αποτελεί δήλωση προσβασιμότητας για την υπηρεσία «Βοήθημα Τοκετού» του Υπουργείου Εργασίας και Κοινωνικών Ασφαλίσεων.&lt;/p&gt;
       &lt;h2&gt;Κατάσταση συμμόρφωσης&lt;/h2&gt;
       &lt;p&gt;Οι Οδηγίες Προσβασιμότητας Περιεχομένου (&lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;WCAG&lt;/a&gt;) καθορίζουν απαιτήσεις για σχεδιαστές και προγραμματιστές για τη βελτίωση της προσβασιμότητας των ατόμων με αναπηρίες. Καθορίζουν τρία επίπεδα συμμόρφωσης: Επίπεδο A, Επίπεδο AA, και Επίπεδο AAA. Η υπηρεσία συμμορφώνεται μερικώς με τις Οδηγίες του WCAG 2.1 επίπεδο AA. Συμμορφώνεται μερικώς σημαίνει ότι ορισμένα μέρη του περιεχομένου δεν συμμορφώνονται πλήρως με το πρότυπο προσβασιμότητας.&lt;/p&gt;
@@ -155,74 +155,17 @@
       &lt;h2&gt;Ημερομηνία&lt;/h2&gt;
       &lt;p&gt;Η δήλωση αυτή δημιουργήθηκε στις 28 Μαρτίου 2022 με τη χρήση του εργαλείου W3C Accessibility Statement Generator.&lt;/p&gt;
       &lt;p&gt;Η δήλωση αυτή μεταφράστηκε στις 7 Απριλίου 2022.&lt;/p&gt;</value>
-    <comment>Accessibility Statement Page</comment>
   </data>
-  <data name="AccessibilityStatement_Title" xml:space="preserve">
+  <data name="accessibility-statement.title" xml:space="preserve">
     <value>Δήλωση προσβασιμότητας</value>
-    <comment>Accessibility Statement Page</comment>
   </data>
-  <data name="Address" xml:space="preserve">
-    <value>Διεύθυνση</value>
-    <comment>Review Page</comment>
+  <data name="application-response.header_ref" xml:space="preserve">
+    <value>Αρ, Αναφοράς</value>
   </data>
-  <data name="AddressDetails" xml:space="preserve">
-    <value>Αλλαγή Διεύθυνσης</value>
-    <comment>Review Page</comment>
+  <data name="application-response.header_title" xml:space="preserve">
+    <value>Η αίτηση σας έχει υποβληθεί</value>
   </data>
-  <data name="ApplicantName" xml:space="preserve">
-    <value>Όνομα</value>
-    <comment>Review Page</comment>
-  </data>
-  <data name="Apply_For_ChildBirth_Grant_Title" xml:space="preserve">
-    <value>Αλλαγή Προσωπικών Στοιχείων του Πολίτη</value>
-    <comment>Layout Page- Header control</comment>
-  </data>
-  <data name="BackButton_Link" xml:space="preserve">
-    <value>Πίσω</value>
-    <comment>Layout Page- Back Button</comment>
-  </data>
-  <data name="BadRoute_Instructions" xml:space="preserve">
-    <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
-      &lt;p&gt;Αν αντιγράψατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι επικολλήσατε ολόκληρη τη διεύθυνση.&lt;/p&gt;</value>
-    <comment>No Page Found</comment>
-  </data>
-  <data name="BadRoute_Title" xml:space="preserve">
-    <value>Δεν βρέθηκε η σελίδα</value>
-    <comment>No Page Found</comment>
-  </data>
-  <data name="Button_Get_Started" xml:space="preserve">
-    <value>Ξεκινήστε</value>
-    <comment>Button Text</comment>
-  </data>
-  <data name="Button_Next" xml:space="preserve">
-    <value>Συνέχεια</value>
-    <comment>General</comment>
-  </data>
-  <data name="Change_Link" xml:space="preserve">
-    <value>Αλλαγή</value>
-    <comment>Table Change Link Text</comment>
-  </data>
-  <data name="CheckAndSubmit" xml:space="preserve">
-    <value>Τα στοιχεία επικοινωνίας σας</value>
-    <comment>Review Page</comment>
-  </data>
-  <data name="CheckAndSubmitPara01" xml:space="preserve">
-    <value>Ελέγξτε ότι οι παρακάτω πληροφορίες είναι σωστές.</value>
-    <comment>Review Page</comment>
-  </data>
-  <data name="CheckAndSubmitPara02" xml:space="preserve">
-    <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
-    <comment>Review Page</comment>
-  </data>
-  <data name="ChooseEmail" xml:space="preserve">
-    <value>Επιλέξετε αν επιθυμείτε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
-    <comment>Email Validator</comment>
-  </data>
-  <data name="Container_content" xml:space="preserve">
-    <value>Πλοήγηση από το πληκτρολόγιο</value>
-    <comment>Layout Page- Container Content</comment>
-  </data>
-  <data name="CookiePolicy_Instructions" xml:space="preserve">
+  <data name="cookie-policy.instructions" xml:space="preserve">
     <value>&lt;p&gt;Η υπηρεσία Αλλαγή Προσωπικών Στοιχείων του Πολίτη (χχχχχχχ.service.gov.cy) χρησιμοποιεί μόνο cookies που είναι απολύτως απαραίτητα για τη σωστή λειτουργία του διαδικτυακού τόπου.&lt;/p&gt;
       &lt;h2&gt;Cookies που χρησιμοποιούνται&lt;/h2&gt;
       &lt;h3&gt;DSFServiceDataCookie&lt;/h3&gt;
@@ -236,152 +179,66 @@
       &lt;h2&gt;Πώς να ελέγχετε τα cookies&lt;/h2&gt;
       &lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Μάθετε πώς να ελέγχετε και να διαγράφετε τα cookies στη συσκευή σας. &lt;/a&gt;
       &lt;p&gt;Μπορείτε να διαγράψετε όλα τα cookies που υπάρχουν ήδη στον υπολογιστή σας και μπορείτε να ρυθμίσετε τους περισσότερους φυλλομετρητές (browsers) ώστε να αποτρέπουν την τοποθέτησή τους. Εάν το κάνετε αυτό, ωστόσο, ίσως χρειαστεί να προσαρμόζετε με μη αυτόματο τρόπο ορισμένες επιλογές κάθε φορά που επισκέπτεστε έναν διαδικτυακό τόπο και ορισμένες υπηρεσίες και λειτουργίες ενδέχεται να μην λειτουργούν.&lt;/p&gt;</value>
-    <comment>Cookie Policy Page</comment>
   </data>
-  <data name="CookiePolicy_Title" xml:space="preserve">
-    <value>Cookies στην υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη </value>
-    <comment>Cookie Policy Page</comment>
+  <data name="cookie-policy.title" xml:space="preserve">
+    <value>Cookies στην υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
-    <comment>Review Page</comment>
+  <data name="email-selection.legend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό το email;</value>
   </data>
-  <data name="EmailDetails" xml:space="preserve">
-    <value>Αλλαγή email</value>
-    <comment>Review Page</comment>
+  <data name="email-selection.no" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
   </data>
-  <data name="EmailEditHeading" xml:space="preserve">
-    <value>Ενημερώστε τη διεύθυνση email σας</value>
-    <comment>Email Edit Page</comment>
+  <data name="email-selection.p1" xml:space="preserve">
+    <value>Αυτό είναι το email που βρήκαμε στη βάση δεδομένων μας.</value>
   </data>
-  <data name="EmailRequired" xml:space="preserve">
-    <value>Εισάγετε email στη σωστή μορφή, για παράδειγμα name@example.com</value>
-    <comment>Email Validator</comment>
+  <data name="email-selection.title" xml:space="preserve">
+    <value>Ποιό email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="ErrorMessage-General" xml:space="preserve">
-    <value>Σφάλμα</value>
-    <comment>Error Review</comment>
+  <data name="email-selection.yes" xml:space="preserve">
+    <value>Το email που είναι καταχωρημένο στα αρχεία μας:</value>
   </data>
-  <data name="ERROR_ALERT" xml:space="preserve">
-    <value>Σφάλμα</value>
-    <comment>General Errors</comment>
-  </data>
-  <data name="Footer_Accessibility_Statement" xml:space="preserve">
-    <value>Προσβασιμότητα</value>
-    <comment>Layout Page - Footer Control</comment>
-  </data>
-  <data name="Footer_Cookey_Policy" xml:space="preserve">
-    <value>Προστασία Προσωπικών Δεδομένων</value>
-    <comment>Layout Page - Footer Control</comment>
-  </data>
-  <data name="Footer_CopyRight" xml:space="preserve">
-    <value>Κυπριακή Δημοκρατία, 2022</value>
-    <comment>Layout Page - Footer Control</comment>
-  </data>
-  <data name="Footer_Privacy_Statement" xml:space="preserve">
-    <value>Όροι Χρήσης</value>
-    <comment>Layout Page - Footer Control</comment>
-  </data>
-  <data name="Index_Heading" xml:space="preserve">
-    <value>Καλωσορίσατε στην εικονική υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
-    <comment>Index Page</comment>
-  </data>
-  <data name="Index_Instructions" xml:space="preserve">
+  <data name="index.instructions" xml:space="preserve">
     <value>&lt;h2&gt;Ζητήστε βοήθεια και καθοδήγηση&lt;/h2&gt;
     &lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;Για θέματα που αφορούν Τεχνική υποστήριξη, επικοινωνήστε με το DSF:&lt;/span&gt;&lt;span class="govcy-d-block"&gt;&lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</value>
-    <comment>Index Page</comment>
   </data>
-  <data name="Index_Instructions1" xml:space="preserve">
+  <data name="index.instructions1" xml:space="preserve">
     <value>&lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;Αυτή είναι μια εικονική υπηρεσία για την κατανόηση των βέλτιστων πρακτικών ανάπτυξης&lt;/span&gt;&lt;/p&gt;</value>
-    <comment>Index Page</comment>
   </data>
-  <data name="LogOut_SignOut" xml:space="preserve">
-    <value>Αποσύνδεση</value>
-    <comment>Layout Page- Log out Control</comment>
+  <data name="index.title" xml:space="preserve">
+    <value>Καλωσορίσατε στην εικονική υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
   </data>
-  <data name="Meta_Description" xml:space="preserve">
-    <value>Παίρνεις βοήθημα μέχρι €581 όταν γεννήσεις. Μάθε τι θα χρειαστείς για να είσαι δικαιούχος και πώς να υποβάλεις αίτηση διαδικτυακά.</value>
-    <comment>Layout Page- Meta Description</comment>
+  <data name="mobile-selection.legend" xml:space="preserve">
+    <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
   </data>
-  <data name="MobEditHeading" xml:space="preserve">
-    <value>Ενημερώστε τον αριθμό του κινητού σας</value>
-    <comment>Mobile Edit Page</comment>
+  <data name="mobile-selection.no" xml:space="preserve">
+    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
   </data>
-  <data name="MobEditParagraph" xml:space="preserve">
-    <value>Αφού συνεχίσετε, θα λάβετε έναν κωδικό ασφαλείας στο κινητό σας και θα σας ζητηθεί να εισαγάγετε αυτόν τον αριθμό στην επόμενη σελίδα, ώστε να επιβεβαιωθεί ο αριθμός κινητού</value>
-    <comment>Mobile Edit Page</comment>
+  <data name="mobile-selection.p1" xml:space="preserve">
+    <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
   </data>
-  <data name="Mobile" xml:space="preserve">
-    <value>Αριθμός κινητού τηλεφώνου</value>
-    <comment>Review Page</comment>
+  <data name="mobile-selection.title" xml:space="preserve">
+    <value>Ποιό κινητό μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="Mobile-Hint" xml:space="preserve">
-    <value>Για αριθμούς εκτός Κύπρου, συμπεριλάβετε και τον κωδικό χώρας</value>
-    <comment>Mobile Edit Page</comment>
+  <data name="mobile-selection.yes" xml:space="preserve">
+    <value>Ο  αριθμός κινητού τηλεφώνου που είναι καταχωρημένο στα αρχεία μας:</value>
   </data>
-  <data name="Mobile-Label" xml:space="preserve">
-    <value>Ποιον αριθμό κινητού τηλεφώνου μπορούν να χρησιμοποιήσουμε για να επικοινωνούμε μαζί σας;</value>
-    <comment>Mobile Edit Page</comment>
+  <data name="no-page-found.instructions" xml:space="preserve">
+    <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
+      &lt;p&gt;Αν αντιγράψατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι επικολλήσατε ολόκληρη τη διεύθυνση.&lt;/p&gt;</value>
   </data>
-  <data name="MobileDetails" xml:space="preserve">
-    <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
-    <comment>Review Page</comment>
+  <data name="no-page-found.title" xml:space="preserve">
+    <value>Δεν βρέθηκε η σελίδα</value>
   </data>
-  <data name="MobileNumberValid" xml:space="preserve">
-    <value>Εισάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
-    <comment>Mobile Validator</comment>
-  </data>
-  <data name="MolibeNumberAlreadyExists" xml:space="preserve">
-    <value>Αυτός ο αριθμός κινητού υπάρχει ήδη στα αρχεία μας</value>
-    <comment>Mobile Validator</comment>
-  </data>
-  <data name="MolibeNumberRequired" xml:space="preserve">
-    <value>Εισάγετε τον αριθμό κινητού τηλεφώνου σας</value>
-    <comment>Mobile Validator</comment>
-  </data>
-  <data name="Email-Label" xml:space="preserve">
-    <value>Ποια διεύθυνση email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
-    <comment>Email Edit Page</comment>
-  </data>
-  <data name="Email-Hint" xml:space="preserve">
-    <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>
-    <comment>Email Edit Page</comment>
-  </data>
-  <data name="EmailEditParagraph" xml:space="preserve">
-    <value>Αφού κάνετε κλικ στο «συνέχεια» θα λάβετε ένα email με έναν σύνδεσμο στον οποίο θα πρέπει να κάνετε κλικ για να επιβεβαιώσετε το email σας.</value>
-    <comment>Email Edit Page</comment>
-  </data>
-  <data name="AddressHeading" xml:space="preserve">
-    <value>Ποια διεύθυνση μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
-    <comment>Address page</comment>
-  </data>
-  <data name="AddressPara01" xml:space="preserve">
-    <value>Αυτή είναι η διεύθυνση που βρήκαμε στη βάση δεδομένων μας.</value>
-    <comment>Address page</comment>
-  </data>
-  <data name="AddressLegend" xml:space="preserve">
-    <value>Θέλετε να χρησιμοποιήσετε αυτήν τη διεύθυνση;</value>
-    <comment>Address page</comment>
-  </data>
-  <data name="AddressOptionYes" xml:space="preserve">
-    <value>Ναί</value>
-    <comment>Address page</comment>
-  </data>
-  <data name="AddressOptionNo" xml:space="preserve">
-    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετική</value>
-    <comment>Address page</comment>
-  </data>
-  <data name="NoValid_Profile_Instructions" xml:space="preserve">
+  <data name="no-valid-profile.instructions" xml:space="preserve">
     <value>&lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για οργανισμούς, χρειάζεται να &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; επιστρέψετε στο CY Login και να συνδεθείτε με λογαριασμό για πολίτες.&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για πολίτες, χρειάζεται να βεβαιωθείτε ότι ο λογαριασμός σας έχει ταυτοποιηθεί. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Μάθετε πώς μπορείτε να ταυτοποιήσετε τον λογαριασμό σας στο CY Login.&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;Μπορείτε, επίσης, να &lt;a href="http://www.mlsi.gov.cy/mlsi/sid/sidv2.nsf/All/B85AA4D88E3630B4C2257B18003B2C9D?OpenDocument" target="_blank"&gt; υποβάλετε αίτηση γραπτώς.&lt;/a&gt;&lt;/p&gt;</value>
-    <comment>No valid Profile Page</comment>
   </data>
-  <data name="NoValid_Profile_Title" xml:space="preserve">
+  <data name="no-valid-profile.title" xml:space="preserve">
     <value>Ελέγξτε τον λογαριασμό σας στο CY Login</value>
-    <comment>No valid Profile Page</comment>
   </data>
-  <data name="PrivacyStatement_Instructions" xml:space="preserve">
+  <data name="privacy-statement.instructions" xml:space="preserve">
     <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς οι Υπηρεσίες Κοινωνικών Ασφαλίσεων (ΥΚΑ) χρησιμοποιούν πληροφορίες σχετικά με εσάς, προκειμένου να διεκπεραιώσουν την αίτησή σας για το βοήθημα τοκετού.&lt;/p&gt;
       &lt;h2&gt;Τύποι πληροφοριών που συλλέγονται και χρησιμοποιούνται&lt;/h2&gt;
       &lt;p&gt;Οι  ΥΚΑ συλλέγουν τις ακόλουθες πληροφορίες απευθείας από εσάς:&lt;/p&gt;
@@ -426,166 +283,71 @@
       &lt;/ul&gt;
       &lt;h2&gt;Παράπονα&lt;/h2&gt;
       &lt;p&gt;Μπορείτε να υποβάλετε παράπονο για τον τρόπο με τον οποίο χρησιμοποιήθηκαν τα προσωπικά σας στοιχεία &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt; επικοινωνώντας με το Γραφείο του Επιτρόπου Προστασίας Δεδομένων Προσωπικού Χαρακτήρα&lt;/a&gt;.&lt;/p&gt;</value>
-    <comment>Privacy Statement Page</comment>
   </data>
-  <data name="PrivacyStatement_Title" xml:space="preserve">
+  <data name="privacy-statement.title" xml:space="preserve">
     <value>Πολιτική απορρήτου – τα προσωπικά σας στοιχεία</value>
-    <comment>Privacy Statement Page</comment>
   </data>
-  <data name="Button_Submit" xml:space="preserve">
-    <value>Υποβολή αίτησης</value>
-    <comment>Review Page</comment>
+  <data name="review.address" xml:space="preserve">
+    <value>Διεύθυνση</value>
   </data>
-  <data name="AddressNotFound" xml:space="preserve">
-    <value>Δεν βρέθηκε διεύθυνση από τα αρχεία μας</value>
-    <comment>Address Selection Page</comment>
+  <data name="review.address_details" xml:space="preserve">
+    <value>Αλλαγή Διεύθυνσης</value>
   </data>
-  <data name="AdressSelection" xml:space="preserve">
-    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτή η Διεύθυνση</value>
-    <comment>Address Selection Page</comment>
+  <data name="review.applicant_name" xml:space="preserve">
+    <value>Όνομα</value>
   </data>
-  <data name="MobileHeading" xml:space="preserve">
-    <value>Ποιό κινητό μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
-    <comment>Mobile Page</comment>
+  <data name="review.email" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="MobileLegend" xml:space="preserve">
-    <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
-    <comment>Mobile Page</comment>
+  <data name="review.email_details" xml:space="preserve">
+    <value>Αλλαγή email</value>
   </data>
-  <data name="MobileOptionNo" xml:space="preserve">
-    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
-    <comment>Mobile Page</comment>
+  <data name="review.mobile" xml:space="preserve">
+    <value>Αριθμός κινητού τηλεφώνου</value>
   </data>
-  <data name="MobileOptionYes" xml:space="preserve">
-    <value>Ο  αριθμός κινητού τηλεφώνου που είναι καταχωρημένο στα αρχεία μας:</value>
-    <comment>Mobile Page</comment>
+  <data name="review.mobile_details" xml:space="preserve">
+    <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
   </data>
-  <data name="MobilePara01" xml:space="preserve">
-    <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
-    <comment>Mobile Page</comment>
+  <data name="review.p1" xml:space="preserve">
+    <value>Τα στοιχεία επικοινωνίας σας</value>
   </data>
-  <data name="MobileNotFound" xml:space="preserve">
-    <value>Δεν βρέθηκε ο αριθμός κινητού τηλεφώνου από τα αρχεία μας</value>
-    <comment>Mobile Validator</comment>
+  <data name="review.p2" xml:space="preserve">
+    <value>Ελέγξτε ότι οι παρακάτω πληροφορίες είναι σωστές.</value>
   </data>
-  <data name="MobileSelection" xml:space="preserve">
-    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
-    <comment>Mobile Validator</comment>
+  <data name="review.p3" xml:space="preserve">
+    <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
   </data>
-  <data name="EmailHeading" xml:space="preserve">
-    <value>Ποιό email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
-    <comment>Email Page</comment>
+  <data name="review.title" xml:space="preserve">
+    <value />
   </data>
-  <data name="EmailPara01" xml:space="preserve">
-    <value>Αυτό είναι το email που βρήκαμε στη βάση δεδομένων μας.</value>
-    <comment>Email Page</comment>
-  </data>
-  <data name="EmailLegend" xml:space="preserve">
-    <value>Θέλετε να χρησιμοποιήσετε αυτό το email;</value>
-    <comment>Email Page</comment>
-  </data>
-  <data name="EmailOptionNo" xml:space="preserve">
-    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
-    <comment>Email Page</comment>
-  </data>
-  <data name="EmailOptionYes" xml:space="preserve">
-    <value>Το email που είναι καταχωρημένο στα αρχεία μας:</value>
-    <comment>Email Page</comment>
-  </data>
-  <data name="EmailNotFound" xml:space="preserve">
-    <value>Δεν βρέθηκε το email από τα αρχεία μας</value>
-    <comment>Email Validator</comment>
-  </data>
-  <data name="EmailSelection" xml:space="preserve">
-    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτό το email</value>
-    <comment>Email Validator</comment>
-  </data>
-  <data name="Response_Success_Header_Ref" xml:space="preserve">
-    <value>Αρ, Αναφοράς</value>
-    <comment>Response Header Success Page</comment>
-  </data>
-  <data name="Response_Success_Header_Title" xml:space="preserve">
-    <value>Η αίτηση σας έχει υποβληθεί</value>
-    <comment>Response Header Success Page</comment>
-  </data>
-  <data name="ServerError_Instructions" xml:space="preserve">
+  <data name="server-error.instructions" xml:space="preserve">
     <value>&lt;p&gt;Δοκιμάστε ξανά αργότερα.&lt;/p&gt;</value>
-    <comment>Server Error Page</comment>
   </data>
-  <data name="ServerError_Title" xml:space="preserve">
+  <data name="server-error.title" xml:space="preserve">
     <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
-    <comment>Server Error Page</comment>
   </data>
-  <data name="EmailNumberAlreadyExists" xml:space="preserve">
-    <value>Αυτό το email υπάρχει ήδη στα αρχεία μας</value>
-    <comment>Email Validator</comment>
+  <data name="set-email.email_hint" xml:space="preserve">
+    <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>
   </data>
-  <data name="AddressEditHeading" xml:space="preserve">
-    <value>Βρείτε τη διεύθυνσή σας</value>
-    <comment>Address Edit Page</comment>
+  <data name="set-email.email_label" xml:space="preserve">
+    <value>Ποια διεύθυνση email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="PostalCode" xml:space="preserve">
-    <value>Ταχυδρομικός Κώδικας</value>
-    <comment>Address Edit Page</comment>
+  <data name="set-email.p1" xml:space="preserve">
+    <value>Αφού κάνετε κλικ στο «συνέχεια» θα λάβετε ένα email με έναν σύνδεσμο στον οποίο θα πρέπει να κάνετε κλικ για να επιβεβαιώσετε το email σας.</value>
   </data>
-  <data name="PostalRequired" xml:space="preserve">
-    <value>Εισάγετε τον ταχυδρομικό σας κώδικα</value>
-    <comment>Address Edit Validator</comment>
+  <data name="set-email.title" xml:space="preserve">
+    <value>Ενημερώστε τη διεύθυνση email σας</value>
   </data>
-  <data name="Find" xml:space="preserve">
-    <value>Αναζήτηση</value>
-    <comment>Address Edit Page</comment>
+  <data name="set-mobile.mobile_hint" xml:space="preserve">
+    <value>Για αριθμούς εκτός Κύπρου, συμπεριλάβετε και τον κωδικό χώρας</value>
   </data>
-  <data name="PleaseSelectAddress" xml:space="preserve">
-    <value>Επιλέξτε Διεύθυνση</value>
-    <comment>Address Edit Page</comment>
+  <data name="set-mobile.mobile_label" xml:space="preserve">
+    <value>Ποιον αριθμό κινητού τηλεφώνου μπορούν να χρησιμοποιήσουμε για να επικοινωνούμε μαζί σας;</value>
   </data>
-  <data name="SelectAddress" xml:space="preserve">
-    <value>Επιλογή Διεύθυνσης</value>
-    <comment>Address Edit Page</comment>
+  <data name="set-mobile.p1" xml:space="preserve">
+    <value>Αφού συνεχίσετε, θα λάβετε έναν κωδικό ασφαλείας στο κινητό σας και θα σας ζητηθεί να εισαγάγετε αυτόν τον αριθμό στην επόμενη σελίδα, ώστε να επιβεβαιωθεί ο αριθμός κινητού</value>
   </data>
-  <data name="City" xml:space="preserve">
-    <value>Πόλη</value>
-    <comment>Address Edit Page</comment>
-  </data>
-  <data name="FlatNo" xml:space="preserve">
-    <value>Αριθμός διαμερίσματος</value>
-    <comment>Address Edit Page</comment>
-  </data>
-  <data name="Parish" xml:space="preserve">
-    <value>Ενορία</value>
-    <comment>Address Edit Page</comment>
-  </data>
-  <data name="Street" xml:space="preserve">
-    <value>διεύθυνση</value>
-    <comment>Address Edit Page</comment>
-  </data>
-  <data name="StreetNo" xml:space="preserve">
-    <value>Αριθμός οδού</value>
-    <comment>Address Edit Page</comment>
-  </data>
-  <data name="FlatNoLength" xml:space="preserve">
-    <value>5 Χαρακτήρες Επιτρέποντεαι</value>
-    <comment>Address Edit Validator</comment>
-  </data>
-  <data name="PostalResultsNotFound" xml:space="preserve">
-    <value>Δεν βρέθηκαν διευθύνσεις </value>
-    <comment>Address Edit Validator</comment>
-  </data>
-  <data name="PostCodeLength" xml:space="preserve">
-    <value>4 Χαρακτήρες Επιτρέποντεαι</value>
-    <comment>Address Edit Validator</comment>
-  </data>
-  <data name="StreetNoLength" xml:space="preserve">
-    <value>5 Χαρακτήρες Επιτρέποντεαι</value>
-    <comment>Address Edit Validator</comment>
-  </data>
-  <data name="StreetNoMandatory" xml:space="preserve">
-    <value>Ο Αριθμός οδού είναι υποχρεωτικός</value>
-    <comment>Address Edit Validator</comment>
-  </data>
-  <data name="PostCodeValid" xml:space="preserve">
-    <value>Μόνο 4 αριθμοί επιτρέπονται</value>
-    <comment>Address Edit Validator</comment>
+  <data name="set-mobile.title" xml:space="preserve">
+    <value>Ενημερώστε τον αριθμό του κινητού σας</value>
   </data>
 </root>

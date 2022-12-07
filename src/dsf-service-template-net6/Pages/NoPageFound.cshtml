@@ -1,11 +1,10 @@
-﻿@page
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IStringLocalizer<Program> Localizer
-@inject IHtmlLocalizer<Program> HtmlLocalizer
+﻿@page "/no-page-found"
+@using dsf_service_template_net6.Resources
+@inject IResourceViewlocalizer Localizer
 @model NoPageFoundModel
 @{
     Layout = "_LayoutNoBackLink";
+    ViewData["Title"] = Localizer["no-page-found.title"];
 }
-<h1>@Localizer["BadRoute_Title"]</h1>
-@HtmlLocalizer["BadRoute_Instructions"]
+<h1>@Localizer["no-page-found.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("no-page-found.instructions")

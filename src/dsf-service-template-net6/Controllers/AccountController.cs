@@ -77,16 +77,8 @@ namespace dsf_service_template_net6.Controllers
                 var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
                 HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
             }
-            //After CyLogin login, redirect to default home page
-            //Check the first session object store once you login
-            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
-            {
-              return RedirectToAction("GetPersonalData", "Citizen", new { currentLanguage = "el", returnUrl = "Address"});
-            }
-            else
-            {
-              return  RedirectToAction("LogOut");
-            }
+            //After CyLogin login, redirect to the first page of the flow
+            return RedirectToPage("/Email");
         }
 
         public async Task LogOutWithNotAuthorize()

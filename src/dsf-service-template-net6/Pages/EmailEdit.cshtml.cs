@@ -1,11 +1,11 @@
 using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
 using dsf_service_template_net6.Extensions;
+using dsf_service_template_net6.Services;
+using dsf_service_template_net6.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Localization;
 
 namespace dsf_service_template_net6.Pages
 {
@@ -14,6 +14,7 @@ namespace dsf_service_template_net6.Pages
     {
         #region "Variables"
         //Dependancy injection Variables
+        private readonly INavigation _nav;
         private readonly IValidator<EmailEdit> _validator;
         [BindProperty]
         //control variables
@@ -22,10 +23,9 @@ namespace dsf_service_template_net6.Pages
         public string ErrorsDesc { get; set; } = "";
         [BindProperty]
         public string EmailErrorClass { get; set; } = "";
+
         [BindProperty]
-        public string EmailSelection { get; set; } = "";
-        [BindProperty]
-        public string email { get; set; }
+        public string email { get; set; } = "";
         [BindProperty]
         public string BackLink { get; set; } = "";
 
@@ -33,58 +33,12 @@ namespace dsf_service_template_net6.Pages
         public string NextLink { get; set; } = "";
         //Object for session data 
         public EmailEdit emailEdit;
-        Navigation _nav = new Navigation();
         #endregion
         #region "Custom Methods"
-        public EmailEditModel(IValidator<EmailEdit> validator)
+        public EmailEditModel(IValidator<EmailEdit> validator, INavigation nav)
         {   _validator = validator;
              emailEdit = new EmailEdit();
-        }
-        public void AddHistoryLinks(string curr)
-        {
-
-            var History = HttpContext?.Session.GetObjectFromJson<List<string>>("History") ?? new List<string>();
-            if (History.Count == 0)
-            {
-                History.Add("/");
-            }
-            int LastIndex = History.Count - 1;
-            if (History[LastIndex] != curr)
-            {
-                //Add to History
-                History.Add(curr);
-                //Set to memory
-
-                HttpContext.Session.SetObjectAsJson("History", History);
-            }
-        }
-        public void SetLinks(string curr, bool Review, string choice = "0")
-        {
-            //First add current page to History
-           AddHistoryLinks("/" + curr);
-
-            NextLink = "/ReviewPage";
-        }
-        private string GetBackLink(string curr)
-        {
-            var History = HttpContext.Session.GetObjectFromJson<List<string>>("History");
-            int currentIndex = History.FindLastIndex(x => x == curr);
-            //if not found
-            if (currentIndex == -1)
-            {
-                return "/";
-            }
-            //Last value in history
-            else if (currentIndex == 0)
-            {
-                var index = History.Count - 1;
-                return History[index].ToString();
-            }
-            //Return the previus of current
-            else
-            {
-                return History[currentIndex - 1].ToString();
-            }
+            _nav = nav;
         }
         void ClearErrors()
         {
@@ -92,10 +46,9 @@ namespace dsf_service_template_net6.Pages
             EmailErrorClass = "";
             ErrorsDesc = "";
         }
-        bool ShowErrors()
+        bool ShowErrors(bool fromPost)
         {
-            if (HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult") != null)
-
+            if (fromPost)
             {
                 var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
                 // Copy the validation results into ModelState.
@@ -130,49 +83,64 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            if (HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime) == null)
+            if (GetCitizenDataFromApi == null)
             {
                 ret = false;
             }
-            if (HttpContext.Session.GetObjectFromJson<AddressSelect>("AddressSelect", authTime) == null)
+             return ret;
+        }
+        private string GetAuthTime()
+        {
+            return User.Claims.First(c => c.Type == "auth_time").Value;
+        }
+        private TasksGetResponse GetCitizenDataFromApi()
+        {
+            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
+            return res;
+        }
+        private EmailEdit GetSessionData()
+        {
+            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
+            return SessionEmailEdit;
+        }
+        private string GetTempSessionData()
+        {
+            var tempSession = HttpContext.Session.GetObjectFromJson<string>("emailval");
+            return tempSession;
+        }
+        private bool BindData()
+        {   //Check if already selected 
+            var sessionData = GetSessionData();
+            if (sessionData != null)
             {
-                ret = false;
+                email = sessionData.email;
+                return true;
             }
-            if ((HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", authTime) == null) && (HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", authTime) == null))
+            else
             {
-                ret = false;
+                return false;     
             }
-            return ret;
         }
         #endregion
-        public IActionResult OnGet(bool review)
-        {
-            Navigation _nav = new Navigation();
-            //Set back and Next Link
-           SetLinks("SetEmail", review);
-           BackLink = GetBackLink("/" + "SetEmail");
+        public IActionResult OnGet(bool review, bool fromPost)
+        {           
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
             {
                 return RedirectToAction("LogOut", "Account");
             }
+            //Set Back Link
+            BackLink = _nav.GetBackLink("/set-email", review);
             //If coming fromPost
-            if (!ShowErrors())
-            {
-                //GetData from session 
-                var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", authTime);
-                if (SessionEmailEdit != null)
-                {
-                    email = SessionEmailEdit.email;
-                }
-               
+            if (!fromPost)
+            { //GetData from session 
+                BindData();
             }
             else
             {
-                email = HttpContext.Session.GetObjectFromJson<string>("emailval") ;
+                email = GetTempSessionData() ;
+                ShowErrors(true);
             }
 
             return Page();
@@ -182,11 +150,10 @@ namespace dsf_service_template_net6.Pages
             //Update the class before validation
             emailEdit.email = email;
             //Get Previous mobile number
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            var citizenPersonalDetails = HttpContext.Session.GetObjectFromJson<CitizenDataResponse>("PersonalDetails", authTime);
+            var citizenPersonalDetails = GetCitizenDataFromApi();
             if (citizenPersonalDetails != null)
             {
-                emailEdit.prev_email = citizenPersonalDetails.data.email ??  User.Claims.First(c => c.Type == "email").Value;
+                emailEdit.prev_email = GetCitizenDataFromApi()?.data?.Count() == 0 ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi()?.data?.First()?.name; 
 
             }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
@@ -194,20 +161,19 @@ namespace dsf_service_template_net6.Pages
             {
                 HttpContext.Session.SetObjectAsJson("valresult", result);
                 HttpContext.Session.SetObjectAsJson("emailval", email);
-                return RedirectToPage("EmailEdit");
+                return RedirectToPage("EmailEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Store Data 
             HttpContext.Session.Remove("EmailEdit");
-            HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, authTime);
+            HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, GetAuthTime());
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("emailval");
-            //Finall redirect
-            Navigation _nav = new Navigation();
+         
             //Set back and Next Link
-            SetLinks("SetEmail", review);
+           NextLink = _nav.SetLinks("set-email","Email", review, "NoSelection");
            
-                return RedirectToPage(NextLink, null, "mainContainer");
+                return RedirectToPage(NextLink);
             
         }
     }

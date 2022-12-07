@@ -1,11 +1,11 @@
-﻿@page
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IStringLocalizer<Program> Localizer
-@inject IHtmlLocalizer<Program> HtmlLocalizer
+﻿@page "/cookie-policy"
+@using dsf_service_template_net6.Resources
+@inject IResourceViewlocalizer Localizer
 @model CookiePolicyModel
 @{
     ViewBag.PreviousUrl=Model.BackLink;
+     ViewData["Title"] = Localizer["cookie-policy.title"];
 }
-<h1>@Localizer["CookiePolicy_Title"]</h1>
-@HtmlLocalizer["CookiePolicy_Instructions"]
+<h1>@Localizer["cookie-policy.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("cookie-policy.instructions")
+

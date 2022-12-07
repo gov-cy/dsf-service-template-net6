@@ -17,9 +17,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Program.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\PageResource.el.resx">
+		  <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\PageResource.en.resx">
+		  <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\CommonResource.el.resx">
+		  <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\CommonResource.en.resx">
+		  <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\ErrorResource.el.resx">
+		  <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\ErrorResource.en.resx">
+		  <Generator></Generator>
+	  </EmbeddedResource>
   </ItemGroup>
 
 </Project>

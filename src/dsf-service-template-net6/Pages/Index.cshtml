@@ -1,20 +1,18 @@
 ﻿@page 
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IStringLocalizer<Program> Localizer
-@inject IHtmlLocalizer<Program> HtmlLocalizer
+@using dsf_service_template_net6.Resources
+@inject IResourceViewlocalizer Localizer
 @model IndexModel
 @{
-    ViewData["Title"] = "Mock Citizen Personal Data Service";
+    ViewData["Title"] = @Localizer["index.title"];
     Layout = "_LayoutNoBackLink";
 }
-    <h1>@Localizer["Index_Heading"]</h1>
-    @HtmlLocalizer["Index_Instructions1"]
+    <h1>@Localizer["index.title"]</h1>
+    @Localizer.GetPagesLocalizedHtml("index.instructions1")
     <div>
        <form asp-page-handler="ApplicationStart">        
          <button type="submit" class="govcy-btn-primary" id="btnApplicationStart">
-            @Localizer["Button_Get_Started"]
+            @Localizer["common.button_get_started"]
          </button>
        </form>
     </div>
-   @HtmlLocalizer["Index_Instructions"]
+   @Localizer.GetPagesLocalizedHtml("index.instructions")

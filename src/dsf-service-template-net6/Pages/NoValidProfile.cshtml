@@ -1,11 +1,10 @@
-﻿@page
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IStringLocalizer<Program> Localizer
-@inject IHtmlLocalizer<Program> HtmlLocalizer
+﻿@page "/no-valid-profile"
+@using dsf_service_template_net6.Resources
+@inject IResourceViewlocalizer Localizer
 @model  NoValidProfileModel
 @{
-    Layout = "_LayoutNoBackLink";
+ Layout = "_LayoutNoBackLink";
+ ViewData["Title"] = Localizer["no-valid-profile.title"];
 }
-<h1>@Localizer["NoValid_Profile_Title"]</h1>
-@HtmlLocalizer["NoValid_Profile_Instructions"]
+<h1>@Localizer["no-valid-profile.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("no-valid-profile.instructions")

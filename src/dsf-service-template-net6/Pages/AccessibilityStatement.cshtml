@@ -1,11 +1,10 @@
-﻿@page
-@using Microsoft.Extensions.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IStringLocalizer<Program> Localizer
-@inject IHtmlLocalizer<Program> HtmlLocalizer
+﻿@page "/accessibility-statement"
+@using dsf_service_template_net6.Resources
+@inject IResourceViewlocalizer Localizer
 @model AccessibilityStatementModel
 @{
     ViewBag.PreviousUrl=Model.BackLink;
+    ViewData["Title"] = Localizer["accessibility-statement.title"];
 }
-<h1>@Localizer["AccessibilityStatement_Title"]</h1>
-@HtmlLocalizer["AccessibilityStatement_Instructions"]
+<h1>@Localizer["accessibility-statement.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("accessibility-statement.instructions")
