@@ -6,12 +6,11 @@ namespace dsf_service_template_net6.Data.Validations
 {
     public class EmailValidator : AbstractValidator<EmailSection>
     {
-        IResourceViewlocalizer _Localizer;
+        readonly IResourceViewlocalizer _Localizer;
         public const string EmailExpression = @"^(([^<>()[\]\\.,;:\s@\""]+(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$";
         string EmailNumNotFoundMsg = string.Empty;
         string EmailNoSelectionMsg = string.Empty;
         string EmailMessage = String.Empty;
-        string EmailAlreadyExists = String.Empty;
         public EmailValidator(IResourceViewlocalizer localizer)
         {
             _Localizer = localizer;

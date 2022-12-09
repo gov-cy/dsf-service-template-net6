@@ -136,7 +136,7 @@ namespace dsf_service_template_net6.Pages
                 {
                     crbEmail = "1";
                 }
-                else if (selectedoptions.use_other && selectedoptions.validation_mode==ValidationMode.Edit)
+                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || selectedoptions.email == GetCitizenDataFromApi()?.data?.First()?.name))
                 {
                     //code use when user hit back button on edit page
                     crbEmail = "1";

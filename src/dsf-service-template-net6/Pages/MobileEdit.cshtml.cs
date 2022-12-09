@@ -14,7 +14,7 @@ namespace dsf_service_template_net6.Pages
         #region "Variables"
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private IValidator<MobileEdit> _validator;
+        private IValidator<MobileSection> _validator;
          //control variables
         [BindProperty]
         public string displaySummary { get; set; } = "display:none";
@@ -30,13 +30,13 @@ namespace dsf_service_template_net6.Pages
         [BindProperty]
         public string NextLink { get; set; } = "";
         //Object for session data 
-        public MobileEdit mobEdit { get; set; }
+        public MobileSection mobEdit { get; set; }
        
         #endregion
         #region "Custom Methods"
-        public MobileEditModel(IValidator<MobileEdit> validator, INavigation nav)
+        public MobileEditModel(IValidator<MobileSection> validator, INavigation nav)
         {  _validator = validator;
-            mobEdit = new MobileEdit();
+            mobEdit = new MobileSection();
             _nav = nav;
         }
      
@@ -87,7 +87,7 @@ namespace dsf_service_template_net6.Pages
             {
                 ret = false;
             }
-            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime()) == null))
+            if ((HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime()) == null))
             {
                 ret = false;
             }
@@ -102,9 +102,9 @@ namespace dsf_service_template_net6.Pages
             TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
-        private MobileEdit GetSessionData()
+        private MobileSection GetSessionData()
         {
-            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
+            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime());
             return SessionEmailEdit;
         }
         private string GetTempSessionData()
@@ -152,14 +152,8 @@ namespace dsf_service_template_net6.Pages
         public IActionResult OnPost(bool review)
         { // Update the class before validation
             mobEdit.mobile = mobile;
-           //Get Previous mobile number
-            var citizenPersonalDetails = GetCitizenDataFromApi();
-            if (citizenPersonalDetails != null)
-            {
-                mobEdit.prev_mobile = citizenPersonalDetails?.data?.ToList()?.Find(x=> x.id==2)?.name;
-
-            }
-           
+            //Get Previous mobile number
+            mobEdit.validation_mode = ValidationMode.Edit;           
             FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
             if (!result.IsValid)
             {
@@ -168,8 +162,8 @@ namespace dsf_service_template_net6.Pages
                 return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Mob Edit from Session
-            HttpContext.Session.Remove("MobEdit");
-            HttpContext.Session.SetObjectAsJson("MobEdit", mobEdit, GetAuthTime());
+            HttpContext.Session.Remove("MobileSection");
+            HttpContext.Session.SetObjectAsJson("MobileSection", mobEdit, GetAuthTime());
 
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");

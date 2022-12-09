@@ -6,7 +6,7 @@ namespace dsf_service_template_net6.Data.Validations
 {
     public class MobileValidator : AbstractValidator<MobileSection>
     {
-        IResourceViewlocalizer _Localizer;
+        readonly IResourceViewlocalizer _Localizer;
         string MobileNumNotFoundMsg = string.Empty;
         string MobileNoSelectionMsg = string.Empty;
         public const string Expression = @"^[1-9]\d*(\.\d+)?$";
@@ -22,7 +22,7 @@ namespace dsf_service_template_net6.Data.Validations
             When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.mobile).NotEmpty().NotNull().WithMessage(MobileNumNotFoundMsg);
-                RuleFor(x => x.use_from_civil).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(MobileNoSelectionMsg);
+                RuleFor(x => x.use_from_api).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(MobileNoSelectionMsg);
             });
             //Edit Mobile
             When(p => p.validation_mode.Equals(ValidationMode.Edit), () =>

@@ -22,7 +22,7 @@ namespace dsf_service_template_net6.Pages
         }
         #region "Variables"
         public List<dsf_service_template_net6.Services.Model.Task> _application = new();
-        public string currentLanguage="";
+        public string currentLanguage = "";
         //Data retrieve from other pages
         public string ret_email = string.Empty;
         public string ret_mobile = string.Empty;
@@ -36,11 +36,11 @@ namespace dsf_service_template_net6.Pages
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
         public IActionResult OnGet(bool review)
-        {   
+        {
             bool allow = AllowToProceed();
             if (!allow)
             {
-              return RedirectToAction("LogOut", "Account");
+                return RedirectToAction("LogOut", "Account");
             }
             //Get back link
             BackLink = _nav.GetBackLink("/review-page", true);
@@ -48,130 +48,98 @@ namespace dsf_service_template_net6.Pages
             bool proceed = SetUserJourneyData();
             if (!proceed)
             {
-              return  RedirectToAction("LogOut", "Account");
+                return RedirectToAction("LogOut", "Account");
             }
             return Page();
         }
         public IActionResult OnPostApplicationSubmit()
         {   //Set ApplicationRequest
-            var  ret = SetApplication();
+            var ret = SetApplication();
             if (!ret)
             {
                 return RedirectToPage("/ServerError");
             }
             if (SubmitApplication())
-                {
-                    return RedirectToPage("/ApplicationResponse");
-                }
-                else
-                {
-                    return RedirectToPage("/ServerError");
-                }
+            {
+                return RedirectToPage("/ApplicationResponse");
+            }
+            else
+            {
+                return RedirectToPage("/ServerError");
+            }
         }
         #region "Custom Methods"
-          private bool AllowToProceed()
+        private bool AllowToProceed()
         {
             //Make sure the sequence has been kept
             bool ret = true;
-            
+
             if (HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime()) == null)
             {
                 ret = false;
             }
-           
-            if ((HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime()) == null))
+
+            if ((HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime()) == null))
             {
                 ret = false;
             }
 
-            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime()) == null))
+            if ((HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime()) == null))
             {
                 ret = false;
             }
             return ret;
         }
-          private bool SetUserJourneyData()
-          {
+        private bool SetUserJourneyData()
+        {
             bool ret = true;
-            var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime());
-            if (mobSelect != null)
-            {   
-                if (mobSelect.use_from_civil)
-                {
-                ret_mobile = mobSelect.mobile;
-                }
-                else
-                {
-                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
-                ret_mobile = SessionMobEdit.mobile;
-                }
-
-            } else
-            {
-                //Directly to edit
-                var SessionMobEdit = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
-                ret_mobile = SessionMobEdit.mobile;
-                useMobileEditOnly = true;
-            }
-         
-            var emailSelect = HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime());
-           if (emailSelect != null)
-            {
-                if (emailSelect.use_from_civil)
-                {
-                ret_email= emailSelect.email; 
-                } else 
-                {
-                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
-                ret_email = SessionEmailEdit.email;
-                }
-            }else
-            {
-                //Directrly to email edit
-                var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
-                ret_email = SessionEmailEdit.email;
-                useEmailEditOnly = true;
-            }
-           
-            
-             return ret;
+            var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime());
+            ret_mobile = mobSelect.mobile;
+            var Nav = HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList");
+            var section = Nav.Find(p => p.Name == "Mobile");
+            useMobileEditOnly = section!.Type == SectionType.InputOnly ? true : false;
+            var emailSelect = HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime());
+            ret_email = emailSelect.email;
+            section = Nav.Find(p => p.Name == "Email");
+            useEmailEditOnly = section!.Type == SectionType.InputOnly ? true : false;
+            return ret;
         }
-          private bool SetApplication()
+        private bool SetApplication()
         {
             bool ret = true;
             bool isDataRetrieve = SetUserJourneyData();
             if (isDataRetrieve)
-            {                
+            {
                 if (string.IsNullOrEmpty(ret_email) || string.IsNullOrEmpty(ret_mobile))
                 {
                     ret = false;
                 }
                 else
                 {
-                    Services.Model.Task mobile, email =new();
+                    Services.Model.Task mobile, email = new();
                     email.id = 1;
                     email.name = ret_email;
                     email.isComplete = true;
-                    mobile = new Services.Model.Task(); 
+                    mobile = new Services.Model.Task();
                     mobile.id = 2;
                     mobile.name = ret_mobile;
                     mobile.isComplete = true;
                     _application.Add(email);
-                    _application.Add(mobile); 
+                    _application.Add(mobile);
                 }
-          }
+            }
             return ret;
         }
-          private bool SubmitApplication()
+        private bool SubmitApplication()
         {
             bool ret = false;
             var authTime = GetAuthTime();
             var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-            TasksPostResponse? res=new();
+            TasksPostResponse? res = new();
             foreach (Services.Model.Task item in _application)
             {
                 res = _service.SubmitTask(item, token);
-            } 
+            }
             if (res.succeeded)
             {
                 //Redirect if error code is <> 0

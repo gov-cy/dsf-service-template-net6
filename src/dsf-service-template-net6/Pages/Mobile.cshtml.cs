@@ -27,16 +27,16 @@ namespace dsf_service_template_net6.Pages
 
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private IValidator<MobileSelect> _validator;
+        private IValidator<MobileSection> _validator;
         //Object for session data 
-        public MobileSelect Mobile_select;
+        public MobileSection Mobile_select;
         #endregion
         #region "Custom Methods"
-        public MobileModel(IValidator<MobileSelect> validator, INavigation nav)
+        public MobileModel(IValidator<MobileSection> validator, INavigation nav)
         {
             _nav = nav;
             _validator = validator;
-            Mobile_select = new MobileSelect();
+            Mobile_select = new MobileSection();
         }
         bool ShowErrors(bool fromPost)
         {
@@ -86,7 +86,7 @@ namespace dsf_service_template_net6.Pages
             {
                 ret = false;
             }
-            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime()) == null))
+            if ((HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime()) == null))
             {
                 ret = false;
             }
@@ -101,14 +101,10 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private MobileEdit GetEditSessionData()
+       
+        private MobileSection GetSessionData()
         {
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
-            return selectedoptions;
-        }
-        private MobileSelect GetSessionData()
-        {
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime());
+            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime());
             return selectedoptions;
         }
         private void BindSelectionData()
@@ -127,16 +123,16 @@ namespace dsf_service_template_net6.Pages
             var selectedoptions = GetSessionData();
             if (selectedoptions != null)
             {
-                if (selectedoptions.use_from_civil)
+                if (selectedoptions.use_from_api)
                 {
                     crbMobile = "1";
                 }
-                else if (GetEditSessionData() == null)
+                else if (selectedoptions.use_other && selectedoptions.mobile== GetCitizenDataFromApi()?.data?.ToList()?.Find(x => x.id == 2)?.name)
                 {
                     //code use when user hit back button on edit page
                     crbMobile = "1";
-                    Mobile_select.use_from_civil = true;
-                    Mobile_select.use_other = true;
+                    Mobile_select.use_from_api = true;
+                    Mobile_select.use_other = false;
                     Mobile_select.mobile = GetCitizenDataFromApi()?.data?.ToList()?.Find(x => x.id == 2)?.name;
                     HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
                 }
@@ -179,17 +175,17 @@ namespace dsf_service_template_net6.Pages
             //Set class Model before validation
             if (crbMobile == "1")
             {
-                Mobile_select.use_from_civil = true;
+                Mobile_select.use_from_api = true;
                 Mobile_select.use_other = false;
             }
             else if (crbMobile == "2")
             {
-                Mobile_select.use_from_civil = false;
+                Mobile_select.use_from_api = false;
                 Mobile_select.use_other = true;
             }
             else
             {
-                Mobile_select.use_from_civil = false;
+                Mobile_select.use_from_api = false;
                 Mobile_select.use_other = false;
             }
             //Re-assign defult email
