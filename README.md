@@ -57,7 +57,7 @@ Details of this configuration can be found in the project's `appsettings.json` f
 The following test accounts can be used to simulate the login functionality:
 `bob/bob, alice/alice, or company1/company1`
 
-```
+
 We stronly propose to keep sensitive data in secrets, so that values like api key cannot be exposed in gitHub repo
 
 ### Mock API Calls
