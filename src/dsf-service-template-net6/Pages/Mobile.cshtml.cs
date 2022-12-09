@@ -115,7 +115,7 @@ namespace dsf_service_template_net6.Pages
         {
             TasksGetResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
-            if (string.IsNullOrEmpty(res.data?.ToList()?.Find(x => x.id == 2)?.name))
+            if (!string.IsNullOrEmpty(res.data?.ToList()?.Find(x => x.id == 2)?.name))
             {
 
                 Mobile_select.mobile = res?.data?.ToList()?.Find(x => x.id == 2)?.name;
