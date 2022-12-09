@@ -58,30 +58,19 @@ builder.Services.AddRazorPages(options =>
 //for resource access
 builder.Services.AddSingleton<IResourceViewlocalizer, ResourceViewlocalizer>();
 //for server side validations
-builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
+builder.Services.AddScoped<IValidator<EmailSection>, EmailValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
-    return new cMobileEditValidator(LocMain);
+    return new EmailValidator(LocMain);
 });
-builder.Services.AddScoped<IValidator<EmailEdit>, cEmailEditValidator>(sp =>
+builder.Services.AddScoped<IValidator<MobileSection>, MobileValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
-    return new cEmailEditValidator(LocMain);
+    return new MobileValidator(LocMain);
 });
-builder.Services.AddScoped<IValidator<MobileSelect>, MobileSelectValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
-    return new MobileSelectValidator(LocMain);
-});
-builder.Services.AddScoped<IValidator<EmailSelect>, EmailSelectValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
-
-    return new EmailSelectValidator(LocMain);
-});
 //Add fluent validation to .Net Core (optional use for server side validation) 
 builder.Services.AddFluentValidation();
 //multi language support localization middleware 

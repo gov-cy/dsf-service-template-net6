@@ -15,7 +15,7 @@ namespace dsf_service_template_net6.Pages
         #region "Variables"
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private readonly IValidator<EmailEdit> _validator;
+        private readonly IValidator<EmailSection> _validator;
         [BindProperty]
         //control variables
         public string DisplaySummary { get; set; } = "display:none";
@@ -32,12 +32,12 @@ namespace dsf_service_template_net6.Pages
         [BindProperty]
         public string NextLink { get; set; } = "";
         //Object for session data 
-        public EmailEdit emailEdit;
+        public EmailSection emailEdit;
         #endregion
         #region "Custom Methods"
-        public EmailEditModel(IValidator<EmailEdit> validator, INavigation nav)
+        public EmailEditModel(IValidator<EmailSection> validator, INavigation nav)
         {   _validator = validator;
-             emailEdit = new EmailEdit();
+             emailEdit = new EmailSection();
             _nav = nav;
         }
         void ClearErrors()
@@ -98,9 +98,9 @@ namespace dsf_service_template_net6.Pages
             TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
-        private EmailEdit GetSessionData()
+        private EmailSection GetSessionData()
         {
-            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime());
+            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime());
             return SessionEmailEdit;
         }
         private string GetTempSessionData()
@@ -153,8 +153,8 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = GetCitizenDataFromApi();
             if (citizenPersonalDetails != null)
             {
-                emailEdit.prev_email = GetCitizenDataFromApi()?.data?.Count() == 0 ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi()?.data?.First()?.name; 
-
+                emailEdit.email = GetCitizenDataFromApi()?.data?.Count() == 0 ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi()?.data?.First()?.name;
+                emailEdit.validation_mode = ValidationMode.Edit;
             }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
@@ -164,8 +164,8 @@ namespace dsf_service_template_net6.Pages
                 return RedirectToPage("EmailEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Store Data 
-            HttpContext.Session.Remove("EmailEdit");
-            HttpContext.Session.SetObjectAsJson("EmailEdit", emailEdit, GetAuthTime());
+            HttpContext.Session.Remove("EmailSection");
+            HttpContext.Session.SetObjectAsJson("EmailSection", emailEdit, GetAuthTime());
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("emailval");
