@@ -1,6 +1,5 @@
-
-# dsf-service-template-net6
 <img src=https://github.com/gov-cy/govdesign/blob/main/dsf-components.png height=75> 
+
 ## DSF Components  
 Generally, DSF-Ready Services are composed of a Web application (including the DSF Design System and CyLogin integration) and a RESTful API that gets data from and posts data to the Back-end system(s).  The connectivity from the service (which is on the cloud) to the API is implemented through an API Gateway.
 
@@ -11,7 +10,7 @@ Generally, DSF-Ready Services are composed of a Web application (including the D
 - **Sample OIDC Web Client**: to simulate the CyLogin functionality [git-oidc-web-client]. The client is using a mock identity server [dsf-idsrv-dev]
 
 
-## This is a quickstart template for creating a sample DSF service (Request an email and mobile change)
+##  **Service template**: This is a quickstart template for creating a sample DSF service (Request an email and mobile change)
 This project is an example of a DSF mock service developed in .NET6 Razor Pages
 
 ## Why .Net6 Razor Pages
@@ -29,6 +28,10 @@ This service is demo that contains the following:
 * Mock API calls
 * Navigation Service
 
+## NuGet Packages
+* FluentValidation.AspNetCore
+* Microsoft.AspNetCore.Authentication.OpenIdConnect
+* Newtonsoft.Json
 
 ## Integrations
 
@@ -53,6 +56,9 @@ builder.Services.AddAuthentication
 Details of this configuration can be found in the project's `appsettings.json` file and the Program.cs file.
 The following test accounts can be used to simulate the login functionality:
 `bob/bob, alice/alice, or company1/company1`
+
+```
+We stronly propose to keep sensitive data in secrets, so that values like api key cannot be exposed in gitHub repo
 
 ### Mock API Calls
 The project also simulates various API calls to demostrate how the service should get data from and post data to a fictional back-end system  [api-template-demo]. 
@@ -80,9 +86,11 @@ dotnet run
 
 ## License
 
-MIT
+[MIT License]
 
 **Free Software, Hell Yeah!**
+
+### Non-production Usage. This Software is provided for evaluation, testing, demonstration and other similar purposes. Any license and rights granted hereunder are valid only for such limited non-production purposes.
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job.)
    [git-api-template]: <https://github.com/gov-cy/dsf-api-template-net6.git>
