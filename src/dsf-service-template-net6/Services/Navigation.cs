@@ -189,11 +189,11 @@ namespace dsf_service_template_net6.Services
             var section = sections.Find(x => x.Name == sectionName);
             int pageIndex = section!.pages.IndexOf(currPage);
             BackLink = GetBackLink("/" + currPage, fromReview);
-            if ((sections.Count == index + 1 || fromReview) && selectChoice == FormSelection.No.ToString())
+            if ((sections.Count == index + 1 ) && selectChoice == FormSelection.No.ToString())
             {
                 NextLink = "/" + section.pages[pageIndex + 1];
             }
-            else if (sections.Count == index + 1 || fromReview)
+            else if (sections.Count == index + 1 && (selectChoice == FormSelection.Yes.ToString() || selectChoice == FormSelection.NoSelection.ToString()))
             {
                 //Mobile section always appears last for all users
                 NextLink = "/review-page";
@@ -206,9 +206,15 @@ namespace dsf_service_template_net6.Services
             else
             {
                 //follow work flow
-
+                if (fromReview)
+                {
+                    NextLink = "/review-page";
+                }else
+                {
                 //go to next section first page
                 NextLink = "/" + sections[index + 1].pages[0];
+                }
+              
             }
 
 

@@ -89,7 +89,7 @@
     </div>
     @*Before main we have the login link and the back button*@
     <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
-        @if (User.Identity.IsAuthenticated)
+        @if (User?.Identity?.IsAuthenticated==true)
         {
             <div class="govcy-mb-4 govcy-float-start">
                 <span class="bi bi-chevron-left"></span>
