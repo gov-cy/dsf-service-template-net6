@@ -30,7 +30,7 @@ namespace dsf_service_template_net6.Services
 
     public class Navigation : INavigation
     {
-        private readonly ITasks _service;
+        private readonly IContact _service;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public string BackLink { get; set; }
         public string NextLink { get; set; }
@@ -69,16 +69,16 @@ namespace dsf_service_template_net6.Services
         }
         private void setSectionPages(ClaimsPrincipal cp)
         {
-            TasksGetResponse? res;
+            ContactInfoResponse? res;
             var authTime = cp.Claims.First(c => c.Type == "auth_time").Value;
             List<SectionInfo> list = new List<SectionInfo>();
-            var citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", authTime);
+            var citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", authTime);
             if (citizen == null)
             { //Try to get data from api
-                res = _service.GetAllTasks(_httpContextAccessor.HttpContext.GetTokenAsync("access_token")?.Result);
+                res = _service.GetContact(_httpContextAccessor.HttpContext.GetTokenAsync("access_token")?.Result);
                 //if the user is already login and not passed from login, set in session
                 _httpContextAccessor.HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
-                citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", authTime);
+                citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", authTime);
             }
             //New Section
             SectionInfo section = new();
@@ -94,7 +94,7 @@ namespace dsf_service_template_net6.Services
             section.Name = "Mobile";
             section.SectionOrder = 2;
             //Always Select, for even API does not have email, we show email from user profile 
-            section.Type = (!string.IsNullOrEmpty(citizen?.data?.ToList()?.Find(x => x.id == 2)?.name)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
+            section.Type = (!string.IsNullOrEmpty(citizen?.data?.mobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)
             {
                 section.pages.Add("set-mobile");
@@ -108,7 +108,7 @@ namespace dsf_service_template_net6.Services
             //Store List
             _httpContextAccessor.HttpContext!.Session.SetObjectAsJson("NavList", list);
         }
-        public Navigation(IHttpContextAccessor httpContextAccessor, ITasks service)
+        public Navigation(IHttpContextAccessor httpContextAccessor, IContact service)
         {
             _httpContextAccessor = httpContextAccessor;
             _service = service;

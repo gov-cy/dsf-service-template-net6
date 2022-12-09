@@ -92,9 +92,9 @@ namespace dsf_service_template_net6.Pages
             }
             return ret;
         }
-        private TasksGetResponse GetCitizenDataFromApi()
+        private ContactInfoResponse GetCitizenDataFromApi()
         {
-            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
+            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private string GetAuthTime()
@@ -109,12 +109,12 @@ namespace dsf_service_template_net6.Pages
         }
         private void BindSelectionData()
         {
-            TasksGetResponse res = GetCitizenDataFromApi();
+            ContactInfoResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
-            if (!string.IsNullOrEmpty(res.data?.ToList()?.Find(x => x.id == 2)?.name))
+            if (!string.IsNullOrEmpty(res.data?.mobileTelephone))
             {
 
-                Mobile_select.mobile = res?.data?.ToList()?.Find(x => x.id == 2)?.name;
+                Mobile_select.mobile = res.data.mobileTelephone;
             }
             
         }
@@ -127,13 +127,13 @@ namespace dsf_service_template_net6.Pages
                 {
                     crbMobile = "1";
                 }
-                else if (selectedoptions.use_other && selectedoptions.mobile== GetCitizenDataFromApi()?.data?.ToList()?.Find(x => x.id == 2)?.name)
+                else if (selectedoptions.use_other && selectedoptions.mobile== GetCitizenDataFromApi()?.data?.mobileTelephone)
                 {
                     //code use when user hit back button on edit page
                     crbMobile = "1";
                     Mobile_select.use_from_api = true;
                     Mobile_select.use_other = false;
-                    Mobile_select.mobile = GetCitizenDataFromApi()?.data?.ToList()?.Find(x => x.id == 2)?.name;
+                    Mobile_select.mobile = GetCitizenDataFromApi().data.mobileTelephone;
                     HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
                 }
                 else

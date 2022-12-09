@@ -97,9 +97,9 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private TasksGetResponse GetCitizenDataFromApi()
+        private ContactInfoResponse GetCitizenDataFromApi()
         {
-            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
+            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private MobileSection GetSessionData()

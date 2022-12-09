@@ -84,7 +84,7 @@ builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
 //Register Navigation Service
 builder.Services.AddScoped<INavigation, Navigation>();
 //Register the Api service for Task Get and post methods
-builder.Services.AddScoped<ITasks, Tasks>();
+builder.Services.AddScoped<IContact, Contact>();
 //Added for session state
 builder.Services.AddSession(options => {
     options.Cookie.Name = "AppDataSessionCookie";

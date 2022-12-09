@@ -14,14 +14,14 @@ namespace dsf_service_template_net6.Pages
     {
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private readonly ITasks _service;
-        public ReviewPageModel(INavigation nav, ITasks service)
+        private readonly IContact _service;
+        public ReviewPageModel(INavigation nav, IContact service)
         {
             _nav = nav;
             _service = service;
         }
         #region "Variables"
-        public List<dsf_service_template_net6.Services.Model.Task> _application = new();
+        ContactInfo _application = new();
         public string currentLanguage = "";
         //Data retrieve from other pages
         public string ret_email = string.Empty;
@@ -74,7 +74,7 @@ namespace dsf_service_template_net6.Pages
             //Make sure the sequence has been kept
             bool ret = true;
 
-            if (HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime()) == null)
+            if (HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime()) == null)
             {
                 ret = false;
             }
@@ -116,16 +116,11 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                    Services.Model.Task mobile, email = new();
-                    email.id = 1;
-                    email.name = ret_email;
-                    email.isComplete = true;
-                    mobile = new Services.Model.Task();
-                    mobile.id = 2;
-                    mobile.name = ret_mobile;
-                    mobile.isComplete = true;
-                    _application.Add(email);
-                    _application.Add(mobile);
+                    ContactInfo data = new();
+                    data.id = 1;
+                    data.email = ret_email;
+                    data.mobileTelephone = ret_mobile;
+                                       
                 }
             }
             return ret;
@@ -135,11 +130,9 @@ namespace dsf_service_template_net6.Pages
             bool ret = false;
             var authTime = GetAuthTime();
             var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
-            TasksPostResponse? res = new();
-            foreach (Services.Model.Task item in _application)
-            {
-                res = _service.SubmitTask(item, token);
-            }
+            ContactInfoResponse? res = new();
+            res = _service.SubmitContact(_application, token);
+            
             if (res.succeeded)
             {
                 //Redirect if error code is <> 0

@@ -93,9 +93,9 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private TasksGetResponse GetCitizenDataFromApi()
+        private ContactInfoResponse GetCitizenDataFromApi()
         {
-            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
+            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private EmailSection GetSessionData()
@@ -153,7 +153,7 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = GetCitizenDataFromApi();
             if (citizenPersonalDetails != null)
             {
-                emailEdit.email = GetCitizenDataFromApi()?.data?.Count() == 0 ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi()?.data?.First()?.name;
+                emailEdit.email = string.IsNullOrEmpty(GetCitizenDataFromApi()?.data?.email) ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi().data.email;
                 emailEdit.validation_mode = ValidationMode.Edit;
             }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);

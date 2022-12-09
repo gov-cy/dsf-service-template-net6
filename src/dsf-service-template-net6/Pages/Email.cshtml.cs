@@ -31,13 +31,13 @@ namespace dsf_service_template_net6.Pages
         public string NextLink { get; set; } = "";
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private readonly ITasks _service;
+        private readonly IContact _service;
         private IValidator<EmailSection> _validator;
         //Object for session data 
         public EmailSection Email_select;
         #endregion
         #region "Custom Methods"
-        public EmailModel(IValidator<EmailSection> validator, ITasks service, INavigation nav)
+        public EmailModel(IValidator<EmailSection> validator, IContact service, INavigation nav)
         {
             _service = service;
             _validator = validator;
@@ -102,9 +102,9 @@ namespace dsf_service_template_net6.Pages
         {
             return User.Claims.First(c => c.Type == "auth_time").Value;
         }
-        private TasksGetResponse GetCitizenDataFromApi()
+        private ContactInfoResponse GetCitizenDataFromApi()
         {
-            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
+            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
             return res;
         }
         private EmailSection GetSessionData()
@@ -115,16 +115,16 @@ namespace dsf_service_template_net6.Pages
        
         private void BindSelectionData()
         {
-            TasksGetResponse res = GetCitizenDataFromApi();
+            ContactInfoResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
-            if (res?.data?.Count()==0)
+            if (string.IsNullOrEmpty(res?.data?.email))
             {
 
                 Email_select.email = User.Claims.First(c => c.Type == "email").Value;
             }
             else
             {
-                Email_select.email = res?.data?.First()?.name;
+                Email_select.email = res.data.email;
             }
         }
         private bool BindData()
@@ -136,13 +136,13 @@ namespace dsf_service_template_net6.Pages
                 {
                     crbEmail = "1";
                 }
-                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || selectedoptions.email == GetCitizenDataFromApi()?.data?.First()?.name))
+                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || selectedoptions.email == GetCitizenDataFromApi()?.data?.email))
                 {
                     //code use when user hit back button on edit page
                     crbEmail = "1";
                     Email_select.use_from_api = true;
                     Email_select.use_other = false;
-                    Email_select.email=GetCitizenDataFromApi()?.data?.Count() == 0? User.Claims.First(c => c.Type == "email").Value: GetCitizenDataFromApi()?.data?.First()?.name;
+                    Email_select.email=string.IsNullOrEmpty(GetCitizenDataFromApi()?.data?.email)? User.Claims.First(c => c.Type == "email").Value: GetCitizenDataFromApi().data.email;
                     HttpContext.Session.SetObjectAsJson("EmailSection", Email_select, GetAuthTime());
                 }
                 else
@@ -180,14 +180,14 @@ namespace dsf_service_template_net6.Pages
                 if (!revisit)
                 {
                     //Check whether api data were retrieve from login , otherwise call again
-                    TasksGetResponse res = GetCitizenDataFromApi();
-                    if (res == null)
+                    ContactInfoResponse res = GetCitizenDataFromApi();
+                    if (!res.succeeded)
                     {
                         var lang = GetLanguage();
 
                         //Call the citizen personal details from civil registry
                         //
-                        res = _service.GetAllTasks(HttpContext.GetTokenAsync("access_token")?.Result);
+                        res = _service.GetContact(HttpContext.GetTokenAsync("access_token")?.Result);
                         if (res.succeeded == false)
                         {
                             return RedirectToPage("/ServerError");

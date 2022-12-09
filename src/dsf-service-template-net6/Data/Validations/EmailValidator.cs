@@ -17,7 +17,6 @@ namespace dsf_service_template_net6.Data.Validations
             EmailNumNotFoundMsg = _Localizer["email-selection.no_results_check"];
             EmailNoSelectionMsg = _Localizer["email-selection.require_check"];
             EmailMessage = _Localizer["set-email.require_check"];
-            EmailAlreadyExists = _Localizer["set-email.exist_check"];
             When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
             {
                 //Selection page
