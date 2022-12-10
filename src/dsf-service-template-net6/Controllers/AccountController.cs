@@ -13,13 +13,13 @@ namespace dsf_service_template_net6.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly ILogger<AccountController> _logger;
+       
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController()
         {
-            _logger = logger;
+       
         }
-        private bool isOrganization()
+        private bool IsOrganization()
         {
             var cp = (ClaimsPrincipal)User;
             var id = cp.Claims.FirstOrDefault(c => c.Type == "legal_unique_identifier")?.Value;
@@ -56,7 +56,7 @@ namespace dsf_service_template_net6.Controllers
         {
             //Authentication time
             var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            if (isOrganization())
+            if (IsOrganization())
             {
                 return RedirectToAction("LogOutWithNotAuthorize");
 

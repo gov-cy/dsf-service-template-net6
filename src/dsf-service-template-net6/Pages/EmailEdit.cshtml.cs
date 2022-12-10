@@ -153,7 +153,7 @@ namespace dsf_service_template_net6.Pages
             var citizenPersonalDetails = GetCitizenDataFromApi();
             if (citizenPersonalDetails != null)
             {
-                emailEdit.email = string.IsNullOrEmpty(GetCitizenDataFromApi()?.data?.email) ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi().data.email;
+                emailEdit.email = string.IsNullOrEmpty(GetCitizenDataFromApi()?.data?.Email) ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi().data.Email;
                 emailEdit.validation_mode = ValidationMode.Edit;
             }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);

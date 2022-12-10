@@ -117,9 +117,9 @@ namespace dsf_service_template_net6.Pages
                 else
                 {
                     ContactInfo data = new();
-                    data.id = 1;
-                    data.email = ret_email;
-                    data.mobileTelephone = ret_mobile;
+                    data.Id = 1;
+                    data.Email = ret_email;
+                    data.MobileTelephone = ret_mobile;
                                        
                 }
             }

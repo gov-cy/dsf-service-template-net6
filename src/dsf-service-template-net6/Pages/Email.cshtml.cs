@@ -16,7 +16,7 @@ namespace dsf_service_template_net6.Pages
         #region "Variables"
         //control variables
         [BindProperty]
-        public string crbEmail { get; set; } = "";
+        public string CrbEmail { get; set; } = "";
         [BindProperty]
         public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
@@ -32,16 +32,18 @@ namespace dsf_service_template_net6.Pages
         //Dependancy injection Variables
         private readonly INavigation _nav;
         private readonly IContact _service;
-        private IValidator<EmailSection> _validator;
+        private readonly IUserSession _userSession;
+        private readonly IValidator<EmailSection> _validator;
         //Object for session data 
         public EmailSection Email_select;
         #endregion
         #region "Custom Methods"
-        public EmailModel(IValidator<EmailSection> validator, IContact service, INavigation nav)
+        public EmailModel(IValidator<EmailSection> validator, IContact service, INavigation nav, IUserSession userSession)
         {
             _service = service;
             _validator = validator;
             _nav = nav;
+            _userSession = userSession;
             Email_select = new EmailSection();
         }
         //Use to show error messages if web form has errors
@@ -49,7 +51,7 @@ namespace dsf_service_template_net6.Pages
         {
             if (fromPost)
             {
-                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                var res = _userSession.GetUserValidationResults();
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -88,66 +90,47 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            if (GetCitizenDataFromApi == null)
+            if (_userSession.GetUserPersonalData() == null)
             {
                 ret = false;
             }
             return ret;
         }
-        private static string GetLanguage()
-        {
-            return Thread.CurrentThread.CurrentUICulture.Name == "el-GR" ? "/el" : "/en";
-        }
-        private string GetAuthTime()
-        {
-            return User.Claims.First(c => c.Type == "auth_time").Value;
-        }
-        private ContactInfoResponse GetCitizenDataFromApi()
-        {
-            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
-            return res;
-        }
-        private EmailSection GetSessionData()
-        {
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime());
-            return selectedoptions;
-        }
-       
         private void BindSelectionData()
         {
-            ContactInfoResponse res = GetCitizenDataFromApi();
+            ContactInfoResponse res = _userSession.GetUserPersonalData()!;
             //Set Email info to model class
-            if (string.IsNullOrEmpty(res?.data?.email))
+            if (string.IsNullOrEmpty(res?.data?.Email))
             {
 
                 Email_select.email = User.Claims.First(c => c.Type == "email").Value;
             }
             else
             {
-                Email_select.email = res.data.email;
+                Email_select.email = res.data.Email;
             }
         }
         private bool BindData()
         {   //Check if already selected 
-            var selectedoptions = GetSessionData();
+            var selectedoptions = _userSession.GetUserEmailData(); 
             if (selectedoptions != null)
             {
                 if (selectedoptions.use_from_api)
                 {
-                    crbEmail = "1";
+                    CrbEmail = "1";
                 }
-                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || selectedoptions.email == GetCitizenDataFromApi()?.data?.email))
+                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || selectedoptions.email == _userSession.GetUserPersonalData()?.data?.Email))
                 {
                     //code use when user hit back button on edit page
-                    crbEmail = "1";
+                    CrbEmail = "1";
                     Email_select.use_from_api = true;
                     Email_select.use_other = false;
-                    Email_select.email=string.IsNullOrEmpty(GetCitizenDataFromApi()?.data?.email)? User.Claims.First(c => c.Type == "email").Value: GetCitizenDataFromApi().data.email;
-                    HttpContext.Session.SetObjectAsJson("EmailSection", Email_select, GetAuthTime());
+                    Email_select.email=string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.data?.Email)? User.Claims.First(c => c.Type == "email").Value: _userSession!.GetUserPersonalData()!.data!.Email;
+                    _userSession.SetUserEmailData(Email_select);
                 }
                 else
                 {
-                    crbEmail = "2";
+                    CrbEmail = "2";
                 }
                 return true;
             }
@@ -168,7 +151,7 @@ namespace dsf_service_template_net6.Pages
             }
             // First set back link
             BackLink = _nav.GetBackLink("/email-selection", review);
-            
+
             if (fromPost)
             {
                 ShowErrors(true);
@@ -180,14 +163,11 @@ namespace dsf_service_template_net6.Pages
                 if (!revisit)
                 {
                     //Check whether api data were retrieve from login , otherwise call again
-                    ContactInfoResponse res = GetCitizenDataFromApi();
-                    if (!res.succeeded)
-                    {
-                        var lang = GetLanguage();
-
-                        //Call the citizen personal details from civil registry
-                        //
-                        res = _service.GetContact(HttpContext.GetTokenAsync("access_token")?.Result);
+                    ContactInfoResponse res = _userSession.GetUserPersonalData() ?? new ContactInfoResponse();
+                    if (res?.data ==null)
+                    {                      
+                        //Cet the citizen personal details from civil registry
+                        res = _service.GetContact(_userSession.GetAccessToken()!);
                         if (res.succeeded == false)
                         {
                             return RedirectToPage("/ServerError");
@@ -195,8 +175,7 @@ namespace dsf_service_template_net6.Pages
                         else
                         {
                             //if the user is already login and not passed from login, set in session
-                            HttpContext.Session.SetObjectAsJson("PersonalDetails", res, GetAuthTime());
-
+                            _userSession.SetUserPersonalData(res);
                         }
                     }
                    
@@ -209,15 +188,18 @@ namespace dsf_service_template_net6.Pages
         public IActionResult OnPost(bool review)
         {
             //Set class Model before validation
-            if (crbEmail == "1")
+            if (CrbEmail == "1")
             {
                 Email_select.use_from_api = true;
                 Email_select.use_other = false;
+                Email_select.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.data!.Email;
+
             }
-            else if (crbEmail == "2")
+            else if (CrbEmail == "2")
             {
                 Email_select.use_from_api = false;
                 Email_select.use_other = true;
+                Email_select.email = "";
             }
             else
             {
@@ -229,12 +211,11 @@ namespace dsf_service_template_net6.Pages
             FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
             if (!result.IsValid)
             {
-                HttpContext.Session.SetObjectAsJson("valresult", result);
+                _userSession.SetUserValidationResults(result);
                 return RedirectToPage("Email", null, new { fromPost = true }, "mainContainer");
             }
             //Model is valid so strore 
-            HttpContext.Session.Remove("EmailSection");
-            HttpContext.Session.SetObjectAsJson("EmailSection", Email_select, GetAuthTime());
+            _userSession.SetUserEmailData(Email_select);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
            
@@ -251,7 +232,7 @@ namespace dsf_service_template_net6.Pages
 
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+                return RedirectToPage(NextLink, null, new { review }, "mainContainer");
             }
             else
             {

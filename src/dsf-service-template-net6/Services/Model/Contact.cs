@@ -4,16 +4,16 @@
     public class ContactInfoResponse
     {
         public int errorCode { get; set; }
-        public string errorMessage { get; set; }
-        public ContactInfo data { get; set; }
+        public string errorMessage { get; set; } = "";
+        public ContactInfo ?data { get; set; }
         public bool succeeded { get; set; }
-        public string informationMessage { get; set; }
+        public string informationMessage { get; set; } = "";
     }
 
     public class ContactInfo
     {
-        public int id { get; set; }
-        public string email { get; set; }
-        public string mobileTelephone { get; set; }
+        public int Id { get; set; }
+        public string Email { get; set; } = "";
+        public string MobileTelephone { get; set; } = "";
     }
 }

@@ -15,7 +15,7 @@ namespace dsf_service_template_net6.Pages
     {
         #region "Variables"
         //control variables
-        public string crbMobile { get; set; } = "";
+        public string CrbMobile { get; set; } = "";
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
         public string MobileSelection = "";
@@ -27,7 +27,7 @@ namespace dsf_service_template_net6.Pages
 
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private IValidator<MobileSection> _validator;
+        private readonly IValidator<MobileSection> _validator;
         //Object for session data 
         public MobileSection Mobile_select;
         #endregion
@@ -111,10 +111,10 @@ namespace dsf_service_template_net6.Pages
         {
             ContactInfoResponse res = GetCitizenDataFromApi();
             //Set Email info to model class
-            if (!string.IsNullOrEmpty(res.data?.mobileTelephone))
+            if (!string.IsNullOrEmpty(res.data?.MobileTelephone))
             {
 
-                Mobile_select.mobile = res.data.mobileTelephone;
+                Mobile_select.mobile = res.data.MobileTelephone;
             }
             
         }
@@ -125,20 +125,20 @@ namespace dsf_service_template_net6.Pages
             {
                 if (selectedoptions.use_from_api)
                 {
-                    crbMobile = "1";
+                    CrbMobile = "1";
                 }
-                else if (selectedoptions.use_other && selectedoptions.mobile== GetCitizenDataFromApi()?.data?.mobileTelephone)
+                else if (selectedoptions.use_other && selectedoptions.mobile== GetCitizenDataFromApi()?.data?.MobileTelephone)
                 {
                     //code use when user hit back button on edit page
-                    crbMobile = "1";
+                    CrbMobile = "1";
                     Mobile_select.use_from_api = true;
                     Mobile_select.use_other = false;
-                    Mobile_select.mobile = GetCitizenDataFromApi().data.mobileTelephone;
+                    Mobile_select.mobile = GetCitizenDataFromApi()!.data!.MobileTelephone;
                     HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
                 }
                 else
                 {
-                    crbMobile = "2";
+                    CrbMobile = "2";
                 }
                 return true;
             }
@@ -173,15 +173,17 @@ namespace dsf_service_template_net6.Pages
         public IActionResult OnPost(bool review)
         {
             //Set class Model before validation
-            if (crbMobile == "1")
+            if (CrbMobile == "1")
             {
                 Mobile_select.use_from_api = true;
                 Mobile_select.use_other = false;
+                Mobile_select.mobile = GetCitizenDataFromApi()!.data!.MobileTelephone;
             }
-            else if (crbMobile == "2")
+            else if (CrbMobile == "2")
             {
                 Mobile_select.use_from_api = false;
                 Mobile_select.use_other = true;
+                Mobile_select.mobile = "";
             }
             else
             {
@@ -216,7 +218,7 @@ namespace dsf_service_template_net6.Pages
             }
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+                return RedirectToPage(NextLink, null, new { review }, "mainContainer");
             }
             else
             {
