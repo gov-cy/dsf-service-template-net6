@@ -21,7 +21,7 @@ namespace dsf_service_template_net6.Pages
         public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
         public string ErrorsDesc { get; set; } = "";
-        
+
         [BindProperty]
         //Store the email selection Error
         public string EmailSelection { get; set; } = "";
@@ -113,20 +113,20 @@ namespace dsf_service_template_net6.Pages
         }
         private bool BindData()
         {   //Check if already selected 
-            var selectedoptions = _userSession.GetUserEmailData(); 
+            var selectedoptions = _userSession.GetUserEmailData();
             if (selectedoptions != null)
             {
                 if (selectedoptions.use_from_api)
                 {
                     CrbEmail = "1";
                 }
-                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || selectedoptions.email == _userSession.GetUserPersonalData()?.Data?.Email))
+                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value))
                 {
                     //code use when user hit back button on edit page
                     CrbEmail = "1";
                     Email_select.use_from_api = true;
                     Email_select.use_other = false;
-                    Email_select.email=string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email)? User.Claims.First(c => c.Type == "email").Value: _userSession!.GetUserPersonalData()!.Data!.Email;
+                    Email_select.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
                     _userSession.SetUserEmailData(Email_select);
                 }
                 else
@@ -152,7 +152,8 @@ namespace dsf_service_template_net6.Pages
             }
             // First set back link
             BackLink = _nav.GetBackLink("/email-selection", review);
-
+            //Show selection Data 
+            BindSelectionData();
             if (fromPost)
             {
                 ShowErrors(true);
@@ -165,15 +166,15 @@ namespace dsf_service_template_net6.Pages
                 {
                     //Check whether api data were retrieve from login , otherwise call again
                     ContactInfoResponse res = _userSession.GetUserPersonalData() ?? new ContactInfoResponse();
-                    if (res?.Data ==null)
-                    {                      
+                    if (res?.Data == null)
+                    {
                         //Cet the citizen personal details from civil registry
                         res = _service.GetContact(_userSession.GetAccessToken()!);
-                       //Demo handling
-                       if (res.Succeeded)
-                       {
+                        //Demo handling
+                        if (res.Succeeded)
+                        {
                             _userSession.SetUserPersonalData(res);
-                       }
+                        }
                         //Real example handling
                         //if (res.succeeded == false)
                         //{
@@ -185,11 +186,10 @@ namespace dsf_service_template_net6.Pages
                         //    _userSession.SetUserPersonalData(res);
                         //}
                     }
-                   
+
                 }
             }
-            //Show selection Data 
-            BindSelectionData();
+
             return Page();
         }
         public IActionResult OnPost(bool review)
@@ -205,7 +205,16 @@ namespace dsf_service_template_net6.Pages
             {
                 Email_select.use_from_api = false;
                 Email_select.use_other = true;
-                Email_select.email = string.IsNullOrEmpty(_userSession.GetUserEmailData()?.email) ? "" : _userSession.GetUserEmailData()!.email;
+                if (review && !string.IsNullOrEmpty(_userSession.GetUserEmailData()?.email) && _userSession.GetUserEmailData()?.use_from_api == true)
+                {
+                    //Reset
+                    Email_select.email = "";
+                }
+                else
+                {
+                    Email_select.email = string.IsNullOrEmpty(_userSession.GetUserEmailData()?.email) ? "" : _userSession.GetUserEmailData()!.email;
+                }
+
             }
             else
             {
@@ -214,7 +223,7 @@ namespace dsf_service_template_net6.Pages
                 Email_select.email = "";
             }
             if (!review)
-            {              
+            {
                 Email_select.validation_mode = ValidationMode.Select;
                 //Validate Model
                 FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
@@ -224,21 +233,25 @@ namespace dsf_service_template_net6.Pages
                     return RedirectToPage("Email", null, new { fromPost = true }, "mainContainer");
                 }
             }
-                     
+            else
+            {
+                Email_select.validation_mode = ValidationMode.Edit;
+            }
+
             //Model is valid so strore 
             _userSession.SetUserEmailData(Email_select);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
-           
+
             //Set back and Next Link
 
             if (Email_select.use_other)
             {
-              NextLink=  _nav.SetLinks("email-selection","Email", review, "No");
+                NextLink = _nav.SetLinks("email-selection", "Email", review, "No");
             }
             else
             {
-              NextLink = _nav.SetLinks("email-selection", "Email", review, "Yes");
+                NextLink = _nav.SetLinks("email-selection", "Email", review, "Yes");
             }
 
             if (review)

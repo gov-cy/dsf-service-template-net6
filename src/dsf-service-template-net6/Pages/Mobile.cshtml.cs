@@ -181,7 +181,16 @@ namespace dsf_service_template_net6.Pages
             {
                 Mobile_select.use_from_api = false;
                 Mobile_select.use_other = true;
-                Mobile_select.mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile)?"" : _userSession.GetUserMobileData()!.mobile;
+                if (review && !string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile) && _userSession.GetUserMobileData()?.use_from_api == true)
+                {
+                    //Reset
+                    Mobile_select.mobile = "";
+                }
+                else
+                {
+                    Mobile_select.mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile) ? "" : _userSession.GetUserMobileData()!.mobile;
+                }
+               
             }
             else
             {
@@ -200,8 +209,12 @@ namespace dsf_service_template_net6.Pages
                     return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
                 }
             }
-           
-                   
+            else
+            {
+                Mobile_select.validation_mode = ValidationMode.Edit;
+            }
+
+
             //Model is valid so strore 
             _userSession.SetUserMobileData(Mobile_select);
             //Remove Error Session 

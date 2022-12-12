@@ -111,7 +111,7 @@ namespace dsf_service_template_net6.Pages
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData != null && sessionData?.validation_mode == ValidationMode.Edit)
+            if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.use_other==true)
             {
                 Mobile = sessionData.mobile;
                 return true;
