@@ -130,10 +130,10 @@ namespace dsf_service_template_net6.Pages
             ContactInfoResponse? res = new();
             res = _service.SubmitContact(_application, token);
             
-            if (res.succeeded)
+            if (res.Succeeded)
             {
                 //Redirect if error code is <> 0
-                if (res.errorCode == 0)
+                if (res.ErrorCode == 0)
                 {
                     ret = true;
                     _userSession.SetUserApplRequest(_application);

@@ -11,6 +11,7 @@ using dsf_service_template_net6.Resources;
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Data.Validations;
 using FluentValidation;
+using dsf_moi_election_catalogue.Services;
 
 IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -58,14 +59,14 @@ builder.Services.AddSingleton<IResourceViewlocalizer, ResourceViewlocalizer>();
 builder.Services.AddScoped<IValidator<EmailSection>, EmailValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
-
-    return new EmailValidator(LocMain);
+    var Checker = sp.GetRequiredService<ICommonApis>();
+    return new EmailValidator(LocMain, Checker);
 });
 builder.Services.AddScoped<IValidator<MobileSection>, MobileValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
-
-    return new MobileValidator(LocMain);
+    var Checker = sp.GetRequiredService<ICommonApis>();
+    return new MobileValidator(LocMain, Checker);
 });
 
 //Add fluent validation to .Net Core (optional use for server side validation) 
@@ -78,6 +79,7 @@ builder.Services.AddHttpContextAccessor();
 //so that it can be used for Dependency Injection
 //for calling all http client requests 
 builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
+builder.Services.AddSingleton<ICommonApis, CommonApis>();
 //Register Navigation Service
 builder.Services.AddScoped<INavigation, Navigation>();
 //Register Session Service

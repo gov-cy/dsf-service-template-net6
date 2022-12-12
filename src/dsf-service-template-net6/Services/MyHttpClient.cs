@@ -16,7 +16,8 @@ namespace dsf_service_template_net6.Services
     }
     public class MyHttpClient : IMyHttpClient
     {
-        private IConfiguration _configuration;
+        private  string ErrorLog = "MyHttpClient - MyHttpClientGetRequest: ";
+        private  readonly IConfiguration _configuration;
         private readonly ILogger<MyHttpClient> _logger;
 
         public MyHttpClient(IConfiguration configuration, ILogger<MyHttpClient> logger)
@@ -34,12 +35,15 @@ namespace dsf_service_template_net6.Services
 
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-                HttpClientHandler httpClientHandler = new HttpClientHandler();
-                httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
-                HttpClient httpClient = new HttpClient(httpClientHandler);
+                HttpClientHandler httpClientHandler = new()
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+                };
+                HttpClient httpClient = new(httpClientHandler)
+                {
+                    BaseAddress = new Uri(baseUrl)
+                };
 
-                httpClient.BaseAddress = new Uri(baseUrl);
-              
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
                 httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
@@ -70,7 +74,7 @@ namespace dsf_service_template_net6.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError("MyHttpClient - MyHttpClientGetRequest: " + ex.ToString());
+                _logger.LogError(ErrorLog + ex.ToString());
 
                 ret = ex.Message;
             }
@@ -86,11 +90,14 @@ namespace dsf_service_template_net6.Services
             {
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-                HttpClientHandler httpClientHandler = new HttpClientHandler();
-                httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
-                HttpClient httpClient = new HttpClient(httpClientHandler);
-
-                httpClient.BaseAddress = new Uri(baseUrl);
+                HttpClientHandler httpClientHandler = new()
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+                };
+                HttpClient httpClient = new(httpClientHandler)
+                {
+                    BaseAddress = new Uri(baseUrl)
+                };
 
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
@@ -123,7 +130,8 @@ namespace dsf_service_template_net6.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError("MyHttpClient - MyHttpClientPostRequest: " + ex.ToString());
+                ErrorLog = ErrorLog.Replace("Get", "Post");
+                _logger.LogError(ErrorLog + ex.ToString());
 
                 ret = ex.Message;
             }

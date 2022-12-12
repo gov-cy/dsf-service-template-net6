@@ -26,7 +26,7 @@ namespace dsf_service_template_net6.Pages
         public string EmailErrorClass { get; set; } = "";
 
         [BindProperty]
-        public string email { get; set; } = "";
+        public string Email { get; set; } = "";
         [BindProperty]
         public string BackLink { get; set; } = "";
 
@@ -53,7 +53,7 @@ namespace dsf_service_template_net6.Pages
         {
             if (fromPost)
             {
-                var res = _userSession.GetUserValidationResults();
+                var res = _userSession.GetUserValidationResults()!;
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -108,9 +108,9 @@ namespace dsf_service_template_net6.Pages
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData != null)
+            if (sessionData != null && sessionData?.validation_mode==ValidationMode.Edit)
             {
-                email = sessionData.email;
+                Email = sessionData.email;
                 return true;
             }
             else
@@ -136,7 +136,7 @@ namespace dsf_service_template_net6.Pages
             }
             else
             {
-                email = GetTempSessionData() ;
+                Email = GetTempSessionData() ;
                 ShowErrors(true);
             }
 
@@ -145,19 +145,15 @@ namespace dsf_service_template_net6.Pages
         public IActionResult OnPost(bool review)
         {
             //Update the class before validation
-            emailEdit.email = email;
-            //Get Previous mobile number
-            var citizenPersonalDetails = _userSession.GetUserPersonalData();
-            if (citizenPersonalDetails != null)
-            {
-                emailEdit.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.data!.Email;
-                emailEdit.validation_mode = ValidationMode.Edit;
-            }
+            emailEdit.email = Email;
+            emailEdit.use_other = true;
+            emailEdit.use_from_api = false;
+            emailEdit.validation_mode = ValidationMode.Edit;
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
             {
                 _userSession.SetUserValidationResults(result);
-                HttpContext.Session.SetObjectAsJson("emailval", email);
+                HttpContext.Session.SetObjectAsJson("emailval", Email);
                 return RedirectToPage("EmailEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Store Data 

@@ -56,17 +56,17 @@
                     dataResponse = new ContactInfoResponse();
                 }
 
-                if (dataResponse.succeeded)
+                if (dataResponse.Succeeded)
                 {
                    
                     return dataResponse;
                 }
-                if (dataResponse.errorCode != 0)
+                if (dataResponse.ErrorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
                     var rsp = new ContactInfoResponse();
-                    rsp.errorCode = dataResponse.errorCode;
-                    rsp.errorMessage = dataResponse.errorMessage;
+                    rsp.ErrorCode = dataResponse.ErrorCode;
+                    rsp.ErrorMessage = dataResponse.ErrorMessage;
                     dataResponse = rsp;
                 }
             }
@@ -104,13 +104,13 @@
                     _logger.LogError("Could not get valid response from " + apiUrl);
                     dataResponse = new ContactInfoResponse();
                 }
-                if (dataResponse.errorCode != 0)
+                if (dataResponse.ErrorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
                     var rsp = new ContactInfoResponse
                     {
-                        errorCode = dataResponse.errorCode,
-                        errorMessage = dataResponse.errorMessage
+                        ErrorCode = dataResponse.ErrorCode,
+                        ErrorMessage = dataResponse.ErrorMessage
                     };
                     dataResponse = rsp;
                 }

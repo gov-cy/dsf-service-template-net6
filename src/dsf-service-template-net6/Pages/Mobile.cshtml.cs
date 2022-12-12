@@ -45,7 +45,7 @@ namespace dsf_service_template_net6.Pages
             if (fromPost)
 
             {
-                var res = _userSession.GetUserValidationResults();
+                var res = _userSession.GetUserValidationResults()!;
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -95,9 +95,9 @@ namespace dsf_service_template_net6.Pages
             }
             return ret;
         }
-      
-      
-       
+
+
+
         private MobileSection GetSessionData()
         {
             var selectedoptions = _userSession.GetUserMobileData();
@@ -107,12 +107,12 @@ namespace dsf_service_template_net6.Pages
         {
             ContactInfoResponse? res = _userSession.GetUserPersonalData();
             //Set Email info to model class
-            if (!string.IsNullOrEmpty(res?.data?.MobileTelephone))
+            if (!string.IsNullOrEmpty(res?.Data?.MobileTelephone))
             {
 
-                Mobile_select.mobile = res.data.MobileTelephone;
+                Mobile_select.mobile = res.Data.MobileTelephone;
             }
-            
+
         }
         private bool BindData()
         {   //Check if already selected 
@@ -123,15 +123,15 @@ namespace dsf_service_template_net6.Pages
                 {
                     CrbMobile = "1";
                 }
-                else if (selectedoptions.use_other && selectedoptions?.mobile == _userSession?.GetUserPersonalData()?.data?.MobileTelephone)
+                else if (selectedoptions.use_other && selectedoptions?.mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone)
                 {
                     //code use when user hit back button on edit page
                     CrbMobile = "1";
                     Mobile_select.use_from_api = true;
                     Mobile_select.use_other = false;
-                    Mobile_select.mobile = _userSession?.GetUserPersonalData()?.data?.MobileTelephone ?? "";
+                    Mobile_select.mobile = _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ?? "";
                     _userSession!.SetUserMobileData(Mobile_select);
-                   
+
                 }
                 else
                 {
@@ -160,11 +160,12 @@ namespace dsf_service_template_net6.Pages
             if (fromPost)
             {
                 ShowErrors(true);
-            }else
+            }
+            else
             {
                 BindData();
             }
-          
+
             return Page();
         }
         public IActionResult OnPost(bool review)
@@ -174,40 +175,44 @@ namespace dsf_service_template_net6.Pages
             {
                 Mobile_select.use_from_api = true;
                 Mobile_select.use_other = false;
-                Mobile_select.mobile = _userSession!.GetUserPersonalData()!.data!.MobileTelephone;
+                Mobile_select.mobile = _userSession!.GetUserPersonalData()!.Data!.MobileTelephone;
             }
             else if (CrbMobile == "2")
             {
                 Mobile_select.use_from_api = false;
                 Mobile_select.use_other = true;
-                Mobile_select.mobile = "";
+                Mobile_select.mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile)?"" : _userSession.GetUserMobileData()!.mobile;
             }
             else
             {
                 Mobile_select.use_from_api = false;
                 Mobile_select.use_other = false;
             }
-            //Re-assign defult email
-            BindSelectionData();
-            //Validate Model
-            Mobile_select.validation_mode = ValidationMode.Select;
-            FluentValidation.Results.ValidationResult result = _validator.Validate(Mobile_select);
-            if (!result.IsValid)
+            if (!review)
             {
-                _userSession.SetUserValidationResults(result);
-                return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
+                
+                Mobile_select.validation_mode = ValidationMode.Select;
+                //Validate Model
+                FluentValidation.Results.ValidationResult result = _validator.Validate(Mobile_select);
+                if (!result.IsValid)
+                {
+                    _userSession.SetUserValidationResults(result);
+                    return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
+                }
             }
+           
+                   
             //Model is valid so strore 
             _userSession.SetUserMobileData(Mobile_select);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
-            
+
             //Set back and Next Link
 
             if (Mobile_select.use_other)
             {
-                NextLink = _nav.SetLinks("mobile-selection","Mobile", review, "No");
+                NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "No");
             }
             else
             {
@@ -215,7 +220,7 @@ namespace dsf_service_template_net6.Pages
             }
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review }, "mainContainer");
+                return RedirectToPage(NextLink, null, new { review });
             }
             else
             {

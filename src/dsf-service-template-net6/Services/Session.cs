@@ -12,7 +12,7 @@ namespace dsf_service_template_net6.Services
         public void SetHistrory(List<HistoryItem> Data);
         public List<SectionInfo>? GetNavLink();
         public void SetNavLink(List<SectionInfo> Data);
-        public ValidationResult GetUserValidationResults();
+        public ValidationResult? GetUserValidationResults();
         public void SetUserValidationResults(ValidationResult Result);
         public string? GetAccessToken();
         public void SetAccessToken(string AccessToken);
@@ -25,22 +25,19 @@ namespace dsf_service_template_net6.Services
         public MobileSection? GetUserMobileData();
         public void SetUserMobileData(MobileSection Data);
        
-        public ContactInfoResponse GetUserApplResponse();
+        public ContactInfoResponse? GetUserApplResponse();
         public void SetUserApplResponse(ContactInfoResponse Data);
 
-        public ContactInfo GetUserApplRequest();
+        public ContactInfo? GetUserApplRequest();
         public void SetUserApplRequest(ContactInfo Data);
 
-        public string GetUserReferenceNumber();
+        public string? GetUserReferenceNumber();
         public void SetUserReferenceNumber(string ReferenceNumber);
     }
     public class UserSession : IUserSession
     {
         private readonly IHttpContextAccessor? _httpContextAccessor;
-        private string GetAuthTime()
-        {
-            return _httpContextAccessor!.HttpContext!.User!.Claims!.First(c => c.Type == "auth_time")!.Value;
-        }
+       
         public UserSession(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
@@ -67,7 +64,7 @@ namespace dsf_service_template_net6.Services
         }
         public void SetAccessToken(string AccessToken)
         {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("access_token", AccessToken, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("access_token", AccessToken);
         }
         public string? GetIdToken()
         {
@@ -75,9 +72,9 @@ namespace dsf_service_template_net6.Services
         }
         public void SetIdToken(string IdToken)
         {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("id_token", IdToken, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("id_token", IdToken);
         }
-        public ValidationResult GetUserValidationResults()
+        public ValidationResult? GetUserValidationResults()
         {
             return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<ValidationResult>("valresult");
         }
@@ -87,51 +84,51 @@ namespace dsf_service_template_net6.Services
         }
         public ContactInfoResponse? GetUserPersonalData()
         {
-            return _httpContextAccessor?.HttpContext?.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
+            return _httpContextAccessor?.HttpContext?.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails");
         }
         public void SetUserPersonalData(ContactInfoResponse Data)
         {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("PersonalDetails", Data, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("PersonalDetails", Data);
         }
-        public EmailSection GetUserEmailData()
+        public EmailSection? GetUserEmailData()
         {
-            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime());
+            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<EmailSection>("EmailSection");
         }
         public void SetUserEmailData(EmailSection Data)
         {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("EmailSection", Data, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("EmailSection", Data);
         }
-        public MobileSection GetUserMobileData()
+        public MobileSection? GetUserMobileData()
         {
-            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime());
+            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<MobileSection>("MobileSection");
         }
         public void SetUserMobileData(MobileSection Data)
         {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("MobileSection", Data, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("MobileSection", Data);
         }
-        public ContactInfoResponse GetUserApplResponse() { 
-        return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<ContactInfoResponse>("ApplRes", GetAuthTime());
+        public ContactInfoResponse? GetUserApplResponse() { 
+        return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<ContactInfoResponse>("ApplRes");
         }
         public void SetUserApplResponse(ContactInfoResponse Data) {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ApplRes", Data, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ApplRes", Data);
         }
 
-        public ContactInfo GetUserApplRequest()
+        public ContactInfo? GetUserApplRequest()
         {
-            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<ContactInfo>("ApplReq", GetAuthTime());
+            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<ContactInfo>("ApplReq");
         }
         public void SetUserApplRequest(ContactInfo Data)
         {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ApplReq", Data, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ApplReq", Data);
         }
 
-        public string GetUserReferenceNumber()
+        public string? GetUserReferenceNumber()
         {
-            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<string>("ref_no", GetAuthTime());
+            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<string>("ref_no");
         }
         public void SetUserReferenceNumber(string ReferenceNumber)
         {
-            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ref_no", ReferenceNumber, GetAuthTime());
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ref_no", ReferenceNumber);
         }
     }
 }

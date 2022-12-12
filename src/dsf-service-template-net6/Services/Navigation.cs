@@ -71,7 +71,7 @@ namespace dsf_service_template_net6.Services
             { //Try to get data from api
                 res = _service.GetContact(_userSession!.GetAccessToken()!);
                 //if the user is already login and not passed from login, set in session
-                if (res?.data != null)
+                if (res?.Data != null)
                 {
                     _userSession.SetUserPersonalData(res);
                     citizen = _userSession.GetUserPersonalData();
@@ -93,7 +93,7 @@ namespace dsf_service_template_net6.Services
             section.Name = "Mobile";
             section.SectionOrder = 2;
             //Always Select, for even API does not have email, we show email from user profile 
-            section.Type = (!string.IsNullOrEmpty(citizen?.data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
+            section.Type = (!string.IsNullOrEmpty(citizen?.Data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)
             {
                 section.pages.Add("set-mobile");
