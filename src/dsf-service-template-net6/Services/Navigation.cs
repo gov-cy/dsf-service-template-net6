@@ -133,7 +133,7 @@ namespace dsf_service_template_net6.Services
 
             AddHistoryLinks(currPage, fromReview);
 
-            HistoryItem? Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
+            HistoryItem? Item = History.FindLast(x => x.PageName == currPage && x.Review == fromReview);
             HistoryItem? PrevItem = null;
             //if not found get the previous
             if (Item == null)
@@ -173,7 +173,7 @@ namespace dsf_service_template_net6.Services
             //Return item
             else
             {
-                int index = History.FindIndex(x => x == Item);
+                int index = History.FindLastIndex(x =>  x.Review==fromReview && x.PageName==currPage );
                 //set the prev item 
                 Item = History[index - 1];
                 Item.PageName = (Item.Review ? Item.PageName + "?review=true" : Item.PageName);

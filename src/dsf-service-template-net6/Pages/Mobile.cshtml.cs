@@ -123,7 +123,7 @@ namespace dsf_service_template_net6.Pages
                 {
                     CrbMobile = "1";
                 }
-                else if (selectedoptions.use_other && selectedoptions?.mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone)
+                else if (selectedoptions.use_other && (selectedoptions?.mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ||string.IsNullOrEmpty(selectedoptions?.mobile)) )
                 {
                     //code use when user hit back button on edit page
                     CrbMobile = "1";

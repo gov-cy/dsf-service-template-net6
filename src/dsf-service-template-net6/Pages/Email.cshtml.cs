@@ -120,7 +120,7 @@ namespace dsf_service_template_net6.Pages
                 {
                     CrbEmail = "1";
                 }
-                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value))
+                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || string.IsNullOrEmpty(selectedoptions.email)))
                 {
                     //code use when user hit back button on edit page
                     CrbEmail = "1";
