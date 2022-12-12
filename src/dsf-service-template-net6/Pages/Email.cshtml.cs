@@ -79,7 +79,7 @@ namespace dsf_service_template_net6.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "use_from_civil" || Item.PropertyName == "email")
+                if (Item.PropertyName == "use_from_api" || Item.PropertyName == "email")
                 {
                     ErrorsDesc += "<a href='#crbEmail'>" + Item.ErrorMessage + "</a>";
                     EmailSelection = Item.ErrorMessage;
@@ -90,10 +90,11 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            if (_userSession.GetUserPersonalData() == null)
-            {
-                ret = false;
-            }
+            //For the demo purpose we might not get data from template api service
+            //if (_userSession.GetUserPersonalData() == null)
+            //{
+            //    ret = false;
+            //}
             return ret;
         }
         private void BindSelectionData()
@@ -168,15 +169,21 @@ namespace dsf_service_template_net6.Pages
                     {                      
                         //Cet the citizen personal details from civil registry
                         res = _service.GetContact(_userSession.GetAccessToken()!);
-                        if (res.succeeded == false)
-                        {
-                            return RedirectToPage("/ServerError");
-                        }
-                        else
-                        {
-                            //if the user is already login and not passed from login, set in session
+                       //Demo handling
+                       if (res.succeeded)
+                       {
                             _userSession.SetUserPersonalData(res);
-                        }
+                       }
+                        //Real example handling
+                        //if (res.succeeded == false)
+                        //{
+                        //    return RedirectToPage("/ServerError");
+                        //}
+                        //else
+                        //{
+                        //    //if the user is already login and not passed from login, set in session
+                        //    _userSession.SetUserPersonalData(res);
+                        //}
                     }
                    
                 }
@@ -205,8 +212,9 @@ namespace dsf_service_template_net6.Pages
             {
                 Email_select.use_from_api = false;
                 Email_select.use_other = false;
+                Email_select.email = "";
             }
-            Email_select.validation_mode = ValidationMode.Edit;
+            Email_select.validation_mode = ValidationMode.Select;
             //Validate Model
             FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
             if (!result.IsValid)

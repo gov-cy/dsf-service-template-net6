@@ -24,6 +24,15 @@ namespace dsf_service_template_net6.Services
         public void SetUserEmailData(EmailSection Data);
         public MobileSection? GetUserMobileData();
         public void SetUserMobileData(MobileSection Data);
+       
+        public ContactInfoResponse GetUserApplResponse();
+        public void SetUserApplResponse(ContactInfoResponse Data);
+
+        public ContactInfo GetUserApplRequest();
+        public void SetUserApplRequest(ContactInfo Data);
+
+        public string GetUserReferenceNumber();
+        public void SetUserReferenceNumber(string ReferenceNumber);
     }
     public class UserSession : IUserSession
     {
@@ -100,6 +109,29 @@ namespace dsf_service_template_net6.Services
         {
             _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("MobileSection", Data, GetAuthTime());
         }
+        public ContactInfoResponse GetUserApplResponse() { 
+        return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<ContactInfoResponse>("ApplRes", GetAuthTime());
+        }
+        public void SetUserApplResponse(ContactInfoResponse Data) {
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ApplRes", Data, GetAuthTime());
+        }
 
+        public ContactInfo GetUserApplRequest()
+        {
+            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<ContactInfo>("ApplReq", GetAuthTime());
+        }
+        public void SetUserApplRequest(ContactInfo Data)
+        {
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ApplReq", Data, GetAuthTime());
+        }
+
+        public string GetUserReferenceNumber()
+        {
+            return _httpContextAccessor!.HttpContext!.Session.GetObjectFromJson<string>("ref_no", GetAuthTime());
+        }
+        public void SetUserReferenceNumber(string ReferenceNumber)
+        {
+            _httpContextAccessor!.HttpContext!.Session.SetObjectAsJson("ref_no", ReferenceNumber, GetAuthTime());
+        }
     }
 }

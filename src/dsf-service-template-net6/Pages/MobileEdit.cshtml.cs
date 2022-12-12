@@ -14,7 +14,8 @@ namespace dsf_service_template_net6.Pages
         #region "Variables"
         //Dependancy injection Variables
         private readonly INavigation _nav;
-        private IValidator<MobileSection> _validator;
+        private readonly IUserSession _userSession;
+        private readonly IValidator<MobileSection> _validator;
          //control variables
         [BindProperty]
         public string displaySummary { get; set; } = "display:none";
@@ -34,8 +35,9 @@ namespace dsf_service_template_net6.Pages
        
         #endregion
         #region "Custom Methods"
-        public MobileEditModel(IValidator<MobileSection> validator, INavigation nav)
+        public MobileEditModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
         {  _validator = validator;
+            _userSession= userSession;
             mobEdit = new MobileSection();
             _nav = nav;
         }
@@ -51,7 +53,7 @@ namespace dsf_service_template_net6.Pages
             if (fromPost)
 
             {
-                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                var res = _userSession.GetUserValidationResults();
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -66,7 +68,7 @@ namespace dsf_service_template_net6.Pages
                 return false;
             }
         }
-        private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
+        private void SetViewErrorMessages(ValidationResult result)
         {
             //First Enable Summary Display
             displaySummary = "display:block";
@@ -83,28 +85,22 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            if (GetCitizenDataFromApi == null)
-            {
-                ret = false;
-            }
-            if ((HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime()) == null))
+            //For the demo purpose we might not get data from template api service
+            //if (_userSession.GetUserPersonalData() == null)
+            //{
+            //    ret = false;
+            //}
+            if (_userSession.GetUserEmailData() == null)
             {
                 ret = false;
             }
             return ret;
         }
-        private string GetAuthTime()
-        {
-            return User.Claims.First(c => c.Type == "auth_time").Value;
-        }
-        private ContactInfoResponse GetCitizenDataFromApi()
-        {
-            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
-            return res;
-        }
+       
+        
         private MobileSection GetSessionData()
         {
-            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime());
+            var SessionEmailEdit = _userSession.GetUserMobileData();
             return SessionEmailEdit;
         }
         private string GetTempSessionData()
@@ -157,13 +153,12 @@ namespace dsf_service_template_net6.Pages
             FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
             if (!result.IsValid)
             {
-                HttpContext.Session.SetObjectAsJson("valresult", result);
+                _userSession.SetUserValidationResults(result);
                 HttpContext.Session.SetObjectAsJson("mobileval", mobile);
                 return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Mob Edit from Session
-            HttpContext.Session.Remove("MobileSection");
-            HttpContext.Session.SetObjectAsJson("MobileSection", mobEdit, GetAuthTime());
+                _userSession.SetUserMobileData(mobEdit);
 
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");

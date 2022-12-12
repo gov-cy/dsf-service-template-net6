@@ -15,6 +15,7 @@ namespace dsf_service_template_net6.Pages
         #region "Variables"
         //Dependancy injection Variables
         private readonly INavigation _nav;
+        private readonly IUserSession _userSession;
         private readonly IValidator<EmailSection> _validator;
         [BindProperty]
         //control variables
@@ -35,10 +36,12 @@ namespace dsf_service_template_net6.Pages
         public EmailSection emailEdit;
         #endregion
         #region "Custom Methods"
-        public EmailEditModel(IValidator<EmailSection> validator, INavigation nav)
-        {   _validator = validator;
-             emailEdit = new EmailSection();
+        public EmailEditModel(IValidator<EmailSection> validator, INavigation nav, IUserSession userSession)
+        {
+            _validator = validator;
+            emailEdit = new EmailSection();
             _nav = nav;
+            _userSession = userSession;
         }
         void ClearErrors()
         {
@@ -50,7 +53,7 @@ namespace dsf_service_template_net6.Pages
         {
             if (fromPost)
             {
-                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                var res = _userSession.GetUserValidationResults();
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -83,24 +86,18 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            if (GetCitizenDataFromApi == null)
-            {
-                ret = false;
-            }
-             return ret;
+            //For the demo purpose we might not get data from template api service
+            //if (_userSession.GetUserPersonalData() == null)
+            //{
+            //    ret = false;
+            //}
+            return ret;
         }
-        private string GetAuthTime()
-        {
-            return User.Claims.First(c => c.Type == "auth_time").Value;
-        }
-        private ContactInfoResponse GetCitizenDataFromApi()
-        {
-            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
-            return res;
-        }
+     
+      
         private EmailSection GetSessionData()
         {
-            var SessionEmailEdit = HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime());
+            var SessionEmailEdit = _userSession.GetUserEmailData();
             return SessionEmailEdit;
         }
         private string GetTempSessionData()
@@ -150,22 +147,21 @@ namespace dsf_service_template_net6.Pages
             //Update the class before validation
             emailEdit.email = email;
             //Get Previous mobile number
-            var citizenPersonalDetails = GetCitizenDataFromApi();
+            var citizenPersonalDetails = _userSession.GetUserPersonalData();
             if (citizenPersonalDetails != null)
             {
-                emailEdit.email = string.IsNullOrEmpty(GetCitizenDataFromApi()?.data?.Email) ? User.Claims.First(c => c.Type == "email").Value : GetCitizenDataFromApi().data.Email;
+                emailEdit.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.data!.Email;
                 emailEdit.validation_mode = ValidationMode.Edit;
             }
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
             {
-                HttpContext.Session.SetObjectAsJson("valresult", result);
+                _userSession.SetUserValidationResults(result);
                 HttpContext.Session.SetObjectAsJson("emailval", email);
                 return RedirectToPage("EmailEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Store Data 
-            HttpContext.Session.Remove("EmailSection");
-            HttpContext.Session.SetObjectAsJson("EmailSection", emailEdit, GetAuthTime());
+            _userSession.SetUserEmailData(emailEdit);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("emailval");

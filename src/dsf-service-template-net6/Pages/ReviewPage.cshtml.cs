@@ -15,10 +15,12 @@ namespace dsf_service_template_net6.Pages
         //Dependancy injection Variables
         private readonly INavigation _nav;
         private readonly IContact _service;
-        public ReviewPageModel(INavigation nav, IContact service)
+        private readonly IUserSession _userSession;
+        public ReviewPageModel(INavigation nav, IContact service, IUserSession userSession)
         {
             _nav = nav;
             _service = service;
+            _userSession = userSession;
         }
         #region "Variables"
         ContactInfo _application = new();
@@ -31,10 +33,6 @@ namespace dsf_service_template_net6.Pages
         [BindProperty]
         public string BackLink { get; set; } = "";
         #endregion
-        private string GetAuthTime()
-        {
-            return User.Claims.First(c => c.Type == "auth_time").Value;
-        }
         public IActionResult OnGet(bool review)
         {
             bool allow = AllowToProceed();
@@ -74,17 +72,18 @@ namespace dsf_service_template_net6.Pages
             //Make sure the sequence has been kept
             bool ret = true;
 
-            if (HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime()) == null)
+            //For the demo purpose we might not get data from template api service
+            //if (_userSession.GetUserPersonalData() == null)
+            //{
+            //    ret = false;
+            //}
+
+            if (_userSession.GetUserMobileData() == null)
             {
                 ret = false;
             }
 
-            if ((HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime()) == null))
-            {
-                ret = false;
-            }
-
-            if ((HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime()) == null))
+            if (_userSession.GetUserEmailData() == null)
             {
                 ret = false;
             }
@@ -93,12 +92,12 @@ namespace dsf_service_template_net6.Pages
         private bool SetUserJourneyData()
         {
             bool ret = true;
-            var mobSelect = HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime());
+            var mobSelect = _userSession!.GetUserMobileData()!;
             ret_mobile = mobSelect.mobile;
-            var Nav = HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList");
+            var Nav = _userSession.GetNavLink()!;
             var section = Nav.Find(p => p.Name == "Mobile");
             useMobileEditOnly = section!.Type == SectionType.InputOnly ? true : false;
-            var emailSelect = HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime());
+            var emailSelect = _userSession.GetUserEmailData()!;
             ret_email = emailSelect.email;
             section = Nav.Find(p => p.Name == "Email");
             useEmailEditOnly = section!.Type == SectionType.InputOnly ? true : false;
@@ -116,10 +115,9 @@ namespace dsf_service_template_net6.Pages
                 }
                 else
                 {
-                    ContactInfo data = new();
-                    data.Id = 1;
-                    data.Email = ret_email;
-                    data.MobileTelephone = ret_mobile;
+                    _application.Id = 1;
+                    _application.Email = ret_email;
+                    _application.MobileTelephone = ret_mobile;
                                        
                 }
             }
@@ -128,8 +126,7 @@ namespace dsf_service_template_net6.Pages
         private bool SubmitApplication()
         {
             bool ret = false;
-            var authTime = GetAuthTime();
-            var token = HttpContext.Session.GetObjectFromJson<string>("access_token", authTime);
+            var token = _userSession.GetAccessToken()!;
             ContactInfoResponse? res = new();
             res = _service.SubmitContact(_application, token);
             
@@ -139,19 +136,19 @@ namespace dsf_service_template_net6.Pages
                 if (res.errorCode == 0)
                 {
                     ret = true;
-                    HttpContext.Session.SetObjectAsJson("ApplReq", _application, authTime);
-                    HttpContext.Session.SetObjectAsJson("ref_no", Guid.NewGuid(), authTime);
+                    _userSession.SetUserApplRequest(_application);
+                    _userSession.SetUserReferenceNumber(Guid.NewGuid().ToString());
                 }
                 else
                 {
-                    //Log response error
-                    HttpContext.Session.SetObjectAsJson("ApplRes", res, authTime);
+                    //Save Invalid Response in session
+                    _userSession.SetUserApplResponse(res);
                 }
             }
             else
             {
-                //Log response error
-                HttpContext.Session.SetObjectAsJson("ApplRes", res, authTime);
+                //Save Invalid Response in session
+                _userSession.SetUserApplResponse(res);
             }
             return ret;
         }

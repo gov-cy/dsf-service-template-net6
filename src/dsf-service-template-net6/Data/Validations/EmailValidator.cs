@@ -20,7 +20,7 @@ namespace dsf_service_template_net6.Data.Validations
             When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
             {
                 //Selection page
-                RuleFor(x => x.email).NotEmpty().NotNull().WithMessage(EmailNumNotFoundMsg);
+                //RuleFor(x => x.email).NotEmpty().NotNull().When(x => x.use_from_api.Equals(true)).WithMessage(EmailNumNotFoundMsg);
                 RuleFor(x => x.use_from_api).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(EmailNoSelectionMsg);
             });
             //Edit page

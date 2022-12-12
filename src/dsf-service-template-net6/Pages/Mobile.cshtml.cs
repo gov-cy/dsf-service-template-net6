@@ -26,24 +26,26 @@ namespace dsf_service_template_net6.Pages
         public string NextLink { get; set; } = "";
 
         //Dependancy injection Variables
+        private readonly IUserSession _userSession;
         private readonly INavigation _nav;
         private readonly IValidator<MobileSection> _validator;
         //Object for session data 
         public MobileSection Mobile_select;
         #endregion
         #region "Custom Methods"
-        public MobileModel(IValidator<MobileSection> validator, INavigation nav)
+        public MobileModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
         {
             _nav = nav;
             _validator = validator;
             Mobile_select = new MobileSection();
+            _userSession = userSession;
         }
         bool ShowErrors(bool fromPost)
         {
             if (fromPost)
 
             {
-                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                var res = _userSession.GetUserValidationResults();
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -71,7 +73,7 @@ namespace dsf_service_template_net6.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "use_from_civil" || Item.PropertyName == "mobile")
+                if (Item.PropertyName == "use_from_api" || Item.PropertyName == "mobile")
                 {
                     ErrorsDesc += "<a href='#crbMobile'>" + Item.ErrorMessage + "</a>";
                     MobileSelection = Item.ErrorMessage;
@@ -82,36 +84,30 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            if (GetCitizenDataFromApi == null)
-            {
-                ret = false;
-            }
-            if ((HttpContext.Session.GetObjectFromJson<EmailSection>("EmailSection", GetAuthTime()) == null))
+            //For the demo purpose we might not get data from template api service
+            //if (_userSession.GetUserPersonalData() == null)
+            //{
+            //    ret = false;
+            //}
+            if (_userSession.GetUserEmailData() == null)
             {
                 ret = false;
             }
             return ret;
         }
-        private ContactInfoResponse GetCitizenDataFromApi()
-        {
-            ContactInfoResponse res = HttpContext.Session.GetObjectFromJson<ContactInfoResponse>("PersonalDetails", GetAuthTime());
-            return res;
-        }
-        private string GetAuthTime()
-        {
-            return User.Claims.First(c => c.Type == "auth_time").Value;
-        }
+      
+      
        
         private MobileSection GetSessionData()
         {
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSection>("MobileSection", GetAuthTime());
+            var selectedoptions = _userSession.GetUserMobileData();
             return selectedoptions;
         }
         private void BindSelectionData()
         {
-            ContactInfoResponse res = GetCitizenDataFromApi();
+            ContactInfoResponse? res = _userSession.GetUserPersonalData();
             //Set Email info to model class
-            if (!string.IsNullOrEmpty(res.data?.MobileTelephone))
+            if (!string.IsNullOrEmpty(res?.data?.MobileTelephone))
             {
 
                 Mobile_select.mobile = res.data.MobileTelephone;
@@ -127,14 +123,15 @@ namespace dsf_service_template_net6.Pages
                 {
                     CrbMobile = "1";
                 }
-                else if (selectedoptions.use_other && selectedoptions.mobile== GetCitizenDataFromApi()?.data?.MobileTelephone)
+                else if (selectedoptions.use_other && selectedoptions?.mobile == _userSession?.GetUserPersonalData()?.data?.MobileTelephone)
                 {
                     //code use when user hit back button on edit page
                     CrbMobile = "1";
                     Mobile_select.use_from_api = true;
                     Mobile_select.use_other = false;
-                    Mobile_select.mobile = GetCitizenDataFromApi()!.data!.MobileTelephone;
-                    HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
+                    Mobile_select.mobile = _userSession?.GetUserPersonalData()?.data?.MobileTelephone ?? "";
+                    _userSession!.SetUserMobileData(Mobile_select);
+                   
                 }
                 else
                 {
@@ -177,7 +174,7 @@ namespace dsf_service_template_net6.Pages
             {
                 Mobile_select.use_from_api = true;
                 Mobile_select.use_other = false;
-                Mobile_select.mobile = GetCitizenDataFromApi()!.data!.MobileTelephone;
+                Mobile_select.mobile = _userSession!.GetUserPersonalData()!.data!.MobileTelephone;
             }
             else if (CrbMobile == "2")
             {
@@ -193,15 +190,15 @@ namespace dsf_service_template_net6.Pages
             //Re-assign defult email
             BindSelectionData();
             //Validate Model
+            Mobile_select.validation_mode = ValidationMode.Select;
             FluentValidation.Results.ValidationResult result = _validator.Validate(Mobile_select);
             if (!result.IsValid)
             {
-                HttpContext.Session.SetObjectAsJson("valresult", result);
+                _userSession.SetUserValidationResults(result);
                 return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
             }
             //Model is valid so strore 
-            HttpContext.Session.Remove("MobileSelect");
-            HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
+            _userSession.SetUserMobileData(Mobile_select);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect

@@ -21,7 +21,6 @@ namespace dsf_service_template_net6.Data.Validations
             mobValid = _Localizer["set-mobile.format_check"];
             When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
             {
-                RuleFor(x => x.mobile).NotEmpty().NotNull().WithMessage(MobileNumNotFoundMsg);
                 RuleFor(x => x.use_from_api).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(MobileNoSelectionMsg);
             });
             //Edit Mobile

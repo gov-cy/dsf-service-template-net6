@@ -1,7 +1,7 @@
 ﻿using dsf_service_template_net6.Services.Model;
 using System.Security.Claims;
 namespace dsf_service_template_net6.Services
-{   
+{
     using Microsoft.AspNetCore.Http;
     public enum FormSelection
     {
@@ -27,7 +27,7 @@ namespace dsf_service_template_net6.Services
     {
         private readonly IContact _service;
         private readonly IHttpContextAccessor? _httpContextAccessor;
-        private readonly IUserSession _userSession;
+        private readonly IUserSession? _userSession;
         public string BackLink { get; set; } = "";
         public string NextLink { get; set; } = "";
         private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
@@ -42,8 +42,8 @@ namespace dsf_service_template_net6.Services
 
         private void AddHistoryLinks(string currPage, bool review)
         {
-            HistoryItem historyItem = new();
-            History = _userSession.GetHistrory() ?? new List<HistoryItem>();
+            HistoryItem? historyItem = new();
+            History = _userSession?.GetHistrory() ?? new List<HistoryItem>();
             int LastIndex = History.Count;
             if (LastIndex == 0)
             {
@@ -60,19 +60,24 @@ namespace dsf_service_template_net6.Services
                 //Set to memory
 
             }
-            _userSession.SetHistrory(History);
-         }
+            _userSession!.SetHistrory(History);
+        }
         private void SetSectionPages()
         {
             ContactInfoResponse? res;
             List<SectionInfo> list = new();
-            var citizen = _userSession.GetUserPersonalData();
+            var citizen = _userSession?.GetUserPersonalData();
             if (citizen == null)
             { //Try to get data from api
                 res = _service.GetContact(_userSession!.GetAccessToken()!);
                 //if the user is already login and not passed from login, set in session
-               _userSession.SetUserPersonalData(res);
-               citizen = _userSession.GetUserPersonalData();
+                if (res?.data != null)
+                {
+                    _userSession.SetUserPersonalData(res);
+                    citizen = _userSession.GetUserPersonalData();
+                }
+
+               
             }
             //New Section
             SectionInfo section = new();
@@ -100,7 +105,7 @@ namespace dsf_service_template_net6.Services
             }
             list.Add(section);
             //Store List
-            _userSession.SetNavLink(list);
+            _userSession!.SetNavLink(list);
         }
         public Navigation(IHttpContextAccessor httpContextAccessor, IContact service, IUserSession userSession)
         {
@@ -124,7 +129,7 @@ namespace dsf_service_template_net6.Services
 
         public string GetBackLink(string currPage, bool fromReview = false)
         {
-            History =  _userSession!.GetHistrory()!;
+            History = _userSession!.GetHistrory()!;
 
             AddHistoryLinks(currPage, fromReview);
 
@@ -186,7 +191,7 @@ namespace dsf_service_template_net6.Services
             var section = sections.Find(x => x.Name == sectionName);
             int pageIndex = section!.pages.IndexOf(currPage);
             BackLink = GetBackLink("/" + currPage, fromReview);
-            if ((sections.Count == index + 1 ) && selectChoice == FormSelection.No.ToString())
+            if ((sections.Count == index + 1) && selectChoice == FormSelection.No.ToString())
             {
                 NextLink = "/" + section.pages[pageIndex + 1];
             }
@@ -206,12 +211,13 @@ namespace dsf_service_template_net6.Services
                 if (fromReview)
                 {
                     NextLink = "/review-page";
-                }else
-                {
-                //go to next section first page
-                NextLink = "/" + sections[index + 1].pages[0];
                 }
-              
+                else
+                {
+                    //go to next section first page
+                    NextLink = "/" + sections[index + 1].pages[0];
+                }
+
             }
 
 

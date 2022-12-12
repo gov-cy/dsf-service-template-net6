@@ -25,9 +25,9 @@
 
         public ContactInfoResponse GetContact(string accesstoken)
         {
-            ContactInfoResponse dataResponse = new();
+            ContactInfoResponse? dataResponse = new();
             var apiUrl = "api/v1/ContactInfo";
-            string response = null;
+            string? response = null;
             try
             {
                 response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "application/json", accesstoken);
@@ -75,10 +75,10 @@
 
         public ContactInfoResponse SubmitContact( ContactInfo req, string accesstoken)
         {
-            ContactInfoResponse dataResponse = new();
+            ContactInfoResponse? dataResponse = new();
             var apiUrl = "api/v1/ContactInfo";
             string jsonString = JsonConvert.SerializeObject(req);
-            string response = null;
+            string? response = null;
             try
             {
                 response = _client.MyHttpClientPostRequest(_configuration["ApiUrl"], apiUrl, "application/json", jsonString, accesstoken);
