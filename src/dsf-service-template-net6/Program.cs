@@ -8,12 +8,9 @@ using dsf_service_template_net6.Extensions;
 using dsf_service_template_net6.Middlewares;
 using dsf_service_template_net6.Services;
 using dsf_service_template_net6.Resources;
-using System.Net;
 using dsf_service_template_net6.Data.Models;
 using dsf_service_template_net6.Data.Validations;
 using FluentValidation;
-using Microsoft.Extensions.Localization;
-using FluentValidation.AspNetCore;
 
 IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -58,32 +55,21 @@ builder.Services.AddRazorPages(options =>
 //for resource access
 builder.Services.AddSingleton<IResourceViewlocalizer, ResourceViewlocalizer>();
 //for server side validations
-builder.Services.AddScoped<IValidator<MobileEdit>, cMobileEditValidator>(sp =>
+builder.Services.AddScoped<IValidator<EmailSection>, EmailValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
-    return new cMobileEditValidator(LocMain);
+    return new EmailValidator(LocMain);
 });
-builder.Services.AddScoped<IValidator<EmailEdit>, cEmailEditValidator>(sp =>
+builder.Services.AddScoped<IValidator<MobileSection>, MobileValidator>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
-    return new cEmailEditValidator(LocMain);
+    return new MobileValidator(LocMain);
 });
-builder.Services.AddScoped<IValidator<MobileSelect>, MobileSelectValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
 
-    return new MobileSelectValidator(LocMain);
-});
-builder.Services.AddScoped<IValidator<EmailSelect>, EmailSelectValidator>(sp =>
-{
-    var LocMain = sp.GetRequiredService<IResourceViewlocalizer>();
-
-    return new EmailSelectValidator(LocMain);
-});
 //Add fluent validation to .Net Core (optional use for server side validation) 
-builder.Services.AddFluentValidation();
+//builder.Services.AddFluentValidation();
 //multi language support localization middleware 
 builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 //IHttpContextAccessor register
@@ -94,8 +80,10 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IMyHttpClient, MyHttpClient>();
 //Register Navigation Service
 builder.Services.AddScoped<INavigation, Navigation>();
+//Register Session Service
+builder.Services.AddScoped<IUserSession, UserSession>();
 //Register the Api service for Task Get and post methods
-builder.Services.AddScoped<ITasks, Tasks>();
+builder.Services.AddScoped<IContact, Contact>();
 //Added for session state
 builder.Services.AddSession(options => {
     options.Cookie.Name = "AppDataSessionCookie";
@@ -134,7 +122,7 @@ builder.Services.AddAuthentication(options =>
     if (environment.IsDevelopment())
     {
         //TODO - remove for production - not for production
-        HttpClientHandler handler = new HttpClientHandler();
+        using HttpClientHandler handler = new();
         handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
         options.BackchannelHttpHandler = handler;
     }

@@ -2,20 +2,20 @@
 {  
     using dsf_service_template_net6.Services.Model;
     using Newtonsoft.Json;
-    public interface ITasks
+    public interface IContact
     {
-        TasksGetResponse GetAllTasks(string accesstoken);
-        TasksPostResponse SubmitTask(Task req, string accesstoken);
+        ContactInfoResponse GetContact(string accesstoken);
+        ContactInfoResponse SubmitContact(ContactInfo req, string accesstoken);
 
 
     }
-    public class Tasks : ITasks
+    public class Contact : IContact
     {
         private IConfiguration _configuration;
-        private readonly ILogger<Tasks> _logger;
+        private readonly ILogger<Contact> _logger;
         private IMyHttpClient _client;
 
-        public Tasks(IConfiguration configuration, ILogger<Tasks> logger, IMyHttpClient client)
+        public Contact(IConfiguration configuration, ILogger<Contact> logger, IMyHttpClient client)
         {
             _configuration = configuration;
             _logger = logger;
@@ -23,11 +23,11 @@
         }
    
 
-        public TasksGetResponse GetAllTasks(string accesstoken)
+        public ContactInfoResponse GetContact(string accesstoken)
         {
-            TasksGetResponse dataResponse = new();
-            var apiUrl = "api/v1/TodoItems";
-            string response = null;
+            ContactInfoResponse? dataResponse = new();
+            var apiUrl = "api/v1/ContactInfo";
+            string? response = null;
             try
             {
                 response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "application/json", accesstoken);
@@ -36,24 +36,24 @@
             catch
             {
                 _logger.LogError("Fail to call Api for " + apiUrl);
-                dataResponse = new TasksGetResponse();
+                dataResponse = new ContactInfoResponse();
             }
             if (response != null)
             {
                 try
                 {
-                    dataResponse = JsonConvert.DeserializeObject<TasksGetResponse>(response);
+                    dataResponse = JsonConvert.DeserializeObject<ContactInfoResponse>(response);
                     if (dataResponse == null)
                     {
                         _logger.LogError("Received Null response from " + apiUrl);
-                        dataResponse = new TasksGetResponse();
+                        dataResponse = new ContactInfoResponse();
                     }
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError("Could not get valid response from " + apiUrl);
                     _logger.LogError("GetCitizenData - Exception" + ex.ToString());
-                    dataResponse = new TasksGetResponse();
+                    dataResponse = new ContactInfoResponse();
                 }
 
                 if (dataResponse.succeeded)
@@ -64,7 +64,7 @@
                 if (dataResponse.errorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
-                    var rsp = new TasksGetResponse();
+                    var rsp = new ContactInfoResponse();
                     rsp.errorCode = dataResponse.errorCode;
                     rsp.errorMessage = dataResponse.errorMessage;
                     dataResponse = rsp;
@@ -73,12 +73,12 @@
             return dataResponse;
         }
 
-        public TasksPostResponse SubmitTask(Task req, string accesstoken)
+        public ContactInfoResponse SubmitContact( ContactInfo req, string accesstoken)
         {
-            TasksPostResponse dataResponse = new();
-            var apiUrl = "api/v1/TodoItems";
+            ContactInfoResponse? dataResponse = new();
+            var apiUrl = "api/v1/ContactInfo";
             string jsonString = JsonConvert.SerializeObject(req);
-            string response = null;
+            string? response = null;
             try
             {
                 response = _client.MyHttpClientPostRequest(_configuration["ApiUrl"], apiUrl, "application/json", jsonString, accesstoken);
@@ -86,30 +86,32 @@
             catch
             {
                 _logger.LogError("Fail to call Api for " + apiUrl);
-                dataResponse = new TasksPostResponse();
+                dataResponse = new ContactInfoResponse();
             }
             if (response != null)
             {
                 try
                 {
-                    dataResponse = JsonConvert.DeserializeObject<TasksPostResponse>(response);
+                    dataResponse = JsonConvert.DeserializeObject<ContactInfoResponse>(response);
                     if (dataResponse == null)
                     {
                         _logger.LogError("Received Null response from " + apiUrl);
-                        dataResponse = new TasksPostResponse();
+                        dataResponse = new ContactInfoResponse();
                     }
                 }
                 catch
                 {
                     _logger.LogError("Could not get valid response from " + apiUrl);
-                    dataResponse = new TasksPostResponse();
+                    dataResponse = new ContactInfoResponse();
                 }
                 if (dataResponse.errorCode != 0)
                 {
                     _logger.LogInformation("Could not get valid response from " + apiUrl);
-                    var rsp = new TasksPostResponse();
-                    rsp.errorCode = dataResponse.errorCode;
-                    rsp.errorMessage = dataResponse.errorMessage;
+                    var rsp = new ContactInfoResponse
+                    {
+                        errorCode = dataResponse.errorCode,
+                        errorMessage = dataResponse.errorMessage
+                    };
                     dataResponse = rsp;
                 }
             }

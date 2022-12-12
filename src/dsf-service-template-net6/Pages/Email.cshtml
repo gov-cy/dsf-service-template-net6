@@ -30,13 +30,13 @@
             }
             <label class="govcy-radio">
                 <strong>@Model.Email_select.email</strong>
-                <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.crbEmail == "1" ? "checked" : "")>
+                <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.CrbEmail == "1" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
                 <span class="govcy-hint">@Localizer["email-selection.p1"]</span>
             </label>
             <label class="govcy-radio">
                 @Localizer["email-selection.no"]
-                <input class="govcy-radio-input" type="radio" value="2" name="crbEmail" @(Model.crbEmail == "2" ? "checked" : "")>
+                <input class="govcy-radio-input" type="radio" value="2" name="crbEmail" @(Model.CrbEmail == "2" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
             </label>
         </div>

@@ -2,12 +2,7 @@
 using System.Security.Claims;
 namespace dsf_service_template_net6.Services
 {
-    using dsf_service_template_net6.Data.Models;
-    using dsf_service_template_net6.Extensions;
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Http;
-    using System.Collections;
-
     public enum FormSelection
     {
         Yes,
@@ -30,12 +25,13 @@ namespace dsf_service_template_net6.Services
 
     public class Navigation : INavigation
     {
-        private readonly ITasks _service;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public string BackLink { get; set; }
-        public string NextLink { get; set; }
+        private readonly IContact _service;
+        private readonly IHttpContextAccessor? _httpContextAccessor;
+        private readonly IUserSession? _userSession;
+        public string BackLink { get; set; } = "";
+        public string NextLink { get; set; } = "";
         private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
-        Dictionary<string, string> _routes = new()
+        readonly Dictionary<string, string> _routes = new()
         {
             { "/Email", "/email-selection" },
             { "/EmailEdit", "/set-email" },
@@ -46,8 +42,8 @@ namespace dsf_service_template_net6.Services
 
         private void AddHistoryLinks(string currPage, bool review)
         {
-            HistoryItem historyItem = new HistoryItem();
-            History = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<HistoryItem>>("History") ?? new List<HistoryItem>();
+            HistoryItem? historyItem = new();
+            History = _userSession?.GetHistrory() ?? new List<HistoryItem>();
             int LastIndex = History.Count;
             if (LastIndex == 0)
             {
@@ -64,21 +60,24 @@ namespace dsf_service_template_net6.Services
                 //Set to memory
 
             }
-            _httpContextAccessor.HttpContext.Session.SetObjectAsJson("History", History);
-
+            _userSession!.SetHistrory(History);
         }
-        private void setSectionPages(ClaimsPrincipal cp)
+        private void SetSectionPages()
         {
-            TasksGetResponse? res;
-            var authTime = cp.Claims.First(c => c.Type == "auth_time").Value;
-            List<SectionInfo> list = new List<SectionInfo>();
-            var citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", authTime);
+            ContactInfoResponse? res;
+            List<SectionInfo> list = new();
+            var citizen = _userSession?.GetUserPersonalData();
             if (citizen == null)
             { //Try to get data from api
-                res = _service.GetAllTasks(_httpContextAccessor.HttpContext.GetTokenAsync("access_token")?.Result);
+                res = _service.GetContact(_userSession!.GetAccessToken()!);
                 //if the user is already login and not passed from login, set in session
-                _httpContextAccessor.HttpContext.Session.SetObjectAsJson("PersonalDetails", res, authTime);
-                citizen = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", authTime);
+                if (res?.data != null)
+                {
+                    _userSession.SetUserPersonalData(res);
+                    citizen = _userSession.GetUserPersonalData();
+                }
+
+               
             }
             //New Section
             SectionInfo section = new();
@@ -94,7 +93,7 @@ namespace dsf_service_template_net6.Services
             section.Name = "Mobile";
             section.SectionOrder = 2;
             //Always Select, for even API does not have email, we show email from user profile 
-            section.Type = (!string.IsNullOrEmpty(citizen?.data?.ToList()?.Find(x => x.id == 2)?.name)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
+            section.Type = (!string.IsNullOrEmpty(citizen?.data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)
             {
                 section.pages.Add("set-mobile");
@@ -106,20 +105,21 @@ namespace dsf_service_template_net6.Services
             }
             list.Add(section);
             //Store List
-            _httpContextAccessor.HttpContext!.Session.SetObjectAsJson("NavList", list);
+            _userSession!.SetNavLink(list);
         }
-        public Navigation(IHttpContextAccessor httpContextAccessor, ITasks service)
+        public Navigation(IHttpContextAccessor httpContextAccessor, IContact service, IUserSession userSession)
         {
             _httpContextAccessor = httpContextAccessor;
             _service = service;
-            var ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList")?.First();
+            _userSession = userSession;
+            var ListItem = _userSession?.GetNavLink()?.First();
             if (ListItem == null)
             {
                 BackLink = "/";
                 if (_httpContextAccessor?.HttpContext?.User?.Identity?.IsAuthenticated == true)
                 {
-                    setSectionPages(_httpContextAccessor?.HttpContext?.User);
-                    ListItem = _httpContextAccessor.HttpContext!.Session.GetObjectFromJson<List<SectionInfo>>("NavList").First();
+                    SetSectionPages();
+                    ListItem = _userSession!.GetNavLink()!.First();
                     NextLink = "/" + ListItem.pages.First();
                 }
 
@@ -129,19 +129,19 @@ namespace dsf_service_template_net6.Services
 
         public string GetBackLink(string currPage, bool fromReview = false)
         {
-            History = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<HistoryItem>>("History");
+            History = _userSession!.GetHistrory()!;
 
             AddHistoryLinks(currPage, fromReview);
 
-            HistoryItem Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
-            HistoryItem PrevItem = null;
+            HistoryItem? Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
+            HistoryItem? PrevItem = null;
             //if not found get the previous
             if (Item == null)
             {
                 bool Found = History.Exists(x => x.PageName == currPage);
                 if (Found)
                 {
-                    PrevItem = (History.Count > 1 ? History[History.Count - 2] : History[History.Count - 1]);
+                    PrevItem = (History.Count > 1 ? History[History!.Count - 2] : History[History.Count - 1]);
                 }
                 else
                 {
@@ -150,8 +150,10 @@ namespace dsf_service_template_net6.Services
                 }
                 if (PrevItem == null)
                 {
-                    Item = new HistoryItem();
-                    Item.PageName = "/";
+                    Item = new HistoryItem
+                    {
+                        PageName = "/"
+                    };
                     Item.PageName = (Item.Review ? Item.PageName + "?review=true" : Item.PageName);
                     Item.Review = fromReview;
                     BackLink = Item.PageName;
@@ -184,12 +186,12 @@ namespace dsf_service_template_net6.Services
 
         public string SetLinks(string currPage, string sectionName, bool fromReview, string selectChoice)
         {
-            var sections = _httpContextAccessor.HttpContext.Session.GetObjectFromJson<List<SectionInfo>>("NavList");
-            int index = sections.FindIndex(x => x.Name == sectionName);
+            var sections = _userSession!.GetNavLink();
+            int index = sections!.FindIndex(x => x.Name == sectionName);
             var section = sections.Find(x => x.Name == sectionName);
             int pageIndex = section!.pages.IndexOf(currPage);
             BackLink = GetBackLink("/" + currPage, fromReview);
-            if ((sections.Count == index + 1 ) && selectChoice == FormSelection.No.ToString())
+            if ((sections.Count == index + 1) && selectChoice == FormSelection.No.ToString())
             {
                 NextLink = "/" + section.pages[pageIndex + 1];
             }
@@ -209,12 +211,13 @@ namespace dsf_service_template_net6.Services
                 if (fromReview)
                 {
                     NextLink = "/review-page";
-                }else
-                {
-                //go to next section first page
-                NextLink = "/" + sections[index + 1].pages[0];
                 }
-              
+                else
+                {
+                    //go to next section first page
+                    NextLink = "/" + sections[index + 1].pages[0];
+                }
+
             }
 
 

@@ -3,23 +3,22 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Data.Models;
+using dsf_service_template_net6.Services;
 
 namespace dsf_service_template_net6.Controllers
 {
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly ILogger<AccountController> _logger;
+        private readonly IUserSession _userSession;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(IUserSession userSession)
         {
-            _logger = logger;
+          _userSession = userSession;
         }
-        private bool isOrganization()
+        private bool IsOrganization()
         {
             var cp = (ClaimsPrincipal)User;
             var id = cp.Claims.FirstOrDefault(c => c.Type == "legal_unique_identifier")?.Value;
@@ -53,10 +52,8 @@ namespace dsf_service_template_net6.Controllers
         //The Authorize Tag will redirect to CY Login for the user to login
         [Authorize]
         public IActionResult LogIn()
-        {
-            //Authentication time
-            var authTime = User.Claims.First(c => c.Type == "auth_time").Value;
-            if (isOrganization())
+        {           
+            if (IsOrganization())
             {
                 return RedirectToAction("LogOutWithNotAuthorize");
 
@@ -66,16 +63,12 @@ namespace dsf_service_template_net6.Controllers
                 return RedirectToAction("LogOutWithNotAuthorize");
             }
             
-            //Set the identidy and Access Token in Session variables
-            if (HttpContext.GetTokenAsync("id_token") != null)
+            //Set Access Token in Session variables
+           
+            if (_userSession.GetAccessToken() != null)
             {
-                var value = HttpContext.GetTokenAsync("id_token").Result ?? "";
-                HttpContext.Session.SetObjectAsJson("id_token",value,authTime);
-            }
-            if (HttpContext.GetTokenAsync("access_token") != null)
-            {
-                var value = HttpContext.GetTokenAsync("access_token").Result ?? "";
-                HttpContext.Session.SetObjectAsJson("access_token", value, authTime);
+                var value = _userSession.GetAccessToken() ?? "";
+                _userSession.SetAccessToken(value);
             }
             //After CyLogin login, redirect to the first page of the flow
             return RedirectToPage("/Email");

@@ -89,7 +89,7 @@
      </div>
     @*Before main we have the login link and the back button*@
     <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
-     @if (User.Identity.IsAuthenticated)
+     @if (User?.Identity?.IsAuthenticated==true)
      {      
         <div class="govcy-text-end" id="beforeMainContainerUsername">
             <div class="govcy-text-end govcy-mb-4">

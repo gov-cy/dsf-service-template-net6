@@ -15,7 +15,7 @@ namespace dsf_service_template_net6.Pages
     {
         #region "Variables"
         //control variables
-        public string crbMobile { get; set; } = "";
+        public string CrbMobile { get; set; } = "";
         public string displaySummary = "display:none";
         public string ErrorsDesc = "";
         public string MobileSelection = "";
@@ -26,24 +26,26 @@ namespace dsf_service_template_net6.Pages
         public string NextLink { get; set; } = "";
 
         //Dependancy injection Variables
+        private readonly IUserSession _userSession;
         private readonly INavigation _nav;
-        private IValidator<MobileSelect> _validator;
+        private readonly IValidator<MobileSection> _validator;
         //Object for session data 
-        public MobileSelect Mobile_select;
+        public MobileSection Mobile_select;
         #endregion
         #region "Custom Methods"
-        public MobileModel(IValidator<MobileSelect> validator, INavigation nav)
+        public MobileModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
         {
             _nav = nav;
             _validator = validator;
-            Mobile_select = new MobileSelect();
+            Mobile_select = new MobileSection();
+            _userSession = userSession;
         }
         bool ShowErrors(bool fromPost)
         {
             if (fromPost)
 
             {
-                var res = HttpContext.Session.GetObjectFromJson<ValidationResult>("valresult");
+                var res = _userSession.GetUserValidationResults();
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -71,7 +73,7 @@ namespace dsf_service_template_net6.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "use_from_civil" || Item.PropertyName == "mobile")
+                if (Item.PropertyName == "use_from_api" || Item.PropertyName == "mobile")
                 {
                     ErrorsDesc += "<a href='#crbMobile'>" + Item.ErrorMessage + "</a>";
                     MobileSelection = Item.ErrorMessage;
@@ -82,43 +84,33 @@ namespace dsf_service_template_net6.Pages
         private bool AllowToProceed()
         {
             bool ret = true;
-            if (GetCitizenDataFromApi == null)
-            {
-                ret = false;
-            }
-            if ((HttpContext.Session.GetObjectFromJson<EmailSelect>("EmailSelect", GetAuthTime()) == null) && (HttpContext.Session.GetObjectFromJson<EmailEdit>("EmailEdit", GetAuthTime()) == null))
+            //For the demo purpose we might not get data from template api service
+            //if (_userSession.GetUserPersonalData() == null)
+            //{
+            //    ret = false;
+            //}
+            if (_userSession.GetUserEmailData() == null)
             {
                 ret = false;
             }
             return ret;
         }
-        private TasksGetResponse GetCitizenDataFromApi()
+      
+      
+       
+        private MobileSection GetSessionData()
         {
-            TasksGetResponse res = HttpContext.Session.GetObjectFromJson<TasksGetResponse>("PersonalDetails", GetAuthTime());
-            return res;
-        }
-        private string GetAuthTime()
-        {
-            return User.Claims.First(c => c.Type == "auth_time").Value;
-        }
-        private MobileEdit GetEditSessionData()
-        {
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileEdit>("MobEdit", GetAuthTime());
-            return selectedoptions;
-        }
-        private MobileSelect GetSessionData()
-        {
-            var selectedoptions = HttpContext.Session.GetObjectFromJson<MobileSelect>("MobileSelect", GetAuthTime());
+            var selectedoptions = _userSession.GetUserMobileData();
             return selectedoptions;
         }
         private void BindSelectionData()
         {
-            TasksGetResponse res = GetCitizenDataFromApi();
+            ContactInfoResponse? res = _userSession.GetUserPersonalData();
             //Set Email info to model class
-            if (!string.IsNullOrEmpty(res.data?.ToList()?.Find(x => x.id == 2)?.name))
+            if (!string.IsNullOrEmpty(res?.data?.MobileTelephone))
             {
 
-                Mobile_select.mobile = res?.data?.ToList()?.Find(x => x.id == 2)?.name;
+                Mobile_select.mobile = res.data.MobileTelephone;
             }
             
         }
@@ -127,22 +119,23 @@ namespace dsf_service_template_net6.Pages
             var selectedoptions = GetSessionData();
             if (selectedoptions != null)
             {
-                if (selectedoptions.use_from_civil)
+                if (selectedoptions.use_from_api)
                 {
-                    crbMobile = "1";
+                    CrbMobile = "1";
                 }
-                else if (GetEditSessionData() == null)
+                else if (selectedoptions.use_other && selectedoptions?.mobile == _userSession?.GetUserPersonalData()?.data?.MobileTelephone)
                 {
                     //code use when user hit back button on edit page
-                    crbMobile = "1";
-                    Mobile_select.use_from_civil = true;
-                    Mobile_select.use_other = true;
-                    Mobile_select.mobile = GetCitizenDataFromApi()?.data?.ToList()?.Find(x => x.id == 2)?.name;
-                    HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
+                    CrbMobile = "1";
+                    Mobile_select.use_from_api = true;
+                    Mobile_select.use_other = false;
+                    Mobile_select.mobile = _userSession?.GetUserPersonalData()?.data?.MobileTelephone ?? "";
+                    _userSession!.SetUserMobileData(Mobile_select);
+                   
                 }
                 else
                 {
-                    crbMobile = "2";
+                    CrbMobile = "2";
                 }
                 return true;
             }
@@ -177,33 +170,35 @@ namespace dsf_service_template_net6.Pages
         public IActionResult OnPost(bool review)
         {
             //Set class Model before validation
-            if (crbMobile == "1")
+            if (CrbMobile == "1")
             {
-                Mobile_select.use_from_civil = true;
+                Mobile_select.use_from_api = true;
                 Mobile_select.use_other = false;
+                Mobile_select.mobile = _userSession!.GetUserPersonalData()!.data!.MobileTelephone;
             }
-            else if (crbMobile == "2")
+            else if (CrbMobile == "2")
             {
-                Mobile_select.use_from_civil = false;
+                Mobile_select.use_from_api = false;
                 Mobile_select.use_other = true;
+                Mobile_select.mobile = "";
             }
             else
             {
-                Mobile_select.use_from_civil = false;
+                Mobile_select.use_from_api = false;
                 Mobile_select.use_other = false;
             }
             //Re-assign defult email
             BindSelectionData();
             //Validate Model
+            Mobile_select.validation_mode = ValidationMode.Select;
             FluentValidation.Results.ValidationResult result = _validator.Validate(Mobile_select);
             if (!result.IsValid)
             {
-                HttpContext.Session.SetObjectAsJson("valresult", result);
+                _userSession.SetUserValidationResults(result);
                 return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
             }
             //Model is valid so strore 
-            HttpContext.Session.Remove("MobileSelect");
-            HttpContext.Session.SetObjectAsJson("MobileSelect", Mobile_select, GetAuthTime());
+            _userSession.SetUserMobileData(Mobile_select);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
@@ -220,7 +215,7 @@ namespace dsf_service_template_net6.Pages
             }
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review = review }, "mainContainer");
+                return RedirectToPage(NextLink, null, new { review }, "mainContainer");
             }
             else
             {
