@@ -222,7 +222,7 @@ namespace Dsf.Service.Template.Pages
                 EmailSel.use_other = false;
                 EmailSel.email = "";
             }
-            if (!review)
+            if (!review && _userSession.GetUserEmailData()==null) 
             {
                 EmailSel.validation_mode = ValidationMode.Select;
                 //Validate Model
