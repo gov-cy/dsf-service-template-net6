@@ -130,10 +130,11 @@ namespace dsf_service_template_net6.Services
         public string GetBackLink(string currPage, bool fromReview = false)
         {
             History = _userSession!.GetHistrory()!;
-
-            AddHistoryLinks(currPage, fromReview);
-
-            HistoryItem? Item = History.FindLast(x => x.PageName == currPage && x.Review == fromReview);
+            if (fromReview || History?.Count==0)
+            {
+                AddHistoryLinks(currPage, fromReview);
+            } 
+            HistoryItem? Item = History?.Find(x => x.PageName == currPage && x.Review == fromReview);
             HistoryItem? PrevItem = null;
             //if not found get the previous
             if (Item == null)
@@ -146,7 +147,7 @@ namespace dsf_service_template_net6.Services
                 else
                 {
                     //Just show Previous
-                    PrevItem = (History.Count > 1 ? History[History.Count - 1] : History[0]);
+                    PrevItem = History.Count > 1 ? History[History.Count - 1] : History[0];
                 }
                 if (PrevItem == null)
                 {
@@ -173,7 +174,7 @@ namespace dsf_service_template_net6.Services
             //Return item
             else
             {
-                int index = History.FindLastIndex(x =>  x.Review==fromReview && x.PageName==currPage );
+                int index = History.FindIndex(x =>  x.Review==fromReview && x.PageName==currPage );
                 //set the prev item 
                 Item = History[index - 1];
                 Item.PageName = (Item.Review ? Item.PageName + "?review=true" : Item.PageName);
@@ -186,6 +187,9 @@ namespace dsf_service_template_net6.Services
 
         public string SetLinks(string currPage, string sectionName, bool fromReview, string selectChoice)
         {
+            //First add current page to History
+
+            AddHistoryLinks("/" + currPage, fromReview);
             var sections = _userSession!.GetNavLink();
             int index = sections!.FindIndex(x => x.Name == sectionName);
             var section = sections.Find(x => x.Name == sectionName);
