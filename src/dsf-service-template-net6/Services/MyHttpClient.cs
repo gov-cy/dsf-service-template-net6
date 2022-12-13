@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace dsf_service_template_net6.Services
+namespace Dsf.Service.Template.Services
 {
     public interface IMyHttpClient
     {

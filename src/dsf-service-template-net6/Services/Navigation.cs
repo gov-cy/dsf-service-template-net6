@@ -1,6 +1,6 @@
-﻿using dsf_service_template_net6.Services.Model;
+﻿using Dsf.Service.Template.Services.Model;
 using System.Security.Claims;
-namespace dsf_service_template_net6.Services
+namespace Dsf.Service.Template.Services
 {
     using Microsoft.AspNetCore.Http;
     public enum FormSelection

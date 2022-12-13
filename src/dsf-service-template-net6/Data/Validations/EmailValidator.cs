@@ -1,9 +1,9 @@
 ﻿using dsf_moi_election_catalogue.Services;
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Resources;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Resources;
 using FluentValidation;
 
-namespace dsf_service_template_net6.Data.Validations
+namespace Dsf.Service.Template.Data.Validations
 {
     public class EmailValidator : AbstractValidator<EmailSection>
     {

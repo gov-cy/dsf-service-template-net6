@@ -1,13 +1,13 @@
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Services.Model;
-using dsf_service_template_net6.Extensions;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Services.Model;
+using Dsf.Service.Template.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using dsf_service_template_net6.Services;
+using Dsf.Service.Template.Services;
 
-namespace dsf_service_template_net6.Pages
+namespace Dsf.Service.Template.Pages
 {
        public class MobileEditModel : PageModel
     {

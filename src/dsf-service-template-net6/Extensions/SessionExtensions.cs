@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace dsf_service_template_net6.Extensions
+namespace Dsf.Service.Template.Extensions
 {
    
     public static class SessionExtensions

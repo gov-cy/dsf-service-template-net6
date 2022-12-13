@@ -1,10 +1,10 @@
-﻿using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Services.Model;
+﻿using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Extensions;
+using Dsf.Service.Template.Services.Model;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 
-namespace dsf_service_template_net6.Services
+namespace Dsf.Service.Template.Services
 {
     public interface IUserSession
     {

@@ -1,14 +1,14 @@
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Services;
-using dsf_service_template_net6.Services.Model;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Extensions;
+using Dsf.Service.Template.Services;
+using Dsf.Service.Template.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
-namespace dsf_service_template_net6.Pages
+namespace Dsf.Service.Template.Pages
 {
     [BindProperties]
     public class MobileModel : PageModel
@@ -30,14 +30,14 @@ namespace dsf_service_template_net6.Pages
         private readonly INavigation _nav;
         private readonly IValidator<MobileSection> _validator;
         //Object for session data 
-        public MobileSection Mobile_select;
+        public MobileSection MobileSel;
         #endregion
         #region "Custom Methods"
         public MobileModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
         {
             _nav = nav;
             _validator = validator;
-            Mobile_select = new MobileSection();
+            MobileSel = new MobileSection();
             _userSession = userSession;
         }
         bool ShowErrors(bool fromPost)
@@ -110,7 +110,7 @@ namespace dsf_service_template_net6.Pages
             if (!string.IsNullOrEmpty(res?.Data?.MobileTelephone))
             {
 
-                Mobile_select.mobile = res.Data.MobileTelephone;
+                MobileSel.mobile = res.Data.MobileTelephone;
             }
 
         }
@@ -127,10 +127,10 @@ namespace dsf_service_template_net6.Pages
                 {
                     //code use when user hit back button on edit page
                     CrbMobile = "1";
-                    Mobile_select.use_from_api = true;
-                    Mobile_select.use_other = false;
-                    Mobile_select.mobile = _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ?? "";
-                    _userSession!.SetUserMobileData(Mobile_select);
+                    MobileSel.use_from_api = true;
+                    MobileSel.use_other = false;
+                    MobileSel.mobile = _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ?? "";
+                    _userSession!.SetUserMobileData(MobileSel);
 
                 }
                 else
@@ -173,36 +173,36 @@ namespace dsf_service_template_net6.Pages
             //Set class Model before validation
             if (CrbMobile == "1")
             {
-                Mobile_select.use_from_api = true;
-                Mobile_select.use_other = false;
-                Mobile_select.mobile = _userSession!.GetUserPersonalData()!.Data!.MobileTelephone;
+                MobileSel.use_from_api = true;
+                MobileSel.use_other = false;
+                MobileSel.mobile = _userSession!.GetUserPersonalData()!.Data!.MobileTelephone;
             }
             else if (CrbMobile == "2")
             {
-                Mobile_select.use_from_api = false;
-                Mobile_select.use_other = true;
+                MobileSel.use_from_api = false;
+                MobileSel.use_other = true;
                 if (review && !string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile) && _userSession.GetUserMobileData()?.use_from_api == true)
                 {
                     //Reset
-                    Mobile_select.mobile = "";
+                    MobileSel.mobile = "";
                 }
                 else
                 {
-                    Mobile_select.mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile) ? "" : _userSession.GetUserMobileData()!.mobile;
+                    MobileSel.mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile) ? "" : _userSession.GetUserMobileData()!.mobile;
                 }
                
             }
             else
             {
-                Mobile_select.use_from_api = false;
-                Mobile_select.use_other = false;
+                MobileSel.use_from_api = false;
+                MobileSel.use_other = false;
             }
             if (!review)
             {
                 
-                Mobile_select.validation_mode = ValidationMode.Select;
+                MobileSel.validation_mode = ValidationMode.Select;
                 //Validate Model
-                FluentValidation.Results.ValidationResult result = _validator.Validate(Mobile_select);
+                FluentValidation.Results.ValidationResult result = _validator.Validate(MobileSel);
                 if (!result.IsValid)
                 {
                     _userSession.SetUserValidationResults(result);
@@ -211,19 +211,19 @@ namespace dsf_service_template_net6.Pages
             }
             else
             {
-                Mobile_select.validation_mode = ValidationMode.Edit;
+                MobileSel.validation_mode = ValidationMode.Edit;
             }
 
 
             //Model is valid so strore 
-            _userSession.SetUserMobileData(Mobile_select);
+            _userSession.SetUserMobileData(MobileSel);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             //Finally redirect
 
             //Set back and Next Link
 
-            if (Mobile_select.use_other)
+            if (MobileSel.use_other)
             {
                 NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "No");
             }

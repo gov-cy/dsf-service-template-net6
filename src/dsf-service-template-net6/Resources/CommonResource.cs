@@ -1,4 +1,4 @@
-﻿namespace dsf_service_template_net6
+﻿namespace Dsf.Service.Template
 {
     public class CommonResource
     {

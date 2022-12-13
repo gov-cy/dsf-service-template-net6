@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Services;
+using Dsf.Service.Template.Extensions;
+using Dsf.Service.Template.Services;
 
-namespace dsf_service_template_net6.Controllers
+namespace Dsf.Service.Template.Controllers
 {
     [Route("[controller]/[action]")]
     public class AccountController : Controller

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
-namespace dsf_service_template_net6.Middlewares
+namespace Dsf.Service.Template.Middlewares
 {
     public static class RequestLocalizationCookiesMiddlewareExtensions
     {

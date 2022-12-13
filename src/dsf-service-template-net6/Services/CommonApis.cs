@@ -1,6 +1,5 @@
-﻿using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Services;
-using dsf_service_template_net6.Services.Model;
+﻿using Dsf.Service.Template.Services;
+using Dsf.Service.Template.Services.Model;
 using Newtonsoft.Json;
 
 namespace dsf_moi_election_catalogue.Services
@@ -13,9 +12,9 @@ namespace dsf_moi_election_catalogue.Services
     }
     public class CommonApis: ICommonApis
     {
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
         private readonly ILogger<CommonApis> _logger;
-        private IMyHttpClient _client;
+        private readonly IMyHttpClient _client;
         public CommonApis(IConfiguration configuration, ILogger<CommonApis> logger, IMyHttpClient client)
         {
             _configuration = configuration;
@@ -39,7 +38,7 @@ namespace dsf_moi_election_catalogue.Services
                 {
                     return false;
                 }
-                string? response = null;
+                string? response;
                 try
                 {
                     response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], urlToValidate, "application/json");
@@ -51,7 +50,7 @@ namespace dsf_moi_election_catalogue.Services
                 }
                 if (response != null)
                 {
-                    MobValidationResp? resp =new();
+                    MobValidationResp? resp;
                     try
                     {
                        resp = JsonConvert.DeserializeObject<MobValidationResp>(response);

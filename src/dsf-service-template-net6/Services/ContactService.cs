@@ -1,6 +1,6 @@
-﻿namespace dsf_service_template_net6.Services
+﻿namespace Dsf.Service.Template.Services
 {  
-    using dsf_service_template_net6.Services.Model;
+    using Dsf.Service.Template.Services.Model;
     using Newtonsoft.Json;
     public interface IContact
     {

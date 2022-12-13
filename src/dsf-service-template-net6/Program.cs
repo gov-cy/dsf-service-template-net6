@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using System.IdentityModel.Tokens.Jwt;
-using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Middlewares;
-using dsf_service_template_net6.Services;
-using dsf_service_template_net6.Resources;
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Data.Validations;
+using Dsf.Service.Template.Extensions;
+using Dsf.Service.Template.Middlewares;
+using Dsf.Service.Template.Services;
+using Dsf.Service.Template.Resources;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Data.Validations;
 using FluentValidation;
 using dsf_moi_election_catalogue.Services;
 

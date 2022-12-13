@@ -1,6 +1,6 @@
 ﻿@page "/mobile-selection/{review:bool?}"
-@using dsf_service_template_net6.Resources
-@model dsf_service_template_net6.Pages.MobileModel
+@using Dsf.Service.Template.Resources
+@model Dsf.Service.Template.Pages.MobileModel
 @inject IResourceViewlocalizer Localizer
 
 @{
@@ -26,7 +26,7 @@
                 <span class="govcy-input-error-msg">@Model.MobileSelection</span>
             }
             <label class="govcy-radio">
-                <strong>@Model.Mobile_select.mobile</strong>
+                <strong>@Model.MobileSel.mobile</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbMobile" name="crbMobile" @(Model.CrbMobile == "1" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
                 <span class="govcy-hint">@Localizer["mobile-selection.p1"]</span>
