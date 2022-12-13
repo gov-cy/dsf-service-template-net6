@@ -1,4 +1,4 @@
-﻿namespace dsf_service_template_net6.Data.Models
+﻿namespace Dsf.Service.Template.Data.Models
 {
     public enum ValidationMode
     {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace dsf_service_template_net6.Extensions
+namespace Dsf.Service.Template.Extensions
 {
     public static class ModelExtentions
     {

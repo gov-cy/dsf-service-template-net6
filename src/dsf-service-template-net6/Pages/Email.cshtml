@@ -1,7 +1,7 @@
 ﻿@page "/email-selection/{review:bool?}"
-@using dsf_service_template_net6.Resources
-@using dsf_service_template_net6.Data.Models
-@model dsf_service_template_net6.Pages.EmailModel
+@using Dsf.Service.Template.Resources
+@using Dsf.Service.Template.Data.Models
+@model Dsf.Service.Template.Pages.EmailModel
 @inject IResourceViewlocalizer Localizer
 
 @{
@@ -29,7 +29,7 @@
                 <span class="govcy-input-error-msg">@Model.EmailSelection</span>
             }
             <label class="govcy-radio">
-                <strong>@Model.Email_select.email</strong>
+                <strong>@Model.EmailSel.email</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.CrbEmail == "1" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
                 <span class="govcy-hint">@Localizer["email-selection.p1"]</span>

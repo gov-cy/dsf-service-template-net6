@@ -1,18 +1,21 @@
-﻿using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Resources;
+﻿using dsf_moi_election_catalogue.Services;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Resources;
 using FluentValidation;
 
-namespace dsf_service_template_net6.Data.Validations
+namespace Dsf.Service.Template.Data.Validations
 {
     public class EmailValidator : AbstractValidator<EmailSection>
     {
+        readonly ICommonApis _checker;
         readonly IResourceViewlocalizer _Localizer;
         public const string EmailExpression = @"^(([^<>()[\]\\.,;:\s@\""]+(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$";
         string EmailNumNotFoundMsg = string.Empty;
         string EmailNoSelectionMsg = string.Empty;
         string EmailMessage = String.Empty;
-        public EmailValidator(IResourceViewlocalizer localizer)
+        public EmailValidator(IResourceViewlocalizer localizer, ICommonApis checker)
         {
+            _checker = checker;
             _Localizer = localizer;
             EmailNumNotFoundMsg = _Localizer["email-selection.no_results_check"];
             EmailNoSelectionMsg = _Localizer["email-selection.require_check"];
@@ -29,7 +32,7 @@ namespace dsf_service_template_net6.Data.Validations
                 RuleFor(p => p.email)
                                         .Cascade(CascadeMode.Stop)
                                         .NotEmpty().WithMessage(EmailMessage)
-                                        .Matches(EmailExpression).WithMessage(EmailMessage);
+                                        .Must(_checker.IsEmailValid).WithMessage(EmailMessage);
             });
  
         }

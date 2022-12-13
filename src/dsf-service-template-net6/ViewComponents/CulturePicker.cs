@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace dsf_service_template_net6.ViewComponents
+namespace Dsf.Service.Template.ViewComponents
 {
     public class CulturePicker : ViewComponent
     {

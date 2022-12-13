@@ -1,13 +1,13 @@
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Services;
-using dsf_service_template_net6.Services.Model;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Extensions;
+using Dsf.Service.Template.Services;
+using Dsf.Service.Template.Services.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
-namespace dsf_service_template_net6.Pages
+namespace Dsf.Service.Template.Pages
 {
     [BindProperties]
     public class ReviewPageModel : PageModel
@@ -130,10 +130,10 @@ namespace dsf_service_template_net6.Pages
             ContactInfoResponse? res = new();
             res = _service.SubmitContact(_application, token);
             
-            if (res.succeeded)
+            if (res.Succeeded)
             {
                 //Redirect if error code is <> 0
-                if (res.errorCode == 0)
+                if (res.ErrorCode == 0)
                 {
                     ret = true;
                     _userSession.SetUserApplRequest(_application);

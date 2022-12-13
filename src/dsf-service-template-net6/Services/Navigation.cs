@@ -1,6 +1,6 @@
-﻿using dsf_service_template_net6.Services.Model;
+﻿using Dsf.Service.Template.Services.Model;
 using System.Security.Claims;
-namespace dsf_service_template_net6.Services
+namespace Dsf.Service.Template.Services
 {
     using Microsoft.AspNetCore.Http;
     public enum FormSelection
@@ -71,7 +71,7 @@ namespace dsf_service_template_net6.Services
             { //Try to get data from api
                 res = _service.GetContact(_userSession!.GetAccessToken()!);
                 //if the user is already login and not passed from login, set in session
-                if (res?.data != null)
+                if (res?.Data != null)
                 {
                     _userSession.SetUserPersonalData(res);
                     citizen = _userSession.GetUserPersonalData();
@@ -93,7 +93,7 @@ namespace dsf_service_template_net6.Services
             section.Name = "Mobile";
             section.SectionOrder = 2;
             //Always Select, for even API does not have email, we show email from user profile 
-            section.Type = (!string.IsNullOrEmpty(citizen?.data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
+            section.Type = (!string.IsNullOrEmpty(citizen?.Data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)
             {
                 section.pages.Add("set-mobile");
@@ -130,10 +130,11 @@ namespace dsf_service_template_net6.Services
         public string GetBackLink(string currPage, bool fromReview = false)
         {
             History = _userSession!.GetHistrory()!;
-
-            AddHistoryLinks(currPage, fromReview);
-
-            HistoryItem? Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
+            if (fromReview || History?.Count==0)
+            {
+                AddHistoryLinks(currPage, fromReview);
+            } 
+            HistoryItem? Item = History?.Find(x => x.PageName == currPage && x.Review == fromReview);
             HistoryItem? PrevItem = null;
             //if not found get the previous
             if (Item == null)
@@ -146,7 +147,7 @@ namespace dsf_service_template_net6.Services
                 else
                 {
                     //Just show Previous
-                    PrevItem = (History.Count > 1 ? History[History.Count - 1] : History[0]);
+                    PrevItem = History.Count > 1 ? History[History.Count - 1] : History[0];
                 }
                 if (PrevItem == null)
                 {
@@ -173,7 +174,7 @@ namespace dsf_service_template_net6.Services
             //Return item
             else
             {
-                int index = History.FindIndex(x => x == Item);
+                int index = History.FindIndex(x =>  x.Review==fromReview && x.PageName==currPage );
                 //set the prev item 
                 Item = History[index - 1];
                 Item.PageName = (Item.Review ? Item.PageName + "?review=true" : Item.PageName);
@@ -186,6 +187,9 @@ namespace dsf_service_template_net6.Services
 
         public string SetLinks(string currPage, string sectionName, bool fromReview, string selectChoice)
         {
+            //First add current page to History
+
+            AddHistoryLinks("/" + currPage, fromReview);
             var sections = _userSession!.GetNavLink();
             int index = sections!.FindIndex(x => x.Name == sectionName);
             var section = sections.Find(x => x.Name == sectionName);

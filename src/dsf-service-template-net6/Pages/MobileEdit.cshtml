@@ -1,12 +1,12 @@
 ﻿@page "/set-mobile/{review:bool?}"
-@using dsf_service_template_net6.Resources
-@model dsf_service_template_net6.Pages.MobileEditModel
+@using Dsf.Service.Template.Resources
+@model Dsf.Service.Template.Pages.MobileEditModel
 @inject IResourceViewlocalizer Localizer
 @{
     ViewBag.PreviousUrl=Model.BackLink;
      ViewData["Title"] = @Localizer["set-mobile.title"];
 }
-<div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
+<div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["common.error_message"]</h2>
     <p class="govcy-mb-0">
         @Html.Raw(Model.ErrorsDesc)
@@ -28,7 +28,7 @@
             
             <input id="mobile" name="mobile" 
              type="tel" 
-             value="@Model.mobile"
+             value="@Model.Mobile"
               maxlength="20"
               autocomplete="tel"
              class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_20 govcy-text-input-error": "govcy-text-input govcy-text-input-char_20")"

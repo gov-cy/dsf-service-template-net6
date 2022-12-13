@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Localization;
 
-namespace dsf_service_template_net6.Resources
+namespace Dsf.Service.Template.Resources
 {
     public interface IResourceViewlocalizer
     {

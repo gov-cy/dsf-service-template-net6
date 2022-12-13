@@ -1,13 +1,13 @@
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Services.Model;
-using dsf_service_template_net6.Extensions;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Services.Model;
+using Dsf.Service.Template.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using dsf_service_template_net6.Services;
+using Dsf.Service.Template.Services;
 
-namespace dsf_service_template_net6.Pages
+namespace Dsf.Service.Template.Pages
 {
        public class MobileEditModel : PageModel
     {
@@ -18,33 +18,33 @@ namespace dsf_service_template_net6.Pages
         private readonly IValidator<MobileSection> _validator;
          //control variables
         [BindProperty]
-        public string displaySummary { get; set; } = "display:none";
+        public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
         public string ErrorsDesc { get; set; } = "";
         [BindProperty]
         public string MobileErrorClass { get; set; } = "";
         [BindProperty]
-        public string mobile { get; set; } = "";
+        public string Mobile { get; set; } = "";
         [BindProperty]
         public string BackLink { get; set; } = "";
 
         [BindProperty]
         public string NextLink { get; set; } = "";
         //Object for session data 
-        public MobileSection mobEdit { get; set; }
+        public MobileSection MobEdit { get; set; }
        
         #endregion
         #region "Custom Methods"
         public MobileEditModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
         {  _validator = validator;
             _userSession= userSession;
-            mobEdit = new MobileSection();
+            MobEdit = new MobileSection();
             _nav = nav;
         }
      
         void ClearErrors()
         {
-            displaySummary = "display:none";
+            DisplaySummary = "display:none";
             MobileErrorClass = "";
             ErrorsDesc = "";
         }
@@ -53,7 +53,7 @@ namespace dsf_service_template_net6.Pages
             if (fromPost)
 
             {
-                var res = _userSession.GetUserValidationResults();
+                var res = _userSession.GetUserValidationResults()!;
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -71,7 +71,7 @@ namespace dsf_service_template_net6.Pages
         private void SetViewErrorMessages(ValidationResult result)
         {
             //First Enable Summary Display
-            displaySummary = "display:block";
+            DisplaySummary = "display:block";
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
@@ -111,9 +111,9 @@ namespace dsf_service_template_net6.Pages
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData != null)
+            if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.use_other==true)
             {
-                mobile = sessionData.mobile;
+                Mobile = sessionData.mobile;
                 return true;
             }
             else
@@ -139,7 +139,7 @@ namespace dsf_service_template_net6.Pages
             }
             else
             {
-                mobile = GetTempSessionData();
+                Mobile = GetTempSessionData();
                 ShowErrors(true);
             }
 
@@ -147,18 +147,19 @@ namespace dsf_service_template_net6.Pages
         }
         public IActionResult OnPost(bool review)
         { // Update the class before validation
-            mobEdit.mobile = mobile;
-            //Get Previous mobile number
-            mobEdit.validation_mode = ValidationMode.Edit;           
-            FluentValidation.Results.ValidationResult result = _validator.Validate(mobEdit);
+            MobEdit.mobile = Mobile;
+            MobEdit.use_other = true;
+            MobEdit.use_from_api = false;
+            MobEdit.validation_mode = ValidationMode.Edit;           
+            FluentValidation.Results.ValidationResult result = _validator.Validate(MobEdit);
             if (!result.IsValid)
             {
                 _userSession.SetUserValidationResults(result);
-                HttpContext.Session.SetObjectAsJson("mobileval", mobile);
+                HttpContext.Session.SetObjectAsJson("mobileval", Mobile);
                 return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Mob Edit from Session
-                _userSession.SetUserMobileData(mobEdit);
+                _userSession.SetUserMobileData(MobEdit);
 
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");

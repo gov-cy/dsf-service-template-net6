@@ -1,10 +1,10 @@
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Services;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Extensions;
+using Dsf.Service.Template.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace dsf_service_template_net6.Pages
+namespace Dsf.Service.Template.Pages
 {
     [BindProperties]
     public class ApplicationResponseModel : PageModel

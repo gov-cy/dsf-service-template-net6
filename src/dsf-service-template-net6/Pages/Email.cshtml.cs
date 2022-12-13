@@ -1,7 +1,7 @@
-using dsf_service_template_net6.Data.Models;
-using dsf_service_template_net6.Extensions;
-using dsf_service_template_net6.Services;
-using dsf_service_template_net6.Services.Model;
+using Dsf.Service.Template.Data.Models;
+using Dsf.Service.Template.Extensions;
+using Dsf.Service.Template.Services;
+using Dsf.Service.Template.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
-namespace dsf_service_template_net6.Pages
+namespace Dsf.Service.Template.Pages
 {
     public class EmailModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace dsf_service_template_net6.Pages
         public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
         public string ErrorsDesc { get; set; } = "";
-        
+
         [BindProperty]
         //Store the email selection Error
         public string EmailSelection { get; set; } = "";
@@ -35,7 +35,7 @@ namespace dsf_service_template_net6.Pages
         private readonly IUserSession _userSession;
         private readonly IValidator<EmailSection> _validator;
         //Object for session data 
-        public EmailSection Email_select;
+        public EmailSection EmailSel;
         #endregion
         #region "Custom Methods"
         public EmailModel(IValidator<EmailSection> validator, IContact service, INavigation nav, IUserSession userSession)
@@ -44,14 +44,14 @@ namespace dsf_service_template_net6.Pages
             _validator = validator;
             _nav = nav;
             _userSession = userSession;
-            Email_select = new EmailSection();
+            EmailSel = new EmailSection();
         }
         //Use to show error messages if web form has errors
         bool ShowErrors(bool fromPost)
         {
             if (fromPost)
             {
-                var res = _userSession.GetUserValidationResults();
+                var res = _userSession.GetUserValidationResults()!;
                 // Copy the validation results into ModelState.
                 // ASP.NET uses the ModelState collection to populate 
                 // error messages in the View.
@@ -101,33 +101,33 @@ namespace dsf_service_template_net6.Pages
         {
             ContactInfoResponse res = _userSession.GetUserPersonalData()!;
             //Set Email info to model class
-            if (string.IsNullOrEmpty(res?.data?.Email))
+            if (string.IsNullOrEmpty(res?.Data?.Email))
             {
 
-                Email_select.email = User.Claims.First(c => c.Type == "email").Value;
+                EmailSel.email = User.Claims.First(c => c.Type == "email").Value;
             }
             else
             {
-                Email_select.email = res.data.Email;
+                EmailSel.email = res.Data.Email;
             }
         }
         private bool BindData()
         {   //Check if already selected 
-            var selectedoptions = _userSession.GetUserEmailData(); 
+            var selectedoptions = _userSession.GetUserEmailData();
             if (selectedoptions != null)
             {
                 if (selectedoptions.use_from_api)
                 {
                     CrbEmail = "1";
                 }
-                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || selectedoptions.email == _userSession.GetUserPersonalData()?.data?.Email))
+                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || string.IsNullOrEmpty(selectedoptions.email)))
                 {
                     //code use when user hit back button on edit page
                     CrbEmail = "1";
-                    Email_select.use_from_api = true;
-                    Email_select.use_other = false;
-                    Email_select.email=string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.data?.Email)? User.Claims.First(c => c.Type == "email").Value: _userSession!.GetUserPersonalData()!.data!.Email;
-                    _userSession.SetUserEmailData(Email_select);
+                    EmailSel.use_from_api = true;
+                    EmailSel.use_other = false;
+                    EmailSel.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
+                    _userSession.SetUserEmailData(EmailSel);
                 }
                 else
                 {
@@ -152,7 +152,8 @@ namespace dsf_service_template_net6.Pages
             }
             // First set back link
             BackLink = _nav.GetBackLink("/email-selection", review);
-
+            //Show selection Data 
+            BindSelectionData();
             if (fromPost)
             {
                 ShowErrors(true);
@@ -165,15 +166,15 @@ namespace dsf_service_template_net6.Pages
                 {
                     //Check whether api data were retrieve from login , otherwise call again
                     ContactInfoResponse res = _userSession.GetUserPersonalData() ?? new ContactInfoResponse();
-                    if (res?.data ==null)
-                    {                      
+                    if (res?.Data == null)
+                    {
                         //Cet the citizen personal details from civil registry
                         res = _service.GetContact(_userSession.GetAccessToken()!);
-                       //Demo handling
-                       if (res.succeeded)
-                       {
+                        //Demo handling
+                        if (res.Succeeded)
+                        {
                             _userSession.SetUserPersonalData(res);
-                       }
+                        }
                         //Real example handling
                         //if (res.succeeded == false)
                         //{
@@ -185,62 +186,77 @@ namespace dsf_service_template_net6.Pages
                         //    _userSession.SetUserPersonalData(res);
                         //}
                     }
-                   
+
                 }
             }
-            //Show selection Data 
-            BindSelectionData();
+
             return Page();
         }
         public IActionResult OnPost(bool review)
         {
-            //Set class Model before validation
             if (CrbEmail == "1")
             {
-                Email_select.use_from_api = true;
-                Email_select.use_other = false;
-                Email_select.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.data!.Email;
+                EmailSel.use_from_api = true;
+                EmailSel.use_other = false;
+                EmailSel.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
 
             }
             else if (CrbEmail == "2")
             {
-                Email_select.use_from_api = false;
-                Email_select.use_other = true;
-                Email_select.email = "";
+                EmailSel.use_from_api = false;
+                EmailSel.use_other = true;
+                if (review && !string.IsNullOrEmpty(_userSession.GetUserEmailData()?.email) && _userSession.GetUserEmailData()?.use_from_api == true)
+                {
+                    //Reset
+                    EmailSel.email = "";
+                }
+                else
+                {
+                    EmailSel.email = string.IsNullOrEmpty(_userSession.GetUserEmailData()?.email) ? "" : _userSession.GetUserEmailData()!.email;
+                }
+
             }
             else
             {
-                Email_select.use_from_api = false;
-                Email_select.use_other = false;
-                Email_select.email = "";
+                EmailSel.use_from_api = false;
+                EmailSel.use_other = false;
+                EmailSel.email = "";
             }
-            Email_select.validation_mode = ValidationMode.Select;
-            //Validate Model
-            FluentValidation.Results.ValidationResult result = _validator.Validate(Email_select);
-            if (!result.IsValid)
+            if (!review)
             {
-                _userSession.SetUserValidationResults(result);
-                return RedirectToPage("Email", null, new { fromPost = true }, "mainContainer");
+                EmailSel.validation_mode = ValidationMode.Select;
+                //Validate Model
+                FluentValidation.Results.ValidationResult result = _validator.Validate(EmailSel);
+                if (!result.IsValid)
+                {
+                    _userSession.SetUserValidationResults(result);
+                    return RedirectToPage("Email", null, new { fromPost = true }, "mainContainer");
+                }
             }
+            else
+            {
+                EmailSel.validation_mode = ValidationMode.Edit;
+            }
+
             //Model is valid so strore 
-            _userSession.SetUserEmailData(Email_select);
+            _userSession.SetUserEmailData(EmailSel);
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
-           
+
             //Set back and Next Link
 
-            if (Email_select.use_other)
+            if (EmailSel.use_other)
             {
-              NextLink=  _nav.SetLinks("email-selection","Email", review, "No");
+                NextLink = _nav.SetLinks("email-selection", "Email", review, "No");
             }
             else
             {
-              NextLink = _nav.SetLinks("email-selection", "Email", review, "Yes");
+                NextLink = _nav.SetLinks("email-selection", "Email", review, "Yes");
             }
 
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review }, "mainContainer");
+                return RedirectToPage(NextLink, null, new { review });
             }
             else
             {
