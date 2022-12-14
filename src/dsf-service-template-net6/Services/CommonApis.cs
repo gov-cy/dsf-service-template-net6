@@ -1,8 +1,7 @@
-﻿using Dsf.Service.Template.Services;
-using Dsf.Service.Template.Services.Model;
+﻿using Dsf.Service.Template.Services.Model;
 using Newtonsoft.Json;
 
-namespace dsf_moi_election_catalogue.Services
+namespace Dsf.Service.Template.Services
 {
     public interface ICommonApis
     {
