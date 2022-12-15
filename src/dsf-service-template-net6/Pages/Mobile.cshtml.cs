@@ -197,7 +197,7 @@ namespace Dsf.Service.Template.Pages
                 MobileSel.use_from_api = false;
                 MobileSel.use_other = false;
             }
-            if (!review)
+            if (!review && _userSession.GetUserMobileData() == null)
             {
                 
                 MobileSel.validation_mode = ValidationMode.Select;

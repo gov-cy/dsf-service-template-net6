@@ -1,11 +1,11 @@
 using Dsf.Service.Template.Data.Models;
 using Dsf.Service.Template.Services.Model;
-using Dsf.Service.Template.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Dsf.Service.Template.Services;
+using Dsf.Service.Template.Extensions;
 
 namespace Dsf.Service.Template.Pages
 {
@@ -113,13 +113,35 @@ namespace Dsf.Service.Template.Pages
             var sessionData = GetSessionData();
             if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.use_other==true)
             {
-                Mobile = sessionData.mobile;
+                Mobile = sessionData.mobile.FormatMobile();
+
                 return true;
             }
             else
             {
                 return false;
             }
+        }
+        private string SetMobile(string mobile)
+        {
+            if (!string.IsNullOrEmpty(mobile))
+            {
+                string formatMob = mobile;
+                //Remove - and spaces
+                formatMob = formatMob.Replace("-", "");
+                formatMob = formatMob.Replace(" ", "");
+                //Replace + with 00
+                formatMob = formatMob.Trim().StartsWith("+") ? formatMob.Replace("+", "00") : formatMob;
+                //Add 00357 if cyprus
+                formatMob = !formatMob.StartsWith("00") ? "00357" + formatMob : formatMob;
+
+                return formatMob;
+            }
+            else
+            {
+                return "";
+            }
+
         }
         #endregion
         public IActionResult OnGet(bool review, bool fromPost)
@@ -131,7 +153,7 @@ namespace Dsf.Service.Template.Pages
                 return RedirectToAction("LogOut", "Account");
             }
             //Set Back Link
-            BackLink = _nav.GetBackLink("/set-email", review);
+            BackLink = _nav.GetBackLink("/set-mobile", review);
             //If coming fromPost
             if (!fromPost)
             { //GetData from session 
@@ -147,6 +169,8 @@ namespace Dsf.Service.Template.Pages
         }
         public IActionResult OnPost(bool review)
         { // Update the class before validation
+            string typemob = Mobile;
+            Mobile = SetMobile(Mobile);
             MobEdit.mobile = Mobile;
             MobEdit.use_other = true;
             MobEdit.use_from_api = false;
@@ -155,7 +179,7 @@ namespace Dsf.Service.Template.Pages
             if (!result.IsValid)
             {
                 _userSession.SetUserValidationResults(result);
-                HttpContext.Session.SetObjectAsJson("mobileval", Mobile);
+                HttpContext.Session.SetObjectAsJson("mobileval", typemob);
                 return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Mob Edit from Session

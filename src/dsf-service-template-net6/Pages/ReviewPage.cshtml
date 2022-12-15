@@ -1,6 +1,7 @@
 ﻿@page "/review-page/{review:bool?}"
 @using Dsf.Service.Template.Resources
 @using Dsf.Service.Template.Data.Models
+@using Dsf.Service.Template.Extensions
 @model ReviewPageModel
 @inject IResourceViewlocalizer Localizer
 @{
@@ -20,7 +21,7 @@
              <th scope="row" class="col-3">@Localizer["review.mobile"]</th>
              <td class="col-7">
                  <p>
-                 <span class="govcy-d-block">@Model.ret_mobile</span>
+                 <span class="govcy-d-block">@Model.ret_mobile.FormatMobile()</span>
                 </p>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">

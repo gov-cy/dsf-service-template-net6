@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using System.IdentityModel.Tokens.Jwt;
-using Dsf.Service.Template.Extensions;
 using Dsf.Service.Template.Middlewares;
 using Dsf.Service.Template.Services;
 using Dsf.Service.Template.Resources;
 using Dsf.Service.Template.Data.Models;
 using Dsf.Service.Template.Data.Validations;
 using FluentValidation;
-using dsf_moi_election_catalogue.Services;
+using Dsf.Service.Template.Extensions;
+
 
 IConfiguration Configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
