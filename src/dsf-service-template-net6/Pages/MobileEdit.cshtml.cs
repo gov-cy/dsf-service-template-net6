@@ -134,8 +134,9 @@ namespace Dsf.Service.Template.Pages
                 //Replace + with 00
                 formatMob = formatMob.Trim().StartsWith("+") ? $"00{formatMob.Substring(1)}" : formatMob;
                 //Add 00357 if cyprus
-                formatMob = !formatMob.StartsWith("009") ? $"003579{formatMob.Substring(3)}" : formatMob;
-
+                formatMob = formatMob.StartsWith("009") ? $"003579{formatMob.Substring(3)}" : formatMob;
+                // or format number with 8 digits that starts with 9
+                formatMob = formatMob.StartsWith("9") && formatMob.Length ==8 ? $"00357{formatMob}" : formatMob;
                 return formatMob;
             }
             else

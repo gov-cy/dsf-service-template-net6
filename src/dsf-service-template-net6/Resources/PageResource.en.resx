@@ -341,7 +341,7 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Enter a mobile phone number in the correct format, like 90000000 for Cyprus</value>
   </data>
   <data name="set-mobile.mobile_hint" xml:space="preserve">
-    <value>Enter only Cyprus numbers</value>
+    <value>Enter only Cyprus number</value>
   </data>
   <data name="set-mobile.mobile_label" xml:space="preserve">
     <value>What mobile phone number we can use to contact you?</value>
