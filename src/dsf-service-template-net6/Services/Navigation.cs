@@ -190,6 +190,7 @@ namespace Dsf.Service.Template.Services
             //First add current page to History
 
             AddHistoryLinks("/" + currPage, fromReview);
+            
             var sections = _userSession!.GetNavLink();
             int index = sections!.FindIndex(x => x.Name == sectionName);
             var section = sections.Find(x => x.Name == sectionName);

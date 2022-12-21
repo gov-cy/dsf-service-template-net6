@@ -111,9 +111,9 @@ namespace Dsf.Service.Template.Pages
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.use_other==true)
+            if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.UseOther==true)
             {
-                Mobile = sessionData.mobile.FormatMobile();
+                Mobile = sessionData.Mobile.FormatMobile();
 
                 return true;
             }
@@ -127,13 +127,14 @@ namespace Dsf.Service.Template.Pages
             if (!string.IsNullOrEmpty(mobile))
             {
                 string formatMob = mobile;
+                //if user input= 0035799876543 
                 //Remove - and spaces
                 formatMob = formatMob.Replace("-", "");
                 formatMob = formatMob.Replace(" ", "");
                 //Replace + with 00
-                formatMob = formatMob.Trim().StartsWith("+") ? formatMob.Replace("+", "00") : formatMob;
+                formatMob = formatMob.Trim().StartsWith("+") ? $"00{formatMob.Substring(1)}" : formatMob;
                 //Add 00357 if cyprus
-                formatMob = !formatMob.StartsWith("00") ? "00357" + formatMob : formatMob;
+                formatMob = !formatMob.StartsWith("009") ? $"003579{formatMob.Substring(3)}" : formatMob;
 
                 return formatMob;
             }
@@ -171,9 +172,9 @@ namespace Dsf.Service.Template.Pages
         { // Update the class before validation
             string typemob = Mobile;
             Mobile = SetMobile(Mobile);
-            MobEdit.mobile = Mobile;
-            MobEdit.use_other = true;
-            MobEdit.use_from_api = false;
+            MobEdit.Mobile = Mobile;
+            MobEdit.UseOther = true;
+            MobEdit.UseFromApi = false;
             MobEdit.validation_mode = ValidationMode.Edit;           
             FluentValidation.Results.ValidationResult result = _validator.Validate(MobEdit);
             if (!result.IsValid)

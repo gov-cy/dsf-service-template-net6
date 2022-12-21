@@ -24,15 +24,23 @@ namespace Dsf.Service.Template.Data.Validations
             {
                 //Selection page
                 //RuleFor(x => x.email).NotEmpty().NotNull().When(x => x.use_from_api.Equals(true)).WithMessage(EmailNumNotFoundMsg);
-                RuleFor(x => x.use_from_api).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(EmailNoSelectionMsg);
+                RuleFor(x => x.UseFromApi)
+                .Equal(true)
+                .When(x => x.UseOther.Equals(false))
+                .WithErrorCode("email-selection.require_check")
+                .WithMessage(EmailNoSelectionMsg);
             });
             //Edit page
             When(p => p.validation_mode.Equals(ValidationMode.Edit), () =>
             {
-                RuleFor(p => p.email)
+                RuleFor(p => p.Email)
                                         .Cascade(CascadeMode.Stop)
-                                        .NotEmpty().WithMessage(EmailMessage)
-                                        .Must(_checker.IsEmailValid).WithMessage(EmailMessage);
+                                        .NotEmpty()
+                                        .WithErrorCode("set-email.require_check")
+                                        .WithMessage(EmailMessage)
+                                        .Must(_checker.IsEmailValid)
+                                        .WithErrorCode("set-email.require_check")
+                                        .WithMessage(EmailMessage);
             });
  
         }

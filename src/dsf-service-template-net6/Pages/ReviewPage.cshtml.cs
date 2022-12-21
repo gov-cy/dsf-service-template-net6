@@ -93,12 +93,12 @@ namespace Dsf.Service.Template.Pages
         {
             bool ret = true;
             var mobSelect = _userSession!.GetUserMobileData()!;
-            ret_mobile = mobSelect.mobile;
+            ret_mobile = mobSelect.Mobile;
             var Nav = _userSession.GetNavLink()!;
             var section = Nav.Find(p => p.Name == "Mobile");
             useMobileEditOnly = section!.Type == SectionType.InputOnly ? true : false;
             var emailSelect = _userSession.GetUserEmailData()!;
-            ret_email = emailSelect.email;
+            ret_email = emailSelect.Email;
             section = Nav.Find(p => p.Name == "Email");
             useEmailEditOnly = section!.Type == SectionType.InputOnly ? true : false;
             return ret;

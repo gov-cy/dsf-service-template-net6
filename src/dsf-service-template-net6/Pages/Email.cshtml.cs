@@ -104,11 +104,11 @@ namespace Dsf.Service.Template.Pages
             if (string.IsNullOrEmpty(res?.Data?.Email))
             {
 
-                EmailSel.email = User.Claims.First(c => c.Type == "email").Value;
+                EmailSel.Email = User.Claims.First(c => c.Type == "email").Value;
             }
             else
             {
-                EmailSel.email = res.Data.Email;
+                EmailSel.Email = res.Data.Email;
             }
         }
         private bool BindData()
@@ -116,17 +116,17 @@ namespace Dsf.Service.Template.Pages
             var selectedoptions = _userSession.GetUserEmailData();
             if (selectedoptions != null)
             {
-                if (selectedoptions.use_from_api)
+                if (selectedoptions.UseFromApi)
                 {
                     CrbEmail = "1";
                 }
-                else if (selectedoptions.use_other && (selectedoptions.email == User.Claims.First(c => c.Type == "email").Value || string.IsNullOrEmpty(selectedoptions.email)))
+                else if (selectedoptions.UseOther && (selectedoptions.Email == User.Claims.First(c => c.Type == "email").Value || string.IsNullOrEmpty(selectedoptions.Email)))
                 {
                     //code use when user hit back button on edit page
                     CrbEmail = "1";
-                    EmailSel.use_from_api = true;
-                    EmailSel.use_other = false;
-                    EmailSel.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
+                    EmailSel.UseFromApi = true;
+                    EmailSel.UseOther = false;
+                    EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
                     _userSession.SetUserEmailData(EmailSel);
                 }
                 else
@@ -196,31 +196,31 @@ namespace Dsf.Service.Template.Pages
         {
             if (CrbEmail == "1")
             {
-                EmailSel.use_from_api = true;
-                EmailSel.use_other = false;
-                EmailSel.email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
+                EmailSel.UseFromApi = true;
+                EmailSel.UseOther = false;
+                EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
 
             }
             else if (CrbEmail == "2")
             {
-                EmailSel.use_from_api = false;
-                EmailSel.use_other = true;
-                if (review && !string.IsNullOrEmpty(_userSession.GetUserEmailData()?.email) && _userSession.GetUserEmailData()?.use_from_api == true)
+                EmailSel.UseFromApi = false;
+                EmailSel.UseOther = true;
+                if (review && !string.IsNullOrEmpty(_userSession.GetUserEmailData()?.Email) && _userSession.GetUserEmailData()?.UseFromApi == true)
                 {
                     //Reset
-                    EmailSel.email = "";
+                    EmailSel.Email = "";
                 }
                 else
                 {
-                    EmailSel.email = string.IsNullOrEmpty(_userSession.GetUserEmailData()?.email) ? "" : _userSession.GetUserEmailData()!.email;
+                    EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserEmailData()?.Email) ? "" : _userSession.GetUserEmailData()!.Email;
                 }
 
             }
             else
             {
-                EmailSel.use_from_api = false;
-                EmailSel.use_other = false;
-                EmailSel.email = "";
+                EmailSel.UseFromApi = false;
+                EmailSel.UseOther = false;
+                EmailSel.Email = "";
             }
             if (!review && _userSession.GetUserEmailData()==null) 
             {
@@ -245,7 +245,7 @@ namespace Dsf.Service.Template.Pages
 
             //Set back and Next Link
 
-            if (EmailSel.use_other)
+            if (EmailSel.UseOther)
             {
                 NextLink = _nav.SetLinks("email-selection", "Email", review, "No");
             }
