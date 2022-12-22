@@ -75,7 +75,7 @@ namespace Dsf.Service.Template.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "mobile")
+                if (Item.PropertyName == nameof(MobEdit.Mobile))
                 {
                     ErrorsDesc += "<a href='#mobile'>" + Item.ErrorMessage + "</a>";
                     MobileErrorClass = Item.ErrorMessage;

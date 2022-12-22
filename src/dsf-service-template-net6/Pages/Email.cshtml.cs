@@ -79,7 +79,7 @@ namespace Dsf.Service.Template.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "use_from_api" || Item.PropertyName == "email")
+                if (Item.PropertyName == nameof(EmailSel.UseFromApi) || Item.PropertyName == nameof(EmailSel.Email))
                 {
                     ErrorsDesc += "<a href='#crbEmail'>" + Item.ErrorMessage + "</a>";
                     EmailSelection = Item.ErrorMessage;

@@ -73,7 +73,7 @@ namespace Dsf.Service.Template.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "use_from_api" || Item.PropertyName == "mobile")
+                if (Item.PropertyName == nameof(MobileSel.UseFromApi) || Item.PropertyName == nameof(MobileSel.Mobile))
                 {
                     ErrorsDesc += "<a href='#crbMobile'>" + Item.ErrorMessage + "</a>";
                     MobileSelection = Item.ErrorMessage;

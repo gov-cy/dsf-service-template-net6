@@ -75,7 +75,7 @@ namespace Dsf.Service.Template.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "email")
+                if (Item.PropertyName == nameof(emailEdit.Email))
                 {
                     ErrorsDesc += "<a href='#email'>" + Item.ErrorMessage + "</a>";
                     EmailErrorClass = Item.ErrorMessage;
