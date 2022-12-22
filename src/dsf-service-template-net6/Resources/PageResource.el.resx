@@ -339,7 +339,7 @@
     <value>Ενημερώστε τη διεύθυνση email σας</value>
   </data>
   <data name="set-mobile.mobile_hint" xml:space="preserve">
-    <value>Για αριθμούς εκτός Κύπρου, συμπεριλάβετε και τον κωδικό χώρας</value>
+    <value>Καταχωρήστε μόνο κυπριακό αριθμό</value>
   </data>
   <data name="set-mobile.mobile_label" xml:space="preserve">
     <value>Ποιον αριθμό κινητού τηλεφώνου μπορούν να χρησιμοποιήσουμε για να επικοινωνούμε μαζί σας;</value>

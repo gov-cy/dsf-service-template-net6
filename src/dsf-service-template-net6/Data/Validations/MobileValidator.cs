@@ -22,16 +22,26 @@ namespace Dsf.Service.Template.Data.Validations
             mobValid = _Localizer["set-mobile.format_check"];
             When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
             {
-                RuleFor(x => x.use_from_api).Equal(true).When(x => x.use_other.Equals(false)).WithMessage(MobileNoSelectionMsg);
+                RuleFor(x => x.UseFromApi)
+                .Equal(true)
+                .When(x => x.UseOther.Equals(false))
+                .WithErrorCode("mobile-selection.require_check")
+                .WithMessage(MobileNoSelectionMsg);
             });
             //Edit Mobile
             When(p => p.validation_mode.Equals(ValidationMode.Edit), () =>
             {
-                RuleFor(p => p.mobile)
+                RuleFor(p => p.Mobile)
                  .Cascade(CascadeMode.Stop)
-                 .NotEmpty().WithMessage(mobReq)
-                 .Matches("[0-9]{8,15}$").WithMessage(mobValid)
-                 .Must(_checker.IsMobileValid).WithMessage(mobValid); 
+                 .NotEmpty()
+                 .WithErrorCode("set-mobile.require_check") //can be used for internal changes i.e. Unit test 
+                 .WithMessage(mobReq)
+                 .Matches("[0-9]{8,15}$")
+                 .WithErrorCode("set-mobile.format_check")
+                 .WithMessage(mobValid)
+                 .Must(_checker.IsMobileValid)
+                 .WithErrorCode("set-mobile.format_check")
+                 .WithMessage(mobValid); 
             });
         }
     }    

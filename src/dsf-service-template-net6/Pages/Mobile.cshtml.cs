@@ -73,7 +73,7 @@ namespace Dsf.Service.Template.Pages
             //Then Build Summary Error
             foreach (ValidationFailure Item in result.Errors)
             {
-                if (Item.PropertyName == "use_from_api" || Item.PropertyName == "mobile")
+                if (Item.PropertyName == nameof(MobileSel.UseFromApi) || Item.PropertyName == nameof(MobileSel.Mobile))
                 {
                     ErrorsDesc += "<a href='#crbMobile'>" + Item.ErrorMessage + "</a>";
                     MobileSelection = Item.ErrorMessage;
@@ -110,7 +110,7 @@ namespace Dsf.Service.Template.Pages
             if (!string.IsNullOrEmpty(res?.Data?.MobileTelephone))
             {
 
-                MobileSel.mobile = res.Data.MobileTelephone;
+                MobileSel.Mobile = res.Data.MobileTelephone;
             }
 
         }
@@ -119,17 +119,17 @@ namespace Dsf.Service.Template.Pages
             var selectedoptions = GetSessionData();
             if (selectedoptions != null)
             {
-                if (selectedoptions.use_from_api)
+                if (selectedoptions.UseFromApi)
                 {
                     CrbMobile = "1";
                 }
-                else if (selectedoptions.use_other && (selectedoptions?.mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ||string.IsNullOrEmpty(selectedoptions?.mobile)) )
+                else if (selectedoptions.UseOther && (selectedoptions?.Mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ||string.IsNullOrEmpty(selectedoptions?.Mobile)) )
                 {
                     //code use when user hit back button on edit page
                     CrbMobile = "1";
-                    MobileSel.use_from_api = true;
-                    MobileSel.use_other = false;
-                    MobileSel.mobile = _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ?? "";
+                    MobileSel.UseFromApi = true;
+                    MobileSel.UseOther = false;
+                    MobileSel.Mobile = _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ?? "";
                     _userSession!.SetUserMobileData(MobileSel);
 
                 }
@@ -173,29 +173,29 @@ namespace Dsf.Service.Template.Pages
             //Set class Model before validation
             if (CrbMobile == "1")
             {
-                MobileSel.use_from_api = true;
-                MobileSel.use_other = false;
-                MobileSel.mobile = _userSession!.GetUserPersonalData()!.Data!.MobileTelephone;
+                MobileSel.UseFromApi = true;
+                MobileSel.UseOther = false;
+                MobileSel.Mobile = _userSession!.GetUserPersonalData()!.Data!.MobileTelephone;
             }
             else if (CrbMobile == "2")
             {
-                MobileSel.use_from_api = false;
-                MobileSel.use_other = true;
-                if (review && !string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile) && _userSession.GetUserMobileData()?.use_from_api == true)
+                MobileSel.UseFromApi = false;
+                MobileSel.UseOther = true;
+                if (review && !string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) && _userSession.GetUserMobileData()?.UseFromApi == true)
                 {
                     //Reset
-                    MobileSel.mobile = "";
+                    MobileSel.Mobile = "";
                 }
                 else
                 {
-                    MobileSel.mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.mobile) ? "" : _userSession.GetUserMobileData()!.mobile;
+                    MobileSel.Mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) ? "" : _userSession.GetUserMobileData()!.Mobile;
                 }
                
             }
             else
             {
-                MobileSel.use_from_api = false;
-                MobileSel.use_other = false;
+                MobileSel.UseFromApi = false;
+                MobileSel.UseOther = false;
             }
             if (!review && _userSession.GetUserMobileData() == null)
             {
@@ -223,7 +223,7 @@ namespace Dsf.Service.Template.Pages
 
             //Set back and Next Link
 
-            if (MobileSel.use_other)
+            if (MobileSel.UseOther)
             {
                 NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "No");
             }

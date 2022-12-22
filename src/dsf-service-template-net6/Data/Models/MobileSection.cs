@@ -3,8 +3,8 @@
    
     public class MobileSection:ModelBase
     {
-        public string mobile { get; set; } = "";
-        public bool use_from_api { get; set; }
-        public bool use_other { get; set; }
+        public string Mobile { get; set; } = "";
+        public bool UseFromApi { get; set; }
+        public bool UseOther { get; set; }
     }
 }

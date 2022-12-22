@@ -27,9 +27,9 @@ namespace Dsf.Service.Template.Services
             if (result)
             {
 
-                Mobile = Mobile.StartsWith("00357") && Mobile.Substring(5).Length == 8 ? Mobile.Substring(5) : Mobile;
+                Mobile = Mobile.StartsWith("003579") && Mobile.Substring(6).Length == 7 ? Mobile.Substring(5) : Mobile;
 
-                bool isCyprusPhone = (Mobile.StartsWith("00357") && Mobile.Length == 8) || Mobile.Length == 8;
+                bool isCyprusPhone = Mobile.Length == 8;
 
                 //Call Api
                 string urlToValidate = "api/v1/Validation/cy-mobile-number-validation/" + Mobile; 

@@ -3,9 +3,9 @@
  
     public class EmailSection:ModelBase
     {
-        public string email { get; set; } = "";
-        public bool use_from_api { get; set; }
-        public bool use_other { get; set; }
+        public string Email { get; set; } = "";
+        public bool UseFromApi { get; set; }
+        public bool UseOther { get; set; }
         
     }
 }
