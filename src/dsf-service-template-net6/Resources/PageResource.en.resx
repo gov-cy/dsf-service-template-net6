@@ -118,45 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="accessibility-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;This is an accessibility statement from the Ministry of Labour and Social Insurance’s service to apply for a child birth grant.&lt;/p&gt;
-      &lt;h2&gt;Conformance status&lt;/h2&gt;
-      &lt;p&gt;The &lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;Web Content Accessibility Guidelines&lt;/a&gt; (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. The  service is partially conformant with WCAG 2.1 level AA. Partially conformant means that some parts of the content do not fully conform to the accessibility standard.&lt;/p&gt;
-      &lt;h2&gt;Compatibility with browsers and assistive technology&lt;/h2&gt;
-      &lt;p&gt;The service is not compatible with:&lt;/p&gt;
-      &lt;ul&gt;  
-        &lt;li&gt;Internet Explorer 9 and older&lt;/li&gt;
-        &lt;li&gt;Safari browser on Windows computers&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;h2&gt;Limitations and alternatives&lt;/h2&gt;
-      &lt;p&gt;Despite our best efforts to ensure accessibility of the service, there may be some limitations. Below is a description of known limitations, and potential solutions. Please contact us if you observe an issue not listed below.&lt;/p&gt;
-      &lt;p&gt;Header images are a known limitation for the service. Images do not have text alternatives because we have not set the ‘alt’ attribute. We'll be adding an empty alt attribute, as the images are used for decorative purposes.&lt;/p&gt;
-      &lt;p&gt;Javascript is required for the service to function properly.&lt;/p&gt;
-      &lt;h2&gt;Assessment approach&lt;/h2&gt;
-      &lt;p&gt;The Digital Services Factory assessed the accessibility of the service using:&lt;/p&gt;
-      &lt;ul&gt;  
-        &lt;li&gt;&lt;a href="https://wave.webaim.org/" target="_blank"&gt;WebAIM’s WAVE Evaluation tool&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="https://developers.google.com/web/tools/lighthouse" target="_blank"&gt;Google Chrome’s Lighthouse tool&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;h2&gt;Feedback and complaints&lt;/h2&gt;
-      &lt;p&gt;We welcome your feedback on the accessibility of the service. Please let us know if you encounter accessibility barriers when using it:&lt;/p&gt;
-      &lt;ul&gt;  
-        &lt;li&gt;Email: &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;p&gt;We try to respond to feedback within 30 working days&lt;/p&gt;
-      &lt;p&gt;
-        &lt;span class="govcy-d-block"&gt;If we do not reply, or do not fix the issue, you can send a complaint to:&lt;/span&gt;
-        &lt;span class="govcy-d-block"&gt;Deputy Minister of Research, Innovation, and Digital Policy&lt;/span&gt;
-        &lt;span class="govcy-d-block"&gt;Vyronos 29 Avenue&lt;/span&gt;
-        &lt;span class="govcy-d-block"&gt;1096 Nicosia&lt;/span&gt;
-        &lt;span class="govcy-d-block"&gt;Cyprus &lt;/span&gt;
-      &lt;/p&gt;
-      &lt;p&gt;Or you can email: &lt;a href="mailto:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
-      &lt;p&gt;If you are not satisfied with their response, you can &lt;a href="https://eforms.mof.gov.cy/eforms/eforms.nsf/complaintformombudsman_en/complaintformombudsman_en?OpenForm" target="_blank"&gt; send a complaint to the Commissioner for Administration and the Protection of Human Rights&lt;/a&gt; (Ombudsman).&lt;/p&gt;
-      &lt;h2&gt;Date&lt;/h2&gt;
-      &lt;p&gt;This statement was created on 28 March 2022 using the W3C Accessibility Statement Generator Tool.&lt;/p&gt;</value>
+    <value>&lt;p&gt;This is an accessibility statement for the Civil Registry and Migration Department’s service ‘Update my details’.&lt;/p&gt;
+&lt;h2&gt;Conformance status&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;Web Content Accessibility Guidelines&lt;/a&gt; (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. The service is fully conformant with WCAG 2.1 level AA.&lt;/p&gt;
+&lt;h2&gt;Compatibility with browsers and assistive technology&lt;/h2&gt;
+&lt;p&gt;The service is not compatible with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Internet Explorer 9 and older&lt;/li&gt;
+&lt;li&gt;Safari browser on Windows computers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Limitations and alternatives&lt;/h2&gt;
+&lt;p&gt;Despite our best efforts to ensure accessibility of the service, there may be some limitations. Below is a description of known limitations, and potential solutions. Please contact us if you observe an issue not listed below.&lt;/p&gt;
+&lt;p&gt;Javascript is required for the service to function properly.&lt;/p&gt;
+&lt;h2&gt;Assessment approach&lt;/h2&gt;
+&lt;p&gt;The Digital Services Factory assessed the accessibility of the service using:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wave.webaim.org/" target="_blank"&gt;WebAIM’s WAVE Evaluation tool&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developers.google.com/web/tools/lighthouse" target="_blank"&gt;Google Chrome’s Lighthouse tool&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Feedback and complaints&lt;/h2&gt;
+&lt;p&gt;We welcome your feedback on the accessibility of the service. Please let us know if you encounter accessibility barriers when using it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Email: &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We try to respond to feedback within 30 working days.&lt;/p&gt;
+&lt;p&gt;If we do not reply, or do not fix the issue, you can send a complaint to:&lt;/p&gt;
+&lt;p&gt;Deputy Minister of Research, Innovation, and Digital Policy&lt;br&gt;Vyronos 29 Avenue1096&lt;br&gt;Nicosia&lt;br&gt;Cyprus&lt;/p&gt;
+&lt;p&gt;Or you can email: &lt;a href="mailto:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you are not satisfied with their response, you can &lt;a href="https://eforms.mof.gov.cy/eforms/eforms.nsf/complaintformombudsman_en/complaintformombudsman_en?OpenForm" target="_blank"&gt;send a complaint to the Commissioner for Administration and the Protection of Human Rights (Ombudsman)&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Date&lt;/h2&gt;
+&lt;p&gt;This statement was created on 4 November 2022 based upon the W3C Accessibility Statement Generator Tool.&lt;/p&gt;</value>
   </data>
   <data name="accessibility-statement.title" xml:space="preserve">
-    <value>Address Change</value>
+    <value>Accessibility statement</value>
   </data>
   <data name="application-response.header_ref" xml:space="preserve">
     <value>Your Reference Number</value>
@@ -165,22 +159,26 @@
     <value>Your application has been sent</value>
   </data>
   <data name="cookie-policy.instructions" xml:space="preserve">
-    <value>&lt;p&gt;The service for Citizen Personal Data Change (χχχχχχχ.service.gov.cy) only uses cookies that are strictly necessary for the correct functioning of the website.&lt;/p&gt;
-      &lt;h2&gt;Cookies in use&lt;/h2&gt;
-      &lt;h3&gt;DSFServiceDataCookie&lt;/h3&gt;
-      &lt;p&gt;This cookie contains encrypted information that’s entered into the form. 
-It is automatically deleted after the user logs out, or after 14 days. &lt;/p&gt;
-      &lt;h3&gt;INGRESSCOOKIE&lt;/h3&gt;
-      &lt;p&gt;This cookie ensures that information sent to our server goes to the correct place. 
-It is automatically deleted after the user closes their browser.&lt;/p&gt;
-      &lt;h2&gt;Using CY Login&lt;/h2&gt;
-      &lt;p&gt;When you sign in using CY Login (also known as ‘Ariadni’) to access the child birth grant service, it will save &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/privacy" target="_blank"&gt;additional cookies on your device.&lt;/a&gt; &lt;/p&gt;        
-      &lt;h2&gt;How to control cookies&lt;/h2&gt;
-      &lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Find out how to control and delete cookies on your device.&lt;/a&gt;
-      &lt;p&gt;You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.&lt;/p&gt;</value>
+    <value>&lt;p&gt;The ‘Update my personal details’ service (update-my-details.service.gov.cy) only uses cookies that are strictly necessary for it to function correctly.&lt;/p&gt;
+&lt;h2&gt;Cookies in use&lt;/h2&gt;
+&lt;p&gt;All of the following cookies are deleted 30 minutes after you close your browser.&lt;/p&gt;
+&lt;h2&gt;AppDataSessionCookie&lt;/h2&gt;
+&lt;p&gt;This cookie stores a ‘session ID’ which is used to identify your browser session.&lt;/p&gt;
+&lt;h2&gt;AspNetCore.Antiforgery&lt;/h2&gt;
+&lt;p&gt;This cookie makes sure that information sent to the server comes from our form, and not elsewhere.&lt;/p&gt;
+&lt;h2&gt;AspNetCore.Culture&lt;/h2&gt;
+&lt;p&gt;This cookie stores your language preference.&lt;/p&gt;
+&lt;h2&gt;DsfCyLoginAuthCookie&lt;/h2&gt;
+&lt;p&gt;This cookie is set when you’ve successfully signed in using CY Login.&lt;/p&gt;
+&lt;h2&gt;Using CY Login&lt;/h2&gt;
+&lt;p&gt;When you sign in using CY Login (also known as ‘Ariadni’) to use this service, it will save &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/privacy" target="_blank"&gt;additional cookies on your device&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;How to control cookies&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Find out how to control and delete cookies on your device.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can delete all cookies that are already on your device and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.&lt;/p&gt;</value>
   </data>
   <data name="cookie-policy.title" xml:space="preserve">
-    <value>Cookies on the Mock on Citizen Personal  Data Change</value>
+    <value>Cookies used by the
+’Update my personal details’ service</value>
   </data>
   <data name="email-selection.legend" xml:space="preserve">
     <value>Do you want to use this email ?</value>
@@ -238,53 +236,50 @@ It is automatically deleted after the user closes their browser.&lt;/p&gt;
     <value>Check your CY Login account</value>
   </data>
   <data name="privacy-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;This privacy policy explains how Social Insurance Services (SIS) uses information about you, in order to process your application for a child birth grant.&lt;/p&gt;
-      &lt;h2&gt;Types of information collected and used&lt;/h2&gt;
-      &lt;p&gt;SIS collects the following information from you directly:&lt;/p&gt;
-      &lt;ul&gt;  
-        &lt;li&gt;your preferred email address&lt;/li&gt;
-        &lt;li&gt;your phone number&lt;/li&gt;
-        &lt;li&gt;your international bank account number (IBAN)&lt;/li&gt;
-        &lt;li&gt;your SWIFT code (if you have a bank account outside of Cyprus)&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;p&gt;SIS collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
-      &lt;ul&gt;  
-        &lt;li&gt;your name&lt;/li&gt;
-        &lt;li&gt;email address&lt;/li&gt;
-        &lt;li&gt;your social insurance number&lt;/li&gt;
-		&lt;li&gt;your identification (or alien registration) number&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;p&gt;SIS collects the following information from the Civil Registry and Migration Department:&lt;/p&gt;
-      &lt;ul&gt;  
-        &lt;li&gt;your date of birth, sex, nationality and community you belong to&lt;/li&gt;
-        &lt;li&gt;the following information about your child or children:&lt;ul&gt;&lt;li&gt;name, date of birth, sex and identification (or alien registration) number&lt;/li&gt; &lt;li&gt;the nationality and community your child or children belong to&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
-         &lt;li&gt;the following information about your husband or civil partner (where appropriate, and if your child is under 12 months old):&lt;ul&gt;&lt;li&gt;name, date of birth, identification (or alien registration) number, and sex&lt;/li&gt; &lt;li&gt;nationality and community they belong to&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;p&gt;SIS uses the following information about you from its own records:&lt;/p&gt;
-      &lt;ul&gt;  
-        &lt;li&gt;your social insurance contributions&lt;/li&gt;
-        &lt;li&gt;your husband’s or civil partner’s social insurance contributions (where appropriate)&lt;/li&gt;
-        &lt;li&gt;your IBAN (if it is already stored)&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;h2&gt;Why they use your information&lt;/h2&gt;
-      &lt;p&gt;This information will be collated for the purposes of programmatically checking your eligibility for the payment, and then used by examiners at SIS.&lt;/p&gt;
-      &lt;p&gt;Without access to the information listed above, SIS is not able to process your application.&lt;/p&gt;
-      &lt;h2&gt;How your personal information is stored&lt;/h2&gt;
-      &lt;p&gt;The information contained within your application is stored securely on servers based in Cyprus.&lt;/p&gt;
-      &lt;h2&gt;Your rights&lt;/h2&gt;
-      &lt;p&gt;Contact &lt;a href="mailto:cchristou@sid.mlsi.gov.cy" target="_blank"&gt;cchristou@sid.mlsi.gov.cy&lt;/a&gt; if you want to:&lt;/p&gt;
-      &lt;ul&gt; 
-        &lt;li&gt;get a copy of the information held about you&lt;/li&gt;
-        &lt;li&gt;restrict the processing of your data&lt;/li&gt;
-        &lt;li&gt;correct or update your personal information&lt;/li&gt;
-        &lt;li&gt;object to the processing of your personal information&lt;/li&gt;
-        &lt;li&gt;have your information transferred to another organisation or to you&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;h2&gt;Complaints&lt;/h2&gt;
-      &lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt; contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;</value>
+    <value>&lt;p&gt;This privacy policy explains how the Civil Registry and Migration Department (CRMD) collects and stores information about you.&lt;/p&gt;
+&lt;h2&gt;Types of information collected and used&lt;/h2&gt;
+&lt;p&gt;CRMD collects the following information from you through this website:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;your preferred email address&lt;/li&gt;
+&lt;li&gt;your mobile phone number&lt;/li&gt;
+&lt;li&gt;your postal address&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CRMD collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;your CY Login user name&lt;/li&gt;
+&lt;li&gt;your email address&lt;/li&gt;
+&lt;li&gt;your personal identification&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;CRMD combines the information you provide in this service with information it already holds, including your:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;name&lt;/li&gt;
+&lt;li&gt;date of birth&lt;/li&gt;
+&lt;li&gt;citizenship&lt;/li&gt;
+&lt;li&gt;postal address (if CRMD has it)&lt;/li&gt;
+&lt;li&gt;phone number (if CRMD has it)&lt;/li&gt;
+&lt;li&gt;email address (if CRMD has it)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;How your personal information is stored&lt;/h2&gt;
+&lt;p&gt;CRMD has created this service to make sure it has the correct and up to date versions of the information listed above. This is so CRMD is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
+&lt;p&gt;Your age and citizenship are used to check you’re eligible to use this service.&lt;/p&gt;
+&lt;p&gt;This information is captured and stored by your consent.&lt;/p&gt;
+&lt;h2&gt;How your personal information is stored&lt;/h2&gt;
+&lt;p&gt;Your information is stored securely on servers based in Cyprus.&lt;/p&gt;
+&lt;h2&gt;Your rights&lt;/h2&gt;
+&lt;p&gt;Contact &lt;a href="mailto:dpo@crmd.moi.gov.cy" target="_blank"&gt;dpo@crmd.moi.gov.cy&lt;/a&gt; if you want to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;get a copy of the information held about you&lt;/li&gt;
+&lt;li&gt;withdraw your consent&lt;/li&gt;
+&lt;li&gt;restrict the processing of your data&lt;/li&gt;
+&lt;li&gt;correct or update your personal information&lt;/li&gt;
+&lt;li&gt;object to the processing of your personal information&lt;/li&gt;
+&lt;li&gt;have your information transferred to another organisation or to you&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Complaints&lt;/h2&gt;
+&lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
   <data name="privacy-statement.title" xml:space="preserve">
-    <value>Πολιτική απορρήτου – τα προσωπικά σας στοιχεία</value>
+    <value>Privacy policy – your personal information</value>
   </data>
   <data name="review.address" xml:space="preserve">
     <value>Address</value>
