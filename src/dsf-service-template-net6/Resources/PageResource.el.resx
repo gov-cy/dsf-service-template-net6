@@ -280,37 +280,25 @@
   <data name="privacy-statement.title" xml:space="preserve">
     <value>Πολιτική απορρήτου – τα προσωπικά σας στοιχεία</value>
   </data>
-  <data name="review.address" xml:space="preserve">
+  <data name="review-page.address" xml:space="preserve">
     <value>Διεύθυνση</value>
   </data>
-  <data name="review.address_details" xml:space="preserve">
+  <data name="review-page.address_details" xml:space="preserve">
     <value>Αλλαγή Διεύθυνσης</value>
   </data>
-  <data name="review.applicant_name" xml:space="preserve">
+  <data name="review-page.applicant_name" xml:space="preserve">
     <value>Όνομα</value>
   </data>
-  <data name="review.email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="review.email_details" xml:space="preserve">
+  <data name="review-page.email_details" xml:space="preserve">
     <value>Αλλαγή email</value>
   </data>
-  <data name="review.mobile" xml:space="preserve">
-    <value>Αριθμός κινητού τηλεφώνου</value>
-  </data>
-  <data name="review.mobile_details" xml:space="preserve">
+  <data name="review-page.mobile_details" xml:space="preserve">
     <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
   </data>
-  <data name="review.p1" xml:space="preserve">
-    <value>Τα στοιχεία επικοινωνίας σας</value>
-  </data>
-  <data name="review.p2" xml:space="preserve">
-    <value>Ελέγξτε ότι οι παρακάτω πληροφορίες είναι σωστές.</value>
-  </data>
-  <data name="review.p3" xml:space="preserve">
+  <data name="review-page.p3" xml:space="preserve">
     <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
   </data>
-  <data name="review.title" xml:space="preserve">
+  <data name="review-page.title" xml:space="preserve">
     <value />
   </data>
   <data name="server-error.instructions" xml:space="preserve">
@@ -342,5 +330,21 @@
   </data>
   <data name="set-mobile.title" xml:space="preserve">
     <value>Ενημερώστε τον αριθμό του κινητού σας</value>
+  </data>
+  <data name="review-page.email" xml:space="preserve">
+    <value>Email</value>
+    <comment>review-page</comment>
+  </data>
+  <data name="review-page.mobile" xml:space="preserve">
+    <value>Αριθμός κινητού τηλεφώνου</value>
+    <comment>review-page</comment>
+  </data>
+  <data name="review-page.p2" xml:space="preserve">
+    <value>Ελέγξτε ότι οι παρακάτω πληροφορίες είναι σωστές.</value>
+    <comment>review-page</comment>
+  </data>
+  <data name="review-page.p1" xml:space="preserve">
+    <value>Τα στοιχεία επικοινωνίας σας</value>
+    <comment>review-page</comment>
   </data>
 </root>
