@@ -1,0 +1,10 @@
+﻿@page "/server-error"
+@model Dsf.Service.Template.Pages.ServerErrorModel
+
+
+@{
+    Layout = "_LayoutNoBackLink";
+    ViewData["Title"] = Localizer["server-error.title"];
+}
+<h1>@Localizer["server-error.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("server-error.instructions")
