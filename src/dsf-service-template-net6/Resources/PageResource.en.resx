@@ -153,7 +153,7 @@
     <value>Accessibility statement</value>
   </data>
   <data name="application-response.header_ref" xml:space="preserve">
-    <value>Your Reference Number DSF2204111303108618</value>
+    <value>Your Reference Number</value>
   </data>
   <data name="application-response.header_title" xml:space="preserve">
     <value>Your application has been sent</value>
