@@ -200,7 +200,7 @@ namespace Dsf.Service.Template.Pages
             if (!review && _userSession.GetUserMobileData() == null)
             {
                 
-                MobileSel.validation_mode = ValidationMode.Select;
+                MobileSel.ValidationMode = ValidationMode.Select;
                 //Validate Model
                 FluentValidation.Results.ValidationResult result = _validator.Validate(MobileSel);
                 if (!result.IsValid)
@@ -211,7 +211,7 @@ namespace Dsf.Service.Template.Pages
             }
             else
             {
-                MobileSel.validation_mode = ValidationMode.Edit;
+                MobileSel.ValidationMode = ValidationMode.Edit;
             }
 
 

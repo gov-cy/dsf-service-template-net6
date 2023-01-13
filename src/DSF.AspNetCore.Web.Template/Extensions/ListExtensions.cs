@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Dsf.Service.Template.Extensions
 {
     public static class ListExtensions

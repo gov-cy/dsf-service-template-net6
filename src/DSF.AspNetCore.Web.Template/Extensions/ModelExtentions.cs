@@ -5,7 +5,6 @@ namespace Dsf.Service.Template.Extensions
 {
     public static class ModelExtentions
     {
-
         public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState, string className = "")
         {
             if (!result.IsValid)
@@ -25,7 +24,6 @@ namespace Dsf.Service.Template.Extensions
                     {
                         modelState.AddModelError(className + "." + error.PropertyName, error.ErrorMessage);
                     }
-
                 }
             }
         }

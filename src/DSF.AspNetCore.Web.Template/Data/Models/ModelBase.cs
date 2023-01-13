@@ -4,10 +4,9 @@
     {
         Select,
         Edit
-
     }
     public class ModelBase
     {
-        public ValidationMode validation_mode { get; set; }
+        public ValidationMode ValidationMode { get; set; }
     }
 }

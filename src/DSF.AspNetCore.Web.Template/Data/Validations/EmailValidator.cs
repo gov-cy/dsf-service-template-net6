@@ -7,10 +7,12 @@ namespace Dsf.Service.Template.Data.Validations
 {
     public class EmailValidator : AbstractValidator<EmailSection>
     {
-        readonly ICommonApis _checker;
-        readonly IResourceViewLocalizer _Localizer;
-        readonly string emailNoSelectionMsg = string.Empty;
-        readonly string emailMessage = string.Empty;
+        private readonly string emailNoSelectionMsg = string.Empty;
+        private readonly string emailMessage = string.Empty;
+
+        private readonly ICommonApis _checker;
+        private readonly IResourceViewLocalizer _Localizer;
+
         public EmailValidator(IResourceViewLocalizer localizer, ICommonApis checker)
         {
             _checker = checker;
@@ -18,7 +20,7 @@ namespace Dsf.Service.Template.Data.Validations
             emailNoSelectionMsg = _Localizer["email-selection.require_check"];
             emailMessage = _Localizer["set-email.require_check"];
 
-            When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
+            When(p => p.ValidationMode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.UseFromApi)
                     .Equal(true)
@@ -27,7 +29,7 @@ namespace Dsf.Service.Template.Data.Validations
                     .WithMessage(emailNoSelectionMsg);
             });
             //Edit page
-            When(p => p.validation_mode.Equals(ValidationMode.Edit), () =>
+            When(p => p.ValidationMode.Equals(ValidationMode.Edit), () =>
             {
                 RuleFor(p => p.Email)
                     .Cascade(CascadeMode.Stop)

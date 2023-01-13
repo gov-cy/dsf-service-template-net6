@@ -111,7 +111,7 @@ namespace Dsf.Service.Template.Pages
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.UseOther==true)
+            if (sessionData?.ValidationMode==ValidationMode.Edit && sessionData?.UseOther==true)
             {
                 Mobile = sessionData.Mobile.FormatMobile();
 
@@ -176,7 +176,7 @@ namespace Dsf.Service.Template.Pages
             MobEdit.Mobile = Mobile;
             MobEdit.UseOther = true;
             MobEdit.UseFromApi = false;
-            MobEdit.validation_mode = ValidationMode.Edit;           
+            MobEdit.ValidationMode = ValidationMode.Edit;           
             FluentValidation.Results.ValidationResult result = _validator.Validate(MobEdit);
             if (!result.IsValid)
             {

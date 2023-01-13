@@ -224,7 +224,7 @@ namespace Dsf.Service.Template.Pages
             }
             if (!review && _userSession.GetUserEmailData()==null) 
             {
-                EmailSel.validation_mode = ValidationMode.Select;
+                EmailSel.ValidationMode = ValidationMode.Select;
                 //Validate Model
                 FluentValidation.Results.ValidationResult result = _validator.Validate(EmailSel);
                 if (!result.IsValid)
@@ -235,7 +235,7 @@ namespace Dsf.Service.Template.Pages
             }
             else
             {
-                EmailSel.validation_mode = ValidationMode.Edit;
+                EmailSel.ValidationMode = ValidationMode.Edit;
             }
 
             //Model is valid so strore 

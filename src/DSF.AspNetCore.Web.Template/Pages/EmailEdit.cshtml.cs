@@ -108,7 +108,7 @@ namespace Dsf.Service.Template.Pages
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData?.validation_mode == ValidationMode.Edit && sessionData?.UseOther == true) //Mobile always have a selection form
+            if (sessionData?.ValidationMode == ValidationMode.Edit && sessionData?.UseOther == true) //Mobile always have a selection form
             {
                 Email = sessionData.Email;
                 return true;
@@ -148,7 +148,7 @@ namespace Dsf.Service.Template.Pages
             emailEdit.Email = Email;
             emailEdit.UseOther = true;
             emailEdit.UseFromApi = false;
-            emailEdit.validation_mode = ValidationMode.Edit;
+            emailEdit.ValidationMode = ValidationMode.Edit;
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
             {
