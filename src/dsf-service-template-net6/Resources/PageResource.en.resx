@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="accessibility-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;This is an accessibility statement for the Civil Registry and Migration Department’s service ‘Update my details’.&lt;/p&gt;
+    <value>&lt;p&gt;This is an accessibility statement for the XXXXX Department’s service ‘MOCK’.&lt;/p&gt;
 &lt;h2&gt;Conformance status&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;Web Content Accessibility Guidelines&lt;/a&gt; (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. The service is fully conformant with WCAG 2.1 level AA.&lt;/p&gt;
 &lt;h2&gt;Compatibility with browsers and assistive technology&lt;/h2&gt;
@@ -144,7 +144,7 @@
 &lt;p&gt;We try to respond to feedback within 30 working days.&lt;/p&gt;
 &lt;p&gt;If we do not reply, or do not fix the issue, you can send a complaint to:&lt;/p&gt;
 &lt;p&gt;Deputy Minister of Research, Innovation, and Digital Policy&lt;br&gt;Vyronos 29 Avenue1096&lt;br&gt;Nicosia&lt;br&gt;Cyprus&lt;/p&gt;
-&lt;p&gt;Or you can email: &lt;a href="mailto:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Or you can email: &lt;a href="mailto:e:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;If you are not satisfied with their response, you can &lt;a href="https://eforms.mof.gov.cy/eforms/eforms.nsf/complaintformombudsman_en/complaintformombudsman_en?OpenForm" target="_blank"&gt;send a complaint to the Commissioner for Administration and the Protection of Human Rights (Ombudsman)&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Date&lt;/h2&gt;
 &lt;p&gt;This statement was created on 4 November 2022 based upon the W3C Accessibility Statement Generator Tool.&lt;/p&gt;</value>
@@ -153,13 +153,13 @@
     <value>Accessibility statement</value>
   </data>
   <data name="application-response.header_ref" xml:space="preserve">
-    <value>Your Reference Number</value>
+    <value>Your Reference Number DSF2204111303108618</value>
   </data>
   <data name="application-response.header_title" xml:space="preserve">
     <value>Your application has been sent</value>
   </data>
   <data name="cookie-policy.instructions" xml:space="preserve">
-    <value>&lt;p&gt;The ‘Update my personal details’ service (update-my-details.service.gov.cy) only uses cookies that are strictly necessary for it to function correctly.&lt;/p&gt;
+    <value>&lt;p&gt;The ‘MOCK’ service (url) only uses cookies that are strictly necessary for it to function correctly.&lt;/p&gt;
 &lt;h2&gt;Cookies in use&lt;/h2&gt;
 &lt;p&gt;All of the following cookies are deleted 30 minutes after you close your browser.&lt;/p&gt;
 &lt;h2&gt;AppDataSessionCookie&lt;/h2&gt;
@@ -178,7 +178,7 @@
   </data>
   <data name="cookie-policy.title" xml:space="preserve">
     <value>Cookies used by the
-’Update my personal details’ service</value>
+’MOCK’ service</value>
   </data>
   <data name="email-selection.legend" xml:space="preserve">
     <value>Do you want to use this email ?</value>
@@ -236,37 +236,36 @@
     <value>Check your CY Login account</value>
   </data>
   <data name="privacy-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;This privacy policy explains how the Civil Registry and Migration Department (CRMD) collects and stores information about you.&lt;/p&gt;
+    <value>&lt;p&gt;This privacy policy explains how the XXXXX Department collects and stores information about you.&lt;/p&gt;
 &lt;h2&gt;Types of information collected and used&lt;/h2&gt;
-&lt;p&gt;CRMD collects the following information from you through this website:&lt;/p&gt;
+&lt;p&gt;XXXXX collects the following information from you through this website:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;your preferred email address&lt;/li&gt;
 &lt;li&gt;your mobile phone number&lt;/li&gt;
-&lt;li&gt;your postal address&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;CRMD collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;XXXXX collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;your CY Login user name&lt;/li&gt;
 &lt;li&gt;your email address&lt;/li&gt;
 &lt;li&gt;your personal identification&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;CRMD combines the information you provide in this service with information it already holds, including your:&lt;/p&gt;
+&lt;p&gt;XXXXX combines the information you provide in this service with information it already holds, including your:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;name&lt;/li&gt;
 &lt;li&gt;date of birth&lt;/li&gt;
 &lt;li&gt;citizenship&lt;/li&gt;
-&lt;li&gt;postal address (if CRMD has it)&lt;/li&gt;
-&lt;li&gt;phone number (if CRMD has it)&lt;/li&gt;
-&lt;li&gt;email address (if CRMD has it)&lt;/li&gt;
+&lt;li&gt;postal address &lt;/li&gt;
+&lt;li&gt;phone number &lt;/li&gt;
+&lt;li&gt;email address&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;How your personal information is stored&lt;/h2&gt;
-&lt;p&gt;CRMD has created this service to make sure it has the correct and up to date versions of the information listed above. This is so CRMD is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
+&lt;p&gt;XXXXX has created this service to make sure it has the correct and up to date versions of the information listed above. This is so XXXXX is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
 &lt;p&gt;Your age and citizenship are used to check you’re eligible to use this service.&lt;/p&gt;
 &lt;p&gt;This information is captured and stored by your consent.&lt;/p&gt;
 &lt;h2&gt;How your personal information is stored&lt;/h2&gt;
 &lt;p&gt;Your information is stored securely on servers based in Cyprus.&lt;/p&gt;
 &lt;h2&gt;Your rights&lt;/h2&gt;
-&lt;p&gt;Contact &lt;a href="mailto:dpo@crmd.moi.gov.cy" target="_blank"&gt;dpo@crmd.moi.gov.cy&lt;/a&gt; if you want to:&lt;/p&gt;
+&lt;p&gt;Contact &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt; if you want to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;get a copy of the information held about you&lt;/li&gt;
 &lt;li&gt;withdraw your consent&lt;/li&gt;
@@ -279,7 +278,7 @@
 &lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
   <data name="privacy-statement.title" xml:space="preserve">
-    <value>Privacy policy – your personal information</value>
+    <value>Privacy policy – MOCK information</value>
   </data>
   <data name="review.address" xml:space="preserve">
     <value>Address</value>
