@@ -5,7 +5,7 @@ Generally, DSF-Ready Services are composed of a Web application (including the D
 
 ## DSF templates to serve as a quickstart guide for developing DSF-ready services:
 - **Service template**:This is a quickstart template for creating a sample DSF service (Request an email and mobile change) [git-service-template]
-- **RESTful API**: This repository provides a template project for developing a RESTful API [git-api-template]
+- **RESTful API**: A template project for developing a RESTful API [git-api-template]
 - **DSF Design System**: [git-design-system].  Detailed documentation for the DSF Design System is available at: [git-design-system-docs]
 - **Sample OIDC Web Client**: to simulate the CyLogin functionality [git-oidc-web-client]. The client is using a mock identity server [dsf-idsrv-dev]
 
