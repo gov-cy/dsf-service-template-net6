@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>dsf-service-template-net6</RootNamespace>
+    <UserSecretsId>993bef86-7fbe-491a-a07e-76c4063d7dd7</UserSecretsId>
     </PropertyGroup>
 
   <ItemGroup>

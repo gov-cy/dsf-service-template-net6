@@ -14,9 +14,9 @@ namespace Dsf.Service.Template.Middlewares
     
     public class RequestLocalizationCookiesMiddleware : IMiddleware
     {
-        public CookieRequestCultureProvider Provider { get; }
+        public CookieRequestCultureProvider? Provider { get; }
 
-        public RequestLocalizationCookiesMiddleware(IOptions<RequestLocalizationOptions> requestLocalizationOptions)
+        public RequestLocalizationCookiesMiddleware (IOptions<RequestLocalizationOptions> requestLocalizationOptions)
         {
             Provider =
                 requestLocalizationOptions

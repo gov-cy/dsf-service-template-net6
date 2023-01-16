@@ -30,7 +30,7 @@ namespace Dsf.Service.Template.Services
         private readonly IUserSession? _userSession;
         public string BackLink { get; set; } = "";
         public string NextLink { get; set; } = "";
-        private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
+        private List<HistoryItem>? History { get; set; } = new List<HistoryItem>();
         readonly Dictionary<string, string> _routes = new()
         {
             { "/Email", "/email-selection" },
@@ -139,7 +139,7 @@ namespace Dsf.Service.Template.Services
             //if not found get the previous
             if (Item == null)
             {
-                bool Found = History.Exists(x => x.PageName == currPage);
+                bool Found = History!.Exists(x => x.PageName == currPage);
                 if (Found)
                 {
                     PrevItem = (History.Count > 1 ? History[History!.Count - 2] : History[History.Count - 1]);
@@ -174,7 +174,7 @@ namespace Dsf.Service.Template.Services
             //Return item
             else
             {
-                int index = History.FindIndex(x =>  x.Review==fromReview && x.PageName==currPage );
+                int index = History!.FindIndex(x =>  x.Review==fromReview && x.PageName==currPage );
                 //set the prev item 
                 Item = History[index - 1];
                 Item.PageName = (Item.Review ? Item.PageName + "?review=true" : Item.PageName);

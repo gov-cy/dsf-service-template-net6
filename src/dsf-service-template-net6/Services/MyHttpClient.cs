@@ -28,7 +28,7 @@ namespace Dsf.Service.Template.Services
 
         public string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken = "")
         {
-            var ret = "";
+            string? ret = "";
 
             try
             {                
@@ -79,12 +79,12 @@ namespace Dsf.Service.Template.Services
                 ret = ex.Message;
             }
 
-            return ret;
+            return ret!;
         }
 
         public string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "")
         {
-            var ret = "";
+            string? ret = "";
 
             try
             {
@@ -136,7 +136,7 @@ namespace Dsf.Service.Template.Services
                 ret = ex.Message;
             }
 
-            return ret;
+            return ret!;
         }
     }
 }

@@ -95,13 +95,10 @@ namespace Dsf.Service.Template.Pages
             }
             return ret;
         }
-
-
-
         private MobileSection GetSessionData()
         {
             var selectedoptions = _userSession.GetUserMobileData();
-            return selectedoptions;
+            return selectedoptions!;
         }
         private void BindSelectionData()
         {
@@ -123,7 +120,7 @@ namespace Dsf.Service.Template.Pages
                 {
                     CrbMobile = "1";
                 }
-                else if (selectedoptions.UseOther && (selectedoptions?.Mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ||string.IsNullOrEmpty(selectedoptions?.Mobile)) )
+                else if (selectedoptions.UseOther && (selectedoptions?.Mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone || string.IsNullOrEmpty(selectedoptions?.Mobile)))
                 {
                     //code use when user hit back button on edit page
                     CrbMobile = "1";
@@ -147,89 +144,102 @@ namespace Dsf.Service.Template.Pages
         #endregion
         public IActionResult OnGet(bool review, bool fromPost)
         {
-            //Chack if user has sequentialy load the page
-            bool allow = AllowToProceed();
-            if (!allow)
+            try
             {
-                return RedirectToAction("LogOut", "Account");
+                //Chack if user has sequentialy load the page
+                bool allow = AllowToProceed();
+                if (!allow)
+                {
+                    return RedirectToAction("LogOut", "Account");
+                }
+                // First set back link
+                BackLink = _nav.GetBackLink("/mobile-selection", review);
+                //Show selection Data 
+                BindSelectionData();
+                if (fromPost)
+                {
+                    ShowErrors(true);
+                }
+                else
+                {
+                    BindData();
+                }
             }
-            // First set back link
-            BackLink = _nav.GetBackLink("/mobile-selection", review);
-            //Show selection Data 
-            BindSelectionData();
-            if (fromPost)
+            catch
             {
-                ShowErrors(true);
+                RedirectToPage("/ServerError");
             }
-            else
-            {
-                BindData();
-            }
-
             return Page();
         }
         public IActionResult OnPost(bool review)
         {
-            //Set class Model before validation
-            if (CrbMobile == "1")
+            try
             {
-                MobileSel.UseFromApi = true;
-                MobileSel.UseOther = false;
-                MobileSel.Mobile = _userSession!.GetUserPersonalData()!.Data!.MobileTelephone;
-            }
-            else if (CrbMobile == "2")
-            {
-                MobileSel.UseFromApi = false;
-                MobileSel.UseOther = true;
-                if (review && !string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) && _userSession.GetUserMobileData()?.UseFromApi == true)
+                //Set class Model before validation
+                if (CrbMobile == "1")
                 {
-                    //Reset
-                    MobileSel.Mobile = "";
+                    MobileSel.UseFromApi = true;
+                    MobileSel.UseOther = false;
+                    MobileSel.Mobile = _userSession!.GetUserPersonalData()!.Data!.MobileTelephone;
+                }
+                else if (CrbMobile == "2")
+                {
+                    MobileSel.UseFromApi = false;
+                    MobileSel.UseOther = true;
+                    if (review && !string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) && _userSession.GetUserMobileData()?.UseFromApi == true)
+                    {
+                        //Reset
+                        MobileSel.Mobile = "";
+                    }
+                    else
+                    {
+                        MobileSel.Mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) ? "" : _userSession.GetUserMobileData()!.Mobile;
+                    }
+
                 }
                 else
                 {
-                    MobileSel.Mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) ? "" : _userSession.GetUserMobileData()!.Mobile;
+                    MobileSel.UseFromApi = false;
+                    MobileSel.UseOther = false;
                 }
-               
-            }
-            else
-            {
-                MobileSel.UseFromApi = false;
-                MobileSel.UseOther = false;
-            }
-            if (!review && _userSession.GetUserMobileData() == null)
-            {
-                
-                MobileSel.validation_mode = ValidationMode.Select;
-                //Validate Model
-                FluentValidation.Results.ValidationResult result = _validator.Validate(MobileSel);
-                if (!result.IsValid)
+                if (!review && _userSession.GetUserMobileData() == null)
                 {
-                    _userSession.SetUserValidationResults(result);
-                    return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
+
+                    MobileSel.validation_mode = ValidationMode.Select;
+                    //Validate Model
+                    FluentValidation.Results.ValidationResult result = _validator.Validate(MobileSel);
+                    if (!result.IsValid)
+                    {
+                        _userSession.SetUserValidationResults(result);
+                        return RedirectToPage("Mobile", null, new { fromPost = true }, "mainContainer");
+                    }
+                }
+                else
+                {
+                    MobileSel.validation_mode = ValidationMode.Edit;
+                }
+
+
+                //Model is valid so strore 
+                _userSession.SetUserMobileData(MobileSel);
+                //Remove Error Session 
+                HttpContext.Session.Remove("valresult");
+                //Finally redirect
+
+                //Set back and Next Link
+
+                if (MobileSel.UseOther)
+                {
+                    NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "No");
+                }
+                else
+                {
+                    NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "Yes");
                 }
             }
-            else
+            catch
             {
-                MobileSel.validation_mode = ValidationMode.Edit;
-            }
-
-
-            //Model is valid so strore 
-            _userSession.SetUserMobileData(MobileSel);
-            //Remove Error Session 
-            HttpContext.Session.Remove("valresult");
-            //Finally redirect
-
-            //Set back and Next Link
-
-            if (MobileSel.UseOther)
-            {
-                NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "No");
-            }
-            else
-            {
-                NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "Yes");
+                RedirectToPage("/ServerError");
             }
             if (review)
             {

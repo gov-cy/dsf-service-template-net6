@@ -9,14 +9,14 @@ using Dsf.Service.Template.Extensions;
 
 namespace Dsf.Service.Template.Pages
 {
-       public class MobileEditModel : PageModel
+    public class MobileEditModel : PageModel
     {
         #region "Variables"
         //Dependancy injection Variables
         private readonly INavigation _nav;
         private readonly IUserSession _userSession;
         private readonly IValidator<MobileSection> _validator;
-         //control variables
+        //control variables
         [BindProperty]
         public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
@@ -32,16 +32,17 @@ namespace Dsf.Service.Template.Pages
         public string NextLink { get; set; } = "";
         //Object for session data 
         public MobileSection MobEdit { get; set; }
-       
+
         #endregion
         #region "Custom Methods"
         public MobileEditModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
-        {  _validator = validator;
-            _userSession= userSession;
+        {
+            _validator = validator;
+            _userSession = userSession;
             MobEdit = new MobileSection();
             _nav = nav;
         }
-     
+
         void ClearErrors()
         {
             DisplaySummary = "display:none";
@@ -96,22 +97,20 @@ namespace Dsf.Service.Template.Pages
             }
             return ret;
         }
-       
-        
         private MobileSection GetSessionData()
         {
             var SessionEmailEdit = _userSession.GetUserMobileData();
-            return SessionEmailEdit;
+            return SessionEmailEdit!;
         }
         private string GetTempSessionData()
         {
             var tempSession = HttpContext.Session.GetObjectFromJson<string>("mobileval");
-            return tempSession;
+            return tempSession!;
         }
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.UseOther==true)
+            if (sessionData?.validation_mode == ValidationMode.Edit && sessionData?.UseOther == true)
             {
                 Mobile = sessionData.Mobile.FormatMobile();
 
@@ -136,7 +135,7 @@ namespace Dsf.Service.Template.Pages
                 //Add 00357 if cyprus
                 formatMob = formatMob.StartsWith("009") ? $"003579{formatMob.Substring(3)}" : formatMob;
                 // or format number with 8 digits that starts with 9
-                formatMob = formatMob.StartsWith("9") && formatMob.Length ==8 ? $"00357{formatMob}" : formatMob;
+                formatMob = formatMob.StartsWith("9") && formatMob.Length == 8 ? $"00357{formatMob}" : formatMob;
                 return formatMob;
             }
             else
@@ -148,51 +147,65 @@ namespace Dsf.Service.Template.Pages
         #endregion
         public IActionResult OnGet(bool review, bool fromPost)
         {
-            //Chack if user has sequentialy load the page
-            bool allow = AllowToProceed();
-            if (!allow)
+            try
             {
-                return RedirectToAction("LogOut", "Account");
+                //Chack if user has sequentialy load the page
+                bool allow = AllowToProceed();
+                if (!allow)
+                {
+                    return RedirectToAction("LogOut", "Account");
+                }
+                //Set Back Link
+                BackLink = _nav.GetBackLink("/set-mobile", review);
+                //If coming fromPost
+                if (!fromPost)
+                { //GetData from session 
+                    BindData();
+                }
+                else
+                {
+                    Mobile = GetTempSessionData();
+                    ShowErrors(true);
+                }
             }
-            //Set Back Link
-            BackLink = _nav.GetBackLink("/set-mobile", review);
-            //If coming fromPost
-            if (!fromPost)
-            { //GetData from session 
-                BindData();
-            }
-            else
+            catch
             {
-                Mobile = GetTempSessionData();
-                ShowErrors(true);
+                RedirectToPage("/ServerError");
             }
-
             return Page();
         }
         public IActionResult OnPost(bool review)
-        { // Update the class before validation
-            string typemob = Mobile;
-            Mobile = SetMobile(Mobile);
-            MobEdit.Mobile = Mobile;
-            MobEdit.UseOther = true;
-            MobEdit.UseFromApi = false;
-            MobEdit.validation_mode = ValidationMode.Edit;           
-            FluentValidation.Results.ValidationResult result = _validator.Validate(MobEdit);
-            if (!result.IsValid)
+        {
+            try
             {
-                _userSession.SetUserValidationResults(result);
-                HttpContext.Session.SetObjectAsJson("mobileval", typemob);
-                return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
-            }
-            //Mob Edit from Session
+                // Update the class before validation
+                string typemob = Mobile;
+                Mobile = SetMobile(Mobile);
+                MobEdit.Mobile = Mobile;
+                MobEdit.UseOther = true;
+                MobEdit.UseFromApi = false;
+                MobEdit.validation_mode = ValidationMode.Edit;
+                FluentValidation.Results.ValidationResult result = _validator.Validate(MobEdit);
+                if (!result.IsValid)
+                {
+                    _userSession.SetUserValidationResults(result);
+                    HttpContext.Session.SetObjectAsJson("mobileval", typemob);
+                    return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
+                }
+                //Mob Edit from Session
                 _userSession.SetUserMobileData(MobEdit);
 
-            //Remove Error Session 
-            HttpContext.Session.Remove("valresult");
-            HttpContext.Session.Remove("mobileval");
-    
-            //Set back and Next Link
-            NextLink=_nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
+                //Remove Error Session 
+                HttpContext.Session.Remove("valresult");
+                HttpContext.Session.Remove("mobileval");
+
+                //Set back and Next Link
+                NextLink = _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
+            }
+            catch
+            {
+                RedirectToPage("/ServerError");
+            }
             return RedirectToPage(NextLink);
         }
     }
