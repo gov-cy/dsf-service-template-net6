@@ -1,15 +1,14 @@
-using Dsf.Service.Template.Data.Models;
-using Dsf.Service.Template.Extensions;
-using Dsf.Service.Template.Services;
-using Dsf.Service.Template.Services.Model;
+using DSF.AspNetCore.Web.Template.Services;
+using DSF.AspNetCore.Web.Template.Services.Model;
+using DSF.AspNetCore.Web.Template.Data.Models;
+using DSF.AspNetCore.Web.Template.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
-namespace Dsf.Service.Template.Pages
+namespace DSF.AspNetCore.Web.Pages
 {
     public class EmailModel : PageModel
     {
@@ -224,7 +223,7 @@ namespace Dsf.Service.Template.Pages
             }
             if (!review && _userSession.GetUserEmailData()==null) 
             {
-                EmailSel.validation_mode = ValidationMode.Select;
+                EmailSel.ValidationMode = ValidationMode.Select;
                 //Validate Model
                 FluentValidation.Results.ValidationResult result = _validator.Validate(EmailSel);
                 if (!result.IsValid)
@@ -235,7 +234,7 @@ namespace Dsf.Service.Template.Pages
             }
             else
             {
-                EmailSel.validation_mode = ValidationMode.Edit;
+                EmailSel.ValidationMode = ValidationMode.Edit;
             }
 
             //Model is valid so strore 

@@ -1,4 +1,4 @@
-﻿namespace Dsf.Service.Template.Services.Model
+﻿namespace DSF.AspNetCore.Web.Template.Services.Model
 {
     public class EmailValidationResp : BaseResponse<string>
     {

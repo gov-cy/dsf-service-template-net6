@@ -1,13 +1,9 @@
-using Dsf.Service.Template.Data.Models;
-using Dsf.Service.Template.Extensions;
-using Dsf.Service.Template.Services;
-using Dsf.Service.Template.Services.Model;
-using Microsoft.AspNetCore.Authentication;
+using DSF.AspNetCore.Web.Template.Services;
+using DSF.AspNetCore.Web.Template.Services.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
 
-namespace Dsf.Service.Template.Pages
+namespace DSF.AspNetCore.Web.Pages
 {
     [BindProperties]
     public class ReviewPageModel : PageModel

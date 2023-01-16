@@ -1,13 +1,12 @@
-﻿namespace Dsf.Service.Template.Data.Models
+﻿namespace DSF.AspNetCore.Web.Template.Data.Models
 {
     public enum ValidationMode
     {
         Select,
         Edit
-
     }
     public class ModelBase
     {
-        public ValidationMode validation_mode { get; set; }
+        public ValidationMode ValidationMode { get; set; }
     }
 }

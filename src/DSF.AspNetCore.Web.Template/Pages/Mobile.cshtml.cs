@@ -1,14 +1,14 @@
-using Dsf.Service.Template.Data.Models;
-using Dsf.Service.Template.Extensions;
-using Dsf.Service.Template.Services;
-using Dsf.Service.Template.Services.Model;
+using DSF.AspNetCore.Web.Template.Data.Models;
+using DSF.AspNetCore.Web.Template.Extensions;
+using DSF.AspNetCore.Web.Template.Services;
+using DSF.AspNetCore.Web.Template.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
-namespace Dsf.Service.Template.Pages
+namespace DSF.AspNetCore.Web.Pages
 {
     [BindProperties]
     public class MobileModel : PageModel
@@ -200,7 +200,7 @@ namespace Dsf.Service.Template.Pages
             if (!review && _userSession.GetUserMobileData() == null)
             {
                 
-                MobileSel.validation_mode = ValidationMode.Select;
+                MobileSel.ValidationMode = ValidationMode.Select;
                 //Validate Model
                 FluentValidation.Results.ValidationResult result = _validator.Validate(MobileSel);
                 if (!result.IsValid)
@@ -211,7 +211,7 @@ namespace Dsf.Service.Template.Pages
             }
             else
             {
-                MobileSel.validation_mode = ValidationMode.Edit;
+                MobileSel.ValidationMode = ValidationMode.Edit;
             }
 
 

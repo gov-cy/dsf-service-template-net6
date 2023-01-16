@@ -1,9 +1,9 @@
-﻿using Dsf.Service.Template.Data.Models;
+﻿using DSF.AspNetCore.Web.Template.Data.Models;
 using FluentValidation;
-using Dsf.Service.Template.Services;
+using DSF.AspNetCore.Web.Template.Services;
 using DSF.Resources;
 
-namespace Dsf.Service.Template.Data.Validations
+namespace DSF.AspNetCore.Web.Template.Data.Validations
 {
     public class EmailValidator : AbstractValidator<EmailSection>
     {
@@ -18,7 +18,7 @@ namespace Dsf.Service.Template.Data.Validations
             emailNoSelectionMsg = _Localizer["email-selection.require_check"];
             emailMessage = _Localizer["set-email.require_check"];
 
-            When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
+            When(p => p.ValidationMode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.UseFromApi)
                     .Equal(true)
@@ -27,7 +27,7 @@ namespace Dsf.Service.Template.Data.Validations
                     .WithMessage(emailNoSelectionMsg);
             });
             //Edit page
-            When(p => p.validation_mode.Equals(ValidationMode.Edit), () =>
+            When(p => p.ValidationMode.Equals(ValidationMode.Edit), () =>
             {
                 RuleFor(p => p.Email)
                     .Cascade(CascadeMode.Stop)

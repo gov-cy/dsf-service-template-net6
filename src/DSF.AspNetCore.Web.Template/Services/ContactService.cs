@@ -1,7 +1,8 @@
-﻿namespace Dsf.Service.Template.Services
-{  
-    using Dsf.Service.Template.Services.Model;
-    using Newtonsoft.Json;
+﻿using DSF.AspNetCore.Web.Template.Services.Model;
+using Newtonsoft.Json;
+
+namespace DSF.AspNetCore.Web.Template.Services
+{ 
     public interface IContact
     {
         ContactInfoResponse GetContact(string accesstoken);

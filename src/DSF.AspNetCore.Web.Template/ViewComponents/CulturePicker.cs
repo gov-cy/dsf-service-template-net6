@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Globalization;
 
-namespace Dsf.Service.Template.ViewComponents
+namespace DSF.AspNetCore.Web.Template.ViewComponents
 {
     public class CulturePicker : ViewComponent
     {
@@ -22,19 +19,20 @@ namespace Dsf.Service.Template.ViewComponents
             var cultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
             var model = new CulturePickerModel
             {
-                SupportedCultures = localizationOptions.Value.SupportedUICultures.ToList(),
-                CurrentUICulture = cultureFeature.RequestCulture.UICulture
+                SupportedCultures = localizationOptions.Value.SupportedUICultures?.ToList() ?? new(),
             };
 
+            if (cultureFeature != null)
+            {
+                model.CurrentUICulture = cultureFeature.RequestCulture.UICulture;
+            }
             return View(model);
         }
     }
 
     public class CulturePickerModel
     {
-        public CultureInfo CurrentUICulture { get; set; }
-        public List<CultureInfo> SupportedCultures { get; set; }
-        
-       
+        public CultureInfo? CurrentUICulture { get; set; }
+        public List<CultureInfo> SupportedCultures { get; set; } = new();
     }
 }

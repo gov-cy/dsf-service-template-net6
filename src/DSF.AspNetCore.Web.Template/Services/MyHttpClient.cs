@@ -1,13 +1,8 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
-namespace Dsf.Service.Template.Services
+namespace DSF.AspNetCore.Web.Template.Services
 {
     public interface IMyHttpClient
     {
@@ -28,7 +23,7 @@ namespace Dsf.Service.Template.Services
 
         public string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken = "")
         {
-            var ret = "";
+            var ret = string.Empty;
 
             try
             {                
@@ -67,10 +62,6 @@ namespace Dsf.Service.Template.Services
                         ret = response.Result.Content.ToString();
                     }
                 }
-                else
-                {
-                    ret = null;
-                }
             }
             catch (Exception ex)
             {
@@ -79,12 +70,12 @@ namespace Dsf.Service.Template.Services
                 ret = ex.Message;
             }
 
-            return ret;
+            return ret!;
         }
 
         public string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "")
         {
-            var ret = "";
+            var ret = string.Empty;
 
             try
             {
@@ -123,10 +114,6 @@ namespace Dsf.Service.Template.Services
                         ret = response.Result.Content.ToString();
                     }
                 }
-                else
-                {
-                    ret = null;
-                }
             }
             catch (Exception ex)
             {
@@ -136,7 +123,7 @@ namespace Dsf.Service.Template.Services
                 ret = ex.Message;
             }
 
-            return ret;
+            return ret!;
         }
     }
 }

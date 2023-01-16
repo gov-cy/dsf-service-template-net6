@@ -1,6 +1,6 @@
-﻿using Dsf.Service.Template.Services.Model;
-using System.Security.Claims;
-namespace Dsf.Service.Template.Services
+﻿using DSF.AspNetCore.Web.Template.Services.Model;
+
+namespace DSF.AspNetCore.Web.Template.Services
 {
     using Microsoft.AspNetCore.Http;
     public enum FormSelection
@@ -13,7 +13,6 @@ namespace Dsf.Service.Template.Services
     {
         public string PageName { get; set; } = "";
         public bool Review { get; set; }
-
     }
     public interface INavigation
     {
@@ -26,8 +25,8 @@ namespace Dsf.Service.Template.Services
     public class Navigation : INavigation
     {
         private readonly IContact _contactService;
-        private readonly IHttpContextAccessor? _httpContextAccessor;
-        private readonly IUserSession? _userSession;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserSession _userSession;
         private readonly Dictionary<string, string> _routes = new()
         {
             { "/Email", "/email-selection" },
@@ -36,14 +35,14 @@ namespace Dsf.Service.Template.Services
             { "/MobileEdit", "/set-mobile" },
             { "/ReviewPage", "/review-page" },
         };
-        private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
-        public string BackLink { get; set; } = "";
-        public string NextLink { get; set; } = "";
+        private List<HistoryItem> History { get; set; } = new();
+        public string BackLink { get; set; } = string.Empty;
+        public string NextLink { get; set; } = string.Empty;
 
         private void AddHistoryLinks(string currPage, bool review)
         {
             HistoryItem? historyItem = new();
-            History = _userSession?.GetHistrory() ?? new List<HistoryItem>();
+            History = _userSession.GetHistrory() ?? new List<HistoryItem>();
             int LastIndex = History.Count;
             if (LastIndex == 0)
             {
@@ -60,7 +59,7 @@ namespace Dsf.Service.Template.Services
                 //Set to memory
 
             }
-            _userSession!.SetHistrory(History);
+            _userSession.SetHistrory(History);
         }
 
         private void SetSectionPages()
@@ -80,24 +79,28 @@ namespace Dsf.Service.Template.Services
             }
 
             //Add Email Section
-            SectionInfo section = new();
-            section.Name = "Email";
-            section.SectionOrder = 1;
+            SectionInfo section = new()
+            {
+                Name = "Email",
+                SectionOrder = 1,
 
-            //Always Select, for even API does not have email, we show email from user profile
-            //The email on user Ariadne profile is always considered verified
-            section.Type = SectionType.SelectionAndInput;
+                //Always Select, for even API does not have email, we show email from user profile
+                //The email on user Ariadne profile is always considered verified
+                Type = SectionType.SelectionAndInput
+            };
             section.pages.Add("email-selection");
             section.pages.Add("set-email");
             list.Add(section);
 
             //Add Mobile section,
-            section = new();
-            section.Name = "Mobile";
-            section.SectionOrder = 2;
+            section = new()
+            {
+                Name = "Mobile",
+                SectionOrder = 2,
 
-            //
-            section.Type = (!string.IsNullOrEmpty(citizen?.Data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
+                //
+                Type = (!string.IsNullOrEmpty(citizen?.Data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly
+            };
             if (section.Type == SectionType.InputOnly)
             {
                 section.pages.Add("set-mobile");
@@ -117,11 +120,11 @@ namespace Dsf.Service.Template.Services
             _httpContextAccessor = httpContextAccessor;
             _contactService = service;
             _userSession = userSession;
-            var ListItem = _userSession?.GetNavLink()?.First();
+            var ListItem = _userSession.GetNavLink().FirstOrDefault();
             if (ListItem == null)
             {
                 BackLink = "/";
-                if (_httpContextAccessor?.HttpContext?.User?.Identity?.IsAuthenticated == true)
+                if (_httpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated == true)
                 {
                     SetSectionPages();
                     ListItem = _userSession!.GetNavLink()!.First();
@@ -132,12 +135,12 @@ namespace Dsf.Service.Template.Services
 
         public string GetBackLink(string currPage, bool fromReview = false)
         {
-            History = _userSession!.GetHistrory()!;
-            if (fromReview || History?.Count==0)
+            History = _userSession!.GetHistrory();
+            if (fromReview || History.Count==0)
             {
                 AddHistoryLinks(currPage, fromReview);
             } 
-            HistoryItem? Item = History?.Find(x => x.PageName == currPage && x.Review == fromReview);
+            HistoryItem? Item = History.Find(x => x.PageName == currPage && x.Review == fromReview);
             HistoryItem? PrevItem = null;
             //if not found get the previous
             if (Item == null)

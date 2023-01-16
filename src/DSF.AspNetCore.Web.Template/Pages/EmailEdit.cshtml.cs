@@ -1,15 +1,14 @@
-using Dsf.Service.Template.Data.Models;
-using Dsf.Service.Template.Extensions;
-using Dsf.Service.Template.Services;
-using Dsf.Service.Template.Services.Model;
+using DSF.AspNetCore.Web.Template.Services;
+using DSF.AspNetCore.Web.Template.Data.Models;
+using DSF.AspNetCore.Web.Template.Extensions;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Dsf.Service.Template.Pages
+namespace DSF.AspNetCore.Web.Pages
 {
-    
+
     public class EmailEditModel : PageModel
     {
         #region "Variables"
@@ -102,13 +101,12 @@ namespace Dsf.Service.Template.Pages
         }
         private string GetTempSessionData()
         {
-            var tempSession = HttpContext.Session.GetObjectFromJson<string>("emailval");
-            return tempSession;
+            return HttpContext.Session.GetObjectFromJson<string>("emailval") ?? string.Empty;
         }
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData?.validation_mode == ValidationMode.Edit && sessionData?.UseOther == true) //Mobile always have a selection form
+            if (sessionData?.ValidationMode == ValidationMode.Edit && sessionData?.UseOther == true) //Mobile always have a selection form
             {
                 Email = sessionData.Email;
                 return true;
@@ -148,7 +146,7 @@ namespace Dsf.Service.Template.Pages
             emailEdit.Email = Email;
             emailEdit.UseOther = true;
             emailEdit.UseFromApi = false;
-            emailEdit.validation_mode = ValidationMode.Edit;
+            emailEdit.ValidationMode = ValidationMode.Edit;
             FluentValidation.Results.ValidationResult result = _validator.Validate(emailEdit);
             if (!result.IsValid)
             {

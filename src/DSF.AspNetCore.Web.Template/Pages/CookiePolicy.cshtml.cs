@@ -1,9 +1,8 @@
-using Dsf.Service.Template.Extensions;
-using Dsf.Service.Template.Services;
+using DSF.AspNetCore.Web.Template.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Dsf.Service.Template.Pages
+namespace DSF.AspNetCore.Web.Pages
 {
     public class CookiePolicyModel : PageModel
     {

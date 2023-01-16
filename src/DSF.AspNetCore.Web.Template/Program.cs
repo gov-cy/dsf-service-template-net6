@@ -1,8 +1,8 @@
-using Dsf.Service.Template.Data.Models;
-using Dsf.Service.Template.Data.Validations;
-using Dsf.Service.Template.Extensions;
-using Dsf.Service.Template.Middlewares;
-using Dsf.Service.Template.Services;
+using DSF.AspNetCore.Web.Template.Data.Models;
+using DSF.AspNetCore.Web.Template.Data.Validations;
+using DSF.AspNetCore.Web.Template.Extensions;
+using DSF.AspNetCore.Web.Template.Middlewares;
+using DSF.AspNetCore.Web.Template.Services;
 using DSF.AspNetCore.Web.Template.Resources;
 using DSF.MOI.CitizenData.Web.Configuration;
 using DSF.Resources;

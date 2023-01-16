@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using System.Reflection.PortableExecutable;
 
 namespace DSF.MOI.CitizenData.Web.Configuration
 {
@@ -19,13 +17,13 @@ namespace DSF.MOI.CitizenData.Web.Configuration
 
         private static IWebHostEnvironment? _environment;
         private static ICyLoginSpecification? _cyLoginSpecification;
-        private static IConfiguration _configSection;
+        private static IConfiguration? _configSection;
 
-        public static void UseCyLoginAuthentication(this WebApplication? app) 
+        public static void UseCyLoginAuthentication(this WebApplication app) 
         {
-            _configSection = app?.Configuration.GetSection(AuthenticationConfiguration.OIDCScheme);
-            _environment = app?.Environment;
-            _cyLoginSpecification = app?.Services.GetRequiredService<ICyLoginSpecification>();
+            _configSection = app.Configuration.GetSection(OIDCScheme);
+            _environment = app.Environment;
+            _cyLoginSpecification = app.Services.GetRequiredService<ICyLoginSpecification>();
         }
 
         public static void AddCyLoginAuthentication(this IServiceCollection services)
@@ -35,36 +33,37 @@ namespace DSF.MOI.CitizenData.Web.Configuration
                 options = _configSection.Get<OIDCSettings>();
             });
 
-            services.AddSingleton<ICyLoginSpecification, CyLoginSpecification>();
+            services
+                .AddSingleton<ICyLoginSpecification, CyLoginSpecification>();
 
             services
                 .AddOptions<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme)
-
-                .Configure<IOptionsMonitor<OIDCSettings>>((options, oidcSettings) =>
+                .Configure((options) =>
                 {
-                    options.Authority = oidcSettings.CurrentValue.Authority;
-                    options.ClientId = oidcSettings.CurrentValue.ClientId;
-                    options.ClientSecret = oidcSettings.CurrentValue.ClientSecret;
+                    var oidcSettings = _configSection.Get<OIDCSettings>();
+                    options.Authority = oidcSettings.Authority;
+                    options.ClientId = oidcSettings.ClientId;
+                    options.ClientSecret = oidcSettings.ClientSecret;
 
                     options.Events.OnTicketReceived = ctx =>
                     {
-                        ctx.ReturnUri = oidcSettings.CurrentValue.LoginUrl;
+                        ctx.ReturnUri = oidcSettings.LoginUrl;
                         return Task.CompletedTask;
                     };
                     //Port used for this client MUST BE 44319
-                    if (string.IsNullOrEmpty(oidcSettings.CurrentValue.SignedOutRedirectUri))
+                    if (!string.IsNullOrEmpty(oidcSettings.SignedOutRedirectUri))
                     {
-                        options.SignedOutRedirectUri = oidcSettings.CurrentValue.SignedOutRedirectUri;
+                        options.SignedOutRedirectUri = oidcSettings.SignedOutRedirectUri;
                     }
 
                     //Split the scopes and add them
                     //Make sure to clear scopes first to remove any defaults
                     options.Scope.Clear();
-                    if (!string.IsNullOrEmpty(oidcSettings.CurrentValue.Scopes))
+                    if (!string.IsNullOrEmpty(oidcSettings.Scopes))
                     {
                         Array.ForEach
                         (
-                            oidcSettings.CurrentValue.Scopes.Split(" ", StringSplitOptions.RemoveEmptyEntries),
+                            oidcSettings.Scopes.Split(" ", StringSplitOptions.RemoveEmptyEntries),
                             str => options.Scope.Add(str)
                         );
                     }

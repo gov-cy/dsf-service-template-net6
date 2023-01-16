@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
 
-namespace Dsf.Service.Template.Extensions
+namespace DSF.AspNetCore.Web.Template.Extensions
 {
-   
     public static class SessionExtensions
     {
-      
-
         public static void SetObjectAsJson(this ISession session, string key, object value)
         {   
            session.SetString(key, JsonConvert.SerializeObject(value));

@@ -1,6 +1,5 @@
-﻿namespace Dsf.Service.Template.Data.Models
+﻿namespace DSF.AspNetCore.Web.Template.Data.Models
 {
- 
     public class EmailSection:ModelBase
     {
         public string Email { get; set; } = "";

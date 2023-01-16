@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Staging"
       }
     },
-    "dsf_service_template_net6": {
+    "DSF.AspNetCore.Web.Template": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

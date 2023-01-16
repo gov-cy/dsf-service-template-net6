@@ -1,13 +1,13 @@
-using Dsf.Service.Template.Data.Models;
-using Dsf.Service.Template.Services.Model;
+using DSF.AspNetCore.Web.Template.Data.Models;
+using DSF.AspNetCore.Web.Template.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Dsf.Service.Template.Services;
-using Dsf.Service.Template.Extensions;
+using DSF.AspNetCore.Web.Template.Services;
+using DSF.AspNetCore.Web.Template.Extensions;
 
-namespace Dsf.Service.Template.Pages
+namespace DSF.AspNetCore.Web.Pages
 {
        public class MobileEditModel : PageModel
     {
@@ -105,13 +105,12 @@ namespace Dsf.Service.Template.Pages
         }
         private string GetTempSessionData()
         {
-            var tempSession = HttpContext.Session.GetObjectFromJson<string>("mobileval");
-            return tempSession;
+            return HttpContext.Session.GetObjectFromJson<string>("mobileval") ?? string.Empty;
         }
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData?.validation_mode==ValidationMode.Edit && sessionData?.UseOther==true)
+            if (sessionData?.ValidationMode==ValidationMode.Edit && sessionData?.UseOther==true)
             {
                 Mobile = sessionData.Mobile.FormatMobile();
 
@@ -176,7 +175,7 @@ namespace Dsf.Service.Template.Pages
             MobEdit.Mobile = Mobile;
             MobEdit.UseOther = true;
             MobEdit.UseFromApi = false;
-            MobEdit.validation_mode = ValidationMode.Edit;           
+            MobEdit.ValidationMode = ValidationMode.Edit;           
             FluentValidation.Results.ValidationResult result = _validator.Validate(MobEdit);
             if (!result.IsValid)
             {

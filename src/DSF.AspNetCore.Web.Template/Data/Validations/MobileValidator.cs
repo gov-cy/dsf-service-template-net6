@@ -1,9 +1,9 @@
-﻿using Dsf.Service.Template.Data.Models;
+﻿using DSF.AspNetCore.Web.Template.Data.Models;
 using FluentValidation;
-using Dsf.Service.Template.Services;
+using DSF.AspNetCore.Web.Template.Services;
 using DSF.Resources;
 
-namespace Dsf.Service.Template.Data.Validations
+namespace DSF.AspNetCore.Web.Template.Data.Validations
 {
     public class MobileValidator : AbstractValidator<MobileSection>
     {
@@ -20,7 +20,7 @@ namespace Dsf.Service.Template.Data.Validations
             MobileNoSelectionMsg = _Localizer["mobile-selection.require_check"];
             mobReq = _Localizer["set-mobile.require_check"];
             mobValid = _Localizer["set-mobile.format_check"];
-            When(p => p.validation_mode.Equals(ValidationMode.Select), () =>
+            When(p => p.ValidationMode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.UseFromApi)
                 .Equal(true)
@@ -29,7 +29,7 @@ namespace Dsf.Service.Template.Data.Validations
                 .WithMessage(MobileNoSelectionMsg);
             });
             //Edit Mobile
-            When(p => p.validation_mode.Equals(ValidationMode.Edit), () =>
+            When(p => p.ValidationMode.Equals(ValidationMode.Edit), () =>
             {
                 RuleFor(p => p.Mobile)
                  .Cascade(CascadeMode.Stop)
