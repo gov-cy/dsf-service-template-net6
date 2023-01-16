@@ -9,14 +9,14 @@ using DSF.AspNetCore.Web.Template.Extensions;
 
 namespace DSF.AspNetCore.Web.Pages
 {
-       public class MobileEditModel : PageModel
+    public class MobileEditModel : PageModel
     {
         #region "Variables"
         //Dependancy injection Variables
         private readonly INavigation _nav;
         private readonly IUserSession _userSession;
         private readonly IValidator<MobileSection> _validator;
-         //control variables
+        //control variables
         [BindProperty]
         public string DisplaySummary { get; set; } = "display:none";
         [BindProperty]
@@ -32,22 +32,24 @@ namespace DSF.AspNetCore.Web.Pages
         public string NextLink { get; set; } = "";
         //Object for session data 
         public MobileSection MobEdit { get; set; }
-       
+
         #endregion
         #region "Custom Methods"
         public MobileEditModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
-        {  _validator = validator;
-            _userSession= userSession;
+        {
+            _validator = validator;
+            _userSession = userSession;
             MobEdit = new MobileSection();
             _nav = nav;
         }
-     
+
         void ClearErrors()
         {
             DisplaySummary = "display:none";
             MobileErrorClass = "";
             ErrorsDesc = "";
         }
+
         bool ShowErrors(bool fromPost)
         {
             if (fromPost)
@@ -68,6 +70,7 @@ namespace DSF.AspNetCore.Web.Pages
                 return false;
             }
         }
+
         private void SetViewErrorMessages(ValidationResult result)
         {
             //First Enable Summary Display
@@ -82,6 +85,7 @@ namespace DSF.AspNetCore.Web.Pages
                 }
             }
         }
+
         private bool AllowToProceed()
         {
             bool ret = true;
@@ -96,24 +100,24 @@ namespace DSF.AspNetCore.Web.Pages
             }
             return ret;
         }
-       
-        
+
         private MobileSection GetSessionData()
         {
             var SessionEmailEdit = _userSession.GetUserMobileData();
             return SessionEmailEdit;
         }
+
         private string GetTempSessionData()
         {
             return HttpContext.Session.GetObjectFromJson<string>("mobileval") ?? string.Empty;
         }
+
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
             if (sessionData?.ValidationMode==ValidationMode.Edit && sessionData?.UseOther==true)
             {
                 Mobile = sessionData.Mobile.FormatMobile();
-
                 return true;
             }
             else
@@ -121,6 +125,7 @@ namespace DSF.AspNetCore.Web.Pages
                 return false;
             }
         }
+
         private string SetMobile(string mobile)
         {
             if (!string.IsNullOrEmpty(mobile))
@@ -135,7 +140,7 @@ namespace DSF.AspNetCore.Web.Pages
                 //Add 00357 if cyprus
                 formatMob = formatMob.StartsWith("009") ? $"003579{formatMob.Substring(3)}" : formatMob;
                 // or format number with 8 digits that starts with 9
-                formatMob = formatMob.StartsWith("9") && formatMob.Length ==8 ? $"00357{formatMob}" : formatMob;
+                formatMob = formatMob.StartsWith("9") && formatMob.Length == 8 ? $"00357{formatMob}" : formatMob;
                 return formatMob;
             }
             else
@@ -184,14 +189,14 @@ namespace DSF.AspNetCore.Web.Pages
                 return RedirectToPage("MobileEdit", null, new { fromPost = true }, "mainContainer");
             }
             //Mob Edit from Session
-                _userSession.SetUserMobileData(MobEdit);
+            _userSession.SetUserMobileData(MobEdit);
 
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("mobileval");
     
             //Set back and Next Link
-            NextLink=_nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
+            NextLink = _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
             return RedirectToPage(NextLink);
         }
     }

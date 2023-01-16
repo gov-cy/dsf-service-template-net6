@@ -97,8 +97,6 @@ namespace DSF.AspNetCore.Web.Template.Services
             {
                 Name = "Mobile",
                 SectionOrder = 2,
-
-                //
                 Type = (!string.IsNullOrEmpty(citizen?.Data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly
             };
             if (section.Type == SectionType.InputOnly)

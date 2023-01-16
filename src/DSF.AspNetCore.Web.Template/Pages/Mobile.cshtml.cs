@@ -40,6 +40,7 @@ namespace DSF.AspNetCore.Web.Pages
             MobileSel = new MobileSection();
             _userSession = userSession;
         }
+
         bool ShowErrors(bool fromPost)
         {
             if (fromPost)
@@ -60,12 +61,14 @@ namespace DSF.AspNetCore.Web.Pages
                 return false;
             }
         }
+
         void ClearErrors()
         {
             displaySummary = "display:none";
             MobileSelection = "";
             ErrorsDesc = "";
         }
+
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
             //First Enable Summary Display
@@ -81,6 +84,7 @@ namespace DSF.AspNetCore.Web.Pages
 
             }
         }
+
         private bool AllowToProceed()
         {
             bool ret = true;
@@ -96,13 +100,12 @@ namespace DSF.AspNetCore.Web.Pages
             return ret;
         }
 
-
-
         private MobileSection GetSessionData()
         {
             var selectedoptions = _userSession.GetUserMobileData();
             return selectedoptions;
         }
+
         private void BindSelectionData()
         {
             ContactInfoResponse? res = _userSession.GetUserPersonalData();
@@ -123,7 +126,7 @@ namespace DSF.AspNetCore.Web.Pages
                 {
                     CrbMobile = "1";
                 }
-                else if (selectedoptions.UseOther && (selectedoptions?.Mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone ||string.IsNullOrEmpty(selectedoptions?.Mobile)) )
+                else if (selectedoptions.UseOther && (selectedoptions?.Mobile == _userSession?.GetUserPersonalData()?.Data?.MobileTelephone || string.IsNullOrEmpty(selectedoptions?.Mobile)))
                 {
                     //code use when user hit back button on edit page
                     CrbMobile = "1";

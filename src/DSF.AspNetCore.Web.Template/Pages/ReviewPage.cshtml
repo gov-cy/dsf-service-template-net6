@@ -6,7 +6,7 @@
 
 @{
     ViewBag.PreviousUrl=Model.BackLink;
-    ViewData["Title"] = Localizer["review.p2"];
+    ViewData["Title"] = Localizer["review-page.p1"];
 }
 
  <h1>@Localizer["review.p2"]</h1>
@@ -16,7 +16,7 @@
  <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
          <tr>
-             <th scope="row" class="col-3">@Localizer["review.mobile"]</th>
+            <th scope="row" class="col-3">@Localizer["review-page.mobile"]</th>
              <td class="col-7">
                  <p>
                  <span class="govcy-d-block">@Model.ret_mobile.FormatMobile()</span>
@@ -33,7 +33,7 @@
               </td>
          </tr>
            <tr>
-             <th scope="row" class="col-3">@Localizer["review.email"]</th>
+            <th scope="row" class="col-3">@Localizer["review-page.email"]</th>
              <td class="col-7">
                  <p>
                   <span class="govcy-d-block">@Model.ret_email</span>
