@@ -4,9 +4,9 @@
 Generally, DSF-Ready Services are composed of a Web application (including the DSF Design System and CyLogin integration) and a RESTful API that gets data from and posts data to the Back-end system(s).  The connectivity from the service (which is on the cloud) to the API is implemented through an API Gateway.
 
 ## DSF templates to serve as a quickstart guide for developing DSF-ready services:
-- **RESTful API**: This repository provides a template project for developing a RESTful API [git-api-template]
+- **Service template**:This is a quickstart template for creating a sample DSF service (Request an email and mobile change) [git-service-template]
+- **RESTful API**: A template project for developing a RESTful API [git-api-template]
 - **DSF Design System**: [git-design-system].  Detailed documentation for the DSF Design System is available at: [git-design-system-docs]
-- **Service template**: A service example to provide a template for a dsf-ready service including the DSF Design system and basic functionality [git-service-template]
 - **Sample OIDC Web Client**: to simulate the CyLogin functionality [git-oidc-web-client]. The client is using a mock identity server [dsf-idsrv-dev]
 
 
@@ -57,8 +57,10 @@ Details of this configuration can be found in the project's `appsettings.json` f
 The following test accounts can be used to simulate the login functionality:
 `bob/bob, alice/alice, or company1/company1`
 
-
 We stronly propose to keep sensitive data in secrets, so that values like api key cannot be exposed in gitHub repo
+
+### Note
+For real test and production implementations, all the information for the CyLogin OIDC implementation should be provided by the CyLogin team (CyLoginSupport@dits.dmrid.gov.cy)
 
 ### Mock API Calls
 The project also simulates various API calls to demostrate how the service should get data from and post data to a fictional back-end system  [api-template-demo]. 
@@ -82,7 +84,7 @@ dotnet run
 * API Calls [dsf-mock-apis]
 
 ## Other
-* Matomo Integration
+*  Optional Matomo Integration (Statistic Tool use by DSF  )
 
 ## License
 
