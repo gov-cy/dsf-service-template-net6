@@ -25,13 +25,10 @@ namespace Dsf.Service.Template.Services
 
     public class Navigation : INavigation
     {
-        private readonly IContact _service;
+        private readonly IContact _contactService;
         private readonly IHttpContextAccessor? _httpContextAccessor;
         private readonly IUserSession? _userSession;
-        public string BackLink { get; set; } = "";
-        public string NextLink { get; set; } = "";
-        private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
-        readonly Dictionary<string, string> _routes = new()
+        private readonly Dictionary<string, string> _routes = new()
         {
             { "/Email", "/email-selection" },
             { "/EmailEdit", "/set-email" },
@@ -39,6 +36,9 @@ namespace Dsf.Service.Template.Services
             { "/MobileEdit", "/set-mobile" },
             { "/ReviewPage", "/review-page" },
         };
+        private List<HistoryItem> History { get; set; } = new List<HistoryItem>();
+        public string BackLink { get; set; } = "";
+        public string NextLink { get; set; } = "";
 
         private void AddHistoryLinks(string currPage, bool review)
         {
@@ -62,6 +62,7 @@ namespace Dsf.Service.Template.Services
             }
             _userSession!.SetHistrory(History);
         }
+
         private void SetSectionPages()
         {
             ContactInfoResponse? res;
@@ -69,30 +70,33 @@ namespace Dsf.Service.Template.Services
             var citizen = _userSession?.GetUserPersonalData();
             if (citizen == null)
             { //Try to get data from api
-                res = _service.GetContact(_userSession!.GetAccessToken()!);
+                res = _contactService.GetContact(_userSession!.GetAccessToken()!);
                 //if the user is already login and not passed from login, set in session
                 if (res?.Data != null)
                 {
                     _userSession.SetUserPersonalData(res);
-                    citizen = _userSession.GetUserPersonalData();
+                    citizen = res;
                 }
-
-               
             }
-            //New Section
+
+            //Add Email Section
             SectionInfo section = new();
             section.Name = "Email";
             section.SectionOrder = 1;
-            //Always Select, for even API does not have email, we show email from user profile 
+
+            //Always Select, for even API does not have email, we show email from user profile
+            //The email on user Ariadne profile is always considered verified
             section.Type = SectionType.SelectionAndInput;
             section.pages.Add("email-selection");
             section.pages.Add("set-email");
             list.Add(section);
-            //New Section
+
+            //Add Mobile section,
             section = new();
             section.Name = "Mobile";
             section.SectionOrder = 2;
-            //Always Select, for even API does not have email, we show email from user profile 
+
+            //
             section.Type = (!string.IsNullOrEmpty(citizen?.Data?.MobileTelephone)) ? SectionType.SelectionAndInput : SectionType.InputOnly;
             if (section.Type == SectionType.InputOnly)
             {
@@ -104,13 +108,14 @@ namespace Dsf.Service.Template.Services
                 section.pages.Add("set-mobile");
             }
             list.Add(section);
+
             //Store List
             _userSession!.SetNavLink(list);
         }
         public Navigation(IHttpContextAccessor httpContextAccessor, IContact service, IUserSession userSession)
         {
             _httpContextAccessor = httpContextAccessor;
-            _service = service;
+            _contactService = service;
             _userSession = userSession;
             var ListItem = _userSession?.GetNavLink()?.First();
             if (ListItem == null)
@@ -122,9 +127,7 @@ namespace Dsf.Service.Template.Services
                     ListItem = _userSession!.GetNavLink()!.First();
                     NextLink = "/" + ListItem.pages.First();
                 }
-
             }
-
         }
 
         public string GetBackLink(string currPage, bool fromReview = false)
