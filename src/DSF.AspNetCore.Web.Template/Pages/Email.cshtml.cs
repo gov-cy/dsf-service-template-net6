@@ -143,52 +143,59 @@ namespace DSF.AspNetCore.Web.Pages
         #endregion
         public IActionResult OnGet(bool review, bool fromPost)
         {
-            //Chack if user has sequentialy load the page
-            bool allow = AllowToProceed();
-            if (!allow)
+            try
             {
-                return RedirectToAction("LogOut", "Account");
-            }
-            // First set back link
-            BackLink = _nav.GetBackLink("/email-selection", review);
-            //Show selection Data 
-            BindSelectionData();
-            if (fromPost)
-            {
-                ShowErrors(true);
-            }
-            else
-            {
-                //check for revisit
-                bool revisit = BindData();
-                if (!revisit)
+                //Chack if user has sequentialy load the page
+                bool allow = AllowToProceed();
+                if (!allow)
                 {
-                    //Check whether api data were retrieve from login , otherwise call again
-                    ContactInfoResponse res = _userSession.GetUserPersonalData() ?? new ContactInfoResponse();
-                    if (res?.Data == null)
-                    {
-                        //Cet the citizen personal details from civil registry
-                        res = _service.GetContact(_userSession.GetAccessToken()!);
-                        //Demo handling
-                        if (res.Succeeded)
-                        {
-                            _userSession.SetUserPersonalData(res);
-                        }
-                        //Real example handling
-                        //if (res.succeeded == false)
-                        //{
-                        //    return RedirectToPage("/ServerError");
-                        //}
-                        //else
-                        //{
-                        //    //if the user is already login and not passed from login, set in session
-                        //    _userSession.SetUserPersonalData(res);
-                        //}
-                    }
-
+                    return RedirectToAction("LogOut", "Account");
                 }
-            }
+                // First set back link
+                BackLink = _nav.GetBackLink("/email-selection", review);
+                //Show selection Data 
+                BindSelectionData();
+                if (fromPost)
+                {
+                    ShowErrors(true);
+                }
+                else
+                {
+                    //check for revisit
+                    bool revisit = BindData();
+                    if (!revisit)
+                    {
+                        //Check whether api data were retrieve from login , otherwise call again
+                        ContactInfoResponse res = _userSession.GetUserPersonalData() ?? new ContactInfoResponse();
+                        if (res?.Data == null)
+                        {
+                            //Cet the citizen personal details from civil registry
+                            res = _service.GetContact(_userSession.GetAccessToken()!);
+                            //Demo handling
+                            if (res.Succeeded)
+                            {
+                                _userSession.SetUserPersonalData(res);
+                            }
+                            //Real example handling
+                            //if (res.succeeded == false)
+                            //{
+                            //    return RedirectToPage("/ServerError");
+                            //}
+                            //else
+                            //{
+                            //    //if the user is already login and not passed from login, set in session
+                            //    _userSession.SetUserPersonalData(res);
+                            //}
+                        }
 
+                    }
+                }
+
+            }
+            catch
+            {
+                RedirectToPage("/ServerError");
+            }
             return Page();
         }
         public IActionResult OnPost(bool review)
@@ -199,20 +206,20 @@ namespace DSF.AspNetCore.Web.Pages
                 EmailSel.UseOther = false;
                 EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
 
-            }
-            else if (CrbEmail == "2")
-            {
-                EmailSel.UseFromApi = false;
-                EmailSel.UseOther = true;
-                if (review && !string.IsNullOrEmpty(_userSession.GetUserEmailData()?.Email) && _userSession.GetUserEmailData()?.UseFromApi == true)
-                {
-                    //Reset
-                    EmailSel.Email = "";
                 }
-                else
+                else if (CrbEmail == "2")
                 {
-                    EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserEmailData()?.Email) ? "" : _userSession.GetUserEmailData()!.Email;
-                }
+                    EmailSel.UseFromApi = false;
+                    EmailSel.UseOther = true;
+                    if (review && !string.IsNullOrEmpty(_userSession.GetUserEmailData()?.Email) && _userSession.GetUserEmailData()?.UseFromApi == true)
+                    {
+                        //Reset
+                        EmailSel.Email = "";
+                    }
+                    else
+                    {
+                        EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserEmailData()?.Email) ? "" : _userSession.GetUserEmailData()!.Email;
+                    }
 
             }
             else

@@ -34,6 +34,7 @@ namespace DSF.AspNetCore.Web.Pages
         //Object for session data 
         public EmailSection emailEdit;
         #endregion
+        
         #region "Custom Methods"
         public EmailEditModel(IValidator<EmailSection> validator, INavigation nav, IUserSession userSession)
         {
@@ -42,12 +43,14 @@ namespace DSF.AspNetCore.Web.Pages
             _nav = nav;
             _userSession = userSession;
         }
+
         void ClearErrors()
         {
             DisplaySummary = "display:none";
             EmailErrorClass = "";
             ErrorsDesc = "";
         }
+
         bool ShowErrors(bool fromPost)
         {
             if (fromPost)
@@ -67,6 +70,7 @@ namespace DSF.AspNetCore.Web.Pages
                 return false;
             }
         }
+
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
             //First Enable Summary Display
@@ -82,6 +86,7 @@ namespace DSF.AspNetCore.Web.Pages
                 
             }
         }
+
         private bool AllowToProceed()
         {
             bool ret = true;
@@ -93,16 +98,16 @@ namespace DSF.AspNetCore.Web.Pages
             return ret;
         }
      
-      
         private EmailSection GetSessionData()
         {
-            var SessionEmailEdit = _userSession.GetUserEmailData();
-            return SessionEmailEdit;
+            return _userSession.GetUserEmailData();
         }
+
         private string GetTempSessionData()
         {
             return HttpContext.Session.GetObjectFromJson<string>("emailval") ?? string.Empty;
         }
+
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
@@ -117,6 +122,7 @@ namespace DSF.AspNetCore.Web.Pages
             }
         }
         #endregion
+
         public IActionResult OnGet(bool review, bool fromPost)
         {           
             //Chack if user has sequentialy load the page
@@ -140,6 +146,7 @@ namespace DSF.AspNetCore.Web.Pages
 
             return Page();
         }
+
         public IActionResult OnPost(bool review)
         {
             //Update the class before validation
@@ -164,8 +171,6 @@ namespace DSF.AspNetCore.Web.Pages
            NextLink = _nav.SetLinks("set-email","Email", review, "NoSelection");
            
                 return RedirectToPage(NextLink);
-            
         }
     }
-   
 }

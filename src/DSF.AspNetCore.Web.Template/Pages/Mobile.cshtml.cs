@@ -242,7 +242,6 @@ namespace DSF.AspNetCore.Web.Pages
             {
                 return RedirectToPage(NextLink);
             }
-
         }
     }
 }

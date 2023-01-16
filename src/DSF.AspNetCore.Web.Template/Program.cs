@@ -137,6 +137,8 @@ builder.Services.AddCyLoginAuthentication();
 
 var app = builder.Build();
 
+app.UseExceptionHandler("/server-error");
+
 app.UseCyLoginAuthentication();
 
 
