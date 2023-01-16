@@ -97,13 +97,13 @@ namespace Dsf.Service.Template.Pages
       
         private EmailSection GetSessionData()
         {
-            var SessionEmailEdit = _userSession.GetUserEmailData();
-            return SessionEmailEdit;
+            EmailSection? SessionEmailEdit = _userSession.GetUserEmailData();
+            return SessionEmailEdit!;
         }
         private string GetTempSessionData()
         {
             var tempSession = HttpContext.Session.GetObjectFromJson<string>("emailval");
-            return tempSession;
+            return tempSession!;
         }
         private bool BindData()
         {   //Check if already selected 

@@ -9,7 +9,7 @@ namespace Dsf.Service.Template.Pages
     [BindProperties]
     public class ApplicationResponseModel : PageModel
     {
-       public string _applResponse=String.Empty;
+       public string? _applResponse=String.Empty;
         private readonly IUserSession _userSession;
         public ApplicationResponseModel(IUserSession userSession)
         {            
@@ -21,7 +21,7 @@ namespace Dsf.Service.Template.Pages
             _applResponse = _userSession.GetUserReferenceNumber();
             HttpContext.Session.Clear();
             //Keep the refence in session for lang change
-            _userSession.SetUserReferenceNumber(_applResponse);
+            _userSession.SetUserReferenceNumber(_applResponse!);
         }
     }
 }
