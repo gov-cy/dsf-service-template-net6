@@ -15,7 +15,7 @@ namespace DSF.AspNetCore.Web.Template.Middlewares
     
     public class RequestLocalizationCookiesMiddleware : IMiddleware
     {
-        public CookieRequestCultureProvider Provider { get; }
+        public CookieRequestCultureProvider? Provider { get; }
 
         public RequestLocalizationCookiesMiddleware(IOptions<RequestLocalizationOptions> requestLocalizationOptions)
         {

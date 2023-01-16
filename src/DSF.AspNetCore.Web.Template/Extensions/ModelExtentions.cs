@@ -24,7 +24,6 @@ namespace DSF.AspNetCore.Web.Template.Extensions
                     {
                         modelState.AddModelError(className + "." + error.PropertyName, error.ErrorMessage);
                     }
-
                 }
             }
         }

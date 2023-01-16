@@ -7,10 +7,12 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
 {
     public class EmailValidator : AbstractValidator<EmailSection>
     {
-        readonly ICommonApis _checker;
-        readonly IResourceViewLocalizer _Localizer;
-        readonly string emailNoSelectionMsg = string.Empty;
-        readonly string emailMessage = string.Empty;
+        private readonly string emailNoSelectionMsg = string.Empty;
+        private readonly string emailMessage = string.Empty;
+
+        private readonly ICommonApis _checker;
+        private readonly IResourceViewLocalizer _Localizer;
+
         public EmailValidator(IResourceViewLocalizer localizer, ICommonApis checker)
         {
             _checker = checker;

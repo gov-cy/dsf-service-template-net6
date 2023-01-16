@@ -5,6 +5,5 @@
         public string Email { get; set; } = "";
         public bool UseFromApi { get; set; }
         public bool UseOther { get; set; }
-        
     }
 }

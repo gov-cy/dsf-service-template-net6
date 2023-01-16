@@ -21,14 +21,24 @@ namespace DSF.MOI.CitizenData.Web.Configuration
 
         public static void UseCyLoginAuthentication(this WebApplication app) 
         {
-            _configSection = app.Configuration.GetSection(OIDCScheme);
+            if(app == null) throw new ArgumentNullException(nameof(app));
+
+            if (app.Configuration.GetChildren().Any(x => x.Key == OIDCScheme))
+            {
+                _configSection = app.Configuration.GetSection(OIDCScheme);
+            }
+            else 
+            {
+                throw new ArgumentException($"Configuration section {OIDCScheme} not found.");
+            }
+           
             _environment = app.Environment;
-            _cyLoginSpecification = app.Services.GetRequiredService<ICyLoginSpecification>();
+            _cyLoginSpecification = app?.Services.GetRequiredService<ICyLoginSpecification>();
         }
 
         public static void AddCyLoginAuthentication(this IServiceCollection services)
         {
-            services.Configure<OIDCSettings>(options => 
+            services.Configure<OIDCSettings>(options =>
             {
                 options = _configSection.Get<OIDCSettings>();
             });
@@ -50,7 +60,7 @@ namespace DSF.MOI.CitizenData.Web.Configuration
                         ctx.ReturnUri = oidcSettings.LoginUrl;
                         return Task.CompletedTask;
                     };
-                    //Port used for this client MUST BE 44319
+
                     if (!string.IsNullOrEmpty(oidcSettings.SignedOutRedirectUri))
                     {
                         options.SignedOutRedirectUri = oidcSettings.SignedOutRedirectUri;

@@ -133,7 +133,6 @@ builder.Services.AddSession(options => {
 });
 
 //open id authentication settings
-//builder.Services.Configure<OIDCSettings>(builder.Configuration.GetSection(AuthenticationConfiguration.OIDCScheme));
 builder.Services.AddCyLoginAuthentication();
 
 var app = builder.Build();

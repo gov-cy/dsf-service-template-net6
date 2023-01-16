@@ -19,7 +19,7 @@ namespace DSF.AspNetCore.Web.Template.Controllers
         }
         private bool IsOrganization()
         {
-            var cp = (ClaimsPrincipal)User;
+            var cp = User;
             var id = cp.Claims.FirstOrDefault(c => c.Type == "legal_unique_identifier")?.Value;
             if (!string.IsNullOrEmpty(id))
             {
@@ -32,7 +32,7 @@ namespace DSF.AspNetCore.Web.Template.Controllers
         }
         private bool NotVerified()
         {
-            var cp = (ClaimsPrincipal)User;
+            var cp = User;
             var id = cp.Claims.FirstOrDefault(c => c.Type == "unique_identifier")?.Value;
             if (string.IsNullOrEmpty(id))
             {
@@ -99,7 +99,7 @@ namespace DSF.AspNetCore.Web.Template.Controllers
         //Ariadni requirement so that they can logout the user with a get call to the account countroller
         public void OidcSignOut(string sid)
         {
-            var cp = (ClaimsPrincipal)User;
+            var cp = User;
             var sidClaim = cp.FindFirst("sid");
             if (sidClaim?.Value == sid)
             {

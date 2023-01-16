@@ -12,19 +12,23 @@ namespace DSF.AspNetCore.Web.Template.Services
         public void SetHistrory(List<HistoryItem> Data);
         public List<SectionInfo> GetNavLink();
         public void SetNavLink(List<SectionInfo> Data);
+
         public ValidationResult? GetUserValidationResults();
         public void SetUserValidationResults(ValidationResult Result);
+
         public string? GetAccessToken();
         public void SetAccessToken(string AccessToken);
+
         public string? GetIdToken();
         public void SetIdToken(string IdToken);
+
         public ContactInfoResponse? GetUserPersonalData();
         public void SetUserPersonalData(ContactInfoResponse Data);
         public EmailSection GetUserEmailData();
         public void SetUserEmailData(EmailSection Data);
         public MobileSection GetUserMobileData();
         public void SetUserMobileData(MobileSection Data);
-       
+
         public ContactInfoResponse? GetUserApplResponse();
         public void SetUserApplResponse(ContactInfoResponse Data);
 

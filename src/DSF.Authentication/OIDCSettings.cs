@@ -9,6 +9,5 @@
         public string? RedirectUri { get; set; }
         public string? LoginUrl { get; set; }
         public string? SignedOutRedirectUri { get; set; }
-
     }
 }
