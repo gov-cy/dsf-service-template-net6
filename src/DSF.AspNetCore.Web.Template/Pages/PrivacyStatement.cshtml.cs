@@ -1,9 +1,8 @@
-using DSF.AspNetCore.Web.Template.Extensions;
 using DSF.AspNetCore.Web.Template.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DSF.AspNetCore.Web.Pages
+namespace DSF.AspNetCore.Web.Template.Pages
 {
     public class PrivacyStatementModel : PageModel
     {

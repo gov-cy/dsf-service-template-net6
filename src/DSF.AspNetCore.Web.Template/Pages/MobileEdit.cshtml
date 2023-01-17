@@ -1,9 +1,9 @@
 ﻿@page "/set-mobile/{review:bool?}"
 
-@model DSF.AspNetCore.Web.Pages.MobileEditModel
+@model MobileEditModel
 
 @{
-    ViewBag.PreviousUrl=Model.BackLink;
+    ViewBag.PreviousUrl = Model.BackLink;
     ViewData["Title"] = @Localizer["set-mobile.title"];
 }
 

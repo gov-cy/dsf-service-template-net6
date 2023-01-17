@@ -33,6 +33,6 @@ namespace DSF.AspNetCore.Web.Template.ViewComponents
     public class CulturePickerModel
     {
         public CultureInfo? CurrentUICulture { get; set; }
-        public List<CultureInfo> SupportedCultures { get; set; } = new();
+        public List<CultureInfo>? SupportedCultures { get; set; }
     }
 }

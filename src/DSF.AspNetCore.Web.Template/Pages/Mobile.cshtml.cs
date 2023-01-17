@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
-namespace DSF.AspNetCore.Web.Pages
+namespace DSF.AspNetCore.Web.Template.Pages
 {
     [BindProperties]
     public class MobileModel : PageModel
@@ -32,6 +32,7 @@ namespace DSF.AspNetCore.Web.Pages
         //Object for session data 
         public MobileSection MobileSel;
         #endregion
+       
         #region "Custom Methods"
         public MobileModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
         {
@@ -148,6 +149,7 @@ namespace DSF.AspNetCore.Web.Pages
             }
         }
         #endregion
+        
         public IActionResult OnGet(bool review, bool fromPost)
         {
             //Chack if user has sequentialy load the page
@@ -171,6 +173,7 @@ namespace DSF.AspNetCore.Web.Pages
 
             return Page();
         }
+
         public IActionResult OnPost(bool review)
         {
             //Set class Model before validation
@@ -187,13 +190,12 @@ namespace DSF.AspNetCore.Web.Pages
                 if (review && !string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) && _userSession.GetUserMobileData()?.UseFromApi == true)
                 {
                     //Reset
-                    MobileSel.Mobile = "";
+                    MobileSel.Mobile = string.Empty;
                 }
                 else
                 {
                     MobileSel.Mobile = string.IsNullOrEmpty(_userSession.GetUserMobileData()?.Mobile) ? "" : _userSession.GetUserMobileData()!.Mobile;
                 }
-               
             }
             else
             {
@@ -202,7 +204,6 @@ namespace DSF.AspNetCore.Web.Pages
             }
             if (!review && _userSession.GetUserMobileData() == null)
             {
-                
                 MobileSel.ValidationMode = ValidationMode.Select;
                 //Validate Model
                 FluentValidation.Results.ValidationResult result = _validator.Validate(MobileSel);
@@ -216,7 +217,6 @@ namespace DSF.AspNetCore.Web.Pages
             {
                 MobileSel.ValidationMode = ValidationMode.Edit;
             }
-
 
             //Model is valid so strore 
             _userSession.SetUserMobileData(MobileSel);

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using DSF.AspNetCore.Web.Template.Services;
 using DSF.AspNetCore.Web.Template.Extensions;
 
-namespace DSF.AspNetCore.Web.Pages
+namespace DSF.AspNetCore.Web.Template.Pages
 {
     public class MobileEditModel : PageModel
     {
@@ -126,7 +126,7 @@ namespace DSF.AspNetCore.Web.Pages
             }
         }
 
-        private string SetMobile(string mobile)
+        private static string SetMobile(string mobile)
         {
             if (!string.IsNullOrEmpty(mobile))
             {

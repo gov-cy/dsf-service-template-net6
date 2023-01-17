@@ -6,7 +6,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DSF.AspNetCore.Web.Pages
+namespace DSF.AspNetCore.Web.Template.Pages
 {
 
     public class EmailEditModel : PageModel
@@ -87,7 +87,7 @@ namespace DSF.AspNetCore.Web.Pages
             }
         }
 
-        private bool AllowToProceed()
+        private static bool AllowToProceed()
         {
             bool ret = true;
             //For the demo purpose we might not get data from template api service

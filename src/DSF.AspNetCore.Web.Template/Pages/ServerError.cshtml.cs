@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DSF.AspNetCore.Web.Pages
+namespace DSF.AspNetCore.Web.Template.Pages
 {
     public class ServerErrorModel : PageModel
     {

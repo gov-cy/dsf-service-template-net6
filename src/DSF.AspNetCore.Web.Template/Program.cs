@@ -38,18 +38,10 @@ builder.Services.AddAntiforgery(options =>
     options.Cookie.SameSite = SameSiteMode.Strict;
 });
 
-var supportedCultures = new[]
-{
-    new CultureInfo("en-US"),
-    //you can add more language as you want...
-};
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.SetDefaultCulture("el-GR");
-    options.DefaultRequestCulture = new RequestCulture("el");
-
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
+    options.AddSupportedUICultures("el-GR", "en-GB");
     options.FallBackToParentUICultures = true;
     options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
 });
@@ -173,14 +165,7 @@ app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRequestLocalization(new RequestLocalizationOptions
-{
-    DefaultRequestCulture = new RequestCulture("el-GR"),
-    // Formatting numbers, dates, etc.
-    SupportedCultures = supportedCultures,
-    // UI strings that we have localized.
-    SupportedUICultures = supportedCultures
-});
+app.UseRequestLocalization();
 
 // will remember to write the cookie 
 app.UseRequestLocalizationCookies();
