@@ -9,6 +9,8 @@ using DSF.Resources;
 using FluentValidation;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 
 IConfiguration Configuration = new ConfigurationBuilder()
@@ -123,15 +125,14 @@ builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
+//get configuration for CyLoginAuthentication from appsettings.json
+builder.Services.AddSingleton(Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>());
 //open id authentication settings
 builder.Services.AddCyLoginAuthentication();
 
 var app = builder.Build();
 
 app.UseExceptionHandler("/server-error");
-
-app.UseCyLoginAuthentication();
-
 
 // Configure the HTTP request pipeline middlewares.
 if (!app.Environment.IsDevelopment())

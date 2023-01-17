@@ -1,12 +1,9 @@
-﻿using DSF.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace DSF.MOI.CitizenData.Web.Configuration
 {
@@ -15,42 +12,12 @@ namespace DSF.MOI.CitizenData.Web.Configuration
         public const string OIDCScheme = "Oidc";
         public const string DsfCyLoginAuthCookie = "DsfCyLoginAuthCookie";
 
-        private static IWebHostEnvironment? _environment;
-        private static ICyLoginSpecification? _cyLoginSpecification;
-        private static IConfiguration? _configSection;
-
-        public static void UseCyLoginAuthentication(this WebApplication app) 
-        {
-            if(app == null) throw new ArgumentNullException(nameof(app));
-
-            if (app.Configuration.GetChildren().Any(x => x.Key == OIDCScheme))
-            {
-                _configSection = app.Configuration.GetSection(OIDCScheme);
-            }
-            else 
-            {
-                throw new ArgumentException($"Configuration section {OIDCScheme} not found.");
-            }
-           
-            _environment = app.Environment;
-            _cyLoginSpecification = app?.Services.GetRequiredService<ICyLoginSpecification>();
-        }
-
         public static void AddCyLoginAuthentication(this IServiceCollection services)
         {
-            services.Configure<OIDCSettings>(options =>
-            {
-                options = _configSection.Get<OIDCSettings>();
-            });
-
-            services
-                .AddSingleton<ICyLoginSpecification, CyLoginSpecification>();
-
             services
                 .AddOptions<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme)
-                .Configure((options) =>
+                .Configure<CyLoginAuthenticationOptions>((options, oidcSettings) =>
                 {
-                    var oidcSettings = _configSection.Get<OIDCSettings>();
                     options.Authority = oidcSettings.Authority;
                     options.ClientId = oidcSettings.ClientId;
                     options.ClientSecret = oidcSettings.ClientSecret;
@@ -78,7 +45,7 @@ namespace DSF.MOI.CitizenData.Web.Configuration
                         );
                     }
                 });
-
+            
             services
                 .AddAuthentication(options =>
                 {
@@ -105,14 +72,6 @@ namespace DSF.MOI.CitizenData.Web.Configuration
                     //dotnet user-secrets set "Oidc:ClientId" "my_client_id"
                     //dotnet user-secrets set "Oidc:Scopes" "my_scope1 my_scope2 ..."
 
-                    if (_environment.IsDevelopment())
-                    {
-                        //TODO - remove for production - not for production
-                        HttpClientHandler handler = new();
-                        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                        options.BackchannelHttpHandler = handler;
-                    }
-
                     options.ResponseType = "code";
                     options.ResponseMode = "query";
 
@@ -120,7 +79,15 @@ namespace DSF.MOI.CitizenData.Web.Configuration
                     options.UsePkce = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
 
-                    _cyLoginSpecification?.SetClaims(options.ClaimActions);
+                    //Map custom fields
+                    //CY Login Specifications v2.1
+                    options.ClaimActions.MapJsonKey("unique_identifier", "unique_identifier");
+                    options.ClaimActions.MapJsonKey("legal_unique_identifier", "legal_unique_identifier");
+                    options.ClaimActions.MapJsonKey("legal_main_profile", "legal_main_profile");
+                    //EIDAS
+                    options.ClaimActions.MapJsonKey("given_name", "given_name");
+                    options.ClaimActions.MapJsonKey("family_name", "family_name");
+                    options.ClaimActions.MapJsonKey("birthdate", "birthdate");
 
                     options.Events.OnRemoteFailure = ctx =>
                     {

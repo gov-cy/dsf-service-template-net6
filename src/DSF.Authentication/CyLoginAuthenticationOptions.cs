@@ -1,6 +1,6 @@
 ﻿namespace DSF.MOI.CitizenData.Web.Configuration
 {
-    public class OIDCSettings
+    public class CyLoginAuthenticationOptions
     {
         public string? Authority { get; set; }
         public string? ClientId { get; set; }
