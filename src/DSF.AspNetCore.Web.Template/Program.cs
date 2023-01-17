@@ -2,14 +2,13 @@ using DSF.AspNetCore.Web.Template.Data.Models;
 using DSF.AspNetCore.Web.Template.Data.Validations;
 using DSF.AspNetCore.Web.Template.Extensions;
 using DSF.AspNetCore.Web.Template.Middlewares;
-using DSF.AspNetCore.Web.Template.Services;
 using DSF.AspNetCore.Web.Template.Resources;
+using DSF.AspNetCore.Web.Template.Services;
 using DSF.MOI.CitizenData.Web.Configuration;
 using DSF.Resources;
 using FluentValidation;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
-using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 
 IConfiguration Configuration = new ConfigurationBuilder()
