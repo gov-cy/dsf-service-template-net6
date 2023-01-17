@@ -101,10 +101,9 @@ namespace DSF.AspNetCore.Web.Template.Pages
             return ret;
         }
 
-        private MobileSection GetSessionData()
+        private MobileSection? GetSessionData()
         {
-            var SessionEmailEdit = _userSession.GetUserMobileData();
-            return SessionEmailEdit;
+            return _userSession.GetUserMobileData();
         }
 
         private string GetTempSessionData()

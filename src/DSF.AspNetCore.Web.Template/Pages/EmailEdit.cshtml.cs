@@ -98,7 +98,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             return ret;
         }
      
-        private EmailSection GetSessionData()
+        private EmailSection? GetSessionData()
         {
             return _userSession.GetUserEmailData();
         }

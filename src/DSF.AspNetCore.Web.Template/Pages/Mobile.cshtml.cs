@@ -101,10 +101,9 @@ namespace DSF.AspNetCore.Web.Template.Pages
             return ret;
         }
 
-        private MobileSection GetSessionData()
+        private MobileSection? GetSessionData()
         {
-            var selectedoptions = _userSession.GetUserMobileData();
-            return selectedoptions;
+            return _userSession.GetUserMobileData();
         }
 
         private void BindSelectionData()

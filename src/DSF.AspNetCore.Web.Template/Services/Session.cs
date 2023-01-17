@@ -26,7 +26,7 @@ namespace DSF.AspNetCore.Web.Template.Services
         public void SetUserPersonalData(ContactInfoResponse Data);
         public EmailSection? GetUserEmailData();
         public void SetUserEmailData(EmailSection Data);
-        public MobileSection GetUserMobileData();
+        public MobileSection? GetUserMobileData();
         public void SetUserMobileData(MobileSection Data);
 
         public ContactInfoResponse? GetUserApplResponse();
@@ -102,9 +102,9 @@ namespace DSF.AspNetCore.Web.Template.Services
         {
             _httpContextAccessor.HttpContext?.Session.SetObjectAsJson("EmailSection", Data);
         }
-        public MobileSection GetUserMobileData()
+        public MobileSection? GetUserMobileData()
         {
-            return _httpContextAccessor.HttpContext?.Session.GetObjectFromJson<MobileSection>("MobileSection") ?? new();
+            return _httpContextAccessor.HttpContext?.Session.GetObjectFromJson<MobileSection>("MobileSection");
         }
         public void SetUserMobileData(MobileSection Data)
         {
