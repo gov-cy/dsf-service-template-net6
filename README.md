@@ -45,7 +45,7 @@ Usage:
 "Oidc:ClientSecret": "<password>",
 "Oidc:ClientId": "<client_id>",
 "Oidc:Authority": "<authority_url>",
-"RedirectUri": "https://localhost:44319/",
+"Oidc:SignedOutRedirectUri": "https://localhost:44319/",
 ```
 - Configure OIDC Authentication in the Program.cs file of the project:
 ```
@@ -68,11 +68,12 @@ The project also simulates various API calls to demostrate how the service shoul
 ## Installation
 ```
 git clone https://github.com/gov-cy/dsf-service-template-net6.git
-cd src\dsf-service-template-net6
+cd src\DSF.AspNetCore.Web.Template
 dotnet build
 dotnet run
 ```
-
+### Note
+if you dont have .Net 6 on you pc download [.Net6-sdk] 
 ## Tech
 * Localization
 * Oidc Authentication (Mock CyLogin) [dsf-idsrv-dev]
@@ -105,3 +106,4 @@ dotnet run
    [dsf-mock-apis]: <https://dsf-api-test.dmrid.gov.cy/swagger/index.html>
    [git-repo-url]: <https://github.com/gov-cy/dsf-service-template-net6.git>
    [Fluent-url]: <https://docs.fluentvalidation.net/en/latest/>
+   [.Net6-sdk]: <https://dotnet.microsoft.com/en-us/download/visual-studio-sdks>
