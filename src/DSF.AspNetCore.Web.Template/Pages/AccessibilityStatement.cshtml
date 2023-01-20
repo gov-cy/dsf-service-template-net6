@@ -1,0 +1,11 @@
+﻿@page "/accessibility-statement"
+
+@model AccessibilityStatementModel
+
+@{
+    ViewBag.PreviousUrl = Model.BackLink;
+    ViewData["Title"] = Localizer["accessibility-statement.title"];
+}
+
+<h1>@Localizer["accessibility-statement.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("accessibility-statement.instructions")

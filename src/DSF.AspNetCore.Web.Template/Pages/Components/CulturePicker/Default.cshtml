@@ -1,0 +1,11 @@
+﻿@model DSF.AspNetCore.Web.Template.ViewComponents.CulturePickerModel
+<form class="govcy-text-white govcy-bg-primary" method="GET">
+    <div class="govcy-text-white govcy-bg-primary">
+       <select class="govcy-lang-menu govcy-text-white" id="culture-picker" name="culture" onchange="this.parentElement.parentElement.submit();">
+       @foreach (var culture in Model.SupportedCultures!)
+       {
+       <option value="@culture.Name" selected="@(Model.CurrentUICulture?.Name == culture.Name)">@(culture.Name.Substring(0, 2).ToUpper()=="EN" ? "English" : "Ελληνικά")</option>
+       }
+       </select>
+    </div>
+</form>                      

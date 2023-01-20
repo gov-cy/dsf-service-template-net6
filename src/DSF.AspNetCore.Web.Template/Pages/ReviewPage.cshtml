@@ -1,0 +1,61 @@
+﻿@page "/review-page/{review:bool?}"
+@using DSF.AspNetCore.Web.Template.Data.Models
+@using DSF.AspNetCore.Web.Template.Extensions
+
+@model ReviewPageModel
+
+@{
+    ViewBag.PreviousUrl=Model.BackLink;
+    ViewData["Title"] = Localizer["review-page.p1"];
+}
+
+<h1>@Localizer["review-page.p1"]</h1>
+<p>@Localizer["review-page.p2"]</p>
+ 
+  
+ <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
+     <tbody>
+         <tr>
+            <th scope="row" class="col-3">@Localizer["review-page.mobile"]</th>
+             <td class="col-7">
+                 <p>
+                 <span class="govcy-d-block">@Model.ret_mobile.FormatMobile()</span>
+                </p>
+             </td>
+              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+                    @if (Model.useMobileEditOnly)
+                    {
+                        <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["common.change_link"]</a>
+                    } else
+                    {
+                        <a asp-page="/Mobile" asp-route-review="true">@Localizer["common.change_link"]</a>
+                    }
+              </td>
+         </tr>
+           <tr>
+            <th scope="row" class="col-3">@Localizer["review-page.email"]</th>
+             <td class="col-7">
+                 <p>
+                  <span class="govcy-d-block">@Model.ret_email</span>
+                </p>
+             </td>
+              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+                    @if (Model.useEmailEditOnly)
+                    {
+                        <a asp-page="/EmailEdit" asp-route-review="true">@Localizer["common.change_link"]</a>
+                    }else
+                    {
+                        <a asp-page="/Email" asp-route-review="true">@Localizer["common.change_link"]</a>
+                    }
+                    
+              </td>
+         </tr>
+     </tbody>
+ </table>
+
+ 
+    <form asp-page-handler="ApplicationSubmit">
+            <button type="submit" class="govcy-btn-primary" id="btnApplicationSubmit">
+                @Localizer["common.submit"]
+            </button>
+   </form>

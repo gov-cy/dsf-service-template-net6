@@ -1,0 +1,10 @@
+﻿@page "/no-page-found"
+
+@model NoPageFoundModel
+@{
+    Layout = "_LayoutNoBackLink";
+    ViewData["Title"] = Localizer["no-page-found.title"];
+}
+
+<h1>@Localizer["no-page-found.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("no-page-found.instructions")

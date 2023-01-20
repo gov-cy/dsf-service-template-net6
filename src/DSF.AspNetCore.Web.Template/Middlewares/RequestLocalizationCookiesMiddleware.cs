@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
+using System.Data;
 
-namespace Dsf.Service.Template.Middlewares
+namespace DSF.AspNetCore.Web.Template.Middlewares
 {
     public static class RequestLocalizationCookiesMiddlewareExtensions
     {
@@ -16,15 +17,20 @@ namespace Dsf.Service.Template.Middlewares
     {
         public CookieRequestCultureProvider? Provider { get; }
 
-        public RequestLocalizationCookiesMiddleware (IOptions<RequestLocalizationOptions> requestLocalizationOptions)
+        public RequestLocalizationCookiesMiddleware(IOptions<RequestLocalizationOptions> requestLocalizationOptions)
         {
-            Provider =
-                requestLocalizationOptions
-                    .Value
-                    .RequestCultureProviders
-                    .Where(x => x is CookieRequestCultureProvider)
-                    .Cast<CookieRequestCultureProvider>()
-                    .FirstOrDefault();
+            var cookieRequestCultureProvider = requestLocalizationOptions
+                .Value
+                .RequestCultureProviders
+                .Where(x => x is CookieRequestCultureProvider)
+                .Cast<CookieRequestCultureProvider>()
+                .FirstOrDefault();
+            
+            if(cookieRequestCultureProvider == null) 
+            {
+                throw new ArgumentNullException(nameof(cookieRequestCultureProvider));
+            }
+            Provider = cookieRequestCultureProvider;
         }
         
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)

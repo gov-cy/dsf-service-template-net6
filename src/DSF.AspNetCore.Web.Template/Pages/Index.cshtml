@@ -1,0 +1,18 @@
+﻿@page 
+
+@model IndexModel
+@{
+    ViewData["Title"] = @Localizer["index.title"];
+    Layout = "_LayoutNoBackLink";
+}
+
+<h1>@Localizer["index.title"]</h1>
+@Localizer.GetPagesLocalizedHtml("index.instructions1")
+<div>
+    <form asp-page-handler="ApplicationStart">        
+        <button type="submit" class="govcy-btn-primary" id="btnApplicationStart">
+        @Localizer["common.button_get_started"]
+        </button>
+    </form>
+</div>
+@Localizer.GetPagesLocalizedHtml("index.instructions")
