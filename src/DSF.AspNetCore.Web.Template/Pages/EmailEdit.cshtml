@@ -5,6 +5,7 @@
 @{
     ViewBag.PreviousUrl=Model.BackLink;
     ViewData["Title"] = @Localizer["set-email.title"];
+   
 }
 
 <div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
@@ -25,16 +26,25 @@
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
                     @Model.EmailErrorClass
             </p>
-        }       
         <input id="email" name="email" 
         type="email" 
         value="@Model.Email"  
         class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")"
-        maxlength="80" spellcheck="false" autocomplete="email"
-        @(Model.EmailErrorClass.Length >0) ? $" aria-describedby=\"email-error\"" : "")>
+        maxlength="80" spellcheck="false" autocomplete="email" aria-describedby="email-error"> 
+        }  
+        else
+        {
+         <input id="email" name="email" 
+        type="email" 
+        value="@Model.Email"  
+        class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")"
+        maxlength="80" spellcheck="false" autocomplete="email">  
+        }      
+       
+       
     </div>
 @*<p>
   @Localizer["set-email.p1"]
 </p>*@
-  <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["common.button_next"]</button>
+  <button type="submit" class="govcy-btn-primary ">@Localizer["common.button_next"]</button>
 </form>

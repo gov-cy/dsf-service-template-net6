@@ -5,7 +5,7 @@ using DSF.AspNetCore.Web.Template.Middlewares;
 using DSF.AspNetCore.Web.Template.Resources;
 using DSF.AspNetCore.Web.Template.Services;
 using DSF.MOI.CitizenData.Web.Configuration;
-using DSF.Resources;
+using DSF.Localization;
 using FluentValidation;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
@@ -69,8 +69,8 @@ builder.Services.AddRazorPages(options =>
 
 
 builder.Services.AddSingleton<IResourceViewLocalizer, ResourceViewLocalizer>();
-builder.Services.Configure<ResourceOptions>(options => 
-{ 
+builder.Services.Configure<ResourceOptions>(options =>
+{
     options.ErrorResourceLocationByType = typeof(ErrorResource);
     options.PageResourceLocationByType = typeof(PageResource);
     options.CommonResourceLocationByType = typeof(CommonResource);
@@ -117,7 +117,8 @@ builder.Services.AddScoped<IUserSession, UserSession>();
 builder.Services.AddScoped<IContact, Contact>();
 
 //Added for session state
-builder.Services.AddSession(options => {
+builder.Services.AddSession(options =>
+{
     options.Cookie.Name = "AppDataSessionCookie";
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -126,9 +127,9 @@ builder.Services.AddSession(options => {
 });
 
 //get configuration for CyLoginAuthentication from appsettings.json
-builder.Services.AddSingleton(Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>());
+//builder.Services.AddSingleton(Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>());
 //open id authentication settings
-builder.Services.AddCyLoginAuthentication();
+builder.Services.AddCyLoginAuthentication(Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>());
 
 var app = builder.Build();
 
@@ -154,8 +155,17 @@ app.UseForwardedHeaders(options);
 
 //IdentityServer4 http to https error (Core 1,2,3,5,6)
 app.Use(async (ctx, next) =>
-{
-    ctx.Request.Scheme = "https";
+{   ctx.Request.Scheme = "https";
+    ctx.Response.OnStarting(() =>
+    {
+        if (ctx.Response.StatusCode == 302)
+        {
+            ctx.Response.Headers["Location"] = ctx.Response.Headers.Location.ToString().EndsWith("#")
+            ? ctx.Response.Headers.Location.ToString().Replace("#", "")
+            : ctx.Response.Headers.Location.ToString();
+        }
+        return Task.CompletedTask;
+    });
     await next();
 });
 

@@ -32,7 +32,7 @@
                 <strong>@Model.EmailSel.Email</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.CrbEmail == "1" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
-                <span class="govcy-hint">@Localizer["email-selection.p1"]</span>
+                <span class="govcy-hint govcy-mt-2">@Localizer["email-selection.p1"]</span>
             </label>
             <label class="govcy-radio">
                 @Localizer["email-selection.no"]
@@ -41,7 +41,7 @@
             </label>
         </div>
     </fieldset>
-    <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["common.button_next"]</button>
+    <button type="submit" class="govcy-btn-primary">@Localizer["common.button_next"]</button>
 </form>
  
 

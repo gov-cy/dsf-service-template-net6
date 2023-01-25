@@ -235,7 +235,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review });
+                return RedirectToPage(NextLink, null, new { review = true });
             }
             else
             {

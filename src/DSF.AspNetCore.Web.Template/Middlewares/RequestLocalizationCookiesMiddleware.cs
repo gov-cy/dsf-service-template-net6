@@ -50,6 +50,10 @@ namespace DSF.AspNetCore.Web.Template.Middlewares
                         );
                 }
             }
+            if (context.Response.StatusCode == 302)
+            {
+                context.Response.Headers.Location = context.Response.Headers.Location.ToString().Replace("#", "");
+            }
             await next(context);
         }
     }

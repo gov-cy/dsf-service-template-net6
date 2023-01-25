@@ -12,5 +12,7 @@
         /// </summary>
         public string? LoginUrl { get; set; }
         public string? SignedOutRedirectUri { get; set; }
+        public string? ExpireTimeSpanInMinutes { get; set; }
+        public string? AuthCookieName { get; set; }
     }
 }

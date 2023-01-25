@@ -24,22 +24,30 @@
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
                     @Model.MobileErrorClass
                  </p>
-                
-            }
-            
-            <input id="mobile" name="mobile" 
+                 <input id="mobile" name="mobile" 
              type="tel" 
              value="@Model.Mobile"
               maxlength="20"
               autocomplete="tel"
              class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_20 govcy-text-input-error": "govcy-text-input govcy-text-input-char_20")"
-             @(Model.MobileErrorClass.Length >0) ? $" aria-describedby=\"tel-error\"" : "")
-            >
+             aria-describedby="tel-error">
+        }
+        else
+        {
+              <input id="mobile" name="mobile" 
+             type="tel" 
+             value="@Model.Mobile"
+              maxlength="20"
+              autocomplete="tel"
+             class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_20 govcy-text-input-error": "govcy-text-input govcy-text-input-char_20")">
+        } 
+            
+           
      </div>
 
   
    @*  <p>
          @Localizer["set-mobile.p1"]
      </p>*@
-     <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["common.button_next"]</button>
+     <button type="submit" class="govcy-btn-primary">@Localizer["common.button_next"]</button>
 </form>
