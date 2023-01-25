@@ -7,7 +7,7 @@ namespace DSF.AspNetCore.Web.Template.Extensions
     {
         public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState, string className = "")
         {
-            if (!result.IsValid)
+            if (result?.IsValid==false)
             {
                 //Clear errors before
                 foreach (var modelValue in modelState.Values)

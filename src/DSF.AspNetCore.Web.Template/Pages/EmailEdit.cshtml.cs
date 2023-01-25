@@ -170,7 +170,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             //Set back and Next Link
            NextLink = _nav.SetLinks("set-email","Email", review, "NoSelection");
            
-                return RedirectToPage(NextLink);
+                return RedirectToPage(NextLink, null, null, ""); ;
         }
     }
 }

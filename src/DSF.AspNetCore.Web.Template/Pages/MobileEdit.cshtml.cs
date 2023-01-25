@@ -196,7 +196,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
     
             //Set back and Next Link
             NextLink = _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
-            return RedirectToPage(NextLink);
+            return RedirectToPage(NextLink, null, null, ""); 
         }
     }
 }

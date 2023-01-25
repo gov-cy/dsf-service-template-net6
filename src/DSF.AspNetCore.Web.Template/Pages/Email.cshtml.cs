@@ -75,18 +75,22 @@ namespace DSF.AspNetCore.Web.Template.Pages
         }
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
-            //First Enable Summary Display
-            DisplaySummary = "display:block";
-            //Then Build Summary Error
-            foreach (ValidationFailure Item in result.Errors)
+            if (result != null)
             {
-                if (Item.PropertyName == nameof(EmailSel.UseFromApi) || Item.PropertyName == nameof(EmailSel.Email))
+                //First Enable Summary Display
+                DisplaySummary = "display:block";
+                //Then Build Summary Error
+                foreach (ValidationFailure Item in result.Errors)
                 {
-                    ErrorsDesc += "<a href='#crbEmail'>" + Item.ErrorMessage + "</a>";
-                    EmailSelection = Item.ErrorMessage;
-                }
+                    if (Item.PropertyName == nameof(EmailSel.UseFromApi) || Item.PropertyName == nameof(EmailSel.Email))
+                    {
+                        ErrorsDesc += "<a href='#crbEmail'>" + Item.ErrorMessage + "</a>";
+                        EmailSelection = Item.ErrorMessage;
+                    }
 
+                }
             }
+
         }
         private bool AllowToProceed()
         {
@@ -197,8 +201,8 @@ namespace DSF.AspNetCore.Web.Template.Pages
             {
                 EmailSel.UseFromApi = true;
                 EmailSel.UseOther = false;
-                EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) 
-                    ? User.Claims.First(c => c.Type == "email").Value 
+                EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email)
+                    ? User.Claims.First(c => c.Type == "email").Value
                     : _userSession!.GetUserPersonalData()!.Data!.Email;
             }
             else if (CrbEmail == "2")
@@ -256,13 +260,15 @@ namespace DSF.AspNetCore.Web.Template.Pages
 
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review =true },"");
+                return RedirectToPage(NextLink, null, new { review = review.ToString().ToLower() }, "");
             }
             else
             {
-                return RedirectToPage(NextLink, null, null, ""); 
+                return RedirectToPage(NextLink,null,null,"");
             }
         }
     }
+
+   
 }
 

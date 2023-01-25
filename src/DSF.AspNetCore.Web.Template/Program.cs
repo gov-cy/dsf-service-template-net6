@@ -65,6 +65,7 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
+    options.Conventions.AllowAnonymousToPage("/NoPageFound");
 }).AddViewLocalization();
 
 
@@ -133,18 +134,23 @@ builder.Services.AddCyLoginAuthentication(Configuration.GetSection("Dsf.Authenti
 
 var app = builder.Build();
 
+
+
 app.UseExceptionHandler("/server-error");
 
 // Configure the HTTP request pipeline middlewares.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseStatusCodePagesWithRedirects("/NoPageFound");
+    app.UseDeveloperExceptionPage();
+}
+else
+{    
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-// This is needed if running behind a reverse proxy (K8S Ingres?)
-//https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
-var options = new ForwardedHeadersOptions
+    // This is needed if running behind a reverse proxy (K8S Ingres?)
+    //https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
+    var options = new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 };
@@ -152,27 +158,20 @@ options.KnownNetworks.Clear();
 options.KnownProxies.Clear();
 
 app.UseForwardedHeaders(options);
+app.UseHttpsRedirection();
 
 //IdentityServer4 http to https error (Core 1,2,3,5,6)
 app.Use(async (ctx, next) =>
-{   ctx.Request.Scheme = "https";
-    ctx.Response.OnStarting(() =>
-    {
-        if (ctx.Response.StatusCode == 302)
-        {
-            ctx.Response.Headers["Location"] = ctx.Response.Headers.Location.ToString().EndsWith("#")
-            ? ctx.Response.Headers.Location.ToString().Replace("#", "")
-            : ctx.Response.Headers.Location.ToString();
-        }
-        return Task.CompletedTask;
-    });
+{
+    ctx.Request.Scheme = "https";
+
+
     await next();
 });
-
 app.UseSession();
 
 app.UseCors();
-app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRequestLocalization();
@@ -186,7 +185,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+app.UseStatusCodePagesWithRedirects("/no-page-found");
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
@@ -195,4 +194,5 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Account}/{action=Index}/{id?}");
 
 });
+
 app.Run();

@@ -235,11 +235,11 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review = true });
+                return RedirectToPage(NextLink, null, new { review = review.ToString().ToLower() },"");
             }
             else
             {
-                return RedirectToPage(NextLink);
+                return RedirectToPage(NextLink, null, null, ""); 
             }
         }
     }
