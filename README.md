@@ -21,7 +21,7 @@ Razor Pages is a newer, simplified web application programming model. It removes
 This service is demo that contains the following:
 * Implementation of a sample login mechanism with Cy Login 
 * A proposed project structure for DSF service development
-* Inclusion of the DSF Design System with example pages (see layout Page)
+* Inclusion of the DSF Design System with example pages
 * Out-of-the-box Multilanguage Support
 * Session data handling and storage
 * A proposed server side validation mechanism (Fluent Validation)
@@ -45,7 +45,7 @@ Usage:
 "Oidc:ClientSecret": "<password>",
 "Oidc:ClientId": "<client_id>",
 "Oidc:Authority": "<authority_url>",
-"RedirectUri": "https://localhost:44319/",
+"Oidc:SignedOutRedirectUri": "https://localhost:44319/",
 ```
 - Configure OIDC Authentication in the Program.cs file of the project:
 ```
@@ -65,13 +65,23 @@ For real test and production implementations, all the information for the CyLogi
 ### Mock API Calls
 The project also simulates various API calls to demostrate how the service should get data from and post data to a fictional back-end system  [api-template-demo]. 
 
-## Installation
+## Installation / Running
 ```
 git clone https://github.com/gov-cy/dsf-service-template-net6.git
-cd src\dsf-service-template-net6
+cd dsf-service-template-net6\src\DSF.AspNetCore.Web.Template
 dotnet build
 dotnet run
 ```
+### Note
+* In order to run git commands, download from [Git]
+* if you dont have .Net 6 on you pc download [.Net6-sdk]
+* If you are not using Visual Studio run `dotnet restore --source https://api.nuget.org/v3/index.json`
+* Defult URL after Build https://localhost:44319/
+
+## Design System
+
+The Service uses css version 1.3.2.
+In order to check the latest version, before creating a new service see [css latest]
 
 ## Tech
 * Localization
@@ -105,3 +115,6 @@ dotnet run
    [dsf-mock-apis]: <https://dsf-api-test.dmrid.gov.cy/swagger/index.html>
    [git-repo-url]: <https://github.com/gov-cy/dsf-service-template-net6.git>
    [Fluent-url]: <https://docs.fluentvalidation.net/en/latest/>
+   [.Net6-sdk]: <https://dotnet.microsoft.com/en-us/download/visual-studio-sdks>
+   [css latest]: <https://gov-cy.github.io/govcy-design-system-docs/getting_started/>
+   [Git]: <https://git-scm.com/downloads> 
