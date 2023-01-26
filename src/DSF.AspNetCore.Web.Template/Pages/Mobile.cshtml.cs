@@ -33,7 +33,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
         //Object for session data 
         public MobileSection MobileSel;
         #endregion
-       
+
         #region "Custom Methods"
         public MobileModel(IValidator<MobileSection> validator, INavigation nav, IUserSession userSession)
         {
@@ -73,18 +73,22 @@ namespace DSF.AspNetCore.Web.Template.Pages
 
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
-            //First Enable Summary Display
-            displaySummary = "display:block";
-            //Then Build Summary Error
-            foreach (ValidationFailure Item in result.Errors)
+            if (result != null)
             {
-                if (Item.PropertyName == nameof(MobileSel.UseFromApi) || Item.PropertyName == nameof(MobileSel.Mobile))
+                //First Enable Summary Display
+                displaySummary = "display:block";
+                //Then Build Summary Error
+                foreach (ValidationFailure Item in result.Errors)
                 {
-                    ErrorsDesc += "<a href='#crbMobile'>" + Item.ErrorMessage + "</a>";
-                    MobileSelection = Item.ErrorMessage;
-                }
+                    if (Item.PropertyName == nameof(MobileSel.UseFromApi) || Item.PropertyName == nameof(MobileSel.Mobile))
+                    {
+                        ErrorsDesc += "<a href='#crbMobile'>" + Item.ErrorMessage + "</a>";
+                        MobileSelection = Item.ErrorMessage;
+                    }
 
+                }
             }
+
         }
 
         private bool AllowToProceed()
@@ -149,7 +153,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
         }
         #endregion
-        
+
         public IActionResult OnGet(bool review, bool fromPost)
         {
             //Chack if user has sequentialy load the page
@@ -242,7 +246,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
             else
             {
-                return RedirectToPage(NextLink, null, null, !hashInUrl ? null : ""); 
+                return RedirectToPage(NextLink, null, null, !hashInUrl ? null : "");
             }
         }
     }
