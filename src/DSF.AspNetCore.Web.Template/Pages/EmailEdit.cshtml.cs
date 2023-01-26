@@ -5,6 +5,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace DSF.AspNetCore.Web.Template.Pages
 {
@@ -34,7 +35,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
         //Object for session data 
         public EmailSection emailEdit;
         #endregion
-        
+
         #region "Custom Methods"
         public EmailEditModel(IValidator<EmailSection> validator, INavigation nav, IUserSession userSession)
         {
@@ -73,18 +74,22 @@ namespace DSF.AspNetCore.Web.Template.Pages
 
         private void SetViewErrorMessages(FluentValidation.Results.ValidationResult result)
         {
-            //First Enable Summary Display
-            DisplaySummary = "display:block";
-            //Then Build Summary Error
-            foreach (ValidationFailure Item in result.Errors)
+            if (result != null)
             {
-                if (Item.PropertyName == nameof(emailEdit.Email))
+                //First Enable Summary Display
+                DisplaySummary = "display:block";
+                //Then Build Summary Error
+                foreach (ValidationFailure Item in result.Errors)
                 {
-                    ErrorsDesc += "<a href='#email'>" + Item.ErrorMessage + "</a>";
-                    EmailErrorClass = Item.ErrorMessage;
+                    if (Item.PropertyName == nameof(emailEdit.Email))
+                    {
+                        ErrorsDesc += "<a href='#email'>" + Item.ErrorMessage + "</a>";
+                        EmailErrorClass = Item.ErrorMessage;
+                    }
+
                 }
-                
             }
+
         }
 
         private static bool AllowToProceed()
@@ -97,7 +102,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             //}
             return ret;
         }
-     
+
         private EmailSection? GetSessionData()
         {
             return _userSession.GetUserEmailData();
@@ -118,13 +123,13 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
             else
             {
-                return false;     
+                return false;
             }
         }
         #endregion
 
         public IActionResult OnGet(bool review, bool fromPost)
-        {           
+        {
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
@@ -140,7 +145,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
             else
             {
-                Email = GetTempSessionData() ;
+                Email = GetTempSessionData();
                 ShowErrors(true);
             }
 
@@ -166,11 +171,12 @@ namespace DSF.AspNetCore.Web.Template.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("emailval");
-         
+
             //Set back and Next Link
-           NextLink = _nav.SetLinks("set-email","Email", review, "NoSelection");
-           
-                return RedirectToPage(NextLink);
+            NextLink = _nav.SetLinks("set-email", "Email", review, "NoSelection");
+            //clear # in  URLs  that generates on error found
+            bool hashInUrl = HttpContext.Request.GetDisplayUrl().Contains("fromPost");
+            return RedirectToPage(NextLink, null, null, !hashInUrl ? null : "");
         }
     }
 }

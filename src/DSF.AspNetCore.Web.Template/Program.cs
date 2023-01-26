@@ -5,7 +5,7 @@ using DSF.AspNetCore.Web.Template.Middlewares;
 using DSF.AspNetCore.Web.Template.Resources;
 using DSF.AspNetCore.Web.Template.Services;
 using DSF.MOI.CitizenData.Web.Configuration;
-using DSF.Resources;
+using DSF.Localization;
 using FluentValidation;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
@@ -65,12 +65,13 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
     options.Conventions.AllowAnonymousToPage("/AccessibilityStatement");
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
+    options.Conventions.AllowAnonymousToPage("/NoPageFound");
 }).AddViewLocalization();
 
 
 builder.Services.AddSingleton<IResourceViewLocalizer, ResourceViewLocalizer>();
-builder.Services.Configure<ResourceOptions>(options => 
-{ 
+builder.Services.Configure<ResourceOptions>(options =>
+{
     options.ErrorResourceLocationByType = typeof(ErrorResource);
     options.PageResourceLocationByType = typeof(PageResource);
     options.CommonResourceLocationByType = typeof(CommonResource);
@@ -116,34 +117,36 @@ builder.Services.AddScoped<IUserSession, UserSession>();
 //Register the Api service for Task Get and post methods
 builder.Services.AddScoped<IContact, Contact>();
 
-//Added for session state
-builder.Services.AddSession(options => {
-    options.Cookie.Name = "AppDataSessionCookie";
-    options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.IsEssential = true;
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-});
-
 //get configuration for CyLoginAuthentication from appsettings.json
-builder.Services.AddSingleton(Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>());
+var authConfiguration = Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>();
 //open id authentication settings
-builder.Services.AddCyLoginAuthentication();
-
-var app = builder.Build();
+builder.Services.AddCyLoginAuthentication(authConfiguration);
+// Added for session state
+ builder.Services.AddSession(options =>
+ {
+     options.Cookie.Name = "AppDataSessionCookie";
+     options.Cookie.HttpOnly = true;
+     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+     options.Cookie.IsEssential = true;
+     options.IdleTimeout = TimeSpan.FromMinutes(double.Parse(authConfiguration.ExpireTimeSpanInMinutes ?? "30")); //same with authentication idle time
+ });
+ var app = builder.Build();
 
 app.UseExceptionHandler("/server-error");
 
 // Configure the HTTP request pipeline middlewares.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseStatusCodePagesWithRedirects("/NoPageFound");
+    app.UseDeveloperExceptionPage();
+}
+else
+{    
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-// This is needed if running behind a reverse proxy (K8S Ingres?)
-//https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
-var options = new ForwardedHeadersOptions
+    // This is needed if running behind a reverse proxy (K8S Ingres?)
+    //https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
+    var options = new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 };
@@ -151,18 +154,20 @@ options.KnownNetworks.Clear();
 options.KnownProxies.Clear();
 
 app.UseForwardedHeaders(options);
+app.UseHttpsRedirection();
 
 //IdentityServer4 http to https error (Core 1,2,3,5,6)
 app.Use(async (ctx, next) =>
 {
     ctx.Request.Scheme = "https";
+
+
     await next();
 });
-
 app.UseSession();
 
 app.UseCors();
-app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRequestLocalization();
@@ -176,7 +181,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+app.UseStatusCodePagesWithRedirects("/no-page-found");
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
@@ -185,4 +190,5 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Account}/{action=Index}/{id?}");
 
 });
+
 app.Run();

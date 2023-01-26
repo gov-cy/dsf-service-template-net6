@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>DSF.AspNetCore.Web.Template</RootNamespace>
+    <UserSecretsId>f0b64a16-dc7f-4fdf-bc0f-a58921987c3c</UserSecretsId>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -20,7 +21,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DSF.Authentication\DSF.Authentication.csproj" />
-	  <ProjectReference Include="..\DSF.Resources\DSF.Resources.csproj" />
+	  <ProjectReference Include="..\DSF.Resources\DSF.Localization.csproj" />
 	</ItemGroup>
 
 </Project>

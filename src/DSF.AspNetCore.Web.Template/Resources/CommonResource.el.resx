@@ -142,7 +142,7 @@
     <value>Προστασία Προσωπικών Δεδομένων</value>
   </data>
   <data name="common.footer_copyright" xml:space="preserve">
-    <value>Κυπριακή Δημοκρατία, 2022</value>
+    <value>Κυπριακή Δημοκρατία, 2023</value>
   </data>
   <data name="common.footer_privacy" xml:space="preserve">
     <value>Όροι Χρήσης</value>
@@ -154,7 +154,7 @@
     <value>Mock Υπηρεσία για αλλάγη στοιχείων επικοινωνίας</value>
   </data>
   <data name="common.main_content_link" xml:space="preserve">
-    <value>Πλοήγηση από το πληκτρολόγιο</value>
+    <value>Μετάβαση στο κύριο περιεχόμενο</value>
   </data>
   <data name="common.signout" xml:space="preserve">
     <value>Αποσύνδεση</value>

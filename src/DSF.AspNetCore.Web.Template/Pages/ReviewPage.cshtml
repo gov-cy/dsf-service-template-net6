@@ -1,4 +1,4 @@
-﻿@page "/review-page/{review:bool?}"
+﻿@page "/review-page"
 @using DSF.AspNetCore.Web.Template.Data.Models
 @using DSF.AspNetCore.Web.Template.Extensions
 
@@ -18,9 +18,7 @@
          <tr>
             <th scope="row" class="col-3">@Localizer["review-page.mobile"]</th>
              <td class="col-7">
-                 <p>
-                 <span class="govcy-d-block">@Model.ret_mobile.FormatMobile()</span>
-                </p>
+                  <div>@Model.ret_mobile.FormatMobile()</div>
              </td>
               <td class="col-2 govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useMobileEditOnly)
@@ -35,11 +33,9 @@
            <tr>
             <th scope="row" class="col-3">@Localizer["review-page.email"]</th>
              <td class="col-7">
-                 <p>
-                  <span class="govcy-d-block">@Model.ret_email</span>
-                </p>
+                   <div>@Model.ret_email</div>
              </td>
-              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+              <td class="col-2  govcy-text-sm-start govcy-text-md-end">
                     @if (Model.useEmailEditOnly)
                     {
                         <a asp-page="/EmailEdit" asp-route-review="true">@Localizer["common.change_link"]</a>

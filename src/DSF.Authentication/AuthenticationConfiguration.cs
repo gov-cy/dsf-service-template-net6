@@ -9,24 +9,37 @@ namespace DSF.MOI.CitizenData.Web.Configuration
 {
     public static class AuthenticationConfiguration
     {
-        public const string OIDCScheme = "Oidc";
-        public const string DsfCyLoginAuthCookie = "DsfCyLoginAuthCookie";
-
-        public static void AddCyLoginAuthentication(this IServiceCollection services)
+         
+        public static void AddCyLoginAuthentication(this IServiceCollection services, CyLoginAuthenticationOptions oidcSettings)
         {
             services
-                .AddOptions<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme)
-                .Configure<CyLoginAuthenticationOptions>((options, oidcSettings) =>
+                .AddAuthentication(options =>
                 {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme; //"OpenIdConnect";
+                })
+                .AddCookie(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.Cookie.SameSite = SameSiteMode.Lax;
+                    options.Cookie.Name = oidcSettings.AuthCookieName;
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(double.Parse(oidcSettings.ExpireTimeSpanInMinutes ?? "30"));
+                })
+                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+                {
+                    //The ClientId and ClientSecret properties are initiated in user-secrets, not in appsettings.json
+                    //dotnet user-secrets init
+                    //dotnet user-secrets list
+                    //dotnet user-secrets set "Oidc:Authority" "https://my_authority_uri"
+                    //dotnet user-secrets set "Oidc:RedirectUri" "https://my_redirect_uri"
+                    //dotnet user-secrets set "Oidc:ClientSecret" "my_secret"
+                    //dotnet user-secrets set "Oidc:ClientId" "my_client_id"
+                    //dotnet user-secrets set "Oidc:Scopes" "my_scope1 my_scope2 ..."
                     options.Authority = oidcSettings.Authority;
                     options.ClientId = oidcSettings.ClientId;
                     options.ClientSecret = oidcSettings.ClientSecret;
-
-                    options.Events.OnTicketReceived = ctx =>
-                    {
-                        ctx.ReturnUri = oidcSettings.LoginUrl;
-                        return Task.CompletedTask;
-                    };
 
                     if (!string.IsNullOrEmpty(oidcSettings.SignedOutRedirectUri))
                     {
@@ -44,33 +57,6 @@ namespace DSF.MOI.CitizenData.Web.Configuration
                             str => options.Scope.Add(str)
                         );
                     }
-                });
-            
-            services
-                .AddAuthentication(options =>
-                {
-                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme; //"OpenIdConnect";
-                })
-                .AddCookie(options =>
-                {
-                    options.Cookie.HttpOnly = true;
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                    options.Cookie.SameSite = SameSiteMode.Lax;
-                    options.Cookie.Name = DsfCyLoginAuthCookie;
-                    options.SlidingExpiration = true;
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                })
-                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
-                {
-                    //The ClientId and ClientSecret properties are initiated in user-secrets, not in appsettings.json
-                    //dotnet user-secrets init
-                    //dotnet user-secrets list
-                    //dotnet user-secrets set "Oidc:Authority" "https://my_authority_uri"
-                    //dotnet user-secrets set "Oidc:RedirectUri" "https://my_redirect_uri"
-                    //dotnet user-secrets set "Oidc:ClientSecret" "my_secret"
-                    //dotnet user-secrets set "Oidc:ClientId" "my_client_id"
-                    //dotnet user-secrets set "Oidc:Scopes" "my_scope1 my_scope2 ..."
 
                     options.ResponseType = "code";
                     options.ResponseMode = "query";
@@ -89,6 +75,11 @@ namespace DSF.MOI.CitizenData.Web.Configuration
                     options.ClaimActions.MapJsonKey("family_name", "family_name");
                     options.ClaimActions.MapJsonKey("birthdate", "birthdate");
 
+                    options.Events.OnTicketReceived = ctx =>
+                    {
+                        ctx.ReturnUri = oidcSettings.LoginUrl;
+                        return Task.CompletedTask;
+                    };
                     options.Events.OnRemoteFailure = ctx =>
                     {
                         //Handle exception when user clicks deny (No, Do Not Allow) on CyLogin Page

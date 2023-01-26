@@ -1,0 +1,9 @@
+bin
+obj
+packages
+*.user
+*.suo
+.vs
+.vscode
+*.tmp
+*.log

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSF.AspNetCore.Web.Template", "src\DSF.AspNetCore.Web.Template\DSF.AspNetCore.Web.Template.csproj", "{11213C6E-3CB3-4E71-93D0-8A436C1689CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSF.Resources", "src\DSF.Resources\DSF.Resources.csproj", "{5122C2A0-C9D1-42C6-872D-28D0C4669FAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSF.Localization", "src\DSF.Resources\DSF.Localization.csproj", "{5122C2A0-C9D1-42C6-872D-28D0C4669FAE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSF.Authentication", "src\DSF.Authentication\DSF.Authentication.csproj", "{17487BED-187E-4604-A905-CF3C557F4A51}"
 EndProject

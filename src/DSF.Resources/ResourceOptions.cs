@@ -1,4 +1,4 @@
-﻿namespace DSF.Resources
+﻿namespace DSF.Localization
 {
     public class ResourceOptions
     {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DSF.AspNetCore.Web.Template.Services;
 using DSF.AspNetCore.Web.Template.Extensions;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace DSF.AspNetCore.Web.Template.Pages
 {
@@ -73,17 +74,21 @@ namespace DSF.AspNetCore.Web.Template.Pages
 
         private void SetViewErrorMessages(ValidationResult result)
         {
-            //First Enable Summary Display
-            DisplaySummary = "display:block";
-            //Then Build Summary Error
-            foreach (ValidationFailure Item in result.Errors)
+            if (result != null)
             {
-                if (Item.PropertyName == nameof(MobEdit.Mobile))
+                //First Enable Summary Display
+                DisplaySummary = "display:block";
+                //Then Build Summary Error
+                foreach (ValidationFailure Item in result.Errors)
                 {
-                    ErrorsDesc += "<a href='#mobile'>" + Item.ErrorMessage + "</a>";
-                    MobileErrorClass = Item.ErrorMessage;
+                    if (Item.PropertyName == nameof(MobEdit.Mobile))
+                    {
+                        ErrorsDesc += "<a href='#mobile'>" + Item.ErrorMessage + "</a>";
+                        MobileErrorClass = Item.ErrorMessage;
+                    }
                 }
             }
+
         }
 
         private bool AllowToProceed()
@@ -114,7 +119,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
         private bool BindData()
         {   //Check if already selected 
             var sessionData = GetSessionData();
-            if (sessionData?.ValidationMode==ValidationMode.Edit && sessionData?.UseOther==true)
+            if (sessionData?.ValidationMode == ValidationMode.Edit && sessionData?.UseOther == true)
             {
                 Mobile = sessionData.Mobile.FormatMobile();
                 return true;
@@ -179,7 +184,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             MobEdit.Mobile = Mobile;
             MobEdit.UseOther = true;
             MobEdit.UseFromApi = false;
-            MobEdit.ValidationMode = ValidationMode.Edit;           
+            MobEdit.ValidationMode = ValidationMode.Edit;
             FluentValidation.Results.ValidationResult result = _validator.Validate(MobEdit);
             if (!result.IsValid)
             {
@@ -193,10 +198,12 @@ namespace DSF.AspNetCore.Web.Template.Pages
             //Remove Error Session 
             HttpContext.Session.Remove("valresult");
             HttpContext.Session.Remove("mobileval");
-    
+
             //Set back and Next Link
             NextLink = _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
-            return RedirectToPage(NextLink);
+            //clear # in  URLs  that generates on error found
+            bool hashInUrl = HttpContext.Request.GetDisplayUrl().Contains("fromPost");
+            return RedirectToPage(NextLink, null, null, !hashInUrl ? null : "");
         }
     }
 }

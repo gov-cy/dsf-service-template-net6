@@ -50,6 +50,7 @@ namespace DSF.AspNetCore.Web.Template.Middlewares
                         );
                 }
             }
+
             await next(context);
         }
     }

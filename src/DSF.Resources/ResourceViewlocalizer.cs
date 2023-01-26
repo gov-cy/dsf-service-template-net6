@@ -3,7 +3,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 
-namespace DSF.Resources
+namespace DSF.Localization
 {
     public class ResourceViewLocalizer : IResourceViewLocalizer
 

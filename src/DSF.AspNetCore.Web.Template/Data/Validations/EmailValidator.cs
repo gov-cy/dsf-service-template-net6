@@ -1,7 +1,7 @@
 ﻿using DSF.AspNetCore.Web.Template.Data.Models;
 using FluentValidation;
 using DSF.AspNetCore.Web.Template.Services;
-using DSF.Resources;
+using DSF.Localization;
 
 namespace DSF.AspNetCore.Web.Template.Data.Validations
 {
