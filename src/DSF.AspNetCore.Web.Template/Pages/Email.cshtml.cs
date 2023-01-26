@@ -6,7 +6,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace DSF.AspNetCore.Web.Template.Pages
 {
@@ -148,6 +148,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
 
         public IActionResult OnGet(bool review, bool fromPost)
         {
+
             //Chack if user has sequentialy load the page
             bool allow = AllowToProceed();
             if (!allow)
@@ -192,7 +193,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
                     }
                 }
             }
-
+            
             return Page();
         }
         public IActionResult OnPost(bool review)
@@ -257,14 +258,15 @@ namespace DSF.AspNetCore.Web.Template.Pages
             {
                 NextLink = _nav.SetLinks("email-selection", "Email", review, "Yes");
             }
-
+            //clear # in  URLs  that generates on error found
+            bool hashInUrl = HttpContext.Request.GetDisplayUrl().Contains("fromPost");
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review = review.ToString().ToLower() }, "");
+                return RedirectToPage(NextLink, null, new { review = review.ToString().ToLower() }, !hashInUrl ? null : "");
             }
             else
             {
-                return RedirectToPage(NextLink,null,null,"");
+                return RedirectToPage(NextLink,null,null, !hashInUrl ? null : "");
             }
         }
     }

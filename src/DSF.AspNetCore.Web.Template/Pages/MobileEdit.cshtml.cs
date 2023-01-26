@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DSF.AspNetCore.Web.Template.Services;
 using DSF.AspNetCore.Web.Template.Extensions;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace DSF.AspNetCore.Web.Template.Pages
 {
@@ -196,7 +197,9 @@ namespace DSF.AspNetCore.Web.Template.Pages
     
             //Set back and Next Link
             NextLink = _nav.SetLinks("set-mobile", "Mobile", review, "NoSelection");
-            return RedirectToPage(NextLink, null, null, ""); 
+            //clear # in  URLs  that generates on error found
+            bool hashInUrl = HttpContext.Request.GetDisplayUrl().Contains("fromPost");
+            return RedirectToPage(NextLink, null, null, !hashInUrl ? null : "");
         }
     }
 }

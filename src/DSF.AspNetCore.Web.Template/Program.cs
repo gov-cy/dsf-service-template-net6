@@ -117,24 +117,20 @@ builder.Services.AddScoped<IUserSession, UserSession>();
 //Register the Api service for Task Get and post methods
 builder.Services.AddScoped<IContact, Contact>();
 
-//Added for session state
-builder.Services.AddSession(options =>
-{
-    options.Cookie.Name = "AppDataSessionCookie";
-    options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.IsEssential = true;
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-});
-
 //get configuration for CyLoginAuthentication from appsettings.json
-//builder.Services.AddSingleton(Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>());
+var authConfiguration = Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>();
 //open id authentication settings
-builder.Services.AddCyLoginAuthentication(Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>());
-
-var app = builder.Build();
-
-
+builder.Services.AddCyLoginAuthentication(authConfiguration);
+// Added for session state
+ builder.Services.AddSession(options =>
+ {
+     options.Cookie.Name = "AppDataSessionCookie";
+     options.Cookie.HttpOnly = true;
+     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+     options.Cookie.IsEssential = true;
+     options.IdleTimeout = TimeSpan.FromMinutes(double.Parse(authConfiguration.ExpireTimeSpanInMinutes ?? "30")); //same with authentication idle time
+ });
+ var app = builder.Build();
 
 app.UseExceptionHandler("/server-error");
 

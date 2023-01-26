@@ -5,6 +5,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace DSF.AspNetCore.Web.Template.Pages
 {
@@ -169,8 +170,9 @@ namespace DSF.AspNetCore.Web.Template.Pages
          
             //Set back and Next Link
            NextLink = _nav.SetLinks("set-email","Email", review, "NoSelection");
-           
-                return RedirectToPage(NextLink, null, null, ""); ;
+            //clear # in  URLs  that generates on error found
+            bool hashInUrl = HttpContext.Request.GetDisplayUrl().Contains("fromPost");
+            return RedirectToPage(NextLink, null, null, !hashInUrl ? null : ""); 
         }
     }
 }

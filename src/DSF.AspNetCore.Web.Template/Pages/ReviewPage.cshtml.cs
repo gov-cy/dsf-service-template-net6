@@ -19,7 +19,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
             _userSession = userSession;
         }
         #region "Variables"
-        ContactInfo _application = new();
+        readonly ContactInfo _application = new();
         public string currentLanguage = "";
         //Data retrieve from other pages
         public string ret_email = string.Empty;
@@ -29,7 +29,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
         [BindProperty]
         public string BackLink { get; set; } = "";
         #endregion
-        public IActionResult OnGet(bool review)
+        public IActionResult OnGet()
         {
             bool allow = AllowToProceed();
             if (!allow)
@@ -92,11 +92,11 @@ namespace DSF.AspNetCore.Web.Template.Pages
             ret_mobile = mobSelect.Mobile;
             var Nav = _userSession.GetNavLink()!;
             var section = Nav.Find(p => p.Name == "Mobile");
-            useMobileEditOnly = section!.Type == SectionType.InputOnly ? true : false;
+            useMobileEditOnly = section!.Type == SectionType.InputOnly;
             var emailSelect = _userSession.GetUserEmailData()!;
             ret_email = emailSelect.Email;
             section = Nav.Find(p => p.Name == "Email");
-            useEmailEditOnly = section!.Type == SectionType.InputOnly ? true : false;
+            useEmailEditOnly = section!.Type == SectionType.InputOnly;
             return ret;
         }
         private bool SetApplication()
@@ -123,7 +123,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
         {
             bool ret = false;
             var token = _userSession.GetAccessToken()!;
-            ContactInfoResponse? res = new();
+            ContactInfoResponse? res;
             res = _service.SubmitContact(_application, token);
             
             if (res.Succeeded)

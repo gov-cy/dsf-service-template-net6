@@ -4,6 +4,7 @@ using DSF.AspNetCore.Web.Template.Services;
 using DSF.AspNetCore.Web.Template.Services.Model;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -233,13 +234,15 @@ namespace DSF.AspNetCore.Web.Template.Pages
             {
                 NextLink = _nav.SetLinks("mobile-selection", "Mobile", review, "Yes");
             }
+            //clear # in  URLs  that generates on error found
+            bool hashInUrl = HttpContext.Request.GetDisplayUrl().Contains("fromPost");
             if (review)
             {
-                return RedirectToPage(NextLink, null, new { review = review.ToString().ToLower() },"");
+                return RedirectToPage(NextLink, null, new { review = review.ToString().ToLower() }, !hashInUrl ? null : "");
             }
             else
             {
-                return RedirectToPage(NextLink, null, null, ""); 
+                return RedirectToPage(NextLink, null, null, !hashInUrl ? null : ""); 
             }
         }
     }
