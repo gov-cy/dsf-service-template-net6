@@ -67,8 +67,6 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/PrivacyStatement");
     options.Conventions.AllowAnonymousToPage("/NoPageFound");
 }).AddViewLocalization();
-
-
 builder.Services.AddSingleton<IResourceViewLocalizer, ResourceViewLocalizer>();
 builder.Services.Configure<ResourceOptions>(options =>
 {
@@ -76,7 +74,6 @@ builder.Services.Configure<ResourceOptions>(options =>
     options.PageResourceLocationByType = typeof(PageResource);
     options.CommonResourceLocationByType = typeof(CommonResource);
 });
-
 //Register Validator for
 //dependency injection purpose
 //for resource access
