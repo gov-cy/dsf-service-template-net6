@@ -1,19 +1,14 @@
 ﻿@page "/review-page"
 @using DSF.AspNetCore.Web.Template.Data.Models
 @using DSF.AspNetCore.Web.Template.Extensions
-
 @model ReviewPageModel
-
 @{
     ViewBag.PreviousUrl=Model.BackLink;
     ViewData["Title"] = Localizer["review-page.p1"];
 }
-
 <h1>@Localizer["review-page.p1"]</h1>
 <p>@Localizer["review-page.p2"]</p>
- 
-  
- <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
+  <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
          <tr>
             <th scope="row" class="col-3">@Localizer["review-page.mobile"]</th>
@@ -48,9 +43,7 @@
          </tr>
      </tbody>
  </table>
-
- 
-    <form asp-page-handler="ApplicationSubmit">
+     <form asp-page-handler="ApplicationSubmit">
             <button type="submit" class="govcy-btn-primary" id="btnApplicationSubmit">
                 @Localizer["common.submit"]
             </button>

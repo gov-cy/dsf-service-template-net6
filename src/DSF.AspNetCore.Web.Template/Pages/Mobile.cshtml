@@ -1,24 +1,18 @@
 ﻿@page "/mobile-selection/{review:bool?}"
-
 @using DSF.AspNetCore.Web.Template.Extensions
-
 @model MobileModel
-
 @{
     ViewBag.PreviousUrl=Model.BackLink;
     ViewData["Title"] = Localizer["mobile-selection.title"];
 }
-
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["ErrorMessage-General"]</h2>
     <p class="govcy-mb-0">
         @Html.Raw(Model.ErrorsDesc)
     </p>
 </div>
-
 <h1>@Localizer["mobile-selection.title"]</h1>
 <form method="post" novalidate class="govcy-form">
-
     <fieldset class="govcy-fieldset">
         <legend class="govcy-legend">@Localizer["mobile-selection.legend"]</legend>
         <div class="@((Model.MobileSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">

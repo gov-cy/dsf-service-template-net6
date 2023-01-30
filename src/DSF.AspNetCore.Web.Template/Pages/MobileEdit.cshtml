@@ -1,12 +1,10 @@
 ﻿@page "/set-mobile/{review:bool?}"
 
 @model MobileEditModel
-
 @{
     ViewBag.PreviousUrl = Model.BackLink;
     ViewData["Title"] = @Localizer["set-mobile.title"];
 }
-
 <div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["common.error_message"]</h2>
     <p class="govcy-mb-0">
@@ -24,7 +22,7 @@
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
                     @Model.MobileErrorClass
                  </p>
-                 <input id="mobile" name="mobile" 
+                 <input id="mobile" name="Mobile" 
              type="tel" 
              value="@Model.Mobile"
               maxlength="20"
@@ -34,20 +32,13 @@
         }
         else
         {
-              <input id="mobile" name="mobile" 
+              <input id="mobile" name="Mobile" 
              type="tel" 
              value="@Model.Mobile"
               maxlength="20"
               autocomplete="tel"
              class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_20 govcy-text-input-error": "govcy-text-input govcy-text-input-char_20")">
         } 
-            
-           
      </div>
-
-  
-   @*  <p>
-         @Localizer["set-mobile.p1"]
-     </p>*@
      <button type="submit" class="govcy-btn-primary">@Localizer["common.button_next"]</button>
 </form>

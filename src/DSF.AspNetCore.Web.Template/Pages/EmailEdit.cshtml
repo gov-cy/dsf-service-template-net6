@@ -1,20 +1,16 @@
 ﻿@page "/set-email/{review:bool?}"
-
 @model EmailEditModel
-
 @{
     ViewBag.PreviousUrl=Model.BackLink;
     ViewData["Title"] = @Localizer["set-email.title"];
    
 }
-
 <div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["common.error_message"]</h2>
     <p class="govcy-mb-0">
         @Html.Raw(Model.ErrorsDesc)
     </p>
 </div>
-
 <h1>@Localizer["set-email.title"]</h1>
 <form class="govcy-form" novalidate method="post">
     <div class="@(Model.EmailErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
@@ -26,7 +22,7 @@
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
                     @Model.EmailErrorClass
             </p>
-        <input id="email" name="email" 
+        <input id="email" name="Email" 
         type="email" 
         value="@Model.Email"  
         class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")"
@@ -34,17 +30,12 @@
         }  
         else
         {
-         <input id="email" name="email" 
+         <input id="email" name="Email" 
         type="email" 
         value="@Model.Email"  
         class="@(Model.EmailErrorClass.Length >0 ? "govcy-text-input govcy-text-input-error": "govcy-text-input")"
         maxlength="80" spellcheck="false" autocomplete="email">  
         }      
-       
-       
-    </div>
-@*<p>
-  @Localizer["set-email.p1"]
-</p>*@
+      </div>
   <button type="submit" class="govcy-btn-primary ">@Localizer["common.button_next"]</button>
 </form>
