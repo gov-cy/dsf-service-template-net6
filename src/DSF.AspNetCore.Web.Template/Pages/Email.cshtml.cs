@@ -127,7 +127,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
                 {
                     CrbEmail = "1";
                 }
-                else if (selectedoptions.UseOther && (selectedoptions.Email == User.Claims.First(c => c.Type == "email").Value || string.IsNullOrEmpty(selectedoptions.Email)))
+                else if (selectedoptions.UseOther && (selectedoptions.Email == _userSession?.GetUserPersonalData()?.Data?.Email || string.IsNullOrEmpty(selectedoptions.Email)))
                 {
                     //code use when user hit back button on edit page
                     CrbEmail = "1";
