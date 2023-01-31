@@ -171,7 +171,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
                 {
                     //Check whether api data were retrieve from login , otherwise call again
                     ContactInfoResponse res = _userSession.GetUserPersonalData() ?? new ContactInfoResponse();
-                    if (res?.Data == null)
+                    if (string.IsNullOrEmpty(res?.Data?.Email))
                     {
                         //Cet the citizen personal details from civil registry
                         res = _service.GetContact(_userSession.GetAccessToken()!);
@@ -193,7 +193,7 @@ namespace DSF.AspNetCore.Web.Template.Pages
                     }
                 }
             }
-            
+
             return Page();
         }
         public IActionResult OnPost(bool review)
@@ -266,11 +266,11 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
             else
             {
-                return RedirectToPage(NextLink,null,null, !hashInUrl ? null : "");
+                return RedirectToPage(NextLink, null, null, !hashInUrl ? null : "");
             }
         }
     }
 
-   
+
 }
 
