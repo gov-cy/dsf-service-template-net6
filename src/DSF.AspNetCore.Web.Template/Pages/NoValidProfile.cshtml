@@ -1,11 +1,8 @@
 ﻿@page "/no-valid-profile"
-
 @model NoValidProfileModel
-
 @{
     Layout = "_LayoutNoBackLink";
     ViewData["Title"] = Localizer["no-valid-profile.title"];
 }
-
 <h1>@Localizer["no-valid-profile.title"]</h1>
 @Localizer.GetPagesLocalizedHtml("no-valid-profile.instructions")
