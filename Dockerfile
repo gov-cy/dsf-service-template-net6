@@ -21,12 +21,16 @@ USER 1000
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj .
+COPY src/DSF.Localization/DSF.Localization.csproj .
+COPY src/DSF.Authentication/DSF.Authentication.csproj .
 RUN dotnet restore "./DSF.AspNetCore.Web.Template.csproj"
 
 
 # See https://stackoverflow.com/questions/51533448/why-copy-package-json-precedes-copy
 # for why we copy just the csproj then the whole directory
 COPY src/DSF.AspNetCore.Web.Template .
+COPY src/DSF.Localization .
+COPY src/DSF.Authentication .
 RUN dotnet build DSF.AspNetCore.Web.Template.csproj -c Release -o /app/build
 
 FROM build AS publish
