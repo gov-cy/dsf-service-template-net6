@@ -21,6 +21,8 @@ USER 1000
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj .
+COPY src/DSF.Localization/DSF.Localization.csproj .
+COPY src/DSF.Authentication/DSF.Authentication.csproj .
 RUN dotnet restore "./DSF.AspNetCore.Web.Template.csproj"
 
 
