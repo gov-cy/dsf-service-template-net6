@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
+# EXPOSE 80
 EXPOSE 443
 
 COPY src/DSF.AspNetCore.Web.Template/cert/ariadni-test.crt /usr/local/share/ca-certificates/ariadni-test.crt
