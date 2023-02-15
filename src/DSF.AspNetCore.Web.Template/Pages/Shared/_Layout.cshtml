@@ -12,9 +12,6 @@
     {
         lang = "en";
     }
-    //Matomo id is given by DSF Team, and it is used
-    //For Statistics. its a requirement for all eservices
-     var MatomoId = conf["MatomoID"].ToString(); 
 }
 <!DOCTYPE html>
 
@@ -120,12 +117,10 @@
             </div>
         </div>
     </div>
+ 
     @*Script Registration*@
-
      <script src="~/lib/jquery/dist/jquery.min.js"></script>
           
-    <!-- Javascripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
