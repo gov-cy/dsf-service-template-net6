@@ -14,7 +14,7 @@ using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 
 IConfiguration Configuration = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile("appsettings.json")
     .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
     .AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true)
     .AddUserSecrets<Program>(true)
