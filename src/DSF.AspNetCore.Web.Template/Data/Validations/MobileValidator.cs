@@ -22,7 +22,7 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
             _Localizer = localizer;
             mobileNoSelectionMsg = _Localizer["mobile-selection.custom.required"];
             mobReq = _Localizer["set-mobile.mobile.required"];
-            mobValid = _Localizer["sset-mobile.mobile.format"];
+            mobValid = _Localizer["set-mobile.mobile.format"];
             When(p => p.ValidationMode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.UseFromApi)
