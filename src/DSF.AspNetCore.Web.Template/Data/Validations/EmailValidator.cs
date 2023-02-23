@@ -17,15 +17,15 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
         {
             _checker = checker;
             _Localizer = localizer;
-            emailNoSelectionMsg = _Localizer["email-selection.require_check"];
-            emailMessage = _Localizer["set-email.require_check"];
+            emailNoSelectionMsg = _Localizer["email-selection.custom.required"];
+            emailMessage = _Localizer["set-email.email.required"];
 
             When(p => p.ValidationMode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.UseFromApi)
                     .Equal(true)
                     .When(x => x.UseOther.Equals(false))
-                    .WithErrorCode("email-selection.require_check")
+                    .WithErrorCode("email-selection.custom.required")
                     .WithMessage(emailNoSelectionMsg);
             });
             //Edit page
@@ -34,10 +34,10 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
                 RuleFor(p => p.Email)
                     .Cascade(CascadeMode.Stop)
                     .NotEmpty()
-                    .WithErrorCode("set-email.require_check")
+                    .WithErrorCode("set-email.email.required")
                     .WithMessage(emailMessage)
                     .Must(_checker.IsEmailValid)
-                    .WithErrorCode("set-email.require_check")
+                    .WithErrorCode("set-email.email.required")
                     .WithMessage(emailMessage);
             });
         }
