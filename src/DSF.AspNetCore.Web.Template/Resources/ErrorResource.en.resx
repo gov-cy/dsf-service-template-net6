@@ -132,4 +132,24 @@
   <data name="set-mobile.require_check" xml:space="preserve">
     <value>Mobile Number is required</value>
   </data>
+  <data name="email-selection.custom.required" xml:space="preserve">
+    <value>Choose if you'd like to use your CY Login email address or a different one</value>
+    <comment>email-selection Checks</comment>
+  </data>
+  <data name="mobile-selection.custom.required" xml:space="preserve">
+    <value>Choose if you'd like to use your CY Login mobile phone number or a different one</value>
+    <comment>mobile-selection Checks</comment>
+  </data>
+  <data name="set-email.email.required" xml:space="preserve">
+    <value>Enter an email address in the correct format, for example name@example.com</value>
+    <comment>set-email Checks</comment>
+  </data>
+  <data name="set-mobile.mobile.required" xml:space="preserve">
+    <value>Enter your mobile number</value>
+    <comment>set-mobile Checks</comment>
+  </data>
+  <data name="set-mobile.mobile.format" xml:space="preserve">
+    <value>Enter your mobile number correctly, for example 90000000 for Cyprus</value>
+    <comment>set-mobile Checks</comment>
+  </data>
 </root>
