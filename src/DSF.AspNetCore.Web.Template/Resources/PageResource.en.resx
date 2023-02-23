@@ -304,7 +304,7 @@
     <value>Sorry, there is a problem with the service</value>
   </data>
   <data name="set-email.email_hint" xml:space="preserve">
-    <value>The email address in your CY Login account will not be change andreas</value>
+    <value>The email address in your CY Login account will not be change</value>
   </data>
   <data name="set-email.email_label" xml:space="preserve">
     <value>What email address can we use to contact you?</value>
