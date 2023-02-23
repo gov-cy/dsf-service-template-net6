@@ -118,26 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="accessibility-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;This is an accessibility statement for the XXXXX Department’s service ‘MOCK’.&lt;/p&gt;
-&lt;h2&gt;Conformance status&lt;/h2&gt;
-&lt;p&gt;The &lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;Web Content Accessibility Guidelines&lt;/a&gt; (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. The service is fully conformant with WCAG 2.1 level AA.&lt;/p&gt;
-&lt;h2&gt;Compatibility with browsers and assistive technology&lt;/h2&gt;
-&lt;p&gt;The service is not compatible with:&lt;/p&gt;
+    <value>
+&lt;h2&gt;Conformance status&lt;/h2&gt;&lt;p&gt;The &lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;Web Content Accessibility Guidelines&lt;/a&gt; (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. The service is fully conformant with WCAG 2.1 level AA.&lt;/p&gt;
+
+&lt;h2&gt;Compatibility with browsers and assistive technology&lt;/h2&gt;&lt;p&gt;The service is not compatible with:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Internet Explorer 9 and older&lt;/li&gt;
 &lt;li&gt;Safari browser on Windows computers&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Limitations and alternatives&lt;/h2&gt;
-&lt;p&gt;Despite our best efforts to ensure accessibility of the service, there may be some limitations. Below is a description of known limitations, and potential solutions. Please contact us if you observe an issue not listed below.&lt;/p&gt;
+
+&lt;h2&gt;Limitations and alternatives&lt;/h2&gt;&lt;p&gt;Despite our best efforts to ensure accessibility of the service, there may be some limitations. Below is a description of known limitations, and potential solutions. Please contact us if you observe an issue not listed below.&lt;/p&gt;
 &lt;p&gt;Javascript is required for the service to function properly.&lt;/p&gt;
-&lt;h2&gt;Assessment approach&lt;/h2&gt;
-&lt;p&gt;The Digital Services Factory assessed the accessibility of the service using:&lt;/p&gt;
+
+&lt;h2&gt;Assessment approach&lt;/h2&gt;&lt;p&gt;The Digital Services Factory assessed the accessibility of the service using:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://wave.webaim.org/" target="_blank"&gt;WebAIM’s WAVE Evaluation tool&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://developers.google.com/web/tools/lighthouse" target="_blank"&gt;Google Chrome’s Lighthouse tool&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Feedback and complaints&lt;/h2&gt;
-&lt;p&gt;We welcome your feedback on the accessibility of the service. Please let us know if you encounter accessibility barriers when using it:&lt;/p&gt;
+
+&lt;h2&gt;Feedback and complaints&lt;/h2&gt;&lt;p&gt;We welcome your feedback on the accessibility of the service. Please let us know if you encounter accessibility barriers when using it:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Email: &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -146,35 +145,36 @@
 &lt;p&gt;Deputy Minister of Research, Innovation, and Digital Policy&lt;br&gt;Vyronos 29 Avenue1096&lt;br&gt;Nicosia&lt;br&gt;Cyprus&lt;/p&gt;
 &lt;p&gt;Or you can email: &lt;a href="mailto:e:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;If you are not satisfied with their response, you can &lt;a href="https://eforms.mof.gov.cy/eforms/eforms.nsf/complaintformombudsman_en/complaintformombudsman_en?OpenForm" target="_blank"&gt;send a complaint to the Commissioner for Administration and the Protection of Human Rights (Ombudsman)&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Date&lt;/h2&gt;
-&lt;p&gt;This statement was created on 4 November 2022 based upon the W3C Accessibility Statement Generator Tool.&lt;/p&gt;</value>
+
+&lt;h2&gt;Date&lt;/h2&gt;&lt;p&gt;This statement was created on 4 November 2022 based upon the W3C Accessibility Statement Generator Tool.&lt;/p&gt;
+&lt;p&gt;This is an accessibility statement for the XXXXX Department’s service ‘MOCK’.&lt;/p&gt;</value>
   </data>
   <data name="accessibility-statement.title" xml:space="preserve">
     <value>Accessibility statement</value>
   </data>
   <data name="application-response.header_ref" xml:space="preserve">
-    <value>Your Reference Number</value>
+    <value>Your Reference Number </value>
   </data>
   <data name="application-response.header_title" xml:space="preserve">
     <value>Your application has been sent</value>
   </data>
   <data name="cookie-policy.instructions" xml:space="preserve">
-    <value>&lt;p&gt;The ‘MOCK’ service (url) only uses cookies that are strictly necessary for it to function correctly.&lt;/p&gt;
-&lt;h2&gt;Cookies in use&lt;/h2&gt;
-&lt;p&gt;All of the following cookies are deleted 30 minutes after you close your browser.&lt;/p&gt;
-&lt;h2&gt;AppDataSessionCookie&lt;/h2&gt;
-&lt;p&gt;This cookie stores a ‘session ID’ which is used to identify your browser session.&lt;/p&gt;
-&lt;h2&gt;AspNetCore.Antiforgery&lt;/h2&gt;
-&lt;p&gt;This cookie makes sure that information sent to the server comes from our form, and not elsewhere.&lt;/p&gt;
-&lt;h2&gt;AspNetCore.Culture&lt;/h2&gt;
-&lt;p&gt;This cookie stores your language preference.&lt;/p&gt;
-&lt;h2&gt;DsfCyLoginAuthCookie&lt;/h2&gt;
-&lt;p&gt;This cookie is set when you’ve successfully signed in using CY Login.&lt;/p&gt;
-&lt;h2&gt;Using CY Login&lt;/h2&gt;
-&lt;p&gt;When you sign in using CY Login (also known as ‘Ariadni’) to use this service, it will save &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/privacy" target="_blank"&gt;additional cookies on your device&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;How to control cookies&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Find out how to control and delete cookies on your device.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can delete all cookies that are already on your device and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.&lt;/p&gt;</value>
+    <value>
+&lt;h2&gt;Cookies in use&lt;/h2&gt;&lt;p&gt;All of the following cookies are deleted 30 minutes after you close your browser.&lt;/p&gt;
+
+&lt;h2&gt;AppDataSessionCookie&lt;/h2&gt;&lt;p&gt;This cookie stores a ‘session ID’ which is used to identify your browser session.&lt;/p&gt;
+
+&lt;h2&gt;AspNetCore.Antiforgery&lt;/h2&gt;&lt;p&gt;This cookie makes sure that information sent to the server comes from our form, and not elsewhere.&lt;/p&gt;
+
+&lt;h2&gt;AspNetCore.Culture&lt;/h2&gt;&lt;p&gt;This cookie stores your language preference.&lt;/p&gt;
+
+&lt;h2&gt;DsfCyLoginAuthCookie&lt;/h2&gt;&lt;p&gt;This cookie is set when you’ve successfully signed in using CY Login.&lt;/p&gt;
+
+&lt;h2&gt;Using CY Login&lt;/h2&gt;&lt;p&gt;When you sign in using CY Login (also known as ‘Ariadni’) to use this service, it will save &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/privacy" target="_blank"&gt;additional cookies on your device&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;How to control cookies&lt;/h2&gt;&lt;p&gt;&lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Find out how to control and delete cookies on your device.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can delete all cookies that are already on your device and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.&lt;/p&gt;
+&lt;p&gt;The ‘MOCK’ service (url) only uses cookies that are strictly necessary for it to function correctly.&lt;/p&gt;</value>
   </data>
   <data name="cookie-policy.title" xml:space="preserve">
     <value>Cookies used by the
@@ -184,26 +184,26 @@
     <value>Do you want to use this email ?</value>
   </data>
   <data name="email-selection.no" xml:space="preserve">
-    <value>No, I want to use different one</value>
+    <value>A different email</value>
   </data>
   <data name="email-selection.p1" xml:space="preserve">
     <value>This is the email we have found in our database.</value>
   </data>
   <data name="email-selection.title" xml:space="preserve">
-    <value>What email can we use to contact you?</value>
+    <value>Which email address can  we use to contact you?</value>
   </data>
   <data name="email-selection.yes" xml:space="preserve">
-    <value>The email that is register in our records:</value>
+    <value>My CY Login account email address: me@example.com</value>
   </data>
   <data name="index.instructions" xml:space="preserve">
-    <value>&lt;h2&gt;Get help and advice&lt;/h2&gt;
-    &lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;For technical support issues, contact DSF:&lt;/span&gt;&lt;span class="govcy-d-block"&gt;&lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</value>
+    <value>
+&lt;h2&gt;Get help and advice&lt;/h2&gt;&lt;p&gt;For technical support issues, contact DSF:&lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;</value>
   </data>
   <data name="index.instructions1" xml:space="preserve">
-    <value>&lt;p class="govcy-mb-4"&gt; &lt;span class="govcy-d-block"&gt;This is a mock service for understanding best development practices.&lt;/span&gt;&lt;/p&gt;</value>
+    <value>&lt;p&gt;This is a mock service for understanding best development practices.&lt;/p&gt;</value>
   </data>
   <data name="index.title" xml:space="preserve">
-    <value>Welcome to citizen personal details  Mock Service</value>
+    <value>Welcome to citizen personal details Mock Service</value>
   </data>
   <data name="mobile-selection.legend" xml:space="preserve">
     <value>Do you want to use this mobile phone number ?</value>
@@ -222,27 +222,22 @@
   </data>
   <data name="no-page-found.instructions" xml:space="preserve">
     <value>&lt;p&gt;If you typed the web address, check it is correct.&lt;/p&gt;
-      &lt;p&gt;If you copied and pasted the web address, check that you copied the entire address.&lt;/p&gt;</value>
+&lt;p&gt;If you copied and pasted the web address, check that you copied the entire address.&lt;/p&gt;</value>
   </data>
   <data name="no-page-found.title" xml:space="preserve">
     <value>Page not found</value>
   </data>
   <data name="no-valid-profile.instructions" xml:space="preserve">
-    <value>&lt;p&gt;If you've signed in using a CY Login 'organisation' account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt; return to CY Login and sign in using a 'citizen' account.&lt;/a&gt;&lt;/p&gt;
-      &lt;p&gt; If you've signed in using a CY Login 'citizen' account, you need to make sure it's 'authenticated'. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt; Find out how to authenticate your CY Login account.&lt;/a&gt;&lt;/p&gt;
-      &lt;p&gt;You can also &lt;a href="http://www.mlsi.gov.cy/mlsi/sid/sidv2.nsf/All/B85AA4D88E3630B4C2257B18003B2C9D?OpenDocument" target="_blank"&gt; apply for the payment using the paper form.&lt;/a&gt;&lt;/p&gt;</value>
+    <value>&lt;p&gt;If you’ve signed in using a CY Login ‘organisation’ account, you need to &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt;return to CY Login and sign in using a ‘citizen’ account&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you’ve signed in using a CY Login ‘citizen’ account, you need to make sure it’s ‘authenticated’. &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt;Find out how to authenticate your CY Login account&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
   <data name="no-valid-profile.title" xml:space="preserve">
     <value>Check your CY Login account</value>
   </data>
   <data name="privacy-statement.instructions" xml:space="preserve">
     <value>&lt;p&gt;This privacy policy explains how the XXXXX Department collects and stores information about you.&lt;/p&gt;
-&lt;h2&gt;Types of information collected and used&lt;/h2&gt;
-&lt;p&gt;XXXXX collects the following information from you through this website:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;your preferred email address&lt;/li&gt;
-&lt;li&gt;your mobile phone number&lt;/li&gt;
-&lt;/ul&gt;
+
+&lt;h2&gt;Types of information collected and used&lt;/h2&gt;&lt;p&gt;XXXXX collects the following information from you through this website:&lt;/p&gt;
 &lt;p&gt;XXXXX collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;your CY Login user name&lt;/li&gt;
@@ -258,14 +253,14 @@
 &lt;li&gt;phone number &lt;/li&gt;
 &lt;li&gt;email address&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;How your personal information is stored&lt;/h2&gt;
-&lt;p&gt;XXXXX has created this service to make sure it has the correct and up to date versions of the information listed above. This is so XXXXX is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
+
+&lt;h2&gt;How your personal information is stored&lt;/h2&gt;&lt;p&gt;XXXXX has created this service to make sure it has the correct and up to date versions of the information listed above. This is so XXXXX is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
 &lt;p&gt;Your age and citizenship are used to check you’re eligible to use this service.&lt;/p&gt;
 &lt;p&gt;This information is captured and stored by your consent.&lt;/p&gt;
-&lt;h2&gt;How your personal information is stored&lt;/h2&gt;
-&lt;p&gt;Your information is stored securely on servers based in Cyprus.&lt;/p&gt;
-&lt;h2&gt;Your rights&lt;/h2&gt;
-&lt;p&gt;Contact &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt; if you want to:&lt;/p&gt;
+
+&lt;h2&gt;How your personal information is stored&lt;/h2&gt;&lt;p&gt;Your information is stored securely on servers based in Cyprus.&lt;/p&gt;
+
+&lt;h2&gt;Your rights&lt;/h2&gt;&lt;p&gt;Contact &lt;a href="mailto:dsf@dits.dmrid.gov.cy" target="_blank"&gt;dsf@dits.dmrid.gov.cy&lt;/a&gt; if you want to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;get a copy of the information held about you&lt;/li&gt;
 &lt;li&gt;withdraw your consent&lt;/li&gt;
@@ -274,8 +269,12 @@
 &lt;li&gt;object to the processing of your personal information&lt;/li&gt;
 &lt;li&gt;have your information transferred to another organisation or to you&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Complaints&lt;/h2&gt;
-&lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;</value>
+
+&lt;h2&gt;Complaints&lt;/h2&gt;&lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;your preferred email address&lt;/li&gt;
+&lt;li&gt;your mobile phone number&lt;/li&gt;
+&lt;/ul&gt;</value>
   </data>
   <data name="privacy-statement.title" xml:space="preserve">
     <value>Privacy policy – MOCK information</value>
@@ -305,7 +304,7 @@
     <value>Sorry, there is a problem with the service</value>
   </data>
   <data name="set-email.email_hint" xml:space="preserve">
-    <value>The email address in your CY Login account will not be change</value>
+    <value>The email address in your CY Login account will not be change andreas</value>
   </data>
   <data name="set-email.email_label" xml:space="preserve">
     <value>What email address can we use to contact you?</value>
@@ -314,7 +313,7 @@
     <value>After you click “continue” you will receive an email with a link that you will need to click in order to confirm your email.</value>
   </data>
   <data name="set-email.title" xml:space="preserve">
-    <value>Update your email address</value>
+    <value>Update your email address </value>
   </data>
   <data name="set-mobile.exist_check" xml:space="preserve">
     <value>This mobile number already exists in our records</value>
