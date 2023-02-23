@@ -117,26 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="email-selection.no_results_check" xml:space="preserve">
-    <value>Δεν βρέθηκε το email από τα αρχεία μας</value>
-  </data>
   <data name="email-selection.require_check" xml:space="preserve">
     <value>Επιλέξετε αν επιθυμείτε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
-  </data>
-  <data name="mobile-selection.no_results_check" xml:space="preserve">
-    <value>Δεν βρέθηκε ο αριθμός κινητού τηλεφώνου από τα αρχεία μας</value>
   </data>
   <data name="mobile-selection.require_check" xml:space="preserve">
     <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
   </data>
-  <data name="set-email.exist_check" xml:space="preserve">
-    <value>Αυτό το email υπάρχει ήδη στα αρχεία μας</value>
-  </data>
   <data name="set-email.require_check" xml:space="preserve">
     <value>Εισάγετε email στη σωστή μορφή, για παράδειγμα name@example.com</value>
-  </data>
-  <data name="set-mobile.exist_check" xml:space="preserve">
-    <value>Αυτός ο αριθμός κινητού υπάρχει ήδη στα αρχεία μας</value>
   </data>
   <data name="set-mobile.format_check" xml:space="preserve">
     <value>Εισάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
