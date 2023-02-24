@@ -151,7 +151,7 @@
 &lt;p&gt;Η παρούσα αποτελεί δήλωση προσβασιμότητας για την υπηρεσία 'MOCK' του Τμήματος XXXXX.&lt;/p&gt;</value>
   </data>
   <data name="accessibility-statement.title" xml:space="preserve">
-    <value>Δήλωση προσβασιμότητας</value>
+    <value>Δήλωση προσβασιμότητας –  [service-name_EL]</value>
   </data>
   <data name="application-response.header_ref" xml:space="preserve">
     <value>Αρ. Αναφοράς </value>
@@ -178,7 +178,7 @@
 &lt;p&gt;Μπορείτε να διαγράψετε όλα τα cookies που υπάρχουν ήδη στον υπολογιστή σας και μπορείτε να ρυθμίσετε τους περισσότερους φυλλομετρητές (browsers) ώστε να αποτρέπουν την τοποθέτησή τους. Εάν το κάνετε αυτό, ωστόσο, ίσως χρειαστεί να προσαρμόζετε με μη αυτόματο τρόπο ορισμένες επιλογές κάθε φορά που επισκέπτεστε έναν διαδικτυακό τόπο και ορισμένες υπηρεσίες και λειτουργίες ενδέχεται να μην λειτουργούν.&lt;/p&gt;</value>
   </data>
   <data name="cookie-policy.title" xml:space="preserve">
-    <value>Cookies στην υπηρεσία MOCK</value>
+    <value>Cookies στην υπηρεσία [service-name_EL] MOCK</value>
   </data>
   <data name="email-selection.legend" xml:space="preserve">
     <value>Θέλετε να χρησιμοποιήσετε αυτό το email;</value>
@@ -193,14 +193,14 @@
     <value>Σε ποιο email μπορούμε να επικοινωνήσουμε μαζί σας;</value>
   </data>
   <data name="email-selection.yes" xml:space="preserve">
-    <value>Στο email που είναι καταχωρημένο στο προφίλ μου στο CY Login: me@example.com</value>
+    <value>Στο email που είναι καταχωρημένο στο CY Login μου: </value>
   </data>
   <data name="index.instructions" xml:space="preserve">
     <value>
-&lt;h2&gt;Ζητήστε βοήθεια και καθοδήγηση&lt;/h2&gt;&lt;p&gt;Για θέματα που αφορούν τεχνική υποστήριξη, επικοινωνήστε με το DSF:&lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;.&lt;/p&gt;</value>
+&lt;h2&gt;Ζητήστε βοήθεια και καθοδήγηση&lt;/h2&gt;&lt;p&gt;Για τεχνική υποστήριξη, επικοινωνήστε με το DSF:&lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
   <data name="index.instructions1" xml:space="preserve">
-    <value>&lt;p&gt;Αυτή είναι μια εικονική υπηρεσία για την κατανόηση των βέλτιστων πρακτικών ανάπτυξης.&lt;/p&gt;</value>
+    <value>&lt;p&gt;Αυτή είναι μια εικονική υπηρεσία για την κατανόηση των βέλτιστων πρακτικών ανάπτυξης λογισμικού.&lt;/p&gt;</value>
   </data>
   <data name="index.title" xml:space="preserve">
     <value>Καλωσορίσατε στην εικονική υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
@@ -209,16 +209,16 @@
     <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
   </data>
   <data name="mobile-selection.no" xml:space="preserve">
-    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
+    <value>Άλλο αριθμό κινητού</value>
   </data>
   <data name="mobile-selection.p1" xml:space="preserve">
     <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
   </data>
   <data name="mobile-selection.title" xml:space="preserve">
-    <value>Ποιο κινητό μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
+    <value>Ποιο αριθμό κινητού μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
   </data>
   <data name="mobile-selection.yes" xml:space="preserve">
-    <value>Ο  αριθμός κινητού τηλεφώνου που είναι καταχωρημένο στα αρχεία μας:</value>
+    <value>Τον αριθμό κινητού που είναι καταχωρημένος στο CY Login μου: </value>
   </data>
   <data name="no-page-found.instructions" xml:space="preserve">
     <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
@@ -235,30 +235,27 @@
     <value>Ελέγξτε τον λογαριασμό σας στο CY Login</value>
   </data>
   <data name="privacy-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς το Τμήμα XXXXX συλλέγει και αποθηκεύει πληροφορίες σχετικά με εσάς.&lt;/p&gt;
+    <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς &lt;a href="Α" target="_blank"&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς [&lt;/a&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς [όνομα Τμήματος/Υπηρεσίας] συλλέγει και αποθηκεύει πληροφορίες σχετικά με εσάς.&lt;/p&gt;
 
-&lt;h2&gt;Τύποι πληροφοριών που συλλέγονται και χρησιμοποιούνται&lt;/h2&gt;&lt;p&gt;Το XXXXX συλλέγει τις ακόλουθες πληροφορίες απευθείας από εσάς μέσω της ιστοσελίδας αυτής:&lt;/p&gt;
+&lt;h2&gt;Τύποι πληροφοριών που συλλέγονται και χρησιμοποιούνται&lt;/h2&gt;&lt;p&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[όνομα Τμήματος/Υπηρεσίας] συλλέγει τις ακόλουθες πληροφορίες απευθείας από εσάς μέσω της ιστοσελίδας αυτής:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;την ταχυδρομική σας διεύθυνση&lt;/li&gt;
-&lt;li&gt;τον αριθμό κινητού τηλεφώνου σας&lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 1, π.χ. “την ταχυδρομική σας διεύθυνση”]&lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 2, π.χ.”τον αριθμό κινητού τηλεφώνου σας”]&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Το XXXXX συλλέγει τις ακόλουθες πληροφορίες για εσάς από το &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;όνομα Τμήματος/Υπηρεσίας] συλλέγει τις ακόλουθες πληροφορίες για εσάς από το [CY Login&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;το όνομα χρήστη σας στο CY Login&lt;/li&gt;
-&lt;li&gt;το email σας&lt;/li&gt;
-&lt;li&gt;τον αριθμό προσωπικής ταυτοποίησής σας&lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 1, π.χ. “το όνομα χρήστη σας στο CY Login”]&lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 2, π.χ. “το email σας”]&lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 3, π.χ. “τον αριθμό προσωπικής ταυτοποίησής σας”]&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Το XXXXX συνδυάζει τις πληροφορίες που παρέχετε σε αυτή την υπηρεσία με πληροφορίες από τα δικά του αρχεία, ανάμεσά τους:&lt;/p&gt;
+&lt;p&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[όμομα Τμήματος/Υπηρεσίας] συνδυάζει τις πληροφορίες που παρέχετε σε αυτή την υπηρεσία με πληροφορίες από τα δικά [του/της] αρχεία, ανάμεσά τους:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;όνομα&lt;/li&gt;
-&lt;li&gt;ημερομηνία γέννησης&lt;/li&gt;
-&lt;li&gt;υπηκοότητα&lt;/li&gt;
-&lt;li&gt;ταχυδρομική διεύθυνση&lt;/li&gt;
-&lt;li&gt;αριθμό κινητού τηλεφώνου &lt;/li&gt;
-&lt;li&gt;email&lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 1, π.χ. “όνομα”]&lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 2, π.χ. “αριθμό κινητού τηλεφώνου”] &lt;/li&gt;
+&lt;li&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[πληροφορία 3, π.χ. “email”]&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Γιατί το XXXXX χρησιμοποιεί τα στοιχεία σας&lt;/h2&gt;&lt;p&gt;Το XXXXX δημιούργησε αυτή την υπηρεσία για να βεβαιωθεί ότι έχει ορθές και ενημερωμένες πληροφορίες για τα παραπάνω στοιχεία. Σκοπός είναι να μπορεί το XXXXX να επικοινωνεί επιτυχώς με τους πολίτες της Κύπρου, στην εκτέλεση της εργασίας του. Η ηλικία και η υπηκοότητά σας χρησιμοποιούνται για να ελεγχθεί ότι δικαιούστε να χρησιμοποιήσετε την υπηρεσία αυτή.&lt;/p&gt;
+&lt;h2&gt;Γιατί [όνομα Τμήματος/Υπηρεσίας] χρησιμοποιεί τα στοιχεία σας&lt;/h2&gt;&lt;p&gt;&lt;a href="[" target="_blank"&gt;[&lt;/a&gt;[όμομα Τμήματος/Υπηρεσίας] δημιούργησε αυτή την υπηρεσία [π.χ. για να βεβαιωθεί ότι έχει ορθές και ενημερωμένες πληροφορίες για τα παραπάνω στοιχεία.] Σκοπός είναι [π.χ. να μπορεί [όμομα Τμήματος/Υπηρεσίας] να [επικοινωνεί επιτυχώς με τους πολίτες της Κύπρου,] στην εκτέλεση της εργασίας του.&lt;/p&gt;
 &lt;p&gt;Οι πληροφορίες αυτές καταγράφονται και αποθηκεύονται με τη συγκατάθεσή σας.&lt;/p&gt;
 
 &lt;h2&gt;Πώς αποθηκεύονται τα προσωπικά σας στοιχεία&lt;/h2&gt;&lt;p&gt;Οι πληροφορίες που περιλαμβάνονται στην αίτησή σας αποθηκεύονται με ασφάλεια σε διακομιστές με έδρα την Κύπρο.&lt;/p&gt;
@@ -268,7 +265,7 @@
 &lt;li&gt;να λάβετε αντίγραφο των πληροφοριών που διατηρούνται για εσάς&lt;/li&gt;
 &lt;li&gt;να αποσύρετε τη συγκατάθεσή σας&lt;/li&gt;
 &lt;li&gt;να περιορίσετε την επεξεργασία των δεδομένων σας&lt;/li&gt;
-&lt;li&gt;να διορθώστε ή να ενημερώστε τα προσωπικά σας στοιχεία&lt;/li&gt;
+&lt;li&gt;να διορθώσετε ή να ενημερώσετε τα προσωπικά σας στοιχεία&lt;/li&gt;
 &lt;li&gt;να υποβάλετε ένσταση για την επεξεργασία των προσωπικών σας πληροφοριών&lt;/li&gt;
 &lt;li&gt;να μεταφερθούν τα στοιχεία σας σε άλλο οργανισμό ή σε εσάς&lt;/li&gt;
 &lt;/ul&gt;
@@ -276,7 +273,7 @@
 &lt;h2&gt;Παράπονα&lt;/h2&gt;&lt;p&gt;Μπορείτε να υποβάλετε παράπονο για τον τρόπο με τον οποίο χρησιμοποιήθηκαν τα προσωπικά σας στοιχεία &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;επικοινωνώντας με το Γραφείο του Επιτρόπου Προστασίας Δεδομένων Προσωπικού Χαρακτήρα&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
   <data name="privacy-statement.title" xml:space="preserve">
-    <value>Πολιτική απορρήτου – MOCK στοιχεία</value>
+    <value>Πολιτική απορρήτου –  [service-name_EL] MOCK στοιχεία</value>
   </data>
   <data name="review-page.address" xml:space="preserve">
     <value>Διεύθυνση</value>
@@ -306,7 +303,7 @@
     <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
   </data>
   <data name="set-email.email_hint" xml:space="preserve">
-    <value>Η διεύθυνση email στον λογαριασμό σας στο CY Login δεν θα αλλάξει</value>
+    <value>Το email στο CY Login σας δεν θα αλλάξει</value>
   </data>
   <data name="set-email.email_label" xml:space="preserve">
     <value>Ποια διεύθυνση email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
@@ -315,19 +312,19 @@
     <value>Αφού κάνετε κλικ στο «συνέχεια» θα λάβετε ένα email με έναν σύνδεσμο στον οποίο θα πρέπει να κάνετε κλικ για να επιβεβαιώσετε το email σας.</value>
   </data>
   <data name="set-email.title" xml:space="preserve">
-    <value>Ενημερώστε τη διεύθυνση email σας</value>
+    <value>Εmail</value>
   </data>
   <data name="set-mobile.mobile_hint" xml:space="preserve">
-    <value>Καταχωρήστε μόνο κυπριακό αριθμό</value>
+    <value>Ο αριθμός σας στο CY Login σας δεν θα αλλάξει</value>
   </data>
   <data name="set-mobile.mobile_label" xml:space="preserve">
-    <value>Ποιον αριθμό κινητού τηλεφώνου μπορούν να χρησιμοποιήσουμε για να επικοινωνούμε μαζί σας;</value>
+    <value></value>
   </data>
   <data name="set-mobile.p1" xml:space="preserve">
     <value>Αφού συνεχίσετε, θα λάβετε έναν κωδικό ασφαλείας στο κινητό σας και θα σας ζητηθεί να εισαγάγετε αυτόν τον αριθμό στην επόμενη σελίδα, ώστε να επιβεβαιωθεί ο αριθμός κινητού</value>
   </data>
   <data name="set-mobile.title" xml:space="preserve">
-    <value>Ενημερώστε τον αριθμό του κινητού σας</value>
+    <value>Αριθμός κινητού</value>
   </data>
   <data name="review-page.email" xml:space="preserve">
     <value>Email</value>
