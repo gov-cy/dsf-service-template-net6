@@ -180,15 +180,6 @@
   <data name="cookie-policy.title" xml:space="preserve">
     <value>Cookies στην υπηρεσία service-name_EL MOCK</value>
   </data>
-  <data name="email-selection.legend" xml:space="preserve">
-    <value>Θέλετε να χρησιμοποιήσετε αυτό το email;</value>
-  </data>
-  <data name="email-selection.no" xml:space="preserve">
-    <value>Σε άλλο email</value>
-  </data>
-  <data name="email-selection.p1" xml:space="preserve">
-    <value>Αυτό είναι το email που βρήκαμε στη βάση δεδομένων μας.</value>
-  </data>
   <data name="email-selection.title" xml:space="preserve">
     <value>Σε ποιο email μπορούμε να επικοινωνήσουμε μαζί σας;</value>
   </data>
@@ -205,20 +196,8 @@
   <data name="index.title" xml:space="preserve">
     <value>Καλωσορίσατε στην εικονική υπηρεσία Ενημέρωσης προσωπικών στοιχείων του πολίτη</value>
   </data>
-  <data name="mobile-selection.legend" xml:space="preserve">
-    <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
-  </data>
-  <data name="mobile-selection.no" xml:space="preserve">
-    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
-  </data>
-  <data name="mobile-selection.p1" xml:space="preserve">
-    <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
-  </data>
   <data name="mobile-selection.title" xml:space="preserve">
     <value>Ποιο αριθμό κινητού μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
-  </data>
-  <data name="mobile-selection.yes" xml:space="preserve">
-    <value>Τον αριθμό κινητού που είναι καταχωρημένος στο CY Login μου: </value>
   </data>
   <data name="no-page-found.instructions" xml:space="preserve">
     <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
@@ -318,7 +297,7 @@
     <value>Ο αριθμός σας στο CY Login σας δεν θα αλλάξει</value>
   </data>
   <data name="set-mobile.mobile_label" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="set-mobile.p1" xml:space="preserve">
     <value>Αφού συνεχίσετε, θα λάβετε έναν κωδικό ασφαλείας στο κινητό σας και θα σας ζητηθεί να εισαγάγετε αυτόν τον αριθμό στην επόμενη σελίδα, ώστε να επιβεβαιωθεί ο αριθμός κινητού</value>
@@ -346,10 +325,6 @@
     <value>Άλλο αριθμό κινητού</value>
     <comment>mobile-selection</comment>
   </data>
-  <data name="mobile-selection.yes_label" xml:space="preserve">
-    <value>Τον αριθμό κινητού που είναι καταχωρημένος στο CY Login μου: </value>
-    <comment>mobile-selection</comment>
-  </data>
   <data name="email-selection.no_label" xml:space="preserve">
     <value>Σε άλλο email</value>
     <comment>email-selection</comment>
@@ -359,7 +334,7 @@
     <comment>email-selection</comment>
   </data>
   <data name="mobile-selection.yes_hint" xml:space="preserve">
-    <value>Αυτός είναι ο αριθμόε που βρήκαμε στα αρχεία μας.</value>
+    <value>Αυτός είναι ο αριθμός που βρήκαμε στα αρχεία μας.</value>
     <comment>mobile-selection</comment>
   </data>
 </root>
