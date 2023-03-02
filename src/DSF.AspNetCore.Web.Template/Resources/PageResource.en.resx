@@ -143,14 +143,14 @@
 &lt;p&gt;We try to respond to feedback within 30 working days.&lt;/p&gt;
 &lt;p&gt;If we do not reply, or do not fix the issue, you can send a complaint to:&lt;/p&gt;
 &lt;p&gt;Deputy Minister of Research, Innovation, and Digital Policy&lt;br&gt;Vyronos 29 Avenue1096&lt;br&gt;Nicosia&lt;br&gt;Cyprus&lt;/p&gt;
-&lt;p&gt;Or you can email: &lt;a href="mailto:e:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Or you can email: &lt;a href="mailto:info@dmrid.gov.cy" target="_blank"&gt;info@dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;If you are not satisfied with their response, you can &lt;a href="https://eforms.mof.gov.cy/eforms/eforms.nsf/complaintformombudsman_en/complaintformombudsman_en?OpenForm" target="_blank"&gt;send a complaint to the Commissioner for Administration and the Protection of Human Rights (Ombudsman)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2&gt;Date&lt;/h2&gt;&lt;p&gt;This statement was created on 4 November 2022 based upon the W3C Accessibility Statement Generator Tool.&lt;/p&gt;
-&lt;p&gt;This is an accessibility statement for the XXXXX Department’s service ‘MOCK’.&lt;/p&gt;</value>
+&lt;p&gt;This is an accessibility statement for the service-name_EN.&lt;/p&gt;</value>
   </data>
   <data name="accessibility-statement.title" xml:space="preserve">
-    <value>Accessibility statement</value>
+    <value>Accessibility statement –  service-name_EN</value>
   </data>
   <data name="application-response.header_ref" xml:space="preserve">
     <value>Your Reference Number </value>
@@ -159,7 +159,8 @@
     <value>Your application has been sent</value>
   </data>
   <data name="cookie-policy.instructions" xml:space="preserve">
-    <value>
+    <value>&lt;p&gt;The ‘MOCK’ service (url) only uses cookies that are strictly necessary for it to function correctly.&lt;/p&gt;
+
 &lt;h2&gt;Cookies in use&lt;/h2&gt;&lt;p&gt;All of the following cookies are deleted 30 minutes after you close your browser.&lt;/p&gt;
 
 &lt;h2&gt;AppDataSessionCookie&lt;/h2&gt;&lt;p&gt;This cookie stores a ‘session ID’ which is used to identify your browser session.&lt;/p&gt;
@@ -173,12 +174,11 @@
 &lt;h2&gt;Using CY Login&lt;/h2&gt;&lt;p&gt;When you sign in using CY Login (also known as ‘Ariadni’) to use this service, it will save &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/privacy" target="_blank"&gt;additional cookies on your device&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2&gt;How to control cookies&lt;/h2&gt;&lt;p&gt;&lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Find out how to control and delete cookies on your device.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can delete all cookies that are already on your device and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.&lt;/p&gt;
-&lt;p&gt;The ‘MOCK’ service (url) only uses cookies that are strictly necessary for it to function correctly.&lt;/p&gt;</value>
+&lt;p&gt;You can delete all cookies that are already on your device and you can set most browsers to prevent them from being placed. If you do this, however, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.&lt;/p&gt;</value>
   </data>
   <data name="cookie-policy.title" xml:space="preserve">
     <value>Cookies used by the
-’MOCK’ service</value>
+service-name_EN MOCK service</value>
   </data>
   <data name="email-selection.legend" xml:space="preserve">
     <value>Do you want to use this email ?</value>
@@ -193,23 +193,23 @@
     <value>Which email address can  we use to contact you?</value>
   </data>
   <data name="email-selection.yes" xml:space="preserve">
-    <value>My CY Login account email address: me@example.com</value>
+    <value>My CY Login account email address: </value>
   </data>
   <data name="index.instructions" xml:space="preserve">
     <value>
-&lt;h2&gt;Get help and advice&lt;/h2&gt;&lt;p&gt;For technical support issues, contact DSF:&lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;</value>
+&lt;h2&gt;Get help and advice&lt;/h2&gt;&lt;p&gt;For technical support, contact DSF: &lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;&lt;/p&gt;</value>
   </data>
   <data name="index.instructions1" xml:space="preserve">
-    <value>&lt;p&gt;This is a mock service for understanding best development practices.&lt;/p&gt;</value>
+    <value>&lt;p&gt;This is a mock service for understanding best software development practices.&lt;/p&gt;</value>
   </data>
   <data name="index.title" xml:space="preserve">
-    <value>Welcome to citizen personal details Mock Service</value>
+    <value>Welcome to Update my details Mock Service</value>
   </data>
   <data name="mobile-selection.legend" xml:space="preserve">
     <value>Do you want to use this mobile phone number ?</value>
   </data>
   <data name="mobile-selection.no" xml:space="preserve">
-    <value>No, I want to use different one</value>
+    <value>A different one</value>
   </data>
   <data name="mobile-selection.p1" xml:space="preserve">
     <value>This is the mobile phone number we have found in our database.</value>
@@ -218,7 +218,7 @@
     <value>What mobile phone number can we use to contact you?</value>
   </data>
   <data name="mobile-selection.yes" xml:space="preserve">
-    <value>The mobile phone number that is register in our records:</value>
+    <value>My CY Login mobile phone number: </value>
   </data>
   <data name="no-page-found.instructions" xml:space="preserve">
     <value>&lt;p&gt;If you typed the web address, check it is correct.&lt;/p&gt;
@@ -235,26 +235,27 @@
     <value>Check your CY Login account</value>
   </data>
   <data name="privacy-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;This privacy policy explains how the XXXXX Department collects and stores information about you.&lt;/p&gt;
+    <value>&lt;p&gt;This privacy policy explains how government_service-name_EN collects and stores information about you.&lt;/p&gt;
 
-&lt;h2&gt;Types of information collected and used&lt;/h2&gt;&lt;p&gt;XXXXX collects the following information from you through this website:&lt;/p&gt;
-&lt;p&gt;XXXXX collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+&lt;h2&gt;Types of information collected and used&lt;/h2&gt;&lt;p&gt;government_service-name_EN collects the following information from you through this website:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;your CY Login user name&lt;/li&gt;
-&lt;li&gt;your email address&lt;/li&gt;
-&lt;li&gt;your personal identification&lt;/li&gt;
+&lt;li&gt;item 1, e.g. “your preferred email address”&lt;/li&gt;
+&lt;li&gt;item 2, e.g. “your mobile phone number”&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;XXXXX combines the information you provide in this service with information it already holds, including your:&lt;/p&gt;
+&lt;p&gt;government_service-name_EN collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;name&lt;/li&gt;
-&lt;li&gt;date of birth&lt;/li&gt;
-&lt;li&gt;citizenship&lt;/li&gt;
-&lt;li&gt;postal address &lt;/li&gt;
-&lt;li&gt;phone number &lt;/li&gt;
-&lt;li&gt;email address&lt;/li&gt;
+&lt;li&gt;item 1, e.g. “your CY Login user name”&lt;/li&gt;
+&lt;li&gt;item 2, e.g. “your email address”&lt;/li&gt;
+&lt;li&gt;item 2, e.g. “your personal identification”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;government_service-name_EN combines the information you provide in this service with information it already holds, including your:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;item 1, e.g. “name”&lt;/li&gt;
+&lt;li&gt;item 1, e.g. “phone number”&lt;/li&gt;
+&lt;li&gt;item 1, e.g. “email address”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;How your personal information is stored&lt;/h2&gt;&lt;p&gt;XXXXX has created this service to make sure it has the correct and up to date versions of the information listed above. This is so XXXXX is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
+&lt;h2&gt;Why government_service-name_EN uses your information&lt;/h2&gt;&lt;p&gt;government_service-name_EN has created this service to (e.g. make sure it has the correct and up to date versions of the information listed above). This is so government_service-name_EN is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
 &lt;p&gt;Your age and citizenship are used to check you’re eligible to use this service.&lt;/p&gt;
 &lt;p&gt;This information is captured and stored by your consent.&lt;/p&gt;
 
@@ -270,14 +271,10 @@
 &lt;li&gt;have your information transferred to another organisation or to you&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Complaints&lt;/h2&gt;&lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;your preferred email address&lt;/li&gt;
-&lt;li&gt;your mobile phone number&lt;/li&gt;
-&lt;/ul&gt;</value>
+&lt;h2&gt;Complaints&lt;/h2&gt;&lt;p&gt;You can complain about the way your personal information has been used by &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;contacting the Office of the Commissioner for Personal Data Protection&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
   <data name="privacy-statement.title" xml:space="preserve">
-    <value>Privacy policy – MOCK information</value>
+    <value>Privacy policy –  service-name_EN MOCK information</value>
   </data>
   <data name="review.address" xml:space="preserve">
     <value>Address</value>
@@ -304,7 +301,7 @@
     <value>Sorry, there is a problem with the service</value>
   </data>
   <data name="set-email.email_hint" xml:space="preserve">
-    <value>The email address in your CY Login account will not be change</value>
+    <value>The email address in your CY Login account will not be changed</value>
   </data>
   <data name="set-email.email_label" xml:space="preserve">
     <value>What email address can we use to contact you?</value>
@@ -313,7 +310,7 @@
     <value>After you click “continue” you will receive an email with a link that you will need to click in order to confirm your email.</value>
   </data>
   <data name="set-email.title" xml:space="preserve">
-    <value>Update your email address </value>
+    <value>Which email address can  we use to contact you?</value>
   </data>
   <data name="set-mobile.exist_check" xml:space="preserve">
     <value>This mobile number already exists in our records</value>
@@ -322,7 +319,7 @@
     <value>Enter a mobile phone number in the correct format, like 90000000 for Cyprus</value>
   </data>
   <data name="set-mobile.mobile_hint" xml:space="preserve">
-    <value>Enter only Cyprus number</value>
+    <value>The number in your CY Login account will not be changed</value>
   </data>
   <data name="set-mobile.mobile_label" xml:space="preserve">
     <value>What mobile phone number we can use to contact you?</value>
@@ -334,7 +331,7 @@
     <value>Enter your mobile telephone number</value>
   </data>
   <data name="set-mobile.title" xml:space="preserve">
-    <value>Update your mobile number</value>
+    <value>What mobile phone number can we use to contact you?</value>
   </data>
   <data name="review-page.email" xml:space="preserve">
     <value>Email address</value>
@@ -351,5 +348,25 @@
   <data name="review-page.p1" xml:space="preserve">
     <value>Your contact details</value>
     <comment>review-page</comment>
+  </data>
+  <data name="mobile-selection.no_label" xml:space="preserve">
+    <value>A different one</value>
+    <comment>mobile-selection</comment>
+  </data>
+  <data name="mobile-selection.yes_label" xml:space="preserve">
+    <value>My CY Login mobile phone number: </value>
+    <comment>mobile-selection</comment>
+  </data>
+  <data name="email-selection.no_label" xml:space="preserve">
+    <value>A different email</value>
+    <comment>email-selection</comment>
+  </data>
+  <data name="email-selection.yes_hint" xml:space="preserve">
+    <value>This is the email we have found in our records.</value>
+    <comment>email-selection</comment>
+  </data>
+  <data name="mobile-selection.yes_hint" xml:space="preserve">
+    <value>This is the number we found in our records</value>
+    <comment>mobile-selection</comment>
   </data>
 </root>
