@@ -180,20 +180,8 @@
     <value>Cookies used by the
 service-name_EN MOCK service</value>
   </data>
-  <data name="email-selection.legend" xml:space="preserve">
-    <value>Do you want to use this email ?</value>
-  </data>
-  <data name="email-selection.no" xml:space="preserve">
-    <value>A different email</value>
-  </data>
-  <data name="email-selection.p1" xml:space="preserve">
-    <value>This is the email we have found in our database.</value>
-  </data>
   <data name="email-selection.title" xml:space="preserve">
     <value>Which email address can  we use to contact you?</value>
-  </data>
-  <data name="email-selection.yes" xml:space="preserve">
-    <value>My CY Login account email address: </value>
   </data>
   <data name="index.instructions" xml:space="preserve">
     <value>
@@ -205,20 +193,8 @@ service-name_EN MOCK service</value>
   <data name="index.title" xml:space="preserve">
     <value>Welcome to Update my details Mock Service</value>
   </data>
-  <data name="mobile-selection.legend" xml:space="preserve">
-    <value>Do you want to use this mobile phone number ?</value>
-  </data>
-  <data name="mobile-selection.no" xml:space="preserve">
-    <value>A different one</value>
-  </data>
-  <data name="mobile-selection.p1" xml:space="preserve">
-    <value>This is the mobile phone number we have found in our database.</value>
-  </data>
   <data name="mobile-selection.title" xml:space="preserve">
     <value>What mobile phone number can we use to contact you?</value>
-  </data>
-  <data name="mobile-selection.yes" xml:space="preserve">
-    <value>My CY Login mobile phone number: </value>
   </data>
   <data name="no-page-found.instructions" xml:space="preserve">
     <value>&lt;p&gt;If you typed the web address, check it is correct.&lt;/p&gt;
@@ -351,10 +327,6 @@ service-name_EN MOCK service</value>
   </data>
   <data name="mobile-selection.no_label" xml:space="preserve">
     <value>A different one</value>
-    <comment>mobile-selection</comment>
-  </data>
-  <data name="mobile-selection.yes_label" xml:space="preserve">
-    <value>My CY Login mobile phone number: </value>
     <comment>mobile-selection</comment>
   </data>
   <data name="email-selection.no_label" xml:space="preserve">
