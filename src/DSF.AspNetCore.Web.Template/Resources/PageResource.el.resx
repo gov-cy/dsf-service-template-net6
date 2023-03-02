@@ -151,7 +151,7 @@
 &lt;p&gt;Η παρούσα αποτελεί δήλωση προσβασιμότητας για την υπηρεσία 'MOCK' του Τμήματος XXXXX.&lt;/p&gt;</value>
   </data>
   <data name="accessibility-statement.title" xml:space="preserve">
-    <value>Δήλωση προσβασιμότητας</value>
+    <value>Δήλωση προσβασιμότητας –  [service-name_EL]</value>
   </data>
   <data name="application-response.header_ref" xml:space="preserve">
     <value>Αρ. Αναφοράς </value>
@@ -204,12 +204,6 @@
   </data>
   <data name="index.title" xml:space="preserve">
     <value>Καλωσορίσατε στην εικονική υπηρεσία αλλαγής προσωπικών στοιχείων του πολίτη</value>
-  </data>
-  <data name="mobile-selection.legend" xml:space="preserve">
-    <value>Θέλετε να χρησιμοποιήσετε αυτό τον αριθμό τηλεφώνου;</value>
-  </data>
-  <data name="mobile-selection.no" xml:space="preserve">
-    <value>Όχι, θέλω να χρησιμοποιήσω διαφορετικό</value>
   </data>
   <data name="mobile-selection.p1" xml:space="preserve">
     <value>Αυτός είναι ο αριθμός κινητού τηλεφώνου που βρήκαμε στη βάση δεδομένων μας.</value>
