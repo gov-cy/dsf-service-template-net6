@@ -235,27 +235,27 @@
     <value>Ελέγξτε τον λογαριασμό σας στο CY Login</value>
   </data>
   <data name="privacy-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς service-name_EL συλλέγει και αποθηκεύει πληροφορίες σχετικά με εσάς.&lt;/p&gt;
+    <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς  government_service-name_EL συλλέγει και αποθηκεύει πληροφορίες σχετικά με εσάς.&lt;/p&gt;
 
-&lt;h2&gt;Τύποι πληροφοριών που συλλέγονται και χρησιμοποιούνται&lt;/h2&gt;&lt;p&gt;service-name_EL συλλέγει τις ακόλουθες πληροφορίες απευθείας από εσάς μέσω της ιστοσελίδας αυτής:&lt;/p&gt;
+&lt;h2&gt;Τύποι πληροφοριών που συλλέγονται και χρησιμοποιούνται&lt;/h2&gt;&lt;p&gt;government_service-name_EL συλλέγει τις ακόλουθες πληροφορίες απευθείας από εσάς μέσω της ιστοσελίδας αυτής:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;πληροφορία 1, π.χ. “την ταχυδρομική σας διεύθυνση”&lt;/li&gt;
 &lt;li&gt;πληροφορία 2, π.χ.”τον αριθμό κινητού τηλεφώνου σας”&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;service-name_EL συλλέγει τις ακόλουθες πληροφορίες για εσάς από το &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;government_service-name_EL συλλέγει τις ακόλουθες πληροφορίες για εσάς από το &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;πληροφορία 1, π.χ. “το όνομα χρήστη σας στο CY Login”&lt;/li&gt;
 &lt;li&gt;πληροφορία 2, π.χ. “το email σας”&lt;/li&gt;
 &lt;li&gt;πληροφορία 3, π.χ. “τον αριθμό προσωπικής ταυτοποίησής σας”&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;service-name_EL συνδυάζει τις πληροφορίες που παρέχετε σε αυτή την υπηρεσία με πληροφορίες από τα δικά (του/της) αρχεία, ανάμεσά τους:&lt;/p&gt;
+&lt;p&gt;government_service-name_EL συνδυάζει τις πληροφορίες που παρέχετε σε αυτή την υπηρεσία με πληροφορίες από τα δικά (του/της) αρχεία, ανάμεσά τους:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;πληροφορία 1, π.χ. “όνομα”&lt;/li&gt;
 &lt;li&gt;πληροφορία 2, π.χ. “αριθμό κινητού τηλεφώνου”&lt;/li&gt;
 &lt;li&gt;πληροφορία 3, π.χ. “email”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Γιατί service-name_EL χρησιμοποιεί τα στοιχεία σας&lt;/h2&gt;&lt;p&gt;service-name_EL δημιούργησε αυτή την υπηρεσία (π.χ. για να βεβαιωθεί ότι έχει ορθές και ενημερωμένες πληροφορίες για τα παραπάνω στοιχεία). Σκοπός είναι (π.χ. να μπορεί service-name_EL να επικοινωνεί επιτυχώς με τους πολίτες της Κύπρου, στην εκτέλεση της εργασίας του).&lt;/p&gt;
+&lt;h2&gt;Γιατί government_service-name_EL χρησιμοποιεί τα στοιχεία σας&lt;/h2&gt;&lt;p&gt;government_sservice-name_EL δημιούργησε αυτή την υπηρεσία (π.χ. για να βεβαιωθεί ότι έχει ορθές και ενημερωμένες πληροφορίες για τα παραπάνω στοιχεία). Σκοπός είναι (π.χ. να μπορεί government_service-name_EL να επικοινωνεί επιτυχώς με τους πολίτες της Κύπρου, στην εκτέλεση της εργασίας του).&lt;/p&gt;
 &lt;p&gt;Οι πληροφορίες αυτές καταγράφονται και αποθηκεύονται με τη συγκατάθεσή σας.&lt;/p&gt;
 
 &lt;h2&gt;Πώς αποθηκεύονται τα προσωπικά σας στοιχεία&lt;/h2&gt;&lt;p&gt;Οι πληροφορίες που περιλαμβάνονται στην αίτησή σας αποθηκεύονται με ασφάλεια σε διακομιστές με έδρα την Κύπρο.&lt;/p&gt;
@@ -357,5 +357,9 @@
   <data name="email-selection.yes_hint" xml:space="preserve">
     <value>Αυτό είναι το email που βρήκαμε στα αρχεία μας.</value>
     <comment>email-selection</comment>
+  </data>
+  <data name="mobile-selection.yes_hint" xml:space="preserve">
+    <value>Αυτός είναι ο αριθμόε που βρήκαμε στα αρχεία μας.</value>
+    <comment>mobile-selection</comment>
   </data>
 </root>

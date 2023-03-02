@@ -235,27 +235,27 @@ service-name_EN MOCK service</value>
     <value>Check your CY Login account</value>
   </data>
   <data name="privacy-statement.instructions" xml:space="preserve">
-    <value>&lt;p&gt;This privacy policy explains how service-name_EN collects and stores information about you.&lt;/p&gt;
+    <value>&lt;p&gt;This privacy policy explains how government_service-name_EN collects and stores information about you.&lt;/p&gt;
 
-&lt;h2&gt;Types of information collected and used&lt;/h2&gt;&lt;p&gt;service-name_EN collects the following information from you through this website:&lt;/p&gt;
+&lt;h2&gt;Types of information collected and used&lt;/h2&gt;&lt;p&gt;government_service-name_EN collects the following information from you through this website:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;item 1, e.g. “your preferred email address”&lt;/li&gt;
 &lt;li&gt;item 2, e.g. “your mobile phone number”&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;service-name_EN collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;government_service-name_EN collects the following information about you from &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help" target="_blank"&gt;CY Login&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;item 1, e.g. “your CY Login user name”&lt;/li&gt;
 &lt;li&gt;item 2, e.g. “your email address”&lt;/li&gt;
 &lt;li&gt;item 2, e.g. “your personal identification”&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;service-name_EN combines the information you provide in this service with information it already holds, including your:&lt;/p&gt;
+&lt;p&gt;government_service-name_EN combines the information you provide in this service with information it already holds, including your:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;item 1, e.g. “name”&lt;/li&gt;
 &lt;li&gt;item 1, e.g. “phone number”&lt;/li&gt;
 &lt;li&gt;item 1, e.g. “email address”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Why service-name_EN uses your information&lt;/h2&gt;&lt;p&gt;service-name_EN has created this service to (e.g. make sure it has the correct and up to date versions of the information listed above). This is so service-name_EN is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
+&lt;h2&gt;Why government_service-name_EN uses your information&lt;/h2&gt;&lt;p&gt;government_service-name_EN has created this service to (e.g. make sure it has the correct and up to date versions of the information listed above). This is so government_service-name_EN is able to successfully contact citizens of Cyprus when carrying out its work.&lt;/p&gt;
 &lt;p&gt;Your age and citizenship are used to check you’re eligible to use this service.&lt;/p&gt;
 &lt;p&gt;This information is captured and stored by your consent.&lt;/p&gt;
 
@@ -364,5 +364,9 @@ service-name_EN MOCK service</value>
   <data name="email-selection.yes_hint" xml:space="preserve">
     <value>This is the email we have found in our records.</value>
     <comment>email-selection</comment>
+  </data>
+  <data name="mobile-selection.yes_hint" xml:space="preserve">
+    <value>This is the number we found in our records</value>
+    <comment>mobile-selection</comment>
   </data>
 </root>
