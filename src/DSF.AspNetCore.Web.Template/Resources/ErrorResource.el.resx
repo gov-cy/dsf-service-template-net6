@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="email-selection.custom.required" xml:space="preserve">
-    <value>Επιλέξετε αν επιθυμείτε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
+    <value>Επιλέξετε αν θέλετε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
   </data>
   <data name="mobile-selection.custom.required" xml:space="preserve">
-    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου, ή κάποιος άλλος</value>
   </data>
   <data name="set-email.email.required" xml:space="preserve">
-    <value>Εισάγετε email στη σωστή μορφή, για παράδειγμα name@example.com</value>
+    <value>Εισαγάγετε email</value>
   </data>
   <data name="set-mobile.mobile.format" xml:space="preserve">
-    <value>Εισάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
+    <value>Εισαγάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
   </data>
   <data name="set-mobile.mobile.required" xml:space="preserve">
-    <value>Εισάγετε τον αριθμό κινητού τηλεφώνου σας</value>
+    <value>Εισαγάγετε τον αριθμό κινητού τηλεφώνου σας</value>
   </data>
   <data name="email-selection.custom.required" xml:space="preserve">
     <value>Επιλέξετε αν επιθυμείτε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
@@ -151,5 +151,9 @@
   <data name="set-mobile.mobile.format" xml:space="preserve">
     <value>Εισάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
     <comment>set-mobile Checks</comment>
+  </data>
+  <data name="set-email.email.format" xml:space="preserve">
+    <value>Εισαγάγετε email στη σωστή μορφή, για παράδειγμα name@example.com</value>
+    <comment>set-email Checks</comment>
   </data>
 </root>
