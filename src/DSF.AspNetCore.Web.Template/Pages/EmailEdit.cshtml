@@ -11,11 +11,10 @@
         @Html.Raw(Model.ErrorsDesc)
     </p>
 </div>
-<h1>@Localizer["set-email.title"]</h1>
+
 <form class="govcy-form" novalidate method="post">
     <div class="@(Model.EmailErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-        <label class="govcy-label" for="email">@Localizer["set-email.email_label"]</label>
-        <span class="govcy-hint">@Localizer["set-email.email_hint"]</span>
+       <h1> <label class="govcy-label" for="email">@Localizer["set-email.title"]</label></h1>
         @if (Model.EmailErrorClass.Length > 0)
         {
             <p id="email-error" class="govcy-input-error-msg">

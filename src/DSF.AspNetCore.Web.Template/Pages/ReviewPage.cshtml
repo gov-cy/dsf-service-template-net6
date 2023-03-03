@@ -10,21 +10,6 @@
 <p>@Localizer["review-page.p2"]</p>
   <table class="govcy-table govcy-table-responsive-vertical govcy-mb-4">
      <tbody>
-         <tr>
-            <th scope="row" class="col-3">@Localizer["review-page.mobile"]</th>
-             <td class="col-7">
-                  <div>@Model.ret_mobile.FormatMobile()</div>
-             </td>
-              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
-                    @if (Model.useMobileEditOnly)
-                    {
-                        <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["common.change_link"]</a>
-                    } else
-                    {
-                        <a asp-page="/Mobile" asp-route-review="true">@Localizer["common.change_link"]</a>
-                    }
-              </td>
-         </tr>
            <tr>
             <th scope="row" class="col-3">@Localizer["review-page.email"]</th>
              <td class="col-7">
@@ -41,6 +26,22 @@
                     
               </td>
          </tr>
+           <tr>
+            <th scope="row" class="col-3">@Localizer["review-page.mobile"]</th>
+             <td class="col-7">
+                  <div>@Model.ret_mobile.FormatMobile()</div>
+             </td>
+              <td class="col-2 govcy-text-sm-start govcy-text-md-end">
+                    @if (Model.useMobileEditOnly)
+                    {
+                        <a asp-page="/MobileEdit" asp-route-review="true">@Localizer["common.change_link"]</a>
+                    } else
+                    {
+                        <a asp-page="/Mobile" asp-route-review="true">@Localizer["common.change_link"]</a>
+                    }
+              </td>
+         </tr>
+         
      </tbody>
  </table>
      <form asp-page-handler="ApplicationSubmit">
