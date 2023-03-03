@@ -13,10 +13,9 @@
 </div>
 
 <form class="govcy-form" novalidate method="post">
-     <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <h1><label class="govcy-label" for="mobile">@Localizer["set-mobile.title"]</label></h1>
-            <span class="govcy-hint">@Localizer["set-mobile.mobile_hint"]</span>
-           	@if (Model.MobileErrorClass.Length > 0)
+        <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+           <h1><label class="govcy-label" for="mobile">@Localizer["set-mobile.title"]</label></h1>
+            @if (Model.MobileErrorClass.Length > 0)
             {
                  <p id="tel-error" class="govcy-input-error-msg">
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
