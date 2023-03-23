@@ -144,6 +144,9 @@
   <data name="common.footer_copyright" xml:space="preserve">
     <value>Republic of Cyprus, 2023</value>
   </data>
+  <data name="common.footer_feedback" xml:space="preserve">
+    <value>Help us improve our service</value>
+  </data>
   <data name="common.footer_privacy" xml:space="preserve">
     <value>Privacy statement</value>
   </data>
@@ -160,7 +163,7 @@
     <value>Log out</value>
   </data>
   <data name="common.submit" xml:space="preserve">
-    <value>Submit application</value>
+    <value>Submit</value>
   </data>
   <data name="common.url_paper_form" xml:space="preserve">
     <value>http://www.elections.gov.cy/moi/elections/elections.nsf/elections07c_el/elections07c_el?OpenDocument</value>

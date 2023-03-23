@@ -99,6 +99,7 @@
                             <li><a href="/privacy-statement">@Localizer["common.footer_privacy"]</a></li>
                             <li><a href="/cookie-policy">@Localizer["common.footer_cookie"]</a></li>
                             <li><a href="/accessibility-statement">@Localizer["common.footer_accesibility"]</a></li>
+                            <li><a href="/user-satisfaction">@Localizer["common.footer_feedback"]</a></li>
                             <li class="govcy-d-block govcy-text-dark">© @Localizer["common.footer_copyright"]</li>
                         </ul>
                 </footer>
@@ -109,5 +110,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
      <!-- Javascripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> 
+    
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

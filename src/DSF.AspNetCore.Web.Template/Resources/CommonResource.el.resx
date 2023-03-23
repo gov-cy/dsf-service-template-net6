@@ -144,6 +144,9 @@
   <data name="common.footer_copyright" xml:space="preserve">
     <value>Κυπριακή Δημοκρατία, 2023</value>
   </data>
+  <data name="common.footer_feedback" xml:space="preserve">
+    <value>Βοηθήστε μας να βελτιώσουμε την υπηρεσία</value>
+  </data>
   <data name="common.footer_privacy" xml:space="preserve">
     <value>Όροι Χρήσης</value>
   </data>
@@ -160,7 +163,7 @@
     <value>Αποσύνδεση</value>
   </data>
   <data name="common.submit" xml:space="preserve">
-    <value>Υποβολή αίτησης</value>
+    <value>Υποβολή</value>
   </data>
   <data name="common.url_paper_form" xml:space="preserve">
     <value>http://www.elections.gov.cy/moi/elections/elections.nsf/elections07c_el/elections07c_el?OpenDocument</value>

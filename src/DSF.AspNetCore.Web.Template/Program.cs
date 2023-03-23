@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
+using DSF.AspNetCore.Web.Template.Services.UserSatisfaction;
+using DSF.AspNetCore.Web.Template.Pages;
 
 IConfiguration Configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -90,6 +92,11 @@ builder.Services.AddScoped<IValidator<MobileSection>, MobileValidator>(sp =>
     var Checker = sp.GetRequiredService<ICommonApis>();
     return new MobileValidator(LocMain, Checker);
 });
+builder.Services.AddScoped<IValidator<UserSatisfaction>, UserSatisfactionValidation>(sp =>
+{
+    var LocMain = sp.GetRequiredService<IResourceViewLocalizer>();
+    return new UserSatisfactionValidation(LocMain);
+});
 
 //Add fluent validation to .Net Core (optional use for server side validation) 
 //builder.Services.AddFluentValidation();
@@ -113,6 +120,7 @@ builder.Services.AddScoped<IUserSession, UserSession>();
 
 //Register the Api service for Task Get and post methods
 builder.Services.AddScoped<IContact, Contact>();
+builder.Services.AddScoped<IUserSatisfactionService, UserSatisfactionService>();
 
 //get configuration for CyLoginAuthentication from appsettings.json
 var authConfiguration = Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>();

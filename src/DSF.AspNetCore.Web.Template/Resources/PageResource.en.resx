@@ -298,6 +298,9 @@
   <data name="review-page.p3" xml:space="preserve">
     <value>Before submitting your application, check that the information below is correct.</value>
   </data>
+	<data name="review-page.submit" xml:space="preserve">
+    <value>Submit application</value>
+  </data>
   <data name="server-error.instructions" xml:space="preserve">
     <value>&lt;p&gt;Try again later.&lt;/p&gt;</value>
   </data>
@@ -352,5 +355,53 @@
   <data name="review-page.p1" xml:space="preserve">
     <value>Your contact details</value>
     <comment>review-page</comment>
+  </data>
+	<data name="user-satisfaction.SatisfactionList.required" xml:space="preserve">
+    <value>Please select satisfactory level</value>
+    <comment>user-satisfaction Checks</comment>
+  </data>
+	<data name="user-satisfaction.Sugestion_label" xml:space="preserve">
+    <value>How could we improve the service?</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.Sugestion_hint" xml:space="preserve">
+    <value>Do not add any personal information such as credit card or social security number</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.SatisfactionList_label" xml:space="preserve">
+    <value>Overall, how would you rate your experience of the service you used today?</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.VeryDissatisfactory_label" xml:space="preserve">
+    <value>Very dissatisfactory</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.Dissatisfactory_label" xml:space="preserve">
+    <value>Dissatisfactory</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.NeitherNor_label" xml:space="preserve">
+    <value>Neither satisfactory nor dissatisfactory</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.Satisfactory_label" xml:space="preserve">
+    <value>Satisfactory</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.VerySatisfactory_label" xml:space="preserve">
+    <value>Very satisfactory</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.title" xml:space="preserve">
+    <value>Help us improve {0} service</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction-response.Success_title" xml:space="preserve">
+    <value>Your response has been recorded</value>
+    <comment>user-satisfaction-response</comment>
+  </data>
+	<data name="user-satisfaction-response.Success_body" xml:space="preserve">
+    <value>Thank you for your help</value>
+    <comment>user-satisfaction-response</comment>
   </data>
 </root>
