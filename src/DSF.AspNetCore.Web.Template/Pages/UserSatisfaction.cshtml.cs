@@ -56,9 +56,18 @@ public class UserSatisfaction : PageModel
     {
         var result = _validator.Validate(this);
         // valid form post and user has not submitted in same session
-        if (!result.IsValid && HttpContext.Session.GetObjectFromJson<bool?>(nameof(UserSatisfaction)) == true)
+        if (!result.IsValid)
         {
             _userSession.SetUserValidationResults(result);
+            return RedirectToPage(nameof(UserSatisfaction), null, new { fromPost = true }, "mainContainer");
+        }
+
+        if (HttpContext.Session.GetObjectFromJson<bool?>(nameof(UserSatisfaction)) == false)
+        {
+            result.Errors.Add(new ValidationFailure()
+            {
+                ErrorMessage = _localizer["user-satisfaction-response.already_submit"]
+            });
             return RedirectToPage(nameof(UserSatisfaction), null, new { fromPost = true }, "mainContainer");
         }
 
@@ -83,6 +92,21 @@ public class UserSatisfaction : PageModel
         });
 
         return RedirectToPage(nameof(UserSatisfactionResponse), routeValues);
+    }
+    private void AddError(string propertyName, string errorMessage)
+    {
+        ModelState.AddModelError(propertyName, _localizer["ServerError_Title"]);
+        HttpContext.Session.SetObjectAsJson($"valresult", new ValidationResult()
+        {
+            Errors = new List<ValidationFailure>()
+            {
+                new ValidationFailure()
+                {
+                    ErrorMessage = errorMessage,
+                    PropertyName = propertyName
+                }
+            }
+        });
     }
 
     bool ShowErrors(bool fromPost)

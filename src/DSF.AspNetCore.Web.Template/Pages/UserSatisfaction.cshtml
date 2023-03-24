@@ -26,8 +26,8 @@
             @if (Model.ErrorsDesc.Length > 0)
             {
                 <p id="@nameof(Model.SatisfactionSelection)-error" class="govcy-input-error-msg">
-                    <span class="govcy-visually-hidden-error">@Localizer["ERROR_ALERT"]</span>
-                    <span class="govcy-input-error-msg">@Html.ValidationMessage(nameof(Model.SatisfactionSelection))</span>
+                    <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
+                    <span class="govcy-input-error-msg">@Model.SatisfactionSelection</span>
                 </p>
             }
             @foreach (var feedback in Enumeration.GetAll<UserSatisfaction.Feedback>())
@@ -36,7 +36,7 @@
                     @Localizer[$"user-satisfaction.{feedback}_label"]
                     <input class="govcy-radio-input" type="radio" value="@feedback" name="@nameof(Model.SatisfactionSelection)"
                            id="@nameof(Model.SatisfactionSelection)"
-                    @(Model.ErrorsDesc.Length > 0 ? $" aria-describedby=\"{nameof(Model.SatisfactionSelection)}-error\"" : "" ) />
+                    @(Model.ErrorsDesc.Length > 0 ? $" aria-describedby={nameof(Model.SatisfactionSelection)}-error" : "" ) />
                     <span class="govcy-radio-checked" />
                 </label>
             }
@@ -45,7 +45,7 @@
             <label class="govcy-label" for="@nameof(Model.HowCouldWeImprove)">@Localizer["user-satisfaction.Sugestion_label"]</label>
             <span class="govcy-hint">@Localizer["user-satisfaction.Sugestion_hint"]</span>
             <textarea class="govcy-text-area" rows="5" name="@nameof(Model.HowCouldWeImprove)" id="@nameof(Model.HowCouldWeImprove)" maxlength="300"></textarea>
-            <span class="govcy-hint">You may enter up to 300 characters.</span>
+            <span class="govcy-hint">@Localizer["user-satisfaction.sugestion_length_check"]</span>
         </div>        
     </fieldset>
     <button id="btnUserSatisfactionSubmit" type="submit" class="govcy-btn-primary  govcy-mb-4" @(User.Identity?.IsAuthenticated == true ? $" onclick=\"window.history.go(-1); return false;\"" : "")>

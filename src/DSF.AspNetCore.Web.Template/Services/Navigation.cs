@@ -126,7 +126,7 @@ namespace DSF.AspNetCore.Web.Template.Services
                 {
                     SetSectionPages();
                     ListItem = _userSession!.GetNavLink()!.First();
-                    NextLink = "/" + ListItem.pages.First();
+                    NextLink = $"/{ListItem.pages.First()}";
                 }
             }
         }

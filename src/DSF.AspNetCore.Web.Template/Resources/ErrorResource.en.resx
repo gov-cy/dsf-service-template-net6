@@ -132,4 +132,7 @@
   <data name="set-email.require_check" xml:space="preserve">
     <value>Enter an email address in the correct format, for example name@example.com</value>
   </data>
+  <data name="user-satisfaction.sugestion_length_check" xml:space="preserve">
+    <value>You may enter up to 300 characters.</value>
+  </data>
 </root>

@@ -349,52 +349,55 @@
     <value>Τα στοιχεία επικοινωνίας σας</value>
     <comment>review-page</comment>
   </data>
-	<data name="user-satisfaction.SatisfactionList.required" xml:space="preserve">
+  <data name="user-satisfaction.SatisfactionList.required" xml:space="preserve">
     <value>Παρακαλώ επιλέξτε επίπεδο ικανοποίησης</value>
     <comment>user-satisfaction Checks</comment>
   </data>
-	<data name="user-satisfaction.Sugestion_label" xml:space="preserve">
+  <data name="user-satisfaction.Sugestion_label" xml:space="preserve">
     <value>Πώς θα μπορούσαμε να βελτιώσουμε την υπηρεσία;</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.Sugestion_hint" xml:space="preserve">
+  <data name="user-satisfaction.Sugestion_hint" xml:space="preserve">
     <value>Μην καταχωρήσετε στοιχεία όπως πιστωτική κάρτα ή αριθμό κοινωνικών ασφαλίσεων</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.SatisfactionList_label" xml:space="preserve">
+  <data name="user-satisfaction.SatisfactionList_label" xml:space="preserve">
     <value>Γενικά, πώς θα αξιολογούσατε την εμπειρία σας από την υπηρεσία που χρησιμοποιήσατε σήμερα;</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.VeryDissatisfactory_label" xml:space="preserve">
+  <data name="user-satisfaction.VeryDissatisfactory_label" xml:space="preserve">
     <value>Καθόλου ικανοποιητική</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.Dissatisfactory_label" xml:space="preserve">
+  <data name="user-satisfaction.Dissatisfactory_label" xml:space="preserve">
     <value>Μη ικανοποιητική</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.NeitherNor_label" xml:space="preserve">
+  <data name="user-satisfaction.NeitherNor_label" xml:space="preserve">
     <value>Ούτε ικανοποιητική ούτε μη ικανοποιητική</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.Satisfactory_label" xml:space="preserve">
+  <data name="user-satisfaction.Satisfactory_label" xml:space="preserve">
     <value>Ικανοποιητική</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.VerySatisfactory_label" xml:space="preserve">
+  <data name="user-satisfaction.VerySatisfactory_label" xml:space="preserve">
     <value>Πολύ ικανοποιητική</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction.title" xml:space="preserve">
+  <data name="user-satisfaction.title" xml:space="preserve">
     <value>Βοηθήστε μας να βελτιώσουμε την υπηρεσία {0}</value>
     <comment>user-satisfaction</comment>
   </data>
-	<data name="user-satisfaction-response.Success_title" xml:space="preserve">
+  <data name="user-satisfaction-response.Success_title" xml:space="preserve">
     <value>Η απάντησή σας έχει καταγραφεί </value>
     <comment>user-satisfaction-response</comment>
   </data>
-	<data name="user-satisfaction-response.Success_body" xml:space="preserve">
+  <data name="user-satisfaction-response.Success_body" xml:space="preserve">
     <value>Σας ευχαριστώ για τη βοήθειά σας</value>
     <comment>user-satisfaction-response</comment>
+  </data>
+  <data name="user-satisfaction-response.already_submit" xml:space="preserve">
+    <value>Η αξιολόγηση σας έχει ήδη καταγραφεί για αυτή την υπηρεσία.  </value>
   </data>
 </root>
