@@ -1,7 +1,7 @@
 ﻿namespace DSF.AspNetCore.Web.Template.Services.UserSatisfaction;
 
-using global::DSF.AspNetCore.Web.Template.Services.Model;
-using global::DSF.AspNetCore.Web.Template.Services.UserSatisfaction.Data;
+using DSF.AspNetCore.Web.Template.Services.Model;
+using DSF.AspNetCore.Web.Template.Services.UserSatisfaction.Data;
 using Newtonsoft.Json;
 
 public class UserSatisfactionService : IUserSatisfactionService
@@ -15,22 +15,17 @@ public class UserSatisfactionService : IUserSatisfactionService
         public UserSatisfactionStatus(int id, string name) : base(id, name) { }
     }
 
-    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IMyHttpClient _client;
-    private readonly IConfiguration _systemConfig;
     private readonly ILogger<Contact> _logger;
 
     public UserSatisfactionService
     (
-        IHttpContextAccessor httpContextAccessor,
         IMyHttpClient client,
-        IConfiguration config,
         ILogger<Contact> logger
     )
     {
-        _httpContextAccessor = httpContextAccessor;
         _client = client;
-        _systemConfig = config;
+        _logger = logger;
     }
 
     public BaseResponse<string> SubmitUserSatisfaction(UserSatisfactionServiceRequest request)
@@ -43,11 +38,8 @@ public class UserSatisfactionService : IUserSatisfactionService
             : "/api/v1/UserFeedback/feedback-record-authorized";
 
         var response = _client.MyHttpClientPostRequest("https://dsf-api-dev.dmrid.gov.cy/", apiUrl, "application/json",
-            jsonString, request.AccessToken, "DsfMlsiSisCbg");
-        response = _client.MyHttpClientPostRequest("https://dsf-api-dev.dmrid.gov.cy/", apiUrl, "application/json",
-    jsonString, request.AccessToken, "DsfMoiElectionsEcr");
-        response = _client.MyHttpClientPostRequest("https://dsf-api-dev.dmrid.gov.cy/", apiUrl, "application/json",
-    jsonString, request.AccessToken, "DsfMoiCrmdCdu");
+            jsonString, request.AccessToken);
+
         if (response != null)
         {
             try
@@ -55,14 +47,15 @@ public class UserSatisfactionService : IUserSatisfactionService
                 dataResponse = JsonConvert.DeserializeObject<BaseResponse<string>>(response);
                 if (dataResponse == null)
                 {
-                    _logger.LogError("Received Null response from " + apiUrl);
+                    _logger.LogError("Received Null response from {apiUrl}", apiUrl);
                     dataResponse = new BaseResponse<string>();
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError("Could not get valid response from " + apiUrl);
-                _logger.LogError("GetCitizenData - Exception" + ex.ToString());
+                var exString = ex.ToString();
+                _logger.LogError("Could not get valid response from {apiUrl}", apiUrl);
+                _logger.LogError("GetCitizenData - Exception {exString}", exString);
                 dataResponse = new BaseResponse<string>();
             }
 
@@ -73,10 +66,12 @@ public class UserSatisfactionService : IUserSatisfactionService
             }
             if (dataResponse.ErrorCode != 0)
             {
-                _logger.LogInformation("Could not get valid response from " + apiUrl);
-                var rsp = new BaseResponse<string>();
-                rsp.ErrorCode = dataResponse.ErrorCode;
-                rsp.ErrorMessage = dataResponse.ErrorMessage;
+                _logger.LogInformation("Could not get valid response from {apiUrl}", apiUrl);
+                var rsp = new BaseResponse<string>
+                {
+                    ErrorCode = dataResponse.ErrorCode,
+                    ErrorMessage = dataResponse.ErrorMessage
+                };
                 dataResponse = rsp;
             }
         }

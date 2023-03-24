@@ -6,8 +6,8 @@ namespace DSF.AspNetCore.Web.Template.Services
 {
     public interface IMyHttpClient
     {
-        string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken="", string serviceId = "DsfMock");
-        string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "", string serviceId = "DsfMock");
+        string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken="");
+        string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "");
     }
     public class MyHttpClient : IMyHttpClient
     {
@@ -21,7 +21,7 @@ namespace DSF.AspNetCore.Web.Template.Services
             _logger = logger;
         }
 
-        public string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken = "", string serviceId = "DsfMock")
+        public string MyHttpClientGetRequest(string baseUrl, string endpoint, string contentType, string accessToken = "")
         {
             var ret = string.Empty;
 
@@ -41,7 +41,7 @@ namespace DSF.AspNetCore.Web.Template.Services
 
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
                 //httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
-                httpClient.DefaultRequestHeaders.Add("service-id", serviceId);
+                httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
                 //httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["Ocp-Apim-Subscription-Key"]);
                 if (!string.IsNullOrEmpty(accessToken))
@@ -74,7 +74,7 @@ namespace DSF.AspNetCore.Web.Template.Services
             return ret!;
         }
 
-        public string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "", string serviceId = "DsfMock")
+        public string MyHttpClientPostRequest(string baseUrl, string endpoint, string contentType, string request, string accessToken = "")
         {
             var ret = string.Empty;
 
@@ -93,7 +93,7 @@ namespace DSF.AspNetCore.Web.Template.Services
 
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
                 //httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
-                httpClient.DefaultRequestHeaders.Add("service-id", serviceId);
+                httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
 
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
                 if (!string.IsNullOrEmpty(accessToken))
