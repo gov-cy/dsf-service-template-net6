@@ -1,6 +1,10 @@
 ﻿@page "/user-satisfaction/{review:bool?}"
+
 @model UserSatisfaction
+
 @using DSF.AspNetCore.Web.Template.Services.Model
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
 @{
     ViewBag.PreviousUrl = Model.BackLink;
     ViewData["Title"] = Localizer.GetPagesLocalizedHtml("user-satisfaction.title", Localizer["common.headers_title"]);
@@ -9,25 +13,31 @@
         Layout = "_Layout";
         ViewBag.PreviousUrl = Model.BackLink;
     }
+    var IsSatisfactionSelectionInValid = ModelState.GetFieldValidationState(nameof(Model.SatisfactionSelection)) == ModelValidationState.Invalid;
 }
+
 <div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["common.error_alert"]</h2>
     <p class="govcy-mb-0">
         @Html.Raw(Model.ErrorsDesc)
     </p>
 </div>
+
 <h1>@ViewData["Title"]</h1>
+
 <form method="post" novalidate class="govcy-form" id="userSatisfactionForm">
     <fieldset class="govcy-fieldset">
+
         <legend class="govcy-legend">
-            @Localizer["user-satisfaction.SatisfactionList_label"]
+            @Localizer["user-satisfaction.SatisfactionList_legend"]
         </legend>
-        <div class="@(Model.ErrorsDesc.Length > 0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            @if (Model.ErrorsDesc.Length > 0)
+
+        <div class="@(IsSatisfactionSelectionInValid ? "govcy-form-control govcy-form-control-error" : "govcy-form-control")">
+            @if (IsSatisfactionSelectionInValid)
             {
                 <p id="@nameof(Model.SatisfactionSelection)-error" class="govcy-input-error-msg">
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
-                    <span class="govcy-input-error-msg">@Model.SatisfactionSelection</span>
+                    <span class="govcy-input-error-msg">@Html.ValidationMessage(nameof(Model.SatisfactionSelection))</span>
                 </p>
             }
             @foreach (var feedback in Enumeration.GetAll<UserSatisfaction.Feedback>())
@@ -41,17 +51,20 @@
                 </label>
             }
         </div>
+
         <div class="govcy-form-control">
-            <label class="govcy-label" for="@nameof(Model.HowCouldWeImprove)">@Localizer["user-satisfaction.Sugestion_label"]</label>
-            <span class="govcy-hint">@Localizer["user-satisfaction.Sugestion_hint"]</span>
+            <label class="govcy-label" for="@nameof(Model.HowCouldWeImprove)">@Localizer["user-satisfaction.Suggestion_label"]</label>
+            <span class="govcy-hint">@Localizer["user-satisfaction.Suggestion_hint"]</span>
             <textarea class="govcy-text-area" rows="5" name="@nameof(Model.HowCouldWeImprove)" id="@nameof(Model.HowCouldWeImprove)" maxlength="300"></textarea>
-            <span class="govcy-hint">@Localizer["user-satisfaction.sugestion_length_check"]</span>
+            <span class="govcy-hint">@Localizer["user-satisfaction.Suggestion.length"]</span>
         </div>        
     </fieldset>
+
     <button id="btnUserSatisfactionSubmit" type="submit" class="govcy-btn-primary  govcy-mb-4" @(User.Identity?.IsAuthenticated == true ? $" onclick=\"window.history.go(-1); return false;\"" : "")>
         @Localizer["common.submit"]
     </button>
 </form>
+
 @section scripts {
     <script src="~/js/user-satisfaction.js" asp-append-version="true"></script>
 }

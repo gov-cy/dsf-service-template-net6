@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSF.Localization", "src\DSF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSF.Authentication", "src\DSF.Authentication\DSF.Authentication.csproj", "{17487BED-187E-4604-A905-CF3C557F4A51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dsf.Web.Captcha", "Dsf.Web.Captcha\Dsf.Web.Captcha.csproj", "{ADED7208-059C-4244-A04D-A5A23EFFBF11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{17487BED-187E-4604-A905-CF3C557F4A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17487BED-187E-4604-A905-CF3C557F4A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17487BED-187E-4604-A905-CF3C557F4A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADED7208-059C-4244-A04D-A5A23EFFBF11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADED7208-059C-4244-A04D-A5A23EFFBF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADED7208-059C-4244-A04D-A5A23EFFBF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADED7208-059C-4244-A04D-A5A23EFFBF11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -62,12 +62,16 @@ public class UserSatisfaction : PageModel
             return RedirectToPage(nameof(UserSatisfaction), null, new { fromPost = true }, "mainContainer");
         }
 
-        if (HttpContext.Session.GetObjectFromJson<bool?>(nameof(UserSatisfaction)) == false)
+        if (HttpContext.Session.GetObjectFromJson<bool?>(nameof(UserSatisfaction)) == true)
         {
             result.Errors.Add(new ValidationFailure()
             {
-                ErrorMessage = _localizer["user-satisfaction-response.already_submit"]
+                ErrorMessage = _localizer["user-satisfaction.Custom.exists"],
+                CustomState = new { },
+                PropertyName = null,
+                
             });
+            _userSession.SetUserValidationResults(result);
             return RedirectToPage(nameof(UserSatisfaction), null, new { fromPost = true }, "mainContainer");
         }
 
@@ -117,7 +121,7 @@ public class UserSatisfaction : PageModel
             // Copy the validation results into ModelState.
             // ASP.NET uses the ModelState collection to populate 
             // error messages in the View.
-            res.AddToModelState(this.ModelState, "SatisfactionSelection");
+            res.AddToModelState(this.ModelState);
             //Update Error messages on View
             ClearErrors();
             SetViewErrorMessages(res);
@@ -134,6 +138,7 @@ public class UserSatisfaction : PageModel
         DisplaySummary = "display:none";
         SatisfactionSelection = "";
         ErrorsDesc = "";
+        HttpContext.Session.SetObjectAsJson($"valresult", null);
     }
 
     private void SetViewErrorMessages(ValidationResult result)
@@ -143,13 +148,9 @@ public class UserSatisfaction : PageModel
             //First Enable Summary Display
             DisplaySummary = "display:block";
             //Then Build Summary Error
-            foreach (ValidationFailure Item in result.Errors)
+            foreach (ValidationFailure item in result.Errors)
             {
-                if (Item.PropertyName == nameof(SatisfactionSelection))
-                {
-                    ErrorsDesc += "<a href='#SatisfactionSelection'>" + Item.ErrorMessage + "</a>";
-                    SatisfactionSelection = Item.ErrorMessage;
-                }
+                ErrorsDesc += $"<a href='#{item.PropertyName}'>" + item.ErrorMessage + "</a>";   
             }
         }
 

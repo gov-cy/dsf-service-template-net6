@@ -353,15 +353,15 @@
     <value>Παρακαλώ επιλέξτε επίπεδο ικανοποίησης</value>
     <comment>user-satisfaction Checks</comment>
   </data>
-  <data name="user-satisfaction.Sugestion_label" xml:space="preserve">
+  <data name="user-satisfaction.Suggestion_label" xml:space="preserve">
     <value>Πώς θα μπορούσαμε να βελτιώσουμε την υπηρεσία;</value>
     <comment>user-satisfaction</comment>
   </data>
-  <data name="user-satisfaction.Sugestion_hint" xml:space="preserve">
+  <data name="user-satisfaction.Suggestion_hint" xml:space="preserve">
     <value>Μην καταχωρήσετε στοιχεία όπως πιστωτική κάρτα ή αριθμό κοινωνικών ασφαλίσεων</value>
     <comment>user-satisfaction</comment>
   </data>
-  <data name="user-satisfaction.SatisfactionList_label" xml:space="preserve">
+	<data name="user-satisfaction.SatisfactionList_legend" xml:space="preserve">
     <value>Γενικά, πώς θα αξιολογούσατε την εμπειρία σας από την υπηρεσία που χρησιμοποιήσατε σήμερα;</value>
     <comment>user-satisfaction</comment>
   </data>
@@ -397,7 +397,11 @@
     <value>Σας ευχαριστώ για τη βοήθειά σας</value>
     <comment>user-satisfaction-response</comment>
   </data>
-  <data name="user-satisfaction-response.already_submit" xml:space="preserve">
-    <value>Η αξιολόγηση σας έχει ήδη καταγραφεί για αυτή την υπηρεσία.  </value>
+  <data name="user-satisfaction.Custom.exists" xml:space="preserve">
+    <value>Έχετε ήδη υποβάλει αξιολόγηση.</value>
+  </data>
+	<data name="user-satisfaction.Suggestion.length" xml:space="preserve">
+    <value>Μπορείτε να δηλώσετε μέχρι 300 χαρακτήρες.</value>
+    <comment>user-satisfaction Checks</comment>
   </data>
 </root>
