@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-#EXPOSE 80
+# EXPOSE 80
 EXPOSE 443
 
 COPY src/DSF.AspNetCore.Web.Template/cert/ariadni-test.crt /usr/local/share/ca-certificates/ariadni-test.crt
@@ -20,25 +20,16 @@ USER 1000
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj .
-COPY src/DSF.Localization/DSF.Localization.csproj .
-COPY src/DSF.Authentication/DSF.Authentication.csproj .
-RUN dotnet restore "./DSF.AspNetCore.Web.Template.csproj"
-
-
-# See https://stackoverflow.com/questions/51533448/why-copy-package-json-precedes-copy
-# for why we copy just the csproj then the whole directory
-COPY src/DSF.AspNetCore.Web.Template .
-COPY src/DSF.Localization .
-COPY src/DSF.Authentication .
-RUN dotnet build DSF.AspNetCore.Web.Template.csproj -c Release -o /app/build
+COPY ["src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj", "src/DSF.AspNetCore.Web.Template/"]
+COPY ["src/DSF.Authentication/DSF.Authentication.csproj", "src/DSF.Authentication/"]
+COPY ["src/DSF.Resources/DSF.Localization.csproj", "src/DSF.Resources/"]
+RUN dotnet restore "src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj"
+COPY . .
+WORKDIR "/src/src/DSF.AspNetCore.Web.Template"
+RUN dotnet build "DSF.AspNetCore.Web.Template.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DSF.AspNetCore.Web.Template.csproj" -c Release -o /app/publish
-
-# Serve on port 8080, we cannot serve on port 80 with a custom user that is not root.
-ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080
+RUN dotnet publish "DSF.AspNetCore.Web.Template.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

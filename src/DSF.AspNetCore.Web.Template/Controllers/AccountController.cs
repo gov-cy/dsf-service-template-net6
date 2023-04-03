@@ -78,7 +78,7 @@ namespace DSF.AspNetCore.Web.Template.Controllers
             HttpContext.Session.Clear();
             var prop = new AuthenticationProperties()
             {
-                RedirectUri = "/NoValidProfile"
+                RedirectUri = "/no-valid-profile"
             };
             await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme, prop);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme, prop);

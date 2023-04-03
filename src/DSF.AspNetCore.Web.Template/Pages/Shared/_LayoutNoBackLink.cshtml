@@ -7,92 +7,90 @@
     {
         lang = "el";
     }
-    else 
+    else
     {
         lang = "en";
     }
-    //Matomo id is given by DSF Team, and it is used
-    //For Statistics. its a requirement for all eservices
-     var MatomoId = conf["MatomoID"].ToString(); 
 }
 <!DOCTYPE html>
 <html lang="@lang">
 <head>
-      <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Social -->
-        <meta name="robots" content="noindex, nofollow">    
-        <meta property="og:url" content="https://address-change-mock.staging.service.gov.cy/">
-        <meta property="og:type" content="website">
-        <meta property="og:image" content="/img/icons-512.png"/>
-        <meta property="og:site_name" content="GOV.CY">
-        <meta property="og:title" content="@ViewData["Title"] - @Localizer["common.headers_title"] – gov.cy">
-        <meta property="og:description" content="@Localizer["common.layout_meta_description"]">
-        <meta property="twitter:title" content="@ViewData["Title"] - @Localizer["common.headers_title"] – gov.cy">
-        <meta property="twitter:description" content="@Localizer["common.layout_meta_description"]">
-        <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://address-change-mock.staging.service.gov.cy/">
-        <meta property="twitter:image" content="/img/icons-512.png">
-        <!-- Theme --> 
-        <link rel="manifest" href="/manifest.json">
-        <meta name="theme-color" content="#31576F">
-        <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48x48.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144x144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/img/apple-touch-icon-120x120-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114x114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72x72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
-        
-        <title>@ViewData["Title"] - @Localizer["common.headers_title"] – gov.cy</title>
-        <meta name="description" content="@Localizer["common.layout_meta_description"]">
-        
-          <link href="~/css/main.min.css" rel="stylesheet" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Social -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:url" content="https://address-change-mock.staging.service.gov.cy/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/img/icons-512.png" />
+    <meta property="og:site_name" content="GOV.CY">
+    <meta property="og:title" content="@ViewData["Title"] - @Localizer["common.headers_title"] – gov.cy">
+    <meta property="og:description" content="@Localizer["common.layout_meta_description"]">
+    <meta property="twitter:title" content="@ViewData["Title"] - @Localizer["common.headers_title"] – gov.cy">
+    <meta property="twitter:description" content="@Localizer["common.layout_meta_description"]">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://address-change-mock.staging.service.gov.cy/">
+    <meta property="twitter:image" content="/img/icons-512.png">
+    <!-- Theme -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#31576F">
+    <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/img/apple-touch-icon-120x120-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
+
+    <title>@ViewData["Title"] - @Localizer["common.headers_title"] – gov.cy</title>
+    <meta name="description" content="@Localizer["common.layout_meta_description"]">
+
+    <link href="~/css/main.min.css" rel="stylesheet" />
 
 </head>
 <body>
-        @*Skip to content section*@
-       
-      <a href="#mainContainer" class="govcy-skip-link">@Localizer["common.main_content_link"]</a>
-       
-       @*Header and change language Mechanism*@
-       <div class="govcy-container-fluid govcy-p-0 govcy-m-0 govcy-position-relative">
-          <div class="govcy-container">
-             <div class="row">
-                 <header class="govcy-header govcy-bg-primary govcy-text-white govcy-bg-primary-right govcy-d-print-none">
-                     <a href="/" class="govcy-logo"> <img alt="govcy-logo"/></a>
-                     <form class="govcy-text-white govcy-bg-primary" > 
-                     <vc:culture-picker/>
-                     </form>
-                    <span class="govcy-service-name">@Localizer["common.headers_title"] <strong class="govcy-bg-blue govcy-text-white govcy-p-1"> MOCK</strong></span>    
+    @*Skip to content section*@
+    <a href="#mainContainer" class="govcy-skip-link">@Localizer["common.main_content_link"]</a>
+
+    @*Header and change language Mechanism*@
+    <div class="govcy-container-fluid govcy-p-0 govcy-m-0 govcy-position-relative">
+        <div class="govcy-container">
+            <div class="row">
+                <header class="govcy-header govcy-bg-primary govcy-text-white govcy-bg-primary-right govcy-d-print-none">
+                    <a href="/" class="govcy-logo"> <img alt="govcy-logo" /></a>
+                    <form class="govcy-text-white govcy-bg-primary">
+                        <vc:culture-picker />
+                    </form>
+                    <span class="govcy-service-name">@Localizer["common.headers_title"] <strong class="govcy-bg-blue govcy-text-white govcy-p-1"> MOCK</strong></span>
                 </header>
-             </div>
-         </div>
-     </div>
+            </div>
+        </div>
+    </div>
+
     @*Before main we have the login link and the back button*@
     <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
-     @if (User?.Identity?.IsAuthenticated==true)
-     {      
-        <div class="govcy-text-end" id="beforeMainContainerUsername">
-            <div class="govcy-text-end govcy-mb-4">
-                 @User.Claims.First(c => c.Type == "name").Value | <a href="/Account/LogOut" class="govcy-back-link">@Localizer["common.signout"]</a>
-		    </div>
-        </div>
-        } 
-   </section>
-   @*Main Body*@
-   <main class="govcy-container" id="mainContainer">
+        @if (User?.Identity?.IsAuthenticated == true)
+        {
+            <div class="govcy-text-end" id="beforeMainContainerUsername">
+                <div class="govcy-text-end govcy-mb-4">
+                    @User.Claims.First(c => c.Type == "name").Value | <a href="/Account/LogOut" class="govcy-back-link">@Localizer["common.signout"]</a>
+                </div>
+            </div>
+        }
+    </section>
+
+    @*Main Body*@
+    <main class="govcy-container" id="mainContainer">
         <div class="govcy-col-8">
             @RenderBody()
         </div>
     </main>
-    
-    @*//Footer section*@
+
+    @*Footer section*@
     <div class="govcy-container-fluid govcy-br-top-8 govcy-br-top-primary govcy-p-3 govcy-bg-light govcy-d-print-none">
         <div class="govcy-container">
-            <div class="row">   
+            <div class="row">
                 <footer class="govcy-footer">
                     <span class="govcy-d-inline-block govcy-valign-top govcy-pb-2"><img alt="govcy-logo" /></span>
                         <ul class="govcy-d-inline-block  govcy-m-0 govcy-pt-1 govcy-pl-1 govcy-pl-sm-3 govcy-efs-medium">
@@ -106,8 +104,10 @@
             </div>
         </div>
     </div>
+  
     @*Script Registration*@
     <script src="~/js/site.js" asp-append-version="true"></script>
+
      <!-- Javascripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> 
     

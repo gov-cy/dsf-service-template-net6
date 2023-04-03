@@ -117,19 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="email-selection.no_results_check" xml:space="preserve">
-    <value>No email found from our records</value>
-  </data>
-  <data name="email-selection.require_check" xml:space="preserve">
+  <data name="email-selection.custom.required" xml:space="preserve">
     <value>Choose if you'd like to use your CY Login email address or a different one</value>
   </data>
-  <data name="mobile-selection.no_results_check" xml:space="preserve">
-    <value>No mobile phone number found from our records</value>
+  <data name="mobile-selection.custom.required" xml:space="preserve">
+    <value>Choose if you'd like to use this mobile phone number or a different one</value>
   </data>
-  <data name="set-email.exist_check" xml:space="preserve">
-    <value>This email already exists in our records</value>
+  <data name="set-email.email.required" xml:space="preserve">
+    <value>Enter an email address</value>
   </data>
-  <data name="set-email.require_check" xml:space="preserve">
+  <data name="set-mobile.mobile.format" xml:space="preserve">
+    <value>Enter your mobile number in the correct format, for example 90000000 for Cyprus</value>
+  </data>
+  <data name="set-mobile.mobile.required" xml:space="preserve">
+    <value>Enter your mobile number</value>
+  </data>
+  <data name="email-selection.custom.required" xml:space="preserve">
+    <value>Choose if you'd like to use your CY Login email address or a different one</value>
+    <comment>email-selection Checks</comment>
+  </data>
+  <data name="mobile-selection.custom.required" xml:space="preserve">
+    <value>Choose if you'd like to use your CY Login mobile phone number or a different one</value>
+    <comment>mobile-selection Checks</comment>
+  </data>
+  <data name="set-email.email.required" xml:space="preserve">
     <value>Enter an email address in the correct format, for example name@example.com</value>
+    <comment>set-email Checks</comment>
+  </data>
+  <data name="set-mobile.mobile.required" xml:space="preserve">
+    <value>Enter your mobile number</value>
+    <comment>set-mobile Checks</comment>
+  </data>
+  <data name="set-mobile.mobile.format" xml:space="preserve">
+    <value>Enter your mobile number correctly, for example 90000000 for Cyprus</value>
+    <comment>set-mobile Checks</comment>
+  </data>
+  <data name="set-email.email.format" xml:space="preserve">
+    <value>Enter an email address in the correct format, for example name@example.com</value>
+    <comment>set-email Checks</comment>
   </data>
 </root>

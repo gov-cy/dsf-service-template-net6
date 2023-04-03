@@ -20,15 +20,15 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
         {
             _checker=commonApis;
             _Localizer = localizer;
-            mobileNoSelectionMsg = _Localizer["mobile-selection.require_check"];
-            mobReq = _Localizer["set-mobile.require_check"];
-            mobValid = _Localizer["set-mobile.format_check"];
+            mobileNoSelectionMsg = _Localizer["mobile-selection.custom.required"];
+            mobReq = _Localizer["set-mobile.mobile.required"];
+            mobValid = _Localizer["set-mobile.mobile.format"];
             When(p => p.ValidationMode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.UseFromApi)
                 .Equal(true)
                 .When(x => x.UseOther.Equals(false))
-                .WithErrorCode("mobile-selection.require_check")
+                .WithErrorCode("mobile-selection.custom.required")
                 .WithMessage(mobileNoSelectionMsg);
             });
             //Edit Mobile
@@ -37,13 +37,13 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
                 RuleFor(p => p.Mobile)
                  .Cascade(CascadeMode.Stop)
                  .NotEmpty()
-                 .WithErrorCode("set-mobile.require_check") //can be used for internal changes i.e. Unit test 
+                 .WithErrorCode("set-mobile.mobile.required") //can be used for internal changes i.e. Unit test 
                  .WithMessage(mobReq)
                  .Matches("[0-9]{8,15}$")
-                 .WithErrorCode("set-mobile.format_check")
+                 .WithErrorCode("set-mobile.mobile.format")
                  .WithMessage(mobValid)
                  .Must(_checker.IsMobileValid)
-                 .WithErrorCode("set-mobile.format_check")
+                 .WithErrorCode("set-mobile.mobile.format")
                  .WithMessage(mobValid); 
             });
         }
