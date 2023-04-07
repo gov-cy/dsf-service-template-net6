@@ -35,3 +35,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DSF.AspNetCore.Web.Template.dll"]
+
+#END1
