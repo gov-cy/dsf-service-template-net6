@@ -3,6 +3,7 @@
 @{
     ViewBag.PreviousUrl=Model.BackLink;
     ViewData["Title"] = Localizer["cookie-policy.title"];
+    ViewData["Index"] = "Show";
 }
 <h1>@Localizer["cookie-policy.title"]</h1>
 @Localizer.GetPagesLocalizedHtml("cookie-policy.instructions")
