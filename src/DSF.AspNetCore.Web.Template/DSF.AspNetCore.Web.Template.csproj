@@ -24,7 +24,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DSF.Authentication\DSF.Authentication.csproj" />
-	  <ProjectReference Include="..\DSF.Resources\DSF.Localization.csproj" />
+	  <ProjectReference Include="..\DSF.Localization\DSF.Localization.csproj" />
 	</ItemGroup>
 
 </Project>
