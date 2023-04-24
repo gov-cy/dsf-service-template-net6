@@ -22,7 +22,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj", "src/DSF.AspNetCore.Web.Template/"]
 COPY ["src/DSF.Authentication/DSF.Authentication.csproj", "src/DSF.Authentication/"]
-COPY ["src/DSF.Resources/DSF.Localization.csproj", "src/DSF.Resources/"]
+COPY ["src/DSF.Localization/DSF.Localization.csproj", "src/DSF.Localization/"]
 RUN dotnet restore "src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj"
 COPY . .
 WORKDIR "/src/src/DSF.AspNetCore.Web.Template"
