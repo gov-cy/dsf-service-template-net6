@@ -7,8 +7,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>DSF.AspNetCore.Web.Template</RootNamespace>
     <UserSecretsId>f0b64a16-dc7f-4fdf-bc0f-a58921987c3c</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
+	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<DockerfileContext>.</DockerfileContext>
+	<DockerfileFile>../../Dockerfile</DockerfileFile>
+	      
   </PropertyGroup>
 	
   <ItemGroup>
