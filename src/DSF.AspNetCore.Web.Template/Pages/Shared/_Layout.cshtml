@@ -12,6 +12,7 @@
     {
         lang = "en";
     }
+    string index = ViewData["Index"].ToString() ?? "";
 }
 <!DOCTYPE html>
 
@@ -21,7 +22,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Social -->
-    <meta name="robots" content="noindex, nofollow">
+    @if (index == "Show")
+    {
+        <meta name="robots" content="noindex, nofollow">
+    }
+    
     <meta property="og:url" content="https://address-change-mock.staging.service.gov.cy/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="/img/icons-512.png" />
@@ -120,8 +125,6 @@
  
     @*Script Registration*@
      <script src="~/lib/jquery/dist/jquery.min.js"></script>
-          
-
-    @RenderSection("Scripts", required: false)
+     @RenderSection("Scripts", required: false)
 </body>
 </html>
