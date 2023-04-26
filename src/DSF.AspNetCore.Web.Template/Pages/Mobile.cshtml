@@ -6,15 +6,15 @@
     ViewData["Title"] = Localizer["mobile-selection.title"];
 }
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
-    <h2>@Localizer["ErrorMessage-General"]</h2>
+    <h2>@Localizer["common.error_message"]</h2>
     <p class="govcy-mb-0">
         @Html.Raw(Model.ErrorsDesc)
     </p>
 </div>
-<h1>@Localizer["mobile-selection.title"]</h1>
+
 <form method="post" novalidate class="govcy-form">
     <fieldset class="govcy-fieldset">
-        <legend class="govcy-legend">@Localizer["mobile-selection.legend"]</legend>
+        <legend class="govcy-legend"><h1>@Localizer["mobile-selection.title"]</h1></legend>
         <div class="@((Model.MobileSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
             @if (Model.MobileSelection.Length > 0)
             {
@@ -25,10 +25,10 @@
                 <strong>@Model.MobileSel.Mobile.FormatMobile()</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbMobile" name="crbMobile" @(Model.CrbMobile == "1" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
-                <span class="govcy-hint govcy-mt-2">@Localizer["mobile-selection.p1"]</span>
+                <span class="govcy-hint govcy-mt-2">@Localizer["mobile-selection.yes_hint"]</span>
             </label>
             <label class="govcy-radio">
-                @Localizer["mobile-selection.no"]
+                @Localizer["mobile-selection.no_label"]
                 <input class="govcy-radio-input" type="radio" value="2" name="crbMobile" @(Model.CrbMobile == "2" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
             </label>

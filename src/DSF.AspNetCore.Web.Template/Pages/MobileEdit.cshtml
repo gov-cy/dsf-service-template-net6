@@ -11,12 +11,11 @@
         @Html.Raw(Model.ErrorsDesc)
     </p>
 </div>
-<h1>@Localizer["set-mobile.title"]</h1>
+
 <form class="govcy-form" novalidate method="post">
-     <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
-            <label class="govcy-label" for="mobile">@Localizer["set-mobile.mobile_label"]</label>
-            <span class="govcy-hint">@Localizer["set-mobile.mobile_hint"]</span>
-           	@if (Model.MobileErrorClass.Length > 0)
+        <div class="@(Model.MobileErrorClass.Length>0 ? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
+           <h1><label class="govcy-label" for="mobile">@Localizer["set-mobile.title"]</label></h1>
+            @if (Model.MobileErrorClass.Length > 0)
             {
                  <p id="tel-error" class="govcy-input-error-msg">
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
@@ -27,7 +26,7 @@
              value="@Model.Mobile"
               maxlength="20"
               autocomplete="tel"
-             class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_20 govcy-text-input-error": "govcy-text-input govcy-text-input-char_20")"
+             class="govcy-text-input govcy-text-input-char_20 govcy-text-input-error"
              aria-describedby="tel-error">
         }
         else
@@ -37,7 +36,7 @@
              value="@Model.Mobile"
               maxlength="20"
               autocomplete="tel"
-             class="@(Model.MobileErrorClass.Length >0 ? "govcy-text-input govcy-text-input-char_20 govcy-text-input-error": "govcy-text-input govcy-text-input-char_20")">
+             class="govcy-text-input govcy-text-input-char_20">
         } 
      </div>
      <button type="submit" class="govcy-btn-primary">@Localizer["common.button_next"]</button>

@@ -15,12 +15,10 @@
     </p>
 </div>
 
-<h1>@Localizer["email-selection.title"]</h1>
-
 <form method="post" novalidate class="govcy-form">
 
     <fieldset class="govcy-fieldset">
-        <legend class="govcy-legend">@Localizer["email-selection.legend"]</legend>
+        <legend class="govcy-legend"><h1>@Localizer["email-selection.title"]</h1></legend>
 
         <div class="@((Model.EmailSelection.Length>0)? "govcy-form-control  govcy-form-control-error" : "govcy-form-control")">
             @if (Model.EmailSelection.Length > 0)
@@ -32,10 +30,10 @@
                 <strong>@Model.EmailSel.Email</strong>
                 <input class="govcy-radio-input" type="radio" value="1" id="crbEmail" name="crbEmail" @(Model.CrbEmail == "1" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
-                <span class="govcy-hint govcy-mt-2">@Localizer["email-selection.p1"]</span>
+                <span class="govcy-hint govcy-mt-2">@Localizer["email-selection.yes_hint"]</span>
             </label>
             <label class="govcy-radio">
-                @Localizer["email-selection.no"]
+                @Localizer["email-selection.no_label"]
                 <input class="govcy-radio-input" type="radio" value="2" name="crbEmail" @(Model.CrbEmail == "2" ? "checked" : "")>
                 <span class="govcy-radio-checked"></span>
             </label>

@@ -117,31 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="email-selection.no_results_check" xml:space="preserve">
-    <value>Δεν βρέθηκε το email από τα αρχεία μας</value>
+  <data name="email-selection.custom.required" xml:space="preserve">
+    <value>Επιλέξετε αν θέλετε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
   </data>
-  <data name="email-selection.require_check" xml:space="preserve">
+  <data name="mobile-selection.custom.required" xml:space="preserve">
+    <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου, ή κάποιος άλλος</value>
+  </data>
+  <data name="set-email.email.required" xml:space="preserve">
+    <value>Εισαγάγετε email</value>
+  </data>
+  <data name="set-mobile.mobile.format" xml:space="preserve">
+    <value>Εισαγάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
+  </data>
+  <data name="set-mobile.mobile.required" xml:space="preserve">
+    <value>Εισαγάγετε τον αριθμό κινητού τηλεφώνου σας</value>
+  </data>
+  <data name="email-selection.custom.required" xml:space="preserve">
     <value>Επιλέξετε αν επιθυμείτε να χρησιμοποιηθεί το email από το CY Login σας, ή κάποιο άλλο</value>
+    <comment>email-selection Checks</comment>
   </data>
-  <data name="mobile-selection.no_results_check" xml:space="preserve">
-    <value>Δεν βρέθηκε ο αριθμός κινητού τηλεφώνου από τα αρχεία μας</value>
-  </data>
-  <data name="mobile-selection.require_check" xml:space="preserve">
+  <data name="mobile-selection.custom.required" xml:space="preserve">
     <value>Επιλέξτε αν θέλετε να χρησιμοποιηθεί αυτός ο αριθμός κινητού τηλεφώνου</value>
+    <comment>mobile-selection Checks</comment>
   </data>
-  <data name="set-email.exist_check" xml:space="preserve">
-    <value>Αυτό το email υπάρχει ήδη στα αρχεία μας</value>
-  </data>
-  <data name="set-email.require_check" xml:space="preserve">
+  <data name="set-email.email.required" xml:space="preserve">
     <value>Εισάγετε email στη σωστή μορφή, για παράδειγμα name@example.com</value>
+    <comment>set-email Checks</comment>
   </data>
-  <data name="set-mobile.exist_check" xml:space="preserve">
-    <value>Αυτός ο αριθμός κινητού υπάρχει ήδη στα αρχεία μας</value>
-  </data>
-  <data name="set-mobile.format_check" xml:space="preserve">
-    <value>Εισάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
-  </data>
-  <data name="set-mobile.require_check" xml:space="preserve">
+  <data name="set-mobile.mobile.required" xml:space="preserve">
     <value>Εισάγετε τον αριθμό κινητού τηλεφώνου σας</value>
+    <comment>set-mobile Checks</comment>
+  </data>
+  <data name="set-mobile.mobile.format" xml:space="preserve">
+    <value>Εισάγετε αριθμό κινητού τηλεφώνου στη σωστή μορφή, για παράδειγμα 90000000 για Κύπρο</value>
+    <comment>set-mobile Checks</comment>
+  </data>
+  <data name="set-email.email.format" xml:space="preserve">
+    <value>Εισαγάγετε email στη σωστή μορφή, για παράδειγμα name@example.com</value>
+    <comment>set-email Checks</comment>
   </data>
 </root>

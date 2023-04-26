@@ -9,6 +9,7 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
     {
         private readonly string emailNoSelectionMsg = string.Empty;
         private readonly string emailMessage = string.Empty;
+        private readonly string emailMessageFormat = string.Empty;
 
         private readonly ICommonApis _checker;
         private readonly IResourceViewLocalizer _Localizer;
@@ -17,15 +18,15 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
         {
             _checker = checker;
             _Localizer = localizer;
-            emailNoSelectionMsg = _Localizer["email-selection.require_check"];
-            emailMessage = _Localizer["set-email.require_check"];
-
+            emailNoSelectionMsg = _Localizer["email-selection.custom.required"];
+            emailMessage = _Localizer["set-email.email.required"];
+            emailMessageFormat = _Localizer["set-email.email.format"];
             When(p => p.ValidationMode.Equals(ValidationMode.Select), () =>
             {
                 RuleFor(x => x.UseFromApi)
                     .Equal(true)
                     .When(x => x.UseOther.Equals(false))
-                    .WithErrorCode("email-selection.require_check")
+                    .WithErrorCode("email-selection.custom.required")
                     .WithMessage(emailNoSelectionMsg);
             });
             //Edit page
@@ -34,11 +35,11 @@ namespace DSF.AspNetCore.Web.Template.Data.Validations
                 RuleFor(p => p.Email)
                     .Cascade(CascadeMode.Stop)
                     .NotEmpty()
-                    .WithErrorCode("set-email.require_check")
+                    .WithErrorCode("set-email.email.required")
                     .WithMessage(emailMessage)
                     .Must(_checker.IsEmailValid)
-                    .WithErrorCode("set-email.require_check")
-                    .WithMessage(emailMessage);
+                    .WithErrorCode("set-email.email.format")
+                    .WithMessage(emailMessageFormat);
             });
         }
     }
