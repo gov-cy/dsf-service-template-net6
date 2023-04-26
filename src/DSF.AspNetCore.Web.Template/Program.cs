@@ -4,16 +4,13 @@ using DSF.AspNetCore.Web.Template.Extensions;
 using DSF.AspNetCore.Web.Template.Middlewares;
 using DSF.AspNetCore.Web.Template.Resources;
 using DSF.AspNetCore.Web.Template.Services;
-using DSF.MOI.CitizenData.Web.Configuration;
+using DSF.AspNetCore.Web.Template.Services.UserSatisfaction;
 using DSF.Localization;
+using DSF.MOI.CitizenData.Web.Configuration;
 using FluentValidation;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
-using DSF.AspNetCore.Web.Template.Services.UserSatisfaction;
-using DSF.AspNetCore.Web.Template.Pages;
 
 IConfiguration Configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -128,8 +125,8 @@ builder.Services.AddScoped<IUserSatisfactionService, UserSatisfactionService>();
 var authConfiguration = Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>();
 //open id authentication settings
 builder.Services.AddCyLoginAuthentication(authConfiguration);
+
 // Added for session state
-builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
  {
      options.Cookie.Name = "AppDataSessionCookie";
