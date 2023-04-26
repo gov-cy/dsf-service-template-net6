@@ -99,7 +99,11 @@
                             <li><a href="/privacy-statement">@Localizer["common.footer_privacy"]</a></li>
                             <li><a href="/cookie-policy">@Localizer["common.footer_cookie"]</a></li>
                             <li><a href="/accessibility-statement">@Localizer["common.footer_accesibility"]</a></li>
-                            <li><a href="/user-satisfaction">@Localizer["common.footer_feedback"]</a></li>
+                            @if (User?.Identity?.IsAuthenticated == true)
+                            {
+                            var currentPageUri = new Uri($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}");
+                            <li><a href="/user-satisfaction?pageSource=@currentPageUri.PathAndQuery">@Localizer["common.footer_feedback"]</a></li>
+                            }
                             <li class="govcy-d-block govcy-text-dark">© @Localizer["common.footer_copyright"]</li>
                         </ul>
                 </footer>

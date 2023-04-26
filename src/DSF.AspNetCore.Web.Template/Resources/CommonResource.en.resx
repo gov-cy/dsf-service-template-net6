@@ -168,4 +168,8 @@
   <data name="common.url_paper_form" xml:space="preserve">
     <value>http://www.elections.gov.cy/moi/elections/elections.nsf/elections07c_el/elections07c_el?OpenDocument</value>
   </data>
+  <data name="common.button_continue_application" xml:space="preserve">
+    <value>Continue application</value>
+    <comment>common button continue application</comment>
+  </data>
 </root>

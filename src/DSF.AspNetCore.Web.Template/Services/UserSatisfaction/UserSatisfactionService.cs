@@ -17,15 +17,18 @@ public class UserSatisfactionService : IUserSatisfactionService
 
     private readonly IMyHttpClient _client;
     private readonly ILogger<Contact> _logger;
+    private readonly IConfiguration _configuration;
 
     public UserSatisfactionService
     (
         IMyHttpClient client,
-        ILogger<Contact> logger
+        ILogger<Contact> logger,
+        IConfiguration configuration
     )
     {
         _client = client;
         _logger = logger;
+        _configuration = configuration;
     }
 
     public BaseResponse<string> SubmitUserSatisfaction(UserSatisfactionServiceRequest request)
@@ -37,7 +40,7 @@ public class UserSatisfactionService : IUserSatisfactionService
             ? "/api/v1/UserFeedback/feedback-record"
             : "/api/v1/UserFeedback/feedback-record-authorized";
 
-        var response = _client.MyHttpClientPostRequest("https://dsf-api-dev.dmrid.gov.cy/", apiUrl, "application/json",
+        var response = _client.MyHttpClientPostRequest(_configuration["ApiUrl"], apiUrl, "application/json",
             jsonString, request.AccessToken);
 
         if (response != null)

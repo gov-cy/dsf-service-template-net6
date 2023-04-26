@@ -62,6 +62,8 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizePage("/MobileEdit");
     options.Conventions.AuthorizePage("/AddressEdit");
     options.Conventions.AuthorizePage("/ReviewPage");
+    options.Conventions.AuthorizePage("/UserSatisfaction");
+    options.Conventions.AuthorizePage("/UserSatisfactionResponse");
     options.Conventions.AllowAnonymousToPage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
@@ -92,7 +94,7 @@ builder.Services.AddScoped<IValidator<MobileSection>, MobileValidator>(sp =>
     var Checker = sp.GetRequiredService<ICommonApis>();
     return new MobileValidator(LocMain, Checker);
 });
-builder.Services.AddScoped<IValidator<UserSatisfaction>, UserSatisfactionValidation>(sp =>
+builder.Services.AddScoped<IValidator<UserSatisfactionViewModel>, UserSatisfactionValidation>(sp =>
 {
     var LocMain = sp.GetRequiredService<IResourceViewLocalizer>();
     return new UserSatisfactionValidation(LocMain);
@@ -127,7 +129,8 @@ var authConfiguration = Configuration.GetSection("Dsf.Authentication").Get<CyLog
 //open id authentication settings
 builder.Services.AddCyLoginAuthentication(authConfiguration);
 // Added for session state
- builder.Services.AddSession(options =>
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
  {
      options.Cookie.Name = "AppDataSessionCookie";
      options.Cookie.HttpOnly = true;
@@ -137,21 +140,20 @@ builder.Services.AddCyLoginAuthentication(authConfiguration);
  });
  var app = builder.Build();
 
-app.UseExceptionHandler("/server-error");
-
 // Configure the HTTP request pipeline middlewares.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
 else
-{    
+{
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/server-error");
     app.UseHsts();
 }
-    // This is needed if running behind a reverse proxy (K8S Ingres?)
-    //https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
-    var options = new ForwardedHeadersOptions
+// This is needed if running behind a reverse proxy (K8S Ingres?)
+//https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
+var options = new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 };
@@ -169,7 +171,6 @@ app.Use(async (ctx, next) =>
 
     await next();
 });
-app.UseSession();
 
 app.UseCors();
 
@@ -184,6 +185,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 app.UseStatusCodePagesWithRedirects("/no-page-found");

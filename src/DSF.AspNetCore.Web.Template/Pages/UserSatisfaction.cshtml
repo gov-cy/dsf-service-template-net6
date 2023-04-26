@@ -13,7 +13,15 @@
         Layout = "_Layout";
         ViewBag.PreviousUrl = Model.BackLink;
     }
-    var IsSatisfactionSelectionInValid = ModelState.GetFieldValidationState(nameof(Model.SatisfactionSelection)) == ModelValidationState.Invalid;
+    var isSatisfactionSelectionInValid = ModelState.GetFieldValidationState(nameof(Model.SatisfactionSelection)) == ModelValidationState.Invalid;
+    var satisfactionSelectionCssClass = isSatisfactionSelectionInValid
+    ? "govcy-form-control govcy-form-control-error"
+    : "govcy-form-control";
+
+    var isHowCouldWeImproveInValid = ModelState.GetFieldValidationState(nameof(Model.HowCouldWeImprove)) == ModelValidationState.Invalid;
+    var howCouldWeImproveInValidCssClass = isHowCouldWeImproveInValid
+        ? "govcy-form-control govcy-form-control-error"
+        : "govcy-form-control";
 }
 
 <div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
@@ -32,8 +40,8 @@
             @Localizer["user-satisfaction.SatisfactionList_legend"]
         </legend>
 
-        <div class="@(IsSatisfactionSelectionInValid ? "govcy-form-control govcy-form-control-error" : "govcy-form-control")">
-            @if (IsSatisfactionSelectionInValid)
+        <div class="@satisfactionSelectionCssClass">
+            @if (isSatisfactionSelectionInValid)
             {
                 <p id="@nameof(Model.SatisfactionSelection)-error" class="govcy-input-error-msg">
                     <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
@@ -52,12 +60,22 @@
             }
         </div>
 
-        <div class="govcy-form-control">
+        <div class="@howCouldWeImproveInValidCssClass">
+            @if (isHowCouldWeImproveInValid)
+            {
+                <p id="@nameof(Model.HowCouldWeImprove)-error" class="govcy-input-error-msg">
+                    <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
+                    <span class="govcy-input-error-msg">@Html.ValidationMessage(nameof(Model.HowCouldWeImprove))</span>
+                </p>
+            }
             <label class="govcy-label" for="@nameof(Model.HowCouldWeImprove)">@Localizer["user-satisfaction.Suggestion_label"]</label>
             <span class="govcy-hint">@Localizer["user-satisfaction.Suggestion_hint"]</span>
-            <textarea class="govcy-text-area" rows="5" name="@nameof(Model.HowCouldWeImprove)" id="@nameof(Model.HowCouldWeImprove)" maxlength="300"></textarea>
+
+            <textarea id="@nameof(Model.HowCouldWeImprove)" class="govcy-text-area" rows="5" name="@nameof(Model.HowCouldWeImprove)"
+                      value="@Model.HowCouldWeImprove" maxlength="301"
+            @(isHowCouldWeImproveInValid ? $" aria-describedby={nameof(Model.HowCouldWeImprove)}-error" : "")></textarea>
             <span class="govcy-hint">@Localizer["user-satisfaction.Suggestion.length"]</span>
-        </div>        
+        </div>
     </fieldset>
 
     <button id="btnUserSatisfactionSubmit" type="submit" class="govcy-btn-primary  govcy-mb-4" @(User.Identity?.IsAuthenticated == true ? $" onclick=\"window.history.go(-1); return false;\"" : "")>

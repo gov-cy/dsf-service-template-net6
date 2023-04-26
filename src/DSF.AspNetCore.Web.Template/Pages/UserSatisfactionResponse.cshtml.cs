@@ -15,25 +15,20 @@ public class UserSatisfactionResponse : PageModel
         _navigation = navigation;
     }
 
+    [FromQuery(Name = "pageSource")]
+    [BindProperty(SupportsGet = true)]
+    public string PageSource { get; set; } = string.Empty;
+
     public IActionResult OnGet()
     {
-        // if not coming from UserSatisfaction form
-        if ((User.Identity?.IsAuthenticated == false && !Request.Query.ContainsKey("submit"))
-            || (User.Identity?.IsAuthenticated == true
-            && HttpContext.Session.GetObjectFromJson<bool?>(nameof(UserSatisfaction)) == null))
+        if (HttpContext.Session.GetObjectFromJson<bool?>("UserSatisfactionSubmitted") == null)
         {
-            return RedirectToPage(nameof(NoPageFoundModel), new { from = "/no-page-found" });
+            return RedirectToPage(nameof(UserSatisfaction));
         }
-        return Page();
-    }
 
-    public IActionResult OnPost(bool review)
-    {
-        if (User.Identity?.IsAuthenticated == true)
-        {
-            return RedirectToPage(review ? "/ReviewPage" : _navigation.GetBackLink("/user-satisfaction", review));
-        }
-        return RedirectToPage("/");
+        HttpContext.Session.Remove("UserSatisfactionSubmitted");
+
+        return Page();
     }
 }
 

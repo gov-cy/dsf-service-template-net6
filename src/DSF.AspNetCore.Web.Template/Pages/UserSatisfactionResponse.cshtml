@@ -2,7 +2,7 @@
 @model DSF.MOI.CitizenData.Web.Pages.UserSatisfactionResponse
 @{
     Layout = "_LayoutNoBackLink";
-    ViewData["Title"] = Localizer["user-satisfaction-response.title"];
+    ViewData["Title"] = Localizer.GetPagesLocalizedHtml("user-satisfaction.title", Localizer["common.headers_title"]);
 }
 
 <div class="govcy-mb-4">
@@ -13,8 +13,6 @@
     </div>
     @Localizer.GetPagesLocalizedHtml("user-satisfaction-response.Success_body");
 
-    <form method="post" novalidate class="govcy-form">
-        <button type="submit" class="govcy-btn-primary  govcy-mb-4">@Localizer["common.button_next"]</button>
-    </form>
+    <a href="@Model.PageSource">@Localizer["common.button_continue_application"]</a>
 
 </div>

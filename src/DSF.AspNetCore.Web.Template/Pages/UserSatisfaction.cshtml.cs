@@ -1,5 +1,6 @@
 ﻿namespace DSF.AspNetCore.Web.Template.Pages;
 
+using DSF.AspNetCore.Web.Template.Data.Models;
 using DSF.AspNetCore.Web.Template.Extensions;
 using DSF.AspNetCore.Web.Template.Services;
 using DSF.AspNetCore.Web.Template.Services.Model;
@@ -22,20 +23,21 @@ public class UserSatisfaction : PageModel
     public string BackLink { get; set; } = string.Empty;
 
     [BindProperty]
-    //Store the email selection Error
     public string SatisfactionSelection { get; set; } = string.Empty;
 
     [BindProperty]
-    //Store the email selection Error
     public string? HowCouldWeImprove { get; set; } = string.Empty;
+
+    [FromQuery(Name = "pageSource")]
+    public string PageSource { get; set; } = string.Empty;
 
     private readonly IUserSatisfactionService _userSatisfactionService;
     private readonly IResourceViewLocalizer _localizer;
     private readonly INavigation _navigation;
     private readonly IUserSession _userSession;
-    private readonly IValidator<UserSatisfaction> _validator;
+    private readonly IValidator<UserSatisfactionViewModel> _validator;
 
-    public UserSatisfaction(INavigation navigation, IUserSession userSession, IUserSatisfactionService userSatisfactionService, IResourceViewLocalizer localizer, IValidator<UserSatisfaction> validator)
+    public UserSatisfaction(INavigation navigation, IUserSession userSession, IUserSatisfactionService userSatisfactionService, IResourceViewLocalizer localizer, IValidator<UserSatisfactionViewModel> validator)
     {
         _navigation = navigation;
         _userSession = userSession;
@@ -47,56 +49,69 @@ public class UserSatisfaction : PageModel
     public IActionResult OnGet(bool review, bool fromPost)
     {
         BackLink = _navigation.GetBackLink("/user-satisfaction", review);
-        ShowErrors(fromPost);
+
+        bool showErrors = fromPost;
+        if (!fromPost && HttpContext.Session.GetObjectFromJson<bool?>("UserSatisfactionAlreadySubmitted") == true)
+        {
+            var valresult = new ValidationResult();
+            valresult.Errors.Add(new ValidationFailure()
+            {
+                ErrorMessage = _localizer["user-satisfaction.Custom.exists"],
+                PropertyName = null
+            });
+            HttpContext.Session.SetObjectAsJson("valresult", valresult);
+            showErrors = true;
+        }
+
+        // load previously set form values
+        var userSatisfactionSession = HttpContext.Session.GetObjectFromJson<UserSatisfactionViewModel>(nameof(UserSatisfactionViewModel));
+        HowCouldWeImprove = userSatisfactionSession?.HowCouldWeImprove!;
+        SatisfactionSelection = userSatisfactionSession?.SatisfactionSelection!;
+
+        ShowErrors(showErrors);
      
         return Page();
     }
 
     public IActionResult OnPost(bool review)
     {
-        var result = _validator.Validate(this);
+        if (HttpContext.Session.GetObjectFromJson<bool?>("UserSatisfactionAlreadySubmitted") == true)
+        {
+            return RedirectToPage(nameof(UserSatisfaction), null, "mainContainer");
+        }
+        var viewModel = new UserSatisfactionViewModel
+        {
+            HowCouldWeImprove = this.HowCouldWeImprove ?? string.Empty,
+            SatisfactionSelection = this.SatisfactionSelection
+        };
+
+        var result = _validator.Validate(viewModel);
+
         // valid form post and user has not submitted in same session
         if (!result.IsValid)
         {
+            HttpContext.Session.SetObjectAsJson(nameof(UserSatisfactionViewModel), viewModel);
             _userSession.SetUserValidationResults(result);
-            return RedirectToPage(nameof(UserSatisfaction), null, new { fromPost = true }, "mainContainer");
+            return RedirectToPage(nameof(UserSatisfaction), null, new { fromPost = true, pageSource = GetPageSource() }, "mainContainer");
         }
 
-        if (HttpContext.Session.GetObjectFromJson<bool?>(nameof(UserSatisfaction)) == true)
-        {
-            result.Errors.Add(new ValidationFailure()
-            {
-                ErrorMessage = _localizer["user-satisfaction.Custom.exists"],
-                CustomState = new { },
-                PropertyName = null,
-                
-            });
-            _userSession.SetUserValidationResults(result);
-            return RedirectToPage(nameof(UserSatisfaction), null, new { fromPost = true }, "mainContainer");
-        }
+        //Remove Error Session 
+        HttpContext.Session.Remove("valresult");
+        HttpContext.Session.Remove(nameof(UserSatisfactionViewModel));
 
-        object? routeValues = new { submit = true };
-        string sessionId = string.Empty;
-        if (User.Identity?.IsAuthenticated == true)
-        {
-            HttpContext.Session.SetObjectAsJson(nameof(UserSatisfaction), true);
-            //Remove Error Session 
-            HttpContext.Session.Remove("valresult");
-            routeValues = null;
-            sessionId = HttpContext.Session.Id;
-        }
-
-        _userSatisfactionService.SubmitUserSatisfaction(new UserSatisfactionServiceRequest()
+        var response = _userSatisfactionService.SubmitUserSatisfaction(new UserSatisfactionServiceRequest()
         {
             PageSource = Request.Path.Value!,
             Rating = Enumeration.FromName<Feedback>(SatisfactionSelection).Id,
-            Description = HowCouldWeImprove ?? string.Empty,
-            AccessToken = _userSession.GetAccessToken() ?? string.Empty,
-            SessionId = sessionId
+            Description = HowCouldWeImprove ?? string.Empty
         });
 
-        return RedirectToPage(nameof(UserSatisfactionResponse), routeValues);
+        HttpContext.Session.SetObjectAsJson("UserSatisfactionAlreadySubmitted", true);
+        HttpContext.Session.SetObjectAsJson("UserSatisfactionSubmitted", true);
+
+        return RedirectToPage(nameof(UserSatisfactionResponse), new { submit = true, pageSource = GetPageSource() });
     }
+
     private void AddError(string propertyName, string errorMessage)
     {
         ModelState.AddModelError(propertyName, _localizer["ServerError_Title"]);
@@ -138,7 +153,7 @@ public class UserSatisfaction : PageModel
         DisplaySummary = "display:none";
         SatisfactionSelection = "";
         ErrorsDesc = "";
-        HttpContext.Session.SetObjectAsJson($"valresult", null);
+        HttpContext.Session.Remove("valresult");
     }
 
     private void SetViewErrorMessages(ValidationResult result)
@@ -154,6 +169,17 @@ public class UserSatisfaction : PageModel
             }
         }
 
+    }
+
+    private string GetPageSource()
+    {
+        if (string.IsNullOrEmpty(PageSource))
+        {
+            PageSource = Request.Path.Value?.IndexOf("/", 1) > 0
+                ? Request.Path.Value[..Request.Path.Value!.IndexOf("/", 1)]
+                : Request.Path.Value!;
+        }
+        return PageSource;
     }
 
     public class Feedback : Enumeration
