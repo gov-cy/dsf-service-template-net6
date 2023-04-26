@@ -2,11 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-# EXPOSE 80
-EXPOSE 443
-
-COPY src/DSF.AspNetCore.Web.Template/cert/ariadni-test.crt /usr/local/share/ca-certificates/ariadni-test.crt
-RUN chmod 644 /usr/local/share/ca-certificates/ariadni-test.crt && update-ca-certificates
+EXPOSE 80
 
 # Create a group and user so we are not running our container and application as root and thus user 0 which is a security issue.
 RUN addgroup --system --gid 1000 appgroup && adduser --system --uid 1000 --ingroup appgroup --shell /bin/sh appuser
@@ -20,9 +16,11 @@ USER 1000
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
+
 COPY ["src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj", "src/DSF.AspNetCore.Web.Template/"]
 COPY ["src/DSF.Authentication/DSF.Authentication.csproj", "src/DSF.Authentication/"]
 COPY ["src/DSF.Resources/DSF.Localization.csproj", "src/DSF.Resources/"]
+
 RUN dotnet restore "src/DSF.AspNetCore.Web.Template/DSF.AspNetCore.Web.Template.csproj"
 COPY . .
 WORKDIR "/src/src/DSF.AspNetCore.Web.Template"
