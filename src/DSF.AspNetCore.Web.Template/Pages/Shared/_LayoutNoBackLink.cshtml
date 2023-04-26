@@ -97,12 +97,17 @@
             <div class="row">
                 <footer class="govcy-footer">
                     <span class="govcy-d-inline-block govcy-valign-top govcy-pb-2"><img alt="govcy-logo" /></span>
-                    <ul class="govcy-d-inline-block  govcy-m-0 govcy-pt-1 govcy-pl-1 govcy-pl-sm-3 govcy-efs-medium">
-                        <li><a href="/privacy-statement">@Localizer["common.footer_privacy"]</a></li>
-                        <li><a href="/cookie-policy">@Localizer["common.footer_cookie"]</a></li>
-                        <li><a href="/accessibility-statement">@Localizer["common.footer_accesibility"]</a></li>
-                        <li class="govcy-d-block govcy-text-dark">© @Localizer["common.footer_copyright"]</li>
-                    </ul>
+                        <ul class="govcy-d-inline-block  govcy-m-0 govcy-pt-1 govcy-pl-1 govcy-pl-sm-3 govcy-efs-medium">
+                            <li><a href="/privacy-statement">@Localizer["common.footer_privacy"]</a></li>
+                            <li><a href="/cookie-policy">@Localizer["common.footer_cookie"]</a></li>
+                            <li><a href="/accessibility-statement">@Localizer["common.footer_accesibility"]</a></li>
+                            @if (User?.Identity?.IsAuthenticated == true)
+                            {
+                            var currentPageUri = new Uri($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}");
+                            <li><a href="/user-satisfaction?pageSource=@currentPageUri.PathAndQuery">@Localizer["common.footer_feedback"]</a></li>
+                            }
+                            <li class="govcy-d-block govcy-text-dark">© @Localizer["common.footer_copyright"]</li>
+                        </ul>
                 </footer>
             </div>
         </div>
@@ -110,5 +115,10 @@
   
     @*Script Registration*@
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+     <!-- Javascripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script> 
+    
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

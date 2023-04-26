@@ -18,7 +18,8 @@ namespace DSF.AspNetCore.Web.Template.Extensions
                 {
                     if (string.IsNullOrEmpty(className))
                     {
-                        modelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                        var propName = string.IsNullOrEmpty(error.PropertyName) ? error.ErrorMessage : error.PropertyName;
+                        modelState.AddModelError(propName, error.ErrorMessage);
                     }
                     else
                     {

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,110 +59,116 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="common.backlink" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="common.backlink" xml:space="preserve">
     <value>Πίσω</value>
   </data>
-  <data name="common.button_get_started" xml:space="preserve">
+	<data name="common.button_get_started" xml:space="preserve">
     <value>Ξεκινήστε</value>
   </data>
-  <data name="common.button_next" xml:space="preserve">
+	<data name="common.button_next" xml:space="preserve">
     <value>Συνέχεια</value>
   </data>
-  <data name="common.change_link" xml:space="preserve">
+	<data name="common.change_link" xml:space="preserve">
     <value>Αλλαγή</value>
   </data>
-  <data name="common.error_alert" xml:space="preserve">
+	<data name="common.error_alert" xml:space="preserve">
     <value>Σφάλμα</value>
   </data>
-  <data name="common.error_message" xml:space="preserve">
+	<data name="common.error_message" xml:space="preserve">
     <value>Σφάλμα</value>
   </data>
-  <data name="common.footer_accesibility" xml:space="preserve">
+	<data name="common.footer_accesibility" xml:space="preserve">
     <value>Προσβασιμότητα</value>
   </data>
-  <data name="common.footer_cookie" xml:space="preserve">
+	<data name="common.footer_cookie" xml:space="preserve">
     <value>Προστασία Προσωπικών Δεδομένων</value>
   </data>
-  <data name="common.footer_copyright" xml:space="preserve">
+	<data name="common.footer_copyright" xml:space="preserve">
     <value>Κυπριακή Δημοκρατία, 2023</value>
   </data>
-  <data name="common.footer_privacy" xml:space="preserve">
+	<data name="common.footer_feedback" xml:space="preserve">
+    <value>Βοηθήστε μας να βελτιώσουμε την υπηρεσία</value>
+  </data>
+	<data name="common.footer_privacy" xml:space="preserve">
     <value>Όροι Χρήσης</value>
   </data>
-  <data name="common.headers_title" xml:space="preserve">
+	<data name="common.headers_title" xml:space="preserve">
     <value>Αλλαγή Προσωπικών Στοιχείων του Πολίτη</value>
   </data>
-  <data name="common.layout_meta_description" xml:space="preserve">
+	<data name="common.layout_meta_description" xml:space="preserve">
     <value>Mock Υπηρεσία για αλλάγη στοιχείων επικοινωνίας</value>
   </data>
-  <data name="common.main_content_link" xml:space="preserve">
+	<data name="common.main_content_link" xml:space="preserve">
     <value>Μετάβαση στο κύριο περιεχόμενο</value>
   </data>
-  <data name="common.signout" xml:space="preserve">
+	<data name="common.signout" xml:space="preserve">
     <value>Αποσύνδεση</value>
   </data>
-  <data name="common.submit" xml:space="preserve">
-    <value>Υποβολή αίτησης</value>
+	<data name="common.submit" xml:space="preserve">
+    <value>Υποβολή</value>
   </data>
-  <data name="common.url_paper_form" xml:space="preserve">
+	<data name="common.url_paper_form" xml:space="preserve">
     <value>http://www.elections.gov.cy/moi/elections/elections.nsf/elections07c_el/elections07c_el?OpenDocument</value>
+  </data>
+	<data name="common.button_continue_application" xml:space="preserve">
+    <value>Συνεχίστε την αίτηση</value>
   </data>
 </root>

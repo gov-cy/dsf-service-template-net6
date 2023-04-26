@@ -4,13 +4,12 @@ using DSF.AspNetCore.Web.Template.Extensions;
 using DSF.AspNetCore.Web.Template.Middlewares;
 using DSF.AspNetCore.Web.Template.Resources;
 using DSF.AspNetCore.Web.Template.Services;
-using DSF.MOI.CitizenData.Web.Configuration;
+using DSF.AspNetCore.Web.Template.Services.UserSatisfaction;
 using DSF.Localization;
+using DSF.MOI.CitizenData.Web.Configuration;
 using FluentValidation;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 
 IConfiguration Configuration = new ConfigurationBuilder()
@@ -60,6 +59,8 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizePage("/MobileEdit");
     options.Conventions.AuthorizePage("/AddressEdit");
     options.Conventions.AuthorizePage("/ReviewPage");
+    options.Conventions.AuthorizePage("/UserSatisfaction");
+    options.Conventions.AuthorizePage("/UserSatisfactionResponse");
     options.Conventions.AllowAnonymousToPage("/NoValidProfile");
     options.Conventions.AllowAnonymousToPage("/Index");
     options.Conventions.AllowAnonymousToPage("/CookiePolicy");
@@ -90,6 +91,11 @@ builder.Services.AddScoped<IValidator<MobileSection>, MobileValidator>(sp =>
     var Checker = sp.GetRequiredService<ICommonApis>();
     return new MobileValidator(LocMain, Checker);
 });
+builder.Services.AddScoped<IValidator<UserSatisfactionViewModel>, UserSatisfactionValidation>(sp =>
+{
+    var LocMain = sp.GetRequiredService<IResourceViewLocalizer>();
+    return new UserSatisfactionValidation(LocMain);
+});
 
 //Add fluent validation to .Net Core (optional use for server side validation) 
 //builder.Services.AddFluentValidation();
@@ -113,13 +119,15 @@ builder.Services.AddScoped<IUserSession, UserSession>();
 
 //Register the Api service for Task Get and post methods
 builder.Services.AddScoped<IContact, Contact>();
+builder.Services.AddScoped<IUserSatisfactionService, UserSatisfactionService>();
 
 //get configuration for CyLoginAuthentication from appsettings.json
 var authConfiguration = Configuration.GetSection("Dsf.Authentication").Get<CyLoginAuthenticationOptions>();
 //open id authentication settings
 builder.Services.AddCyLoginAuthentication(authConfiguration);
+
 // Added for session state
- builder.Services.AddSession(options =>
+builder.Services.AddSession(options =>
  {
      options.Cookie.Name = "AppDataSessionCookie";
      options.Cookie.HttpOnly = true;
@@ -129,21 +137,20 @@ builder.Services.AddCyLoginAuthentication(authConfiguration);
  });
  var app = builder.Build();
 
-app.UseExceptionHandler("/server-error");
-
 // Configure the HTTP request pipeline middlewares.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
 else
-{    
+{
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/server-error");
     app.UseHsts();
 }
-    // This is needed if running behind a reverse proxy (K8S Ingres?)
-    //https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
-    var options = new ForwardedHeadersOptions
+// This is needed if running behind a reverse proxy (K8S Ingres?)
+//https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0
+var options = new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 };
@@ -161,7 +168,6 @@ app.Use(async (ctx, next) =>
 
     await next();
 });
-app.UseSession();
 
 app.UseCors();
 
@@ -176,6 +182,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 app.UseStatusCodePagesWithRedirects("/no-page-found");

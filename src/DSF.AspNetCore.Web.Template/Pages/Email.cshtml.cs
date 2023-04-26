@@ -92,7 +92,8 @@ namespace DSF.AspNetCore.Web.Template.Pages
             }
 
         }
-        private bool AllowToProceed()
+
+        private static bool AllowToProceed()
         {
             bool ret = true;
             //For the demo purpose we might not get data from template api service
@@ -133,8 +134,8 @@ namespace DSF.AspNetCore.Web.Template.Pages
                     CrbEmail = "1";
                     EmailSel.UseFromApi = true;
                     EmailSel.UseOther = false;
-                    EmailSel.Email = string.IsNullOrEmpty(_userSession.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
-                    _userSession.SetUserEmailData(EmailSel);
+                    EmailSel.Email = string.IsNullOrEmpty(_userSession?.GetUserPersonalData()?.Data?.Email) ? User.Claims.First(c => c.Type == "email").Value : _userSession!.GetUserPersonalData()!.Data!.Email;
+                    _userSession?.SetUserEmailData(EmailSel);
                 }
                 else
                 {

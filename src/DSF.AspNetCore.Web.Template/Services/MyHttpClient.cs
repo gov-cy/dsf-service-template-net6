@@ -40,6 +40,7 @@ namespace DSF.AspNetCore.Web.Template.Services
                 };
 
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
+                //httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
                 httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
                 //httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration["Ocp-Apim-Subscription-Key"]);
@@ -91,6 +92,9 @@ namespace DSF.AspNetCore.Web.Template.Services
                 };
 
                 httpClient.DefaultRequestHeaders.Add("client-key", _configuration["client-key"]);
+                //httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
+                httpClient.DefaultRequestHeaders.Add("service-id", "DsfMock");
+
                 httpClient.DefaultRequestHeaders.CacheControl = CacheControlHeaderValue.Parse("no-cache");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
