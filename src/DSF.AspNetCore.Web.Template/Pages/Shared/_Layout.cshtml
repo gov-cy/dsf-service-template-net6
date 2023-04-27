@@ -12,7 +12,7 @@
     {
         lang = "en";
     }
-    string index = ViewData["Index"].ToString() ?? "";
+    string index = ViewData["Index"]?.ToString() ?? "";
 }
 <!DOCTYPE html>
 
