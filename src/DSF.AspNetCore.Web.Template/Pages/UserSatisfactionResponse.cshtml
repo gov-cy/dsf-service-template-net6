@@ -12,8 +12,10 @@
             <h1>@Localizer["user-satisfaction-response.Success_title"]</h1>
         </div>
     </div>
-    @Localizer.GetPagesLocalizedHtml("user-satisfaction-response.Success_body");
-
-    <a href="@Model.PageSource">@Localizer["common.button_continue_application"]</a>
-
+    <p>
+        @Localizer.GetPagesLocalizedHtml("user-satisfaction-response.Success_body");
+    </p>
+    <p>
+        <a href="@Model.PageSource">@Localizer["common.button_continue_application"]</a>
+    </p>
 </div>
