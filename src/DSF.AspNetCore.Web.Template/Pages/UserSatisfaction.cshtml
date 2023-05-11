@@ -8,6 +8,7 @@
 @{
     ViewBag.PreviousUrl = Model.BackLink;
     ViewData["Title"] = Localizer.GetPagesLocalizedHtml("user-satisfaction.title", Localizer["common.headers_title"]);
+    ViewData["Index"] = "Show";
     if (User.Identity?.IsAuthenticated == true)
     {
         Layout = "_Layout";
