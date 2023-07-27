@@ -125,12 +125,14 @@ jobs:
       #  run: cosign sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
 
       # #AKS Deployment using kubeconfig method
-      - name: Kubernetes set context
-        uses: Azure/k8s-set-context@v1.1
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.AKS_STAGING_CONFIG }}
+      ## Remove after STAGING Access List Implementation
+      ## Use manual deployment for public repos
+      #- name: Kubernetes set context
+      #  uses: Azure/k8s-set-context@v1.1
+      #  with:
+      #    method: kubeconfig
+      #    kubeconfig: ${{ secrets.AKS_STAGING_CONFIG }}
 
-      - name: Run the kubectl script
-        run: |
-          kubectl rollout restart deployment service-template --namespace=default
+      #- name: Run the kubectl script
+      #  run: |
+      #    kubectl rollout restart deployment service-template --namespace=default
