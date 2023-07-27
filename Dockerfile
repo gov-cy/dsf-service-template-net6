@@ -9,7 +9,7 @@ RUN addgroup --system --gid 1000 appgroup && adduser --system --uid 1000 --ingro
   
 # Serve on port 8080, we cannot serve on port 80 with a custom user that is not root.
 #ENV ASPNETCORE_URLS=http://+:8080
-
+ 
   
 # Tell docker that all future commands should run as the appuser user, must use the user number
 USER 1000
