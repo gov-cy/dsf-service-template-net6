@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,65 +59,65 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="accessibility-statement.instructions" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="accessibility-statement.instructions" xml:space="preserve">
     <value>
 &lt;h2&gt;Κατάσταση συμμόρφωσης&lt;/h2&gt;&lt;p&gt;Οι Οδηγίες Προσβασιμότητας Περιεχομένου &lt;a href="https://www.w3.org/TR/WCAG21/" target="_blank"&gt;WCAG&lt;/a&gt; καθορίζουν απαιτήσεις για σχεδιαστές και προγραμματιστές για τη βελτίωση της προσβασιμότητας των ατόμων με αναπηρίες. Καθορίζουν τρία επίπεδα συμμόρφωσης: Επίπεδο A, Επίπεδο AA, και Επίπεδο AAA. Η υπηρεσία συμμορφώνεται πλήρως με τις Οδηγίες του WCAG 2.1 επίπεδο AA.&lt;/p&gt;
 
@@ -150,16 +150,16 @@
 &lt;p&gt;Η δήλωση αυτή μεταφράστηκε στις 4 Νοεμβρίου 2022.&lt;/p&gt;
 &lt;p&gt;Η παρούσα αποτελεί δήλωση προσβασιμότητας για την υπηρεσία service-name_EL.&lt;/p&gt;</value>
   </data>
-  <data name="accessibility-statement.title" xml:space="preserve">
+	<data name="accessibility-statement.title" xml:space="preserve">
     <value>Δήλωση προσβασιμότητας –  service-name_EL</value>
   </data>
-  <data name="application-response.header_ref" xml:space="preserve">
+	<data name="application-response.header_ref" xml:space="preserve">
     <value>Αρ. Αναφοράς </value>
   </data>
-  <data name="application-response.header_title" xml:space="preserve">
+	<data name="application-response.header_title" xml:space="preserve">
     <value>Η αίτηση σας έχει υποβληθεί</value>
   </data>
-  <data name="cookie-policy.instructions" xml:space="preserve">
+	<data name="cookie-policy.instructions" xml:space="preserve">
     <value>&lt;p&gt;Η υπηρεσία MOCK (url) χρησιμοποιεί μόνο cookies που είναι απολύτως απαραίτητα για τη σωστή λειτουργία του διαδικτυακού τόπου.&lt;/p&gt;
 
 &lt;h2&gt;Cookies που χρησιμοποιούνται&lt;/h2&gt;&lt;p&gt;Όλα τα πιο κάτω cookies διαγράφονται 30 λεπτά μετά το κλείσιμο του φυλλομετρητή (browser) σας.&lt;/p&gt;
@@ -177,43 +177,43 @@
 &lt;h2&gt;Πώς να ελέγχετε τα cookies&lt;/h2&gt;&lt;p&gt;&lt;a href="https://www.aboutcookies.org/how-to-manage-and-delete-cookies" target="_blank"&gt;Μάθετε πώς να ελέγχετε και να διαγράφετε τα cookies στη συσκευή σας.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Μπορείτε να διαγράψετε όλα τα cookies που υπάρχουν ήδη στον υπολογιστή σας και μπορείτε να ρυθμίσετε τους περισσότερους φυλλομετρητές (browsers) ώστε να αποτρέπουν την τοποθέτησή τους. Εάν το κάνετε αυτό, ωστόσο, ίσως χρειαστεί να προσαρμόζετε με μη αυτόματο τρόπο ορισμένες επιλογές κάθε φορά που επισκέπτεστε έναν διαδικτυακό τόπο και ορισμένες υπηρεσίες και λειτουργίες ενδέχεται να μην λειτουργούν.&lt;/p&gt;</value>
   </data>
-  <data name="cookie-policy.title" xml:space="preserve">
+	<data name="cookie-policy.title" xml:space="preserve">
     <value>Cookies στην υπηρεσία service-name_EL MOCK</value>
   </data>
-  <data name="email-selection.title" xml:space="preserve">
+	<data name="email-selection.title" xml:space="preserve">
     <value>Σε ποιο email μπορούμε να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="email-selection.yes" xml:space="preserve">
+	<data name="email-selection.yes" xml:space="preserve">
     <value>Στο email που είναι καταχωρημένο στο CY Login μου: </value>
   </data>
-  <data name="index.instructions" xml:space="preserve">
+	<data name="index.instructions" xml:space="preserve">
     <value>
 &lt;h2&gt;Ζητήστε βοήθεια και καθοδήγηση&lt;/h2&gt;&lt;p&gt;Για τεχνική υποστήριξη, επικοινωνήστε με το DSF: &lt;a href="mailto:Dsf-tech@dits.dmrid.gov.cy" target="_blank"&gt;Dsf-tech@dits.dmrid.gov.cy&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
-  <data name="index.instructions1" xml:space="preserve">
+	<data name="index.instructions1" xml:space="preserve">
     <value>&lt;p&gt;Αυτή είναι μια εικονική υπηρεσία για την κατανόηση των βέλτιστων πρακτικών ανάπτυξης λογισμικού.&lt;/p&gt;</value>
   </data>
-  <data name="index.title" xml:space="preserve">
+	<data name="index.title" xml:space="preserve">
     <value>Καλωσορίσατε στην εικονική υπηρεσία Ενημέρωσης προσωπικών στοιχείων του πολίτη</value>
   </data>
-  <data name="mobile-selection.title" xml:space="preserve">
+	<data name="mobile-selection.title" xml:space="preserve">
     <value>Ποιο αριθμό κινητού μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="no-page-found.instructions" xml:space="preserve">
+	<data name="no-page-found.instructions" xml:space="preserve">
     <value>&lt;p&gt;Αν πληκτρολογήσατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι είναι σωστή.&lt;/p&gt;
 &lt;p&gt;Αν αντιγράψατε την ηλεκτρονική διεύθυνση, ελέγξετε ότι επικολλήσατε ολόκληρη τη διεύθυνση.&lt;/p&gt;</value>
   </data>
-  <data name="no-page-found.title" xml:space="preserve">
+	<data name="no-page-found.title" xml:space="preserve">
     <value>Δεν βρέθηκε η σελίδα</value>
   </data>
-  <data name="no-valid-profile.instructions" xml:space="preserve">
+	<data name="no-valid-profile.instructions" xml:space="preserve">
     <value>&lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για οργανισμούς, χρειάζεται να &lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/register" target="_blank"&gt;επιστρέψετε στο CY Login και να συνδεθείτε με λογαριασμό για πολίτες&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Εάν έχετε συνδεθεί στο CY Login με λογαριασμό για πολίτες, χρειάζεται να βεβαιωθείτε ότι ο λογαριασμός σας έχει ταυτοποιηθεί.&lt;a href="https://cge.cyprus.gov.cy/cyloginregistration/knowledgebase/help/identification" target="_blank"&gt;Μάθετε πώς μπορείτε να ταυτοποιήσετε τον λογαριασμό σας στο CY Login&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
-  <data name="no-valid-profile.title" xml:space="preserve">
+	<data name="no-valid-profile.title" xml:space="preserve">
     <value>Ελέγξτε τον λογαριασμό σας στο CY Login</value>
   </data>
-  <data name="privacy-statement.instructions" xml:space="preserve">
+	<data name="privacy-statement.instructions" xml:space="preserve">
     <value>&lt;p&gt;Αυτή η πολιτική απορρήτου εξηγεί πώς  government_service-name_EL συλλέγει και αποθηκεύει πληροφορίες σχετικά με εσάς.&lt;/p&gt;
 
 &lt;h2&gt;Τύποι πληροφοριών που συλλέγονται και χρησιμοποιούνται&lt;/h2&gt;&lt;p&gt;government_service-name_EL συλλέγει τις ακόλουθες πληροφορίες απευθείας από εσάς μέσω της ιστοσελίδας αυτής:&lt;/p&gt;
@@ -251,89 +251,147 @@
 
 &lt;h2&gt;Παράπονα&lt;/h2&gt;&lt;p&gt;Μπορείτε να υποβάλετε παράπονο για τον τρόπο με τον οποίο χρησιμοποιήθηκαν τα προσωπικά σας στοιχεία &lt;a href="https://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/page1i_gr/page1i_gr?opendocument" target="_blank"&gt;επικοινωνώντας με το Γραφείο του Επιτρόπου Προστασίας Δεδομένων Προσωπικού Χαρακτήρα&lt;/a&gt;.&lt;/p&gt;</value>
   </data>
-  <data name="privacy-statement.title" xml:space="preserve">
+	<data name="privacy-statement.title" xml:space="preserve">
     <value>Πολιτική απορρήτου –  service-name_EL MOCK στοιχεία</value>
   </data>
-  <data name="review-page.address" xml:space="preserve">
+	<data name="review-page.address" xml:space="preserve">
     <value>Διεύθυνση</value>
   </data>
-  <data name="review-page.address_details" xml:space="preserve">
+	<data name="review-page.address_details" xml:space="preserve">
     <value>Αλλαγή Διεύθυνσης</value>
   </data>
-  <data name="review-page.applicant_name" xml:space="preserve">
+	<data name="review-page.applicant_name" xml:space="preserve">
     <value>Όνομα</value>
   </data>
-  <data name="review-page.email_details" xml:space="preserve">
+	<data name="review-page.email_details" xml:space="preserve">
     <value>Αλλαγή email</value>
   </data>
-  <data name="review-page.mobile_details" xml:space="preserve">
+	<data name="review-page.mobile_details" xml:space="preserve">
     <value>Αλλαγή αριθμού κινητού τηλεφώνου</value>
   </data>
-  <data name="review-page.p3" xml:space="preserve">
+	<data name="review-page.p3" xml:space="preserve">
     <value>Προτού υποβάλετε την αίτησή σας, ελέγξτε αν οι πιο κάτω πληροφορίες είναι ορθές.</value>
   </data>
-  <data name="review-page.title" xml:space="preserve">
+	<data name="review-page.title" xml:space="preserve">
     <value />
   </data>
-  <data name="server-error.instructions" xml:space="preserve">
+	<data name="review-page.submit" xml:space="preserve">
+    <value>Υποβολή αίτησης</value>
+  </data>
+	<data name="server-error.instructions" xml:space="preserve">
     <value>&lt;p&gt;Δοκιμάστε ξανά αργότερα.&lt;/p&gt;</value>
   </data>
-  <data name="server-error.title" xml:space="preserve">
+	<data name="server-error.title" xml:space="preserve">
     <value>Λυπούμαστε, υπάρχει πρόβλημα με την υπηρεσία</value>
   </data>
-  <data name="set-email.email_hint" xml:space="preserve">
+	<data name="set-email.email_hint" xml:space="preserve">
     <value>Το email στο CY Login σας δεν θα αλλάξει</value>
   </data>
-  <data name="set-email.email_label" xml:space="preserve">
+	<data name="set-email.email_label" xml:space="preserve">
     <value>Ποια διεύθυνση email μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="set-email.p1" xml:space="preserve">
+	<data name="set-email.p1" xml:space="preserve">
     <value>Αφού κάνετε κλικ στο «συνέχεια» θα λάβετε ένα email με έναν σύνδεσμο στον οποίο θα πρέπει να κάνετε κλικ για να επιβεβαιώσετε το email σας.</value>
   </data>
-  <data name="set-email.title" xml:space="preserve">
+	<data name="set-email.title" xml:space="preserve">
     <value>Σε ποιο email μπορούμε να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="set-mobile.mobile_hint" xml:space="preserve">
+	<data name="set-mobile.mobile_hint" xml:space="preserve">
     <value>Ο αριθμός σας στο CY Login σας δεν θα αλλάξει</value>
   </data>
-  <data name="set-mobile.mobile_label" xml:space="preserve">
+	<data name="set-mobile.mobile_label" xml:space="preserve">
     <value />
   </data>
-  <data name="set-mobile.p1" xml:space="preserve">
+	<data name="set-mobile.p1" xml:space="preserve">
     <value>Αφού συνεχίσετε, θα λάβετε έναν κωδικό ασφαλείας στο κινητό σας και θα σας ζητηθεί να εισαγάγετε αυτόν τον αριθμό στην επόμενη σελίδα, ώστε να επιβεβαιωθεί ο αριθμός κινητού</value>
   </data>
-  <data name="set-mobile.title" xml:space="preserve">
+	<data name="set-mobile.title" xml:space="preserve">
     <value>Ποιο αριθμό κινητού μπορούμε να χρησιμοποιήσουμε για να επικοινωνήσουμε μαζί σας;</value>
   </data>
-  <data name="review-page.email" xml:space="preserve">
+	<data name="review-page.email" xml:space="preserve">
     <value>Email</value>
     <comment>review-page</comment>
   </data>
-  <data name="review-page.mobile" xml:space="preserve">
+	<data name="review-page.mobile" xml:space="preserve">
     <value>Αριθμός κινητού τηλεφώνου</value>
     <comment>review-page</comment>
   </data>
-  <data name="review-page.p2" xml:space="preserve">
+	<data name="review-page.p2" xml:space="preserve">
     <value>Ελέγξτε ότι οι παρακάτω πληροφορίες είναι σωστές.</value>
     <comment>review-page</comment>
   </data>
-  <data name="review-page.p1" xml:space="preserve">
+	<data name="review-page.p1" xml:space="preserve">
     <value>Τα στοιχεία επικοινωνίας σας</value>
     <comment>review-page</comment>
   </data>
-  <data name="mobile-selection.no_label" xml:space="preserve">
+	<data name="user-satisfaction.SatisfactionList.required" xml:space="preserve">
+    <value>Παρακαλώ επιλέξτε επίπεδο ικανοποίησης</value>
+    <comment>user-satisfaction Checks</comment>
+  </data>
+	<data name="user-satisfaction.Suggestion_label" xml:space="preserve">
+    <value>Πώς θα μπορούσαμε να βελτιώσουμε την υπηρεσία;</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.Suggestion_hint" xml:space="preserve">
+    <value>Μην καταχωρήσετε στοιχεία όπως πιστωτική κάρτα ή αριθμό κοινωνικών ασφαλίσεων</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.SatisfactionList_legend" xml:space="preserve">
+    <value>Γενικά, πώς θα αξιολογούσατε την εμπειρία σας από την υπηρεσία που χρησιμοποιήσατε σήμερα;</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.VeryDissatisfactory_label" xml:space="preserve">
+    <value>Καθόλου ικανοποιητική</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.Dissatisfactory_label" xml:space="preserve">
+    <value>Μη ικανοποιητική</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.NeitherNor_label" xml:space="preserve">
+    <value>Ούτε ικανοποιητική ούτε μη ικανοποιητική</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.Satisfactory_label" xml:space="preserve">
+    <value>Ικανοποιητική</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.VerySatisfactory_label" xml:space="preserve">
+    <value>Πολύ ικανοποιητική</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction.title" xml:space="preserve">
+    <value>Βοηθήστε μας να βελτιώσουμε την υπηρεσία {0}</value>
+    <comment>user-satisfaction</comment>
+  </data>
+	<data name="user-satisfaction-response.Success_title" xml:space="preserve">
+    <value>Η απάντησή σας έχει καταγραφεί </value>
+    <comment>user-satisfaction-response</comment>
+  </data>
+	<data name="user-satisfaction-response.Success_body" xml:space="preserve">
+    <value>Σας ευχαριστώ για τη βοήθειά σας</value>
+    <comment>user-satisfaction-response</comment>
+  </data>
+	<data name="user-satisfaction.Custom.exists" xml:space="preserve">
+    <value>Έχετε ήδη υποβάλει αξιολόγηση.</value>
+  </data>
+	<data name="user-satisfaction.Suggestion.length" xml:space="preserve">
+    <value>Μπορείτε να δηλώσετε μέχρι 300 χαρακτήρες.</value>
+    <comment>user-satisfaction Checks</comment>
+  </data>
+	<data name="mobile-selection.no_label" xml:space="preserve">
     <value>Άλλο αριθμό κινητού</value>
     <comment>mobile-selection</comment>
   </data>
-  <data name="email-selection.no_label" xml:space="preserve">
+	<data name="email-selection.no_label" xml:space="preserve">
     <value>Σε άλλο email</value>
     <comment>email-selection</comment>
   </data>
-  <data name="email-selection.yes_hint" xml:space="preserve">
+	<data name="email-selection.yes_hint" xml:space="preserve">
     <value>Αυτό είναι το email που βρήκαμε στα αρχεία μας.</value>
     <comment>email-selection</comment>
   </data>
-  <data name="mobile-selection.yes_hint" xml:space="preserve">
+	<data name="mobile-selection.yes_hint" xml:space="preserve">
     <value>Αυτός είναι ο αριθμός που βρήκαμε στα αρχεία μας.</value>
     <comment>mobile-selection</comment>
   </data>

@@ -1,0 +1,89 @@
+﻿@page "/user-satisfaction/{review:bool?}"
+
+@model UserSatisfaction
+
+@using DSF.AspNetCore.Web.Template.Services.Model
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+@{
+    ViewBag.PreviousUrl = Model.BackLink;
+    ViewData["Title"] = Localizer.GetPagesLocalizedHtml("user-satisfaction.title", Localizer["common.headers_title"]);
+    ViewData["Index"] = "Show";
+    if (User.Identity?.IsAuthenticated == true)
+    {
+        Layout = "_Layout";
+        ViewBag.PreviousUrl = Model.BackLink;
+    }
+    var isSatisfactionSelectionInValid = ModelState.GetFieldValidationState(nameof(Model.SatisfactionSelection)) == ModelValidationState.Invalid;
+    var satisfactionSelectionCssClass = isSatisfactionSelectionInValid
+    ? "govcy-form-control govcy-form-control-error"
+    : "govcy-form-control";
+
+    var isHowCouldWeImproveInValid = ModelState.GetFieldValidationState(nameof(Model.HowCouldWeImprove)) == ModelValidationState.Invalid;
+    var howCouldWeImproveInValidCssClass = isHowCouldWeImproveInValid
+        ? "govcy-form-control govcy-form-control-error"
+        : "govcy-form-control";
+}
+
+<div style="@Model.DisplaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
+    <h2>@Localizer["common.error_alert"]</h2>
+    <p class="govcy-mb-0">
+        @Html.Raw(Model.ErrorsDesc)
+    </p>
+</div>
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" novalidate class="govcy-form" id="userSatisfactionForm">
+    <fieldset class="govcy-fieldset">
+
+        <legend class="govcy-legend">
+            @Localizer["user-satisfaction.SatisfactionList_legend"]
+        </legend>
+
+        <div class="@satisfactionSelectionCssClass">
+            @if (isSatisfactionSelectionInValid)
+            {
+                <p id="@nameof(Model.SatisfactionSelection)-error" class="govcy-input-error-msg">
+                    <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
+                    <span class="govcy-input-error-msg">@Html.ValidationMessage(nameof(Model.SatisfactionSelection))</span>
+                </p>
+            }
+            @foreach (var feedback in Enumeration.GetAll<UserSatisfaction.Feedback>())
+            {
+                <label class="govcy-radio">
+                    @Localizer[$"user-satisfaction.{feedback}_label"]
+                    <input class="govcy-radio-input" type="radio" value="@feedback" name="@nameof(Model.SatisfactionSelection)"
+                           id="@nameof(Model.SatisfactionSelection)"
+                    @(Model.ErrorsDesc.Length > 0 ? $" aria-describedby={nameof(Model.SatisfactionSelection)}-error" : "" ) />
+                    <span class="govcy-radio-checked" />
+                </label>
+            }
+        </div>
+
+        <div class="@howCouldWeImproveInValidCssClass">
+            @if (isHowCouldWeImproveInValid)
+            {
+                <p id="@nameof(Model.HowCouldWeImprove)-error" class="govcy-input-error-msg">
+                    <span class="govcy-visually-hidden-error">@Localizer["common.error_alert"]</span>
+                    <span class="govcy-input-error-msg">@Html.ValidationMessage(nameof(Model.HowCouldWeImprove))</span>
+                </p>
+            }
+            <label class="govcy-label" for="@nameof(Model.HowCouldWeImprove)">@Localizer["user-satisfaction.Suggestion_label"]</label>
+            <span class="govcy-hint">@Localizer["user-satisfaction.Suggestion_hint"]</span>
+
+            <textarea id="@nameof(Model.HowCouldWeImprove)" class="govcy-text-area" rows="5" name="@nameof(Model.HowCouldWeImprove)"
+                      value="@Model.HowCouldWeImprove" maxlength="301"
+            @(isHowCouldWeImproveInValid ? $" aria-describedby={nameof(Model.HowCouldWeImprove)}-error" : "")></textarea>
+            <span class="govcy-hint">@Localizer["user-satisfaction.Suggestion.length"]</span>
+        </div>
+    </fieldset>
+
+    <button id="btnUserSatisfactionSubmit" type="submit" class="govcy-btn-primary  govcy-mb-4" @(User.Identity?.IsAuthenticated == true ? $" onclick=\"window.history.go(-1); return false;\"" : "")>
+        @Localizer["common.submit"]
+    </button>
+</form>
+
+@section scripts {
+    <script src="~/js/user-satisfaction.js" asp-append-version="true"></script>
+}

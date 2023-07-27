@@ -32,7 +32,6 @@ namespace DSF.AspNetCore.Web.Template.Services
             try
             {
                 response = _client.MyHttpClientGetRequest(_configuration["ApiUrl"], apiUrl, "application/json", accesstoken);
-               
             }
             catch
             {

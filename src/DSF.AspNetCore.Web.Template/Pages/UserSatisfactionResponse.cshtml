@@ -1,0 +1,21 @@
+﻿@page "/user-satisfaction-response"
+@model DSF.MOI.CitizenData.Web.Pages.UserSatisfactionResponse
+@{
+    Layout = "_LayoutNoBackLink";
+    ViewData["Title"] = Localizer.GetPagesLocalizedHtml("user-satisfaction.title", Localizer["common.headers_title"]);
+    ViewData["Index"] = "Show";
+}
+
+<div class="govcy-mb-4">
+    <div class="govcy-alert-completed-notification govcy-px-0 govcy-mb-4">
+        <div class="govcy-alert-completed-notification-body govcy-bg-success">
+            <h1>@Localizer["user-satisfaction-response.Success_title"]</h1>
+        </div>
+    </div>
+    <p>
+        @Localizer.GetPagesLocalizedHtml("user-satisfaction-response.Success_body");
+    </p>
+    <p>
+        <a href="@Model.PageSource">@Localizer["common.button_continue_application"]</a>
+    </p>
+</div>

@@ -4,6 +4,7 @@
 @{
     ViewBag.PreviousUrl=Model.BackLink;
     ViewData["Title"] = Localizer["mobile-selection.title"];
+    ViewData["Index"] = "Show";
 }
 <div style="@Model.displaySummary" class="govcy-alert-error govcy-br-5 govcy-br-danger govcy-p-3">
     <h2>@Localizer["common.error_message"]</h2>
