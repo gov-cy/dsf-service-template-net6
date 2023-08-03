@@ -1,0 +1,66 @@
+name: DSF Issue
+description: File an issue or a bug.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Try to describe the issue as best as possible by filling out this form.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe what happened? What steps did you follow to produce this error/issue?
+    validations:
+      required: true
+  - type: textarea
+    id: expected-outcome
+    attributes:
+      label: Expected outcome?
+      description: Describe the expected outcome (if any)
+    validations:
+      required: false
+  - type: input
+    id: scenario
+    attributes:
+      label: Scenario
+      description: Did this issue occur during a specific test scenario? If yes please specify the scenario reference number.
+    validations:
+      required: false
+  - type: input
+    id: urls
+    attributes:
+      label: URLs
+      description: Enter the URL (or URLs) of the page the issue has occurred.
+    validations:
+      required: false
+  - type: input
+    id: test-user
+    attributes:
+      label: Test user
+      description: Which user did you use when the issue occurred.
+    validations:
+      required: false
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: textarea
+    id: notes
+    attributes:
+      label: Enter any other notes if needed.
+    validations:
+      required: false
+    
+
