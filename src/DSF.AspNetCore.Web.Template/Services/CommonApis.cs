@@ -43,7 +43,7 @@ namespace DSF.AspNetCore.Web.Template.Services
                 }
                 catch
                 {
-                    _logger.LogError("Fail to call Api for " + urlToValidate);
+                    _logger.LogError("Fail to call Api for mobile validation");
                     return false;
                 }
                 if (response != null)
@@ -55,7 +55,7 @@ namespace DSF.AspNetCore.Web.Template.Services
                     }
                     catch (System.Text.Json.JsonException) // Invalid JSON
                     {
-                        _logger.Log(LogLevel.Error, "Error Validate Mobile " + Mobile);
+                        _logger.Log(LogLevel.Error, "Error Validate Mobile ");
                         return false;
                     }
                     if (resp?.Succeeded == false)
@@ -81,7 +81,7 @@ namespace DSF.AspNetCore.Web.Template.Services
                 }
                 catch
                 {
-                    _logger.LogError("Fail to call Api for " + urlToValidate);
+                    _logger.LogError("Fail to call Api for email validation");
                     return false;
                 }
                 if (response != null)
@@ -93,7 +93,7 @@ namespace DSF.AspNetCore.Web.Template.Services
                     }
                     catch (System.Text.Json.JsonException) // Invalid JSON
                     {
-                        _logger.Log(LogLevel.Error, "Error Validate Mobile " + Email);
+                        _logger.Log(LogLevel.Error, "Error Validate Email");
                         return false;
                     }
                     if (resp?.Succeeded==false)
